@@ -47,7 +47,9 @@ Le noeud `Sprite` permettra d'ajouter facilement les images au noeud `AnimationP
 1. Ajouter un noeud `Sprite`.
 2. Glisser l'image `viking2.png` sur la propriété `Texture` du noeud `Sprite`
    - On devrait obtenir une image similaire à cette capture d'écran
+  
    ![](assets/sprite_screen_shot.png)
+   
 3. Il faudra configurer le nombre d'images à l'horizontal et à la vertical qui sont respectivement 9 et 6.
    - Il s'agit des propriétés `Hframes` et `Vframes` de la section `Animation`
 
@@ -63,10 +65,11 @@ On verra une bande avec des nombres apparaître, il s'agit de l'échelle de temp
 
 3. Sélectionner le noeud `Sprite`.
 4. Remarquer la propriété `Frame`, il y a une petite clé avec un "+" à la droite.
+   
 ![](assets/keyframe_button.png)
 
-5. Cliquer sur ce bouton pour créer une nouvelle trame dans l'animation.
-6. Si une petite fenêtre s'affiche, s'assurer que la courbe de Bezier ne soit pas cochée et cliquer sur `Créer`.
+1. Cliquer sur ce bouton pour créer une nouvelle trame dans l'animation.
+2. Si une petite fenêtre s'affiche, s'assurer que la courbe de Bezier ne soit pas cochée et cliquer sur `Créer`.
 
 Une nouvelle image apparaîtra et la propriété `Frame` sera incrémentée de 1.
 Le curseur du temps (ligne bleue) sera à zéro
@@ -82,6 +85,7 @@ Le curseur du temps (ligne bleue) sera à zéro
 9. Cliquer sur la petite clé
 10. Répéter l'opération jusqu'à la fin de l'animation.
 11. Ajuster la durée de l'animation à l'aide de la zone de texte au bout du chronomètre.
+
 ![](assets/animation_time_adjustment.png)
 
 
