@@ -9,6 +9,7 @@
   - [Étape 3 : Ajouter un noeud `Sprite`](#étape-3--ajouter-un-noeud-sprite)
   - [Étape 4 : Ajouter un noeud `AnimationPlayer`](#étape-4--ajouter-un-noeud-animationplayer)
 - [Ajouter un noeud `AnimationTree`](#ajouter-un-noeud-animationtree)
+- [La machine à état fini](#la-machine-à-état-fini)
 - [Référence](#référence)
 
 # Problématique
@@ -174,6 +175,11 @@ Les étapes de base seront les suivantes :
 
 ![](assets/AnimationTree_completed.png)
 
+---
+
+# La machine à état fini
+
+TODO : Compléter cette partie. Src : https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/
 
 ---
 
