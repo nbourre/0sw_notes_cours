@@ -6,6 +6,13 @@ Améliorons nos personnages!
 - [Machine à état fini](#machine-à-état-fini)
 - [Projet Godot](#projet-godot)
   - [Modification au code](#modification-au-code)
+  - [Solution intermédiaire](#solution-intermédiaire)
+    - [Diagramme d'états](#diagramme-détats)
+  - [Solution intermédiaire : Modification du code](#solution-intermédiaire--modification-du-code)
+  - [Résumé de la solution temporaire](#résumé-de-la-solution-temporaire)
+- [Design pattern : L'état](#design-pattern--létat)
+  - [Implémentation dans Godot](#implémentation-dans-godot)
+- [Références](#références)
 
 # Étude de cas
 
@@ -186,10 +193,422 @@ Chasse aux bogues encore…
 - Avant toute chose, nous allons améliorer le code de base
 - À la première ligne de la méthode `_PhysicsProcess`, ajoutez le code pour connaître la direction appuyée
 
-`var dir = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");`
+```cpp 
+var dir = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
+```
 
-Remplacez le code qui vérifie la direction appuyée par le code de droite
+Remplacez le code d'avant ci-bas avec celui après.
+
+```cpp
+// AVANT
+if (Input.IsActionPressed("ui_left")) {
+    motion.x += ACCEL * dir;
+    facing_right = false;
+    animPlayer.Play("Run");
+} else if (Input.IsActionPressed("ui_right")) {
+    motion.x += ACCEL * dir;
+    facing_right = true;
+    animPlayer.Play("Run");
+} else {
+    motion = motion.LinearInterpolate(Vector2.Zero, 0.2f);
+    animPlayer.Play("Idle");
+}
+``` 
+*Code 06*
+
+```cpp
+// APRÈS
+if (dir != 0) {
+    motion.x += ACCEL * dir;
+    animPlayer.Play("Run");
+}               
+if (dir > 0) {
+    facing_right = true;
+} else if (dir < 0) {
+    facing_right = false;
+} else {
+    motion = motion.LinearInterpolate(Vector2.Zero, 0.2f);
+    animPlayer.Play("Idle");
+}
+
+```
+*Code 07*
+
+---
+
+## Solution intermédiaire
+Avant d’implanter le DP État, on fera une solution intermédiaire pour mieux comprendre la mécanique.
+
+**Énumérations et switch** 
+- Pour indiquer les états, on regardait si le personnage était au sol ou dans les airs ainsi que les touches appuyées.
+- On aurait pu utiliser des booléens isJumping et isRunning, mais il ne faudrait pas qu’ils soient à vrai en simultané.
+- Si on a besoin d’avoir plusieurs booléens et qu’un seul doit être vrai dans tous les cas, c’est un indice indiquant que l’on devrait utiliser des énumérations.
+
+### Diagramme d'états
+La première étape est de tracer le diagramme d’états. Tracer le diagramme facilite grandement la programmation.
+- Alors sortez vos crayons! :)
+
+L'ordre pour tracer le diagramme est relativement simple :
+1. Identifier les états
+2. Tracer les transitions et écrire les conditions de transition
+
+![](assets/platform_fsm.png)
+
+3. Créer l'énumération qui contiendra les états.
+
+---
+## Solution intermédiaire : Modification du code
+
+Dans la classe `Player`, ajoutez l’énumération ci-bas ainsi qu’un attribut pour sauvegarder l’état.
+
+```cpp
+public class player : KinematicBody2D
+{
+
+    enum State {
+        STATE_JUMPING,
+        STATE_IDLE,
+        STATE_RUNNING,
+        STATE_FALLING
+    };
+    
+    State currentState = State.STATE_IDLE;
+    // ..
+
+```
+*Code 08*
+
+Ajouter un switch-case pour la gestion des états.
+
+Voici le code de `_PhysicsProcess` modifié
+
+```cpp
+
+public override void _PhysicsProcess(float delta)
+{
+    var dir = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
+
+    motion.x += ACCEL * dir;
+    motion.y += GRAVITY;
+
+    if (facing_right) {
+        currentSprite.FlipH = false;
+    } else {
+        currentSprite.FlipH = true;
+    }
+
+    switch(currentState) {
+        case State.STATE_FALLING:
+            if (IsOnFloor()) {
+                currentState = State.STATE_IDLE;
+                animPlayer.Play("Idle");
+            }
+            break;
+        case State.STATE_IDLE:                
+            if (dir != 0) {
+                currentState = State.STATE_RUNNING;
+                animPlayer.Play("Run");
+            }
+            if (Input.IsActionJustPressed("ui_jump")) {
+                currentState = State.STATE_JUMPING;
+                motion.y = -JUMPFORCE;
+                animPlayer.Play("jump");
+            }
+            if (!IsOnFloor()) {
+                if (motion.y > 0) {
+                    currentState = State.STATE_FALLING;
+                    animPlayer.Play("fall");
+                }
+            }                
+            break;
+        case State.STATE_JUMPING:
+            if (motion.y >= 0) {
+                currentState = State.STATE_FALLING;
+                animPlayer.Play("fall");
+            } else {
+                animPlayer.Play("jump");
+            }                
+            break;
+      case State.STATE_RUNNING:                
+            if (dir > 0) {
+                facing_right = true;
+            } else if (dir < 0) {
+                facing_right = false;
+            } else {
+                currentState = State.STATE_IDLE;
+                motion = motion.LinearInterpolate(Vector2.Zero, 0.2f);   
+                animPlayer.Play("Idle");
+            }
+            if (!IsOnFloor()) {
+                if (motion.y > 0) {
+                    currentState = State.STATE_FALLING;
+                    animPlayer.Play("fall");
+                }
+            }
+            if (Input.IsActionJustPressed("ui_jump")) {
+                currentState = State.STATE_JUMPING;
+                motion.y = -JUMPFORCE;
+                animPlayer.Play("jump");
+            }                
+            break;
+        default:
+            animPlayer.Play("Idle");
+            break;
+    }
+
+    motion.x = Mathf.Lerp(motion.x, MAXSPEED * motion.x > 0 ? 1 : -1, (ACCEL * 1f) / MAXSPEED);
+
+    if(motion.y > MAXFALLSPEED) {
+        motion.y = MAXFALLSPEED;
+    }
+    motion = MoveAndSlide(motion, UP);
+}
+
+```
+*Code 09*
+
+**Points saillants**
+- Toutes la gestions est dans un switch-case
+- Chaque état est indépendant
+
+Pour un lecteur, ce code a l’air compliqué. Pour améliorer la lisibilité, on crée des méthodes pour chaque état.
+
+---
+
+Ainsi, on crée des méthodes pour chaque état et ensuite on appelle ces méthodes dans les différents cas.
+
+```cpp
+//...
+switch(currentState) {
+    case State.STATE_FALLING:
+        fall();
+        break;
+    case State.STATE_IDLE:
+        idle();            
+        break;
+    case State.STATE_JUMPING:
+        jump();          
+        break;
+    case State.STATE_RUNNING:                
+        run();              
+        break;
+    default:
+        idle();
+        break;
+}
+//...
+
+```
+*Code 10*
+- Cette solution ci-haut est beaucoup plus propre que celle d’avant.
+- Une seule propriété pour gérer les états
+- Un peu de structure conditionnelle pour chaque état, mais c’est utilisable pour bien des cas.
+- C’est la méthode la plus simple pour implanter une FSM
+
+<details><summary>Cliquer pour voir le code de chacune des méthodes.</summary>
 
 
-|--|---|
-|c|232|
+```cpp
+void jump() {
+    if (motion.y >= 0) {
+        currentState = State.STATE_FALLING;
+        animPlayer.Play("fall");
+    } else {
+        animPlayer.Play("jump");
+    }      
+}
+
+void fall() {
+    if (IsOnFloor()) {
+        currentState = State.STATE_IDLE;
+        animPlayer.Play("Idle");
+    }
+}
+
+void idle() {
+    if (dir != 0) {
+        currentState = State.STATE_RUNNING;
+        animPlayer.Play("Run");
+    }
+    JumpCheck();
+    FallCheck(); 
+}
+
+void FallCheck() {
+    if (!IsOnFloor()) {
+        if (motion.y > 0) {
+            currentState = State.STATE_FALLING;
+            animPlayer.Play("fall");
+        }
+    }  
+}
+
+void JumpCheck() {
+    if (Input.IsActionJustPressed("ui_jump")) {
+        currentState = State.STATE_JUMPING;
+        motion.y = -JUMPFORCE;
+        animPlayer.Play("jump");
+    }         
+}
+
+
+void run(){
+    if (dir > 0) {
+        facing_right = true;
+    } else if (dir < 0) {
+        facing_right = false;
+    } else {
+        currentState = State.STATE_IDLE;
+        motion = motion.LinearInterpolate(Vector2.Zero, 0.2f);   
+        animPlayer.Play("Idle");
+    }
+
+    JumpCheck(); 
+    FallCheck();
+}
+```
+*Code 11*
+</details>
+
+---
+
+## Résumé de la solution temporaire
+Pour les petits jeux, cette solution peut convenir. Toutefois, si le jeux prend de l'ampleur, ça peut être un peu compliqué.
+
+En effet, la solution présentée peut ne pas convenir à nos besoins lorsque les états deviennent trop nombreux.
+
+Exemple :
+- Disons que l’on désire que le personnage puisse voler, mais il devra courir pendant un certain temps avant de pouvoir s’exécuter.
+- Dans le code, il faudra faire un suivi du temps pendant l'état de la course.
+
+```cpp
+float chargeTime;
+void run(){
+    chargeTime += delta;
+    if (dir > 0) {
+        facing_right = true;
+    } else if (dir < 0) {
+        facing_right = false;
+    } else {
+        currentState = State.STATE_IDLE;
+        motion = motion.LinearInterpolate(Vector2.Zero, 0.2f);   
+        animPlayer.Play("Idle");
+    }
+    FlyCheck();
+    JumpCheck(); 
+    FallCheck();
+}
+
+// On devra remettre à zéro le temps avant de changer vers l’état de courir
+
+```
+*Code 12*
+
+Avec cette solution, nous avons eu besoin de modifier deux méthodes.
+- On doit ajouter une propriété pour garder le temps de recharge qui n’est utilisé que lorsque le personnage court
+- Le DP État permet de remédier à cette situation
+
+---
+
+# Design pattern : L'état
+- Anglais : State
+- Patron de conception comportementale
+- Objectif : Permettre à un objet de modifier son comportement après un changement d’état interne
+- Exemple de problème : Une section de l’application possède un switch avec trop de cas dépendant de l’état de celle-ci.
+
+![](assets/State_Design_Pattern_UML_Class_Diagram.svg)
+
+---
+
+Principe :
+- Définir une classe « contexte » qui présente une interface unique pour le monde
+- Définir une classe abstraite « état »
+- Représenter les différents états comme étant des classes héritantes de la classe abstraite
+- Définir le comportement de l’état dans la classe qui hérite de la classe abstraite
+- Garder un pointeur qui garde l’état courant dans la classe contexte
+- Pour changer l’état, modifier le pointeur de l’état
+
+
+---
+
+- Le DP État n’indique pas où l’on doit intégrer le changement d’état
+- On peut le faire dans la classe « contexte » ou dans chacun des états
+  - L’avantage de faire l’intégration dans les états est la facilité de créer de nouveaux états
+  - Le désavantage, c’est que chaque état doit connaître l’état qui suit la transition ainsi il y a un couplage par transition qui se forment
+
+
+---
+
+## Implémentation dans Godot
+- Pour implémenter ce DP, il faudra tricher à quelques endroits pour optimiser les caractéristiques de Godot
+- La première étape sera de créer une classe générique qui aura les méthodes de base pour l’ensemble des états
+- Nous appellerons cette classe `BaseState`
+  - Celle-ci héritera de la classe Node pour avoir les fonctionnalités de Godot
+
+```cpp
+using Godot;
+using System.Collections.Generic;
+
+public class State : Node
+{
+    /// <summary>
+    /// # Reference à la `StateMachine` pour appeler sa méthode `transition_to()` directement.
+    /// C'est notre triche pour l'implémentation du DP État, car cela ajoute une dépendance entre
+    /// l'état et l'objet `StateMachine`, mais une méthode efficace pour nos besoins
+    /// La machine à état qui l'assignera.
+    /// </summary>
+    public StateMachine _stateMachine = null;
+
+    /// <summary>
+    /// Fonction virtuelle. Reçoit les événements de `_unhandled_input()`.
+    /// </summary>
+    /// <param name="inputEvent"></param>
+    public virtual void HandleInputs(InputEvent inputEvent)
+    {
+        return;
+    }
+
+    /// <summary>
+    /// Fonction virtuel correspondant à `_process()`.
+    /// </summary>
+    /// <param name="delta"></param>
+    public virtual void Update(float delta)
+    {
+        return;
+    }
+
+    /// <summary>
+    /// Fonction virtuel correspondant à `_PhysicsProcess()`
+    /// </summary>
+    /// <param name="delta"></param>
+    public virtual void PhysicsUpdate(float delta)
+    {
+        return;
+    }
+
+    /// <summary>
+    /// Fonction virtuelle. Appelée par la machine à état pour modifier l'état courant. Le paramètre `msg`
+    /// est un dictionnaire avec des données arbitraires que l'état peut utiliser pour initialiser.
+    /// </summary>
+    /// <param name="message"></param>
+    public virtual void Enter(Dictionary<string, bool> message = null)
+    {
+        return;
+    }
+
+    /// <summary>
+    /// Fonction virtuelle. Appelée par la machine à état avant de changer l'état courant. Utilisez cette
+    /// fonction pour nettoyer les ressources utilisées par l'état.
+    /// </summary>
+    public virtual void Exit()
+    {
+        return;
+    }
+}
+
+```
+*Code 13*
+
+---
+# Références
+- [Design Pattern Guru : State pattern](https://refactoring.guru/design-patterns/state)
