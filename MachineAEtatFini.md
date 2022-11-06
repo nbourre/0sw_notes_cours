@@ -609,6 +609,60 @@ public class State : Node
 ```
 *Code 13*
 
+> **Rappel**
+> 
+> Une méthode virtuel est une méthode qui peut être redéfinie dans une classe dérivée. Une méthode virtuelle est définie avec le mot-clé `virtual` et peut être redéfinie avec le mot-clé `override` dans une classe dérivée.
+
+---
+
+Une fois que nous avons notre classe de base, nous pouvons créer nos états. Nous allons créer un état pour chaque action que le personnage peut faire. Nous allons donc créer les états suivants :
+- Idle
+- Running
+- Jumping
+- Falling
+
+```cpp
+using Godot;
+using System.Collections.Generic;
+
+public class Idle : State
+{
+    public override void Enter(Dictionary<string, bool> message = null)
+    {
+        _stateMachine._player._animPlayer.Play("Idle");
+    }
+
+    public override void HandleInputs(InputEvent inputEvent)
+    {
+        if (inputEvent.IsActionPressed("ui_right"))
+        {
+            _stateMachine._player.dir = 1;
+            _stateMachine.transition_to("Running");
+        }
+        else if (inputEvent.IsActionPressed("ui_left"))
+        {
+            _stateMachine._player.dir = -1;
+            _stateMachine.transition_to("Running");
+        }
+
+        if (inputEvent.IsActionJustPressed("ui_jump"))
+        {
+            _stateMachine.transition_to("Jumping");
+        }
+    }
+
+    public override void PhysicsUpdate(float delta)
+    {
+        if (_stateMachine._player._velocity.y > 0)
+        {
+            _stateMachine.transition_to("Falling");
+        }
+    }
+}
+
+```
+
+
 ---
 # Références
 - [Design Pattern Guru : State pattern](https://refactoring.guru/design-patterns/state)
