@@ -58,7 +58,8 @@ Pour créer un nouveau shader, vous pouvez suivre les étapes suivantes:
 4. Cliquez `Material` dans l'inspecteur
 5. Créez un nouveau `Shader` pour la propriété du même nom
 6. Cliquez sur `Shader` une seconde fois pour développer l'éditeur de shader
-   ![](../assets/shader_tutorial_03.gif)
+
+![](../assets/shader_tutorial_03.gif)
 
 ## Écrire le code GLSL
 Le langage GLSL est basé sur le C. Il est donc possible d'utiliser des variables, des fonctions, des boucles, des conditions, etc.
@@ -209,11 +210,11 @@ Nous avons maintenant accès à un paramètre `Flash color` dans l'inspecteur de
 Exemple 2
 ```glsl
 uniform vec4 flash_color : hint_color = vec4(1.0);
-uniform float flash_modifer : hint_range(0.0, 1.0) = 1.0;
+uniform float flash_modifier : hint_range(0.0, 1.0) = 1.0;
 
 void fragment() {
   vec4 color = texture(TEXTURE, UV);
-  color.rgb = mix(color.rgb, flash_color.rgb, flash_modifer);
+  color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
   COLOR = color;
 }
 ```
