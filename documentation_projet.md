@@ -6,7 +6,7 @@ Il y a deux volets pour la documentation :
 - Aide intégrée au projet
 
 ## Document court
-Dans ce document de tout au plus une page, vous expliquez les concepts utilisés dans le projet. Les objectifs du jeu ou de la simulation. Vous devez aussi indiquer les sources d’information utilisées.
+Dans ce document de tout au plus une page, vous expliquez les concepts utilisés dans le projet ainsi que les objectifs du jeu ou de la simulation. Vous devez aussi indiquer les sources d’information utilisées.
 
 De plus, vous devez inclure au moins deux points saillants en lien avec le développement. Par exemple, vous pouvez expliquer comment vous avez fait pour pour faire une génération procédurale ou encore comment vous avez implémenté une machine à état fini.
 
@@ -23,13 +23,13 @@ L’algorithme du OSN n’est que la base pour l’algorithme de génération. E
     <tr>
         <td>
             <figure>
-                <img src="assets/exemple_01.png"/>
+                <img src="assets/exemple_01.png"/><br />
                 <figcaption>Figure 1 : Terrain basé avec une seule valeur de bruit</figcaption>
             </figure>
         </td>
         <td>
             <figure>
-                <img src="assets/exemple_02.png"/>
+                <img src="assets/exemple_02.png"/><br />
                 <figcaption>Figure 2 : Terrain basé 2 valeurs de bruit</figcaption>
             </figure>
         </td>
