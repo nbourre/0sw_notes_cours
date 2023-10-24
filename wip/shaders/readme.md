@@ -21,26 +21,6 @@
     - [Autres exemples](#autres-exemples)
 - [Conclusion](#conclusion)
 - [Références](#références)
-- [Introduction](#introduction-1)
-- [Les shaders dans Godot](#les-shaders-dans-godot-1)
-  - [Projet de base](#projet-de-base-1)
-  - [Créer un shader](#créer-un-shader-1)
-  - [Écrire le code GLSL](#écrire-le-code-glsl-1)
-    - [Exemple simple](#exemple-simple-1)
-  - [Utiliser des variables](#utiliser-des-variables-1)
-  - [Pixel avec une texture](#pixel-avec-une-texture-1)
-    - [Variable `UV`](#variable-uv-1)
-    - [Variable `TEXTURE`](#variable-texture-1)
-    - [Exemple](#exemple-1)
-- [Rendre public des paramètres du shader](#rendre-public-des-paramètres-du-shader-1)
-  - [Le mot clé `uniform`](#le-mot-clé-uniform-1)
-- [Utiliser le shader dans un jeu](#utiliser-le-shader-dans-un-jeu-1)
-  - [Sauvegarder le shader](#sauvegarder-le-shader-1)
-  - [Appliquer le shader sur un objet](#appliquer-le-shader-sur-un-objet-1)
-  - [Utiliser le shader dans un script](#utiliser-le-shader-dans-un-script-1)
-    - [Autres exemples](#autres-exemples-1)
-- [Conclusion](#conclusion-1)
-- [Références](#références-1)
 
 # Introduction
 - Les shaders sont des programmes qui permettent de dessiner des objets dans un moteur de jeu.
@@ -65,7 +45,7 @@ Dans cet article, nous allons voir comment créer et utiliser un shader 2D dans 
 
 Dans le projet, vous devez avoir un sprite avec une texture. Comme indiquer précédemment, j'utilise le projet vide de Godot, j'ai pris le sprite `Icon` que j'ai mis directement dans la scène.
 
-![](assets/shader_tutorial_01.gif)
+![](../assets/shader_tutorial_01.gif)
 
 ## Créer un shader
 Pour créer un nouveau shader, vous pouvez suivre les étapes suivantes:
@@ -75,11 +55,11 @@ Pour créer un nouveau shader, vous pouvez suivre les étapes suivantes:
 3. Cliquez sur le bouton `New ShaderMaterial`
    - Une sphère apparait dans l'inspecteur
    - Un nouveau noeud `ShaderMaterial` est créé dans la hiérarchie
-   ![](assets/shader_tutorial_02.gif)
+   ![](../assets/shader_tutorial_02.gif)
 4. Cliquez `Material` dans l'inspecteur
 5. Créez un nouveau `Shader` pour la propriété du même nom
 6. Cliquez sur `Shader` une seconde fois pour développer l'éditeur de shader
-   ![](assets/shader_tutorial_03.gif)
+   ![](../assets/shader_tutorial_03.gif)
 
 ## Écrire le code GLSL
 Le langage GLSL est basé sur le C. Il est donc possible d'utiliser des variables, des fonctions, des boucles, des conditions, etc.
@@ -132,17 +112,17 @@ void fragment() {
 ```
 Sauvegardez et observez le résultat en direct dans la scène.
 
-![](assets/shader_tutorial_04.gif)
+![](../assets/shader_tutorial_04.gif)
 
 - Testez en modifiant la valeur de `COLOR` pour obtenir un pixel rouge ou dans une autre couleur
 - Testez en modifiant la transparence
 
-![](assets/shader_tutorial_05.gif)
+![](../assets/shader_tutorial_05.gif)
 
 ## Utiliser des variables
 Pour être un peu plus efficace, on peut sauvegarder la valeur dans une variable.
 
-![](assets/shader_tutorial_06.gif)
+![](../assets/shader_tutorial_06.gif)
 
 ## Pixel avec une texture
 On remarque que la couleur change pour l'ensemble des pixels. Ce n'est généralement pas ce que l'on désire. On peut donc utiliser une texture pour déterminer la couleur du pixel. Pour ce faire, on va utiliser les variables `COLOR`, `UV` et `TEXTURE`.
@@ -150,7 +130,7 @@ On remarque que la couleur change pour l'ensemble des pixels. Ce n'est général
 ### Variable `UV`
 La variable `UV` contient les coordonnées du pixel. Il s'agit d'un type `vec2`. La première valeur est la coordonnée horizontale et la deuxième la coordonnée verticale. Les valeurs sont comprises **entre 0 et 1**.
 
-![](assets/shader_iconuv.webp)
+![](../assets/shader_iconuv.webp)
 
 Exemple  
 ```glsl
@@ -159,7 +139,7 @@ void fragment() {
   COLOR = vec4(UV, 0.5, 1.0);
 }
 ```
-![](assets/shader_tutorial_07.gif)
+![](../assets/shader_tutorial_07.gif)
 
 ### Variable `TEXTURE`
 La variable `TEXTURE` contient la texture du sprite. On peut donc utiliser la fonction `texture` pour obtenir la couleur du pixel à partir de la texture.
@@ -185,7 +165,7 @@ void fragment() {
 ```
 Vous avez remarqué la fonction `mix`? Cette fonction permet de mélanger deux couleurs. Le premier paramètre est la première couleur, le second est la 2e couleur et la troisième valeur est le pourcentage de mélange de la 2e couleur sur la 1ère. Ici, on met la valeur à 1 pour appliquer 100% de la 2e couleur.
 
-![](assets/shader_tutorial_08.gif)
+![](../assets/shader_tutorial_08.gif)
 
 # Rendre public des paramètres du shader
 Maintenant que l'on connaît les bases du shader, il est temps de rendre public des paramètres du shader. Cela permettra de modifier les paramètres du shader dans Godot (ou tout autre moteur de jeu).
@@ -225,7 +205,7 @@ void fragment() {
 
 Nous avons maintenant accès à un paramètre `Flash color` dans l'inspecteur de Godot.
 
-![](assets/shader_tutorial_09.gif)
+![](../assets/shader_tutorial_09.gif)
 
 Exemple 2
 ```glsl
@@ -245,7 +225,7 @@ Pour exploiter un shader à son plein potentiel, il faut l'utiliser dans un jeu.
 ## Sauvegarder le shader
 Dans l'inspecteur à la propriété `Shader`, cliquez la petite flèche au bout de `Shader`. Sélectionnez `Save` et sauvegardez le shader dans un fichier `.shader` ou `.gdshader`.
 
-![](assets/shader_tutorial_10_saving.gif)
+![](../assets/shader_tutorial_10_saving.gif)
 
 Une fois sauvegardé, on peut appliquer le shader sur plusieurs objets.
 
@@ -256,7 +236,7 @@ Pour appliquer le shader sur un objet, il faut sélectionner l'objet et dans l'i
 > 
 > Dans le bloc `Resource`, il faut cocher `Local to Scene` pour que le shader ne soit appliquer qu'à l'objet actuel. Autrement, aussitôt que l'on activera le shader, il sera appliqué à tous les objets qui utilisent le même shader en simultané.
 
-![](assets/shader_tutorial_11_localToScene.gif)
+![](../assets/shader_tutorial_11_localToScene.gif)
 
 ## Utiliser le shader dans un script
 Dans la scène où j'utilise le shader, j'ai ajouté un noeud `Timer` qui dure 0.1 seconde.
@@ -311,14 +291,14 @@ public override void _Process(float delta)
 
 Voici le résultat
 
-![](assets/shader_tutorial_12_final.gif)
+![](../assets/shader_tutorial_12_final.gif)
 
 ### Autres exemples
-![](assets/shader_tutorial_13_exA.gif)
+![](../assets/shader_tutorial_13_exA.gif)
 
-![](assets/shader_tutorial_13_exB.gif)
+![](../assets/shader_tutorial_13_exB.gif)
 
-![](assets/shader_tutorial_13_exC.gif)
+![](../assets/shader_tutorial_13_exC.gif)
 
 # Conclusion
 Une fois que les bases sont apprises, les `shaders` ne sont pas si compliqué. Il faut juste prendre le temps de comprendre comment ils fonctionnent et de les tester.
@@ -354,26 +334,6 @@ Il y a plusieurs ressources gratuites de disponibles sur [GodotShaders.com](http
     - [Autres exemples](#autres-exemples)
 - [Conclusion](#conclusion)
 - [Références](#références)
-- [Introduction](#introduction-1)
-- [Les shaders dans Godot](#les-shaders-dans-godot-1)
-  - [Projet de base](#projet-de-base-1)
-  - [Créer un shader](#créer-un-shader-1)
-  - [Écrire le code GLSL](#écrire-le-code-glsl-1)
-    - [Exemple simple](#exemple-simple-1)
-  - [Utiliser des variables](#utiliser-des-variables-1)
-  - [Pixel avec une texture](#pixel-avec-une-texture-1)
-    - [Variable `UV`](#variable-uv-1)
-    - [Variable `TEXTURE`](#variable-texture-1)
-    - [Exemple](#exemple-1)
-- [Rendre public des paramètres du shader](#rendre-public-des-paramètres-du-shader-1)
-  - [Le mot clé `uniform`](#le-mot-clé-uniform-1)
-- [Utiliser le shader dans un jeu](#utiliser-le-shader-dans-un-jeu-1)
-  - [Sauvegarder le shader](#sauvegarder-le-shader-1)
-  - [Appliquer le shader sur un objet](#appliquer-le-shader-sur-un-objet-1)
-  - [Utiliser le shader dans un script](#utiliser-le-shader-dans-un-script-1)
-    - [Autres exemples](#autres-exemples-1)
-- [Conclusion](#conclusion-1)
-- [Références](#références-1)
 
 # Introduction
 - Les shaders sont des programmes qui permettent de dessiner des objets dans un moteur de jeu.
@@ -398,7 +358,7 @@ Dans cet article, nous allons voir comment créer et utiliser un shader 2D dans 
 
 Dans le projet, vous devez avoir un sprite avec une texture. Comme indiquer précédemment, j'utilise le projet vide de Godot, j'ai pris le sprite `Icon` que j'ai mis directement dans la scène.
 
-![](assets/shader_tutorial_01.gif)
+![](../assets/shader_tutorial_01.gif)
 
 ## Créer un shader
 Pour créer un nouveau shader, vous pouvez suivre les étapes suivantes:
@@ -408,12 +368,12 @@ Pour créer un nouveau shader, vous pouvez suivre les étapes suivantes:
 3. Cliquez sur le bouton `New ShaderMaterial`
    - Une sphère apparait dans l'inspecteur
    - Un nouveau noeud `ShaderMaterial` est créé dans la hiérarchie
-   ![](assets/shader_tutorial_02.gif)
+   ![](../assets/shader_tutorial_02.gif)
 4. Cliquez `Material` dans l'inspecteur
 5. Créez un nouveau `Shader` pour la propriété du même nom
 6. Cliquez sur `Shader` une seconde fois pour développer l'éditeur de shader
 
-![](assets/shader_tutorial_03.gif)
+![](../assets/shader_tutorial_03.gif)
 
 ## Écrire le code GLSL
 Le langage GLSL est basé sur le C. Il est donc possible d'utiliser des variables, des fonctions, des boucles, des conditions, etc.
@@ -466,17 +426,17 @@ void fragment() {
 ```
 Sauvegardez et observez le résultat en direct dans la scène.
 
-![](assets/shader_tutorial_04.gif)
+![](../assets/shader_tutorial_04.gif)
 
 - Testez en modifiant la valeur de `COLOR` pour obtenir un pixel rouge ou dans une autre couleur
 - Testez en modifiant la transparence
 
-![](assets/shader_tutorial_05.gif)
+![](../assets/shader_tutorial_05.gif)
 
 ## Utiliser des variables
 Pour être un peu plus efficace, on peut sauvegarder la valeur dans une variable.
 
-![](assets/shader_tutorial_06.gif)
+![](../assets/shader_tutorial_06.gif)
 
 ## Pixel avec une texture
 On remarque que la couleur change pour l'ensemble des pixels. Ce n'est généralement pas ce que l'on désire. On peut donc utiliser une texture pour déterminer la couleur du pixel. Pour ce faire, on va utiliser les variables `COLOR`, `UV` et `TEXTURE`.
@@ -484,7 +444,7 @@ On remarque que la couleur change pour l'ensemble des pixels. Ce n'est général
 ### Variable `UV`
 La variable `UV` contient les coordonnées du pixel. Il s'agit d'un type `vec2`. La première valeur est la coordonnée horizontale et la deuxième la coordonnée verticale. Les valeurs sont comprises **entre 0 et 1**.
 
-![](assets/shader_iconuv.webp)
+![](../assets/shader_iconuv.webp)
 
 Exemple  
 ```glsl
@@ -493,7 +453,7 @@ void fragment() {
   COLOR = vec4(UV, 0.5, 1.0);
 }
 ```
-![](assets/shader_tutorial_07.gif)
+![](../assets/shader_tutorial_07.gif)
 
 ### Variable `TEXTURE`
 La variable `TEXTURE` contient la texture du sprite. On peut donc utiliser la fonction `texture` pour obtenir la couleur du pixel à partir de la texture.
@@ -519,7 +479,7 @@ void fragment() {
 ```
 Vous avez remarqué la fonction `mix`? Cette fonction permet de mélanger deux couleurs. Le premier paramètre est la première couleur, le second est la 2e couleur et la troisième valeur est le pourcentage de mélange de la 2e couleur sur la 1ère. Ici, on met la valeur à 1 pour appliquer 100% de la 2e couleur.
 
-![](assets/shader_tutorial_08.gif)
+![](../assets/shader_tutorial_08.gif)
 
 # Rendre public des paramètres du shader
 Maintenant que l'on connaît les bases du shader, il est temps de rendre public des paramètres du shader. Cela permettra de modifier les paramètres du shader dans Godot (ou tout autre moteur de jeu).
@@ -559,7 +519,7 @@ void fragment() {
 
 Nous avons maintenant accès à un paramètre `Flash color` dans l'inspecteur de Godot.
 
-![](assets/shader_tutorial_09.gif)
+![](../assets/shader_tutorial_09.gif)
 
 Exemple 2
 ```glsl
@@ -579,7 +539,7 @@ Pour exploiter un shader à son plein potentiel, il faut l'utiliser dans un jeu.
 ## Sauvegarder le shader
 Dans l'inspecteur à la propriété `Shader`, cliquez la petite flèche au bout de `Shader`. Sélectionnez `Save` et sauvegardez le shader dans un fichier `.shader` ou `.gdshader`.
 
-![](assets/shader_tutorial_10_saving.gif)
+![](../assets/shader_tutorial_10_saving.gif)
 
 Une fois sauvegardé, on peut appliquer le shader sur plusieurs objets.
 
@@ -590,7 +550,7 @@ Pour appliquer le shader sur un objet, il faut sélectionner l'objet et dans l'i
 > 
 > Dans le bloc `Resource`, il faut cocher `Local to Scene` pour que le shader ne soit appliquer qu'à l'objet actuel. Autrement, aussitôt que l'on activera le shader, il sera appliqué à tous les objets qui utilisent le même shader en simultané.
 
-![](assets/shader_tutorial_11_localToScene.gif)
+![](../assets/shader_tutorial_11_localToScene.gif)
 
 ## Utiliser le shader dans un script
 Dans la scène où j'utilise le shader, j'ai ajouté un noeud `Timer` qui dure 0.1 seconde.
@@ -645,14 +605,14 @@ public override void _Process(float delta)
 
 Voici le résultat
 
-![](assets/shader_tutorial_12_final.gif)
+![](../assets/shader_tutorial_12_final.gif)
 
 ### Autres exemples
-![](assets/shader_tutorial_13_exA.gif)
+![](../assets/shader_tutorial_13_exA.gif)
 
-![](assets/shader_tutorial_13_exB.gif)
+![](../assets/shader_tutorial_13_exB.gif)
 
-![](assets/shader_tutorial_13_exC.gif)
+![](../assets/shader_tutorial_13_exC.gif)
 
 # Conclusion
 Une fois que les bases sont apprises, les `shaders` ne sont pas si compliqué. Il faut juste prendre le temps de comprendre comment ils fonctionnent et de les tester.

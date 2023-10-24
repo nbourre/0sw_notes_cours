@@ -7,6 +7,8 @@
   - [Sélection d'un jeu de tuiles (TileSet)](#sélection-dun-jeu-de-tuiles-tileset)
   - [Sélectionner les tuiles qui seront utilisées](#sélectionner-les-tuiles-qui-seront-utilisées)
   - [Tracer le masque de terrain](#tracer-le-masque-de-terrain)
+  - [Ajout de tuiles supplémentaires](#ajout-de-tuiles-supplémentaires)
+  - [Tracer le terrain](#tracer-le-terrain)
 - [Références](#références)
 
 
@@ -73,11 +75,47 @@ Maintenant que le terrain est créé, il faut tracer le masque de terrain. Le ma
 5. Sélectionner les tuiles qui seront utilisées pour tracer le masque de terrain. <br /> ![Alt text](assets/tileset_paint_select.gif)
 
 ## Tracer le masque de terrain
-Maintenant vient le moment un peu plus corsé.
-<!-- TODO : Continuer... -->
+Maintenant vient le moment un peu plus corsé soit le traçage du masque de bit.
 
+Mon astuce personnelle est de tracer le sol ensuite les délimitations (exemple : Le gazon).
 
-![Alt text](assets/Godot_v4.1.1-stable_mono_win64_haQ1wgpKqt.gif)
+1. Suivant les étapes précédentes, sélectionner le `Terrain Set 0`.
+2. Pour Terrain, sélectionner `Dirt`.
+3. Commencer à tracer les surfaces représentant le sol. <br /> ![Alt text](assets/tileset_paint_dirt.gif)
+   - La couleur du masque sera celle sélectionnée lors de la création des `Terrain`. Je propose toujours une couleur complémentaire, car c'est plus facile à distinguer.
+
+Voici le résultat pour le sol. <br />
+![Alt text](assets/tileset_paint_dirt_done.png)
+
+4. Répéter les étapes 2 à 3 pour le gazon. <br/>
+![Alt text](assets/tileset_paint_grass.gif)
+
+Voici le résultat pour le gazon et le sol. <br />
+![Alt text](assets/tileset_grass_done.png)
+
+## Ajout de tuiles supplémentaires
+Il y a quelques tuiles avec plus de gazon dans le bas du l'image. Il faut les ajouter au TileSet. Pour ce faire, il suffit de cliquer sur les tuiles avec un point blanc pour les ajouter à l'ensemble de tuiles.
+
+![Alt text](assets/tileset_paint_grass_add.gif)
+
+Ensuite, il suffit de continuer à tracer le masque de terrain.
+
+Le résultat final est le suivant.
+![Alt text](assets/tileset_paint_grass_extra_done.png)
+
+Remarquez que l'on a omis de compléter 3 tuiles. En effet, ces tuiles sont des tuiles de transitions avec un autre type de terrain. Il faut donc les compléter avec le terrain approprié.
+
+## Tracer le terrain
+
+Pour la sélection des tuiles automatiques, la logique est la suivante:
+- Le bit central est le bit de la tuile courante.
+- Les bits autour sont les bits des tuiles adjacentes.
+- La tuile sélectionnée par le système sera celle dont les bits autour du centre ont des bits identiques sur les tuiles adjacentes.
+
+1. Sélectionner l'onglet `TileMap`
+2. Sélectionner le sous-onglet `Terrains` (Coin supérieur gauche du volet)
+3. Sélectionner le type de terrain désiré. Il y a 2 choix selon ce que nous avons créé précédemment soit `Dirt` et `Grass`.
+
 
 # Références
 - [Godot Docs - Using TileSet](https://docs.godotengine.org/en/stable/tutorials/2d/using_tilesets.html#doc-using-tilesets)
