@@ -10,6 +10,7 @@
   - [Ajout de tuiles supplémentaires](#ajout-de-tuiles-supplémentaires)
   - [Probabilité](#probabilité)
   - [Tracer le terrain](#tracer-le-terrain)
+- [Travailler avec les couches](#travailler-avec-les-couches)
 - [Résumé](#résumé)
 - [Références](#références)
 
@@ -139,6 +140,21 @@ Voici le résultat que l'on pourra s'attendre. <br />
 On remarque que les tuiles se sélectionnent toutes seules. C'est le système de sélection de tuiles qui fait le travail. Il suffit de tracer le masque de terrain et le système de sélection de tuiles fait le reste.
 
 > **Notes :** Il est important de ne pas oublier un bit dans les masques, car cela peut empêcher le bon fonctionnement du système de sélection de tuiles.
+
+# Travailler avec les couches
+Il est possible d'ajouter des couches sur le TileMap. Cela permet de tracer des éléments par-dessus le terrain. C'est utile pour ajouter des éléments de décor ou des éléments interactifs.
+
+Pour ajouter une couche, il suffit d'ajouter un élément à la propriété `Layers` du noeud `TileMap`.
+
+On peut en profiter pour renommer les couches en modifiant le champ `Name` de la propriété `Layers`.
+
+Dans le cas ci-contre, on y voit 2 couches soit `Ground` et `Nature`.
+
+![Alt text](assets/tilemap_layers.png)
+
+Pour tracer sur un couche, il suffit de sélectionner la couche désirée dans l'onglet Tilemap et de tracer les éléments comme nous l'avons fait précédemment.
+
+![Alt text](assets/Tilemap_layers_selection.png)
 
 # Résumé
 On a vu comment utiliser les propriétés de terrains pour tracer un fond de jeu rapidement. Ce qui est important de retenir est que le système de sélection de tuiles est basé sur les bits des tuiles adjacentes. Il faut donc s'assurer que les bits sont bien placés pour que le système fonctionne correctement.
