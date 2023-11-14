@@ -9,6 +9,7 @@ Les notes pour le cours Programmation jeux et multimédias (420-0SW-SW).
 - [Autotiling](tilemap_terrain/readme.md)
 - [Parallaxe](parallaxe/readme.md)
 - [Débogueur](remote_debugger/readme.md)
+- [Shaders](shaders/readme.md)	
 
 # Work in progress
 - [WiP : AnimationTree](animation_tree/readme.md)
