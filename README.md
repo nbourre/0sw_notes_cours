@@ -13,4 +13,3 @@ Les notes pour le cours Programmation jeux et multimédias (420-0SW-SW).
 
 # Work in progress
 - [WiP : AnimationTree](animation_tree/readme.md)
-- [WiP : Shaders](wip/shaders/readme.md)
