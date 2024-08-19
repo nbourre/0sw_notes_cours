@@ -5,12 +5,15 @@
 - [Introduction](#introduction)
 - [Le marcheur aléatoire](#le-marcheur-aléatoire)
 - [Nombre aléatoire](#nombre-aléatoire)
-- [Marcheur aléatoire guidé](#marcheur-aléatoire-guidé)
+  - [Marcheur aléatoire guidé](#marcheur-aléatoire-guidé)
   - [Dans les jeux](#dans-les-jeux)
 - [Distribution normale](#distribution-normale)
   - [Comment faire pour gérer la distribution normale?](#comment-faire-pour-gérer-la-distribution-normale)
   - [Exemple de cas d'utilisation](#exemple-de-cas-dutilisation)
+- [Distribution uniforme vs normale](#distribution-uniforme-vs-normale)
+  - [Question](#question)
 - [Exercices](#exercices)
+- [Le bruit de Perlin](#le-bruit-de-perlin)
 
 # Objectifs
 - Comprendre les bases des nombres aléatoires
@@ -76,18 +79,30 @@ Un nombre aléatoire est un nombre que l'on ne peut généralement pas prédire.
 int r = int (random() * 10);
 ```
 
+> **Question :**
+>
+> Que fera l’instruction suivante? 
+> `line (width / 2, height / 2, random (0, width), random (0, height));`
+
 Remarquez l'animation ci-dessous. Elle montre comment les nombres aléatoires sont distribués de manière uniforme entre 0 et 20.
 
 ![alt text](assets/random_distribution.gif)
 
 Ainsi, c'est comme si l'on avait un dé à 20 faces. Chaque face a la même probabilité d'apparaître. On appellera cette distribution une **distribution uniforme**.
 
-# Marcheur aléatoire guidé
-TODO : Ajouter un exemple de marcheur aléatoire guidé
+## Marcheur aléatoire guidé
 
-Si on veut que le marcheur tende vers l'ouest, comment pourrait-on procéder?
+Si on veut que le marcheur tende vers l'ouest, comme dans l'exemple ci-contre, comment pourrait-on faire?
 
+![alt text](assets/02_random_walker.gif)
 
+<details>
+
+<summary>Indice</summary>
+
+On peut utiliser une distribution uniforme pour guider le marcheur. Par exemple, si on veut que le marcheur aille plus souvent vers l'ouest, on peut générer un nombre aléatoire entre 0 et 1. Si le nombre est inférieur à 0.4, on ira vers l'ouest.
+
+</details>
 
 
 ## Dans les jeux
@@ -249,5 +264,52 @@ Ce code donnera un résultat similaire à celui-ci :
 
 </details>
 
+---
+
+# Distribution uniforme vs normale
+
+<table style="border: none;">
+
+<tr>
+<td>
+
+![alt text](assets/random_distribution.gif)
+
+</td>
+<td>
+
+![alt text](assets/normal_distribution.gif)
+
+</td>
+</tr>
+</table>
+
+---
+
+## Question
+
+<table style="border: none;">
+
+<tr>
+<td>
+
+De quel côté est la distribution uniforme et pourquoi?
+
+</td>
+<td>
+
+![alt text](assets/Image12.gif)
+
+</td>
+</tr>
+</table>
+
+---
+
 # Exercices
 - Modifiez l'exemple avec la distribution normale pour qu'il affiche une distribution normale avec une moyenne de 175 et un écart-type de 10.
+
+---
+
+# Le bruit de Perlin
+Voici le lien vers mes notes sur le [bruit de Perlin](https://moodle.cshawi.ca/mod/page/view.php?id=10607&forceview=1)
