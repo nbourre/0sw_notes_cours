@@ -5,6 +5,7 @@
 - [Introduction](#introduction)
 - [Le marcheur aléatoire](#le-marcheur-aléatoire)
 - [Nombre aléatoire](#nombre-aléatoire)
+- [Marcheur aléatoire guidé](#marcheur-aléatoire-guidé)
   - [Dans les jeux](#dans-les-jeux)
 - [Distribution normale](#distribution-normale)
   - [Comment faire pour gérer la distribution normale?](#comment-faire-pour-gérer-la-distribution-normale)
@@ -80,6 +81,14 @@ Remarquez l'animation ci-dessous. Elle montre comment les nombres aléatoires so
 ![alt text](assets/random_distribution.gif)
 
 Ainsi, c'est comme si l'on avait un dé à 20 faces. Chaque face a la même probabilité d'apparaître. On appellera cette distribution une **distribution uniforme**.
+
+# Marcheur aléatoire guidé
+TODO : Ajouter un exemple de marcheur aléatoire guidé
+
+Si on veut que le marcheur tende vers l'ouest, comment pourrait-on procéder?
+
+
+
 
 ## Dans les jeux
 On retrouve la distribution uniforme dans plusieurs types de jeux. Par exemple, dans un jeu de cartes, chaque carte a la même probabilité d'apparaître. Dans un jeu de dés, chaque face a la même probabilité d'apparaître. Certains jeux utilisent la distribution uniforme pour générer des physiques de personnages aléatoires.
