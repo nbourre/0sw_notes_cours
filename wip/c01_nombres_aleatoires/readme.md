@@ -13,8 +13,8 @@
 
 # Objectifs
 - Comprendre les bases des nombres aléatoires
-- Les différents types de distributions
-- Le bruit de Perlin
+- Comprendre la distribution uniforme
+- Comprendre la distribution normale
 
 # Introduction
 Un ordinateur est une machine déterministe. Cela signifie que si vous lui donnez les mêmes données d'entrée, il donnera toujours la même sortie. Ainsi, il ne peut pas générer de nombres aléatoires. Cela peut être un problème si vous voulez simuler des phénomènes aléatoires. Pour cela, on utilise des générateurs de nombres aléatoires.
@@ -167,6 +167,8 @@ int value = int (sd * num + mean);
 ## Exemple de cas d'utilisation
 Dans un jeu de tir, on peut utiliser une distribution normale pour gérer la précision des tirs. Lorsque le joueur tire, on génère une valeur aléatoire avec une distribution normale selon son niveau de fatigue, la distance de la cible, etc. Par exemple, après un sprint, le joueur sera plus fatigué et sa précision sera moins bonne. Ainsi, en augmentant l'écart-type, on augmente la dispersion des tirs.
 
+Dans les logiciels de dessin, on peut utiliser une distribution normale pour simuler l'aérographe. Plus l'écart-type est grand, plus la zone de peinture sera grande et dispersé.
+
 <table>
 <tr>
 <td>
@@ -239,4 +241,4 @@ Ce code donnera un résultat similaire à celui-ci :
 </details>
 
 # Exercices
-TODO : Compléter les exercices
+- Modifiez l'exemple avec la distribution normale pour qu'il affiche une distribution normale avec une moyenne de 175 et un écart-type de 10.
