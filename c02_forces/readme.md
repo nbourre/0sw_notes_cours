@@ -91,6 +91,14 @@ git clone https://github.com/nbourre/0sw_processing_exemples
 - L’accélération est directement proportionnelle à la force et inversement proportionnelle à la masse.
   - Ainsi, si vous êtes sur un chariot, le plus fort que l’on vous pousse, le plus rapide que vous vous déplacerez. Toutefois, plus lourd vous êtes, plus lentement vous vous déplacerez.
 
+Ainsi la formule est :
+- $F = ma$
+
+On peut la réécrite en fonction de l’accélération :
+- $a = \frac{F}{m}$
+
+C'est cette formule que l'on va utiliser pour simuler les forces.
+
 ---
 
 ## Poids vs masse
@@ -245,6 +253,8 @@ friction.normalize(); // Vecteur unitaire
 friction.mult(-1); // Inverser la direction
 friction.mult(mu); // mu < 1 coefficient de friction
 ```
+
+![alt text](assets/force_friction.gif)
 
 ---
 
