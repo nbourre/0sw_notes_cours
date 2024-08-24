@@ -204,7 +204,7 @@ Apprendre les rudiments de l’environnement de développement Godot.
 - Un projet peut contenir plusieurs scènes, mais un jeu pour démarrer doit avoir une scène principale.
 
 ---
-
+TODO : Continuer ici
 # Exercice : Bonjour le monde
 
 - Comme tout bon premier exemple, nous allons créer un projet `Bonjour le monde`.
