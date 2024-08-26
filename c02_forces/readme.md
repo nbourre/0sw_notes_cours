@@ -86,8 +86,8 @@ git clone https://github.com/nbourre/0sw_processing_exemples
 ---
 
 # Deuxième loi de Newton
-
-- La force est égale à la masse multipliée par l’accélération.
+- C'est la loi la plus importante pour nous.
+- **La force est égale à la masse multipliée par l’accélération.**
 - L’accélération est directement proportionnelle à la force et inversement proportionnelle à la masse.
   - Ainsi, si vous êtes sur un chariot, le plus fort que l’on vous pousse, le plus rapide que vous vous déplacerez. Toutefois, plus lourd vous êtes, plus lentement vous vous déplacerez.
 
@@ -115,10 +115,13 @@ C'est cette formule que l'on va utiliser pour simuler les forces.
 - Pour simplifier la compréhension, nous allons utiliser une masse ($m$) de 1 dans les premiers exemples.
 - Ainsi $F=ma$ à $F = a$.
 - Disons que l’on reprend la classe `Mover` avec les propriétés `location`, `vélocité`, et `accélération`.
-- La classe `Mover` est disponible dans le projet `s02_forces_01` dans les exemples Processing.
+- La classe `Mover` est disponible dans le projet [`s02_forces_01`](pde://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s02_forces_01.pdez) dans les exemples Processing.
+  - Cliquez sur le lien pour télécharger et ouvrir le fichier directement.
 - Notre but est d’appliquer une force.
   - Par exemple : `mover.applyForce(wind)`
   - Ou encore : `mover.applyForce(gravity)`
+
+Ajoutez la méthode suivante à la classe `Mover` :
 
 ```java
 // Code ninja

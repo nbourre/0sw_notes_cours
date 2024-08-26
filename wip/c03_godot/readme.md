@@ -18,9 +18,9 @@ Apprendre les rudiments de l’environnement de développement Godot.
   - [](#)
   - [Les types d’environnement de travail](#les-types-denvironnement-de-travail)
 - [Scènes et nœuds](#scènes-et-nœuds)
-- [Les nœuds](#les-nœuds)
-- [Les scènes](#les-scènes)
-- [Exercice : Bonjour le monde](#exercice--bonjour-le-monde)
+  - [Les nœuds](#les-nœuds)
+  - [Les scènes](#les-scènes)
+  - [Exercice : Bonjour le monde](#exercice--bonjour-le-monde)
 - [Exercice : Bonjour le monde (suite)](#exercice--bonjour-le-monde-suite)
 - [Exercice : Bonjour le monde (suite)](#exercice--bonjour-le-monde-suite-1)
 - [Configurer le projet](#configurer-le-projet)
@@ -176,7 +176,7 @@ Apprendre les rudiments de l’environnement de développement Godot.
 
 ---
 
-# Les nœuds
+## Les nœuds
 
 ![alt text](assets/scene_and_nodes.png)
 
@@ -193,7 +193,7 @@ Apprendre les rudiments de l’environnement de développement Godot.
 
 ---
 
-# Les scènes
+## Les scènes
 
 - Une scène est composée d’un groupe de nœuds organisés de façon hiérarchique.
 - Une scène :
@@ -204,8 +204,8 @@ Apprendre les rudiments de l’environnement de développement Godot.
 - Un projet peut contenir plusieurs scènes, mais un jeu pour démarrer doit avoir une scène principale.
 
 ---
-TODO : Continuer ici
-# Exercice : Bonjour le monde
+
+## Exercice : Bonjour le monde
 
 - Comme tout bon premier exemple, nous allons créer un projet `Bonjour le monde`.
 - Nous allons ajouter un nœud `Label` via le bouton "+" dans le coin supérieur gauche du volet Scene.
