@@ -115,7 +115,7 @@ C'est cette formule que l'on va utiliser pour simuler les forces.
 - Pour simplifier la compréhension, nous allons utiliser une masse ($m$) de 1 dans les premiers exemples.
 - Ainsi $F=ma$ à $F = a$.
 - Disons que l’on reprend la classe `Mover` avec les propriétés `location`, `vélocité`, et `accélération`.
-- La classe `Mover` est disponible dans le projet [`s02_forces_01`](pde://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s02_forces_01.pdez) dans les exemples Processing.
+- La classe `Mover` est disponible dans le projet [`s02_forces_01`](https://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s02_forces_01.pdez) dans les exemples Processing.
   - Cliquez sur le lien pour télécharger et ouvrir le fichier directement.
 - Notre but est d’appliquer une force.
   - Par exemple : `mover.applyForce(wind)`
