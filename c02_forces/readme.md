@@ -7,7 +7,7 @@
 
 # Table des matières <!-- omit in toc -->
 - [Introduction](#introduction)
-  - [Clone du projet](#clone-du-projet)
+  - [Clone et branchage du projet](#clone-et-branchage-du-projet)
 - [Force](#force)
 - [Première loi de Newton](#première-loi-de-newton)
 - [Troisième loi de Newton](#troisième-loi-de-newton)
@@ -32,12 +32,18 @@ Dans ce chapitre, on verra comment appliquer différents types de forces à un o
 
 ![alt text](assets/forces_example.gif)
 
-## Clone du projet
+## Clone et branchage du projet
 
 Si ce n'est déjà fait, clonez le projet du cours :
 
 ```bash
 git clone https://github.com/nbourre/0sw_processing_exemples
+```
+
+Créez une branche pour ce chapitre :
+
+```bash
+git checkout -b c02_forces
 ```
 
 ---
@@ -116,7 +122,7 @@ C'est cette formule que l'on va utiliser pour simuler les forces.
 - Ainsi $F=ma$ à $F = a$.
 - Disons que l’on reprend la classe `Mover` avec les propriétés `location`, `vélocité`, et `accélération`.
 - La classe `Mover` est disponible dans le projet [`s02_forces_01`](https://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s02_forces_01.pdez) dans les exemples Processing.
-  - Cliquez sur le lien pour télécharger et ouvrir le fichier directement.
+  - **Cliquez sur le lien pour télécharger et ouvrir le fichier directement.**
 - Notre but est d’appliquer une force.
   - Par exemple : `mover.applyForce(wind)`
   - Ou encore : `mover.applyForce(gravity)`
@@ -130,6 +136,19 @@ void applyForce (PVector f) {
 }
 ```
 
+Dans le fichier principal, voici la nouvelle méthode `update` ainsi qu'un vecteur vent :
+
+```java
+// Code ninja
+void update(int delta) {
+  PVector wind = new PVector(-0.1, 0);
+  mover.applyForce(wind);
+  mover.update(delta);
+}
+```
+
+![alt text](assets/force_wind_02.gif)
+
 ---
 
 # Accumulation des forces
@@ -137,13 +156,15 @@ void applyForce (PVector f) {
 - Disons que l’on désire appliquer du vent et de la gravité en simultané.
 
 ```java
+// Dans update
 mover.applyForce(wind);
 mover.applyForce(gravity);
 mover.update();
 mover.display();
 ```
 
-- Si l’on prend cet exemple avec le code dans l’encadré du diapositive précédent, ce code est brisé car le vent sera toujours écrasé par la gravité! En effet, les paramètres sont passés par référence. N'oubliez pas que les vecteurs sont des objets.
+- Si l’on prend cet exemple avec le code précédent, ce code est brisé car le vent sera toujours écrasé par la gravité! En effet, les paramètres sont passés par référence. N'oubliez pas que les vecteurs sont des objets.
+  
 - **L’accélération est égale à la somme de toutes les forces divisées par la masse**. Cette action se nomme l’accumulation des forces.
 
 Dans la classe `Mover` :
@@ -153,6 +174,8 @@ void applyForce(Pvector f) {
   acceleration.add(force);
 }
 ```
+
+![alt text](assets/force_wind_grav_30.gif)
 
 ---
 
