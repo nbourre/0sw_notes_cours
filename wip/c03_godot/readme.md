@@ -20,15 +20,16 @@ Apprendre les rudiments de l’environnement de développement Godot.
 - [Scènes et nœuds](#scènes-et-nœuds)
   - [Les nœuds](#les-nœuds)
   - [Les scènes](#les-scènes)
-  - [Exercice : Bonjour le monde](#exercice--bonjour-le-monde)
-- [Exercice : Bonjour le monde (suite)](#exercice--bonjour-le-monde-suite)
-- [Exercice : Bonjour le monde (suite)](#exercice--bonjour-le-monde-suite-1)
-- [Configurer le projet](#configurer-le-projet)
+- [Exercice : Bonjour le monde](#exercice--bonjour-le-monde)
+  - [Ajout d’un nœud Label](#ajout-dun-nœud-label)
+  - [Exécution de la scène](#exécution-de-la-scène)
+  - [Configurer le projet](#configurer-le-projet)
 - [Script](#script)
-- [Introduction](#introduction)
-- [Objectifs](#objectifs)
-- [Monter la scène](#monter-la-scène)
-- [Ajouter un script](#ajouter-un-script)
+  - [Introduction](#introduction)
+  - [Objectifs](#objectifs)
+  - [Monter la scène](#monter-la-scène)
+  - [Signification des éléments d'ajustement](#signification-des-éléments-dajustement)
+  - [Ajouter un script](#ajouter-un-script)
 - [Le script](#le-script)
 - [Le script (suite)](#le-script-suite)
 - [Signal et GetNode](#signal-et-getnode)
@@ -191,9 +192,12 @@ Apprendre les rudiments de l’environnement de développement Godot.
     - Cela crée un graphe.
 - Ne vous inquiétez pas si vous n’avez pas tout compris, on revient sur le sujet plus tard.
 
+![alt text](assets/editor_intro_workspace_2d.webp)
+
 ---
 
 ## Les scènes
+
 
 - Une scène est composée d’un groupe de nœuds organisés de façon hiérarchique.
 - Une scène :
@@ -203,68 +207,74 @@ Apprendre les rudiments de l’environnement de développement Godot.
 - Exécuter un jeu revient à exécuter une scène.
 - Un projet peut contenir plusieurs scènes, mais un jeu pour démarrer doit avoir une scène principale.
 
+![alt text](assets/nodes_and_scenes_character_nodes.webp)
+
 ---
 
-## Exercice : Bonjour le monde
+# Exercice : Bonjour le monde
 
+## Ajout d’un nœud Label
 - Comme tout bon premier exemple, nous allons créer un projet `Bonjour le monde`.
 - Nous allons ajouter un nœud `Label` via le bouton "+" dans le coin supérieur gauche du volet Scene.
 - Le bouton "Other node" revient à la même action.
 - Une fenêtre apparaîtra dans laquelle on pourra rechercher le nœud désiré.
 - Effectuez la recherche "Label".
-- Appuyez sur Create.
+- Appuyez sur `Create`.
+
+![alt text](assets/hw_label.gif)
 
 ---
-
-# Exercice : Bonjour le monde (suite)
 
 - Plusieurs choses se passent après avoir cliqué sur Create :
-  - Premièrement, la scène se met en 2D car un Label est un nœud de type 2D.
-  - Deuxièmement, l’étiquette apparaît sélectionnée dans la scène dans le coin supérieur gauche du viewport.
-- La seconde étape sera de changer le texte dans le volet Inspector.
-- Modifiez la propriété "Texte" pour "Bonjour le monde!".
-- Exécutez le code en cliquant sur le bouton Exécuter la scène dans le coin supérieur droit ou [F6].
+  - Premièrement, la scène se met en 2D car un `Label` est un nœud de type 2D.
+  - Deuxièmement, l’étiquette apparaît sélectionnée dans la scène dans le coin supérieur gauche du *viewport*.
+- La seconde étape sera de changer le texte dans le volet `Inspector`.
+- Modifiez la propriété `Text` pour "Bonjour le monde!".
 
 ---
 
-# Exercice : Bonjour le monde (suite)
+## Exécution de la scène
 
-- Godot demandera à sauvegarder la scène.
+- Exécutez le code en cliquant sur le bouton Exécuter la scène dans le coin supérieur droit ou [F6].
+- La première fois, Godot demandera à sauvegarder la scène.
 - Donnez un nom significatif comme "bonjour".
 - L’endroit de sauvegarde sera le dossier "res://" qui est le dossier des ressources.
 - Si tout va bien, une fenêtre s’affichera avec le texte de l’étiquette.
 
+![alt text](assets/new_scene_test.png)
+
 ---
 
-# Configurer le projet
+## Configurer le projet
 
 - Comme indiqué plus tôt, un projet peut avoir plusieurs scènes.
 - Il faut configurer le projet pour sélectionner la scène principale.
-- Pour configurer le projet, il suffit d’aller dans le menu "Project à Project settings".
+- Pour configurer le projet, il suffit d’aller dans le menu "Project --> Project settings".
 - Configurons le projet pour exécuter la scène principale :
-  - Dans le volet de gauche sous la catégorie "Application" sous "Run"
-  - Changer la propriété "Main Scene" pour récupérer la scène de "Bonjour le monde".
+  - Dans le volet de gauche sous la catégorie `Application` sous `Run`
+  - Changer la propriété `Main Scene` pour récupérer la scène de "Bonjour le monde".
   - Une fois modifié, lorsque l’on exécutera le jeu avec [F5], la scène principale sera lancée.
 
 ---
 
 # Script
 
-TODO : Ajouter image
+![alt text](assets/coding_dance.webp)
 
 ---
 
-# Introduction
+## Introduction
 
 - Dans cette partie, nous allons faire un projet dans lequel un bouton changera le texte d’une étiquette à l’aide du code.
-- Godot accepte 3 langages :
+- Sans extension, Godot accepte 2 langages :
   - GDScript : Langage natif de Godot ressemblant à Python. C’est le favori de ceux qui apprennent à programmer. Il est utilisé dans la plupart des tutoriels.
   - C# : Langage favori des programmeurs et des gros projets. Ce sera le langage utilisé dans le cours pour faciliter l’apprentissage.
-  - GDNative/C++ : C’est du C++ :)
+- On peut utiliser plusieurs langages dans un même projet.
+- Lien vers la [documentation officielle](https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html)
 
 ---
 
-# Objectifs
+## Objectifs
 
 - On verra les éléments suivants :
   - Attacher un script à un nœud
@@ -274,30 +284,50 @@ TODO : Ajouter image
 
 ---
 
-# Monter la scène
+## Monter la scène
 
-- Avec le projet "Hello World", ajoutez les nœuds suivants dans la même hiérarchie :
+<table>
+  <tr>
+    <td>
+    
+- Avec le projet "Hello World"
+- Ajoutez les nœuds suivants dans la même hiérarchie :
   - Panel
-  - Label
-  - Button
+    - Label
+    - Button
 - Vous pouvez mettre un nœud à la racine de la scène en cliquant avec le bouton de droite.
 - Positionnez les contrôles pour obtenir ce qui est affiché ci-contre.
-- Propriété "Rect" de "Panel" pour la dimension de ce dernier.
+- La propriété `Size` dans la section `Transform` de `Panel` permet de redimensionner le panneau.
 
-TODO : Ajouter image
+    </td>
+    <td>
+
+    
+    ![alt text](assets/panel_button.png)
+    
+
+    </td>
+  </tr>
+</table>
 
 ---
 
-# Ajouter un script
+## Signification des éléments d'ajustement
 
-- Dans le volet Scene, cliquez avec le bouton droit sur le nœud Panel et sélectionnez Attach Script.
+![alt text](assets/container_elements.png)
+
+---
+
+## Ajouter un script
+
+- Dans le volet `Scene`, cliquez avec le bouton droit sur le nœud Panel et sélectionnez `Attach Script`.
 - La boîte de dialogue pour la création de script s’affichera.
 - On peut y régler entre autres :
   - Le langage de programmation
   - Le nom du fichier
-- Sélectionnez le langage "C#".
-- Dans Path, donnez un nom significatif au script. Exemple : TestPanel.cs.
-- Cliquez sur "Create".
+- Sélectionnez le langage `C#`.
+- Dans `Path`, donnez un nom significatif au script. Exemple : `TestPanel.cs`.
+- Cliquez sur `Create`.
 - L’éditeur de script s’ouvrira.
 - Un bouton apparaîtra à côté du Panel. En cliquant dessus, on ouvre le script attaché.
 
@@ -560,3 +590,22 @@ TODO : Ajouter code
 
 - Dans les petits projets l’utilisation d’une seule scène avec quelques nœuds peut fonctionner mais dans les projets plus grands le nombre de nœuds peut devenir ingérable
 - L’instanciation permet d’intégrer des scènes sauvegardées à l’intérieur d’une autre scène
+
+
+<!-- Tableau html à 2 colonnes pour copier coller
+
+<table>
+  <tr>
+    <td>
+    
+
+    </td>
+    <td>
+    
+
+    </td>
+  </tr>
+</table>
+
+-->
+
