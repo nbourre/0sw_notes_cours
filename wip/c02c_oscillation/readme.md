@@ -13,6 +13,14 @@ De la trigonométrie!... Oh boboy!
   - [Analogie `pushMatrix()` et `popMatrix()`](#analogie-pushmatrix-et-popmatrix)
 - [Exemple d’imbrication](#exemple-dimbrication)
   - [Exemples visuels](#exemples-visuels)
+- [Mouvement angulaire](#mouvement-angulaire)
+- [Trouver l’angle de direction](#trouver-langle-de-direction)
+- [Coordonnées polaires](#coordonnées-polaires)
+- [Exercice](#exercice)
+- [Les collisions circulaires](#les-collisions-circulaires)
+    - [Plan de leçon](#plan-de-leçon-1)
+  - [Collision entre cercles](#collision-entre-cercles)
+  - [Trouver le point de contact](#trouver-le-point-de-contact)
 
 
 ---
@@ -220,6 +228,151 @@ Projet : [s04_syst_solaire](pde://github.com/nbourre/0sw_processing_exemples/raw
 </table>
 
 ---
+
+![alt text](assets/math-hangover.gif)
+
+---
+
+---
+
+# Mouvement angulaire
+
+
+<table>
+  <tr>
+    <td>
+
+- On se rappelle de :
+  - $vitesse = vitesse + acceleration\\
+  location = location + vitesse$
+- Pour la vitesse angulaire, c’est le même principe :
+  - $\theta_{vitesse} = \theta_{vitesse} + \theta_{acceleration}\\
+  \theta = \theta + \theta_{vitesse}$
+
+  ![alt text](assets/angular_motion_Image.webp)
+
+</td>
+    <td>
+
+```java
+void update(float deltaTime) {
+  velocity.add(acceleration);
+  location.add(velocity);
+  
+  acceleration.mult(0);
+  
+  angularVelocity += angularAcceleration;
+  angle += angularVelocity;
+  
+  angularAcceleration = 0.0;    
+}
+
+void display() {
+  pushMatrix();
+    translate (location.x, location.y);
+    rotate (angle);
+    
+    fill(fillColor);
+    noStroke();
+    
+    rect (0, 0, w, h);
+  popMatrix();
+}
+```
+  </td>
+  </tr>
+</table>
+
+
+---
+
+# Trouver l’angle de direction
+
+- La fonction arctangente (`atan2`) permet de trouver l’angle de la vélocité.
+- **Pourquoi `atan2` et non `atan` ?**
+  - `atan` retourne un angle basé uniquement sur le rapport entre les côtés opposé et adjacent, sans savoir dans quel quadrant se trouve le point.
+  - `atan2`, en revanche, prend en compte à la fois l'opposé et l'adjacent, ainsi que leurs signes, ce qui permet de déterminer correctement le quadrant et d'obtenir un angle précis entre -π et π radians.
+
+<table>
+  <tr>
+  <td>
+
+![alt text](assets/motion_detection.webp)
+
+  </td>
+  <td>
+
+![alt text](assets/velocity_triangle.png)
+
+  </td>
+  </tr>
+</table>
+
+---
+
+# Coordonnées polaires
+
+- Les coordonnées polaires sont une représentation angulaire des données cartésiennes.
+- Elles facilitent les calculs de rotation en utilisant uniquement la valeur de $\theta$ (thêta) et $r$ (rayon).
+- Une des utilisations les plus courantes est le mouvement circulaire, car on n'a qu'à incrémenter l'angle.
+- Les formules de conversion de polaires à cartésiennes :
+  - $x = r \cos(\theta)$
+  - $y = r \sin(\theta)$
+
+<table>
+  <tr>
+  <td>
+
+![alt text](assets/coord_polaire.webp)
+
+  </td>
+  <td>
+
+![alt text](assets/triangle_polar.png)
+
+  </td>
+  </tr>
+</table>
+
+
+
+---
+
+# Exercice
+
+Réalisez un petit vaisseau simple qui pivote à l’aide des flèches gauche et droite et qui accélère en appuyant sur espace.
+
+![alt text](assets/vaisseau.webp)
+
+---
+
+TODO : Continuer les notes
+
+# Les collisions circulaires
+
+### Plan de leçon
+
+- Détecter une collision circulaire
+- Trouver le point de contact
+- Répondre à une collision entre balles
+
+---
+
+## Collision entre cercles
+
+- La collision entre cercles se base sur la distance entre les centres des cercles.
+- Si la distance est plus petite que la somme des deux rayons, il y a collision.
+
+---
+
+## Trouver le point de contact
+
+```java
+// Trouver le point de collision sans trigo
+float collisionPointX = ((this.position.x * autre.radius) + (autre.position.x * this.radius)) / (this.radius + autre.radius);
+float collisionPointY = ((this.position.y * autre.radius) + (autre.position.y * this.radius)) / (this.radius + autre.radius);
+```
+
 <!-- Tableau html à 2 colonnes pour copier coller
 
 <table>
