@@ -12,6 +12,7 @@ De la trigonométrie!... Oh boboy!
   - [Les fonctions `pushMatrix()` et `popMatrix()`](#les-fonctions-pushmatrix-et-popmatrix)
   - [Analogie `pushMatrix()` et `popMatrix()`](#analogie-pushmatrix-et-popmatrix)
 - [Exemple d’imbrication](#exemple-dimbrication)
+  - [Exemples visuels](#exemples-visuels)
 
 
 ---
@@ -150,23 +151,14 @@ En résumé, ces deux fonctions sont essentielles pour isoler les transformation
 - Question : Comment pourrait-on animer le robot ci-contre?
 
     </td>
-    <td>
+<td>
 
 ![alt text](assets/robot.webp)
-
     </td>
-
   </tr>
 </table>
     
-
-
-
-
-
-
 ---
-
 
 # Exemple d’imbrication
 
@@ -175,9 +167,8 @@ En résumé, ces deux fonctions sont essentielles pour isoler les transformation
     <td>
     
 ![alt text](assets/solar_system.png)
-
-    </td>
-    <td>
+</td>
+<td>
     
 ```java
 pushMatrix();
@@ -204,12 +195,31 @@ popMatrix();
 
 ```
 
-    </td>
-  </tr>
+</td>
+</tr>
 </table>
 
+---
 
+## Exemples visuels
 
+<table>
+  <tr>
+    <td>
+    
+![alt text](assets/rectangle_moving.gif)
+Projet : [s04_push_pop](https://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s04_push_pop.pdez)
+
+</td>
+<td>
+
+![alt text](assets/solar_system.gif)
+Projet : [s04_syst_solaire](pde://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s04_syst_solaire.pdez)
+</td>
+</tr>
+</table>
+
+---
 <!-- Tableau html à 2 colonnes pour copier coller
 
 <table>
@@ -219,8 +229,6 @@ popMatrix();
 
     </td>
     <td>
-    
-
     </td>
   </tr>
 </table>
