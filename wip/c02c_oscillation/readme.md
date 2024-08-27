@@ -139,21 +139,17 @@ En résumé, ces deux fonctions sont essentielles pour isoler les transformation
 
 ---
 
-<table>
-  <tr>
-    <td>
-
-    - **Il s'utilise toujours en pair push-pop.**
-    - **On peut les imbriquer.**
-    - Par exemple, si l’on veut dessiner un objet où il y a d’autres composants-enfants qui sont positionnés relativement au parent
-    - Voici une [vidéo explicative](https://www.youtube.com/watch?v=o9sgjuh-CBM&ab_channel=TheCodingTrain) de Daniel Shiffman
-    - Question : Comment pourrait-on animer le robot ci-contre?
-
-    </td>
-    <td>
-    wip/c02c_oscillation/assets/robot.webp
-    </td>
-  </tr>
+<table><tr><td>
+- **Il s'utilise toujours en pair push-pop.**
+- **On peut les imbriquer.**
+- Par exemple, si l’on veut dessiner un objet où il y a d’autres composants-enfants qui sont positionnés relativement au parent
+- Voici une [vidéo explicative](https://www.youtube.com/watch?v=o9sgjuh-CBM&ab_channel=TheCodingTrain) de Daniel Shiffman
+- Question : Comment pourrait-on animer le robot ci-contre?
+</td>
+<td>
+![alt text](assets/robot.webp)
+</td>
+</tr>
 </table>
 
 
