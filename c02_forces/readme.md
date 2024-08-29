@@ -306,7 +306,7 @@ float vitesse = velocity.mag();
 float surface = 1; // Aire frontale
 
 PVector resistance = PVector.normalize(velocity);
-resitance.mult(-0.5 * density * vitesse * vitesse * surface);
+resistance.mult(-0.5 * density * vitesse * vitesse * surface);
 ```
 
 Ainsi en appliquant cette force lors du contact avec le "liquide", on aura l’impression que l’objet ralenti.
