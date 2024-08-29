@@ -249,10 +249,10 @@ Projet : [s04_syst_solaire](pde://github.com/nbourre/0sw_processing_exemples/raw
 
 - On se rappelle de :
   - $$vitesse = vitesse + acceleration$$
-  $$location = location + vitesse$$
+  - $$location = location + vitesse$$
 - Pour la vitesse angulaire, c’est le même principe :
   - $$\theta_{vitesse} = \theta_{vitesse} + \theta_{acceleration}$$
-  $$\theta = \theta + \theta_{vitesse}$$
+  - $$\theta = \theta + \theta_{vitesse}$$
 
   ![alt text](assets/angular_motion_Image.webp)
 
