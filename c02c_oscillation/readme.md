@@ -302,12 +302,12 @@ void display() {
   <tr>
   <td>
 
-![alt text](assets/motion_detection.webp)
+<img src="assets/motion_detection.webp"/>
 
   </td>
   <td>
 
-![alt text](assets/velocity_triangle.png)
+<img src="assets/velocity_triangle.png" width="400"/>
 
   </td>
   </tr>
