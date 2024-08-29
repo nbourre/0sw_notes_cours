@@ -248,11 +248,11 @@ Projet : [s04_syst_solaire](pde://github.com/nbourre/0sw_processing_exemples/raw
     <td>
 
 - On se rappelle de :
-  - $vitesse = vitesse + acceleration\\
-  location = location + vitesse$
+  - $$vitesse = vitesse + acceleration\\
+  location = location + vitesse$$
 - Pour la vitesse angulaire, c’est le même principe :
-  - $\theta_{vitesse} = \theta_{vitesse} + \theta_{acceleration}\\
-  \theta = \theta + \theta_{vitesse}$
+  - $$\theta_{vitesse} = \theta_{vitesse} + \theta_{acceleration}\\
+  \theta = \theta + \theta_{vitesse}$$
 
   ![alt text](assets/angular_motion_Image.webp)
 
@@ -350,8 +350,6 @@ Réalisez un petit vaisseau simple qui pivote à l’aide des flèches gauche et
 ![alt text](assets/vaisseau.webp)
 
 ---
-
-TODO : Continuer les notes
 
 # Les collisions circulaires
 
