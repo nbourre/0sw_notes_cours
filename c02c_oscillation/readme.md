@@ -18,9 +18,14 @@ De la trigonométrie!... Oh boboy!
 - [Coordonnées polaires](#coordonnées-polaires)
 - [Exercice](#exercice)
 - [Les collisions circulaires](#les-collisions-circulaires)
-    - [Plan de leçon](#plan-de-leçon-1)
+  - [Plan de leçon](#plan-de-leçon-1)
   - [Collision entre cercles](#collision-entre-cercles)
   - [Trouver le point de contact](#trouver-le-point-de-contact)
+  - [Réponse à la collision](#réponse-à-la-collision)
+  - [Étape : Vecteur unitaire du point de contact](#étape--vecteur-unitaire-du-point-de-contact)
+  - [Étape : Projection de vecteur](#étape--projection-de-vecteur)
+  - [Exemple de résultat](#exemple-de-résultat)
+- [Références](#références)
 
 
 ---
@@ -350,7 +355,7 @@ TODO : Continuer les notes
 
 # Les collisions circulaires
 
-### Plan de leçon
+## Plan de leçon
 
 - Détecter une collision circulaire
 - Trouver le point de contact
@@ -363,15 +368,97 @@ TODO : Continuer les notes
 - La collision entre cercles se base sur la distance entre les centres des cercles.
 - Si la distance est plus petite que la somme des deux rayons, il y a collision.
 
+![alt text](assets/collision_circulaire.gif)
+
 ---
 
 ## Trouver le point de contact
+
+- Pour trouver le point de contact, il suffit de faire un peu de trigo! 👩‍🎓👨‍🎓🧑‍🎓
+
+![alt text](assets/collision_contact_point.jpg)
 
 ```java
 // Trouver le point de collision sans trigo
 float collisionPointX = ((this.position.x * autre.radius) + (autre.position.x * this.radius)) / (this.radius + autre.radius);
 float collisionPointY = ((this.position.y * autre.radius) + (autre.position.y * this.radius)) / (this.radius + autre.radius);
 ```
+
+---
+
+---
+
+## Réponse à la collision
+
+- Simuler une réponse suite à l’impact entre deux cercles permet de rendre l’animation plus réaliste.
+- Ce type de collision entre deux corps est appelé une "collision élastique".
+- La théorie derrière les collisions élastiques se trouve sur [Wikipédia](https://code.tutsplus.com/when-worlds-collide-simulating-circle-circle-collisions--gamedev-769t).
+
+![alt text](assets/collision_elastique.gif)
+
+---
+
+## Étape : Vecteur unitaire du point de contact
+
+- Trouver le vecteur unitaire entre le point de collision et le centre du cercle.
+
+```java
+// Vecteur unitaire entre le point de contact et le centre du cercle
+PVector un = result.get();
+un.sub(this.position);
+un.normalize();
+
+// 90° du vecteur unitaire
+PVector ut = new PVector(-un.y, un.x);
+
+```
+
+---
+
+## Étape : Projection de vecteur
+
+- Pour simuler la direction que prendront les balles après la collision, on calcule les projections des vecteurs de vélocité résultants.
+- Cela nécessite d’utiliser des produits croisés pour séparer les composantes normales et tangentielles de la vitesse.
+- La classe `PVector` en Processing offre la méthode `dot()` pour effectuer ce calcul.
+
+![alt text](assets/math_magic.png)
+
+```java
+// Produits croisés pour la vélocité du premier cercle
+float v1n = PVector.dot(un, this.velocity);
+float v1t = PVector.dot(ut, this.velocity);
+
+// Produits croisés pour la vélocité du deuxième cercle
+float v2n = PVector.dot(un, autre.velocity);
+float v2t = PVector.dot(ut, autre.velocity);
+
+// Formule
+// (b1.vitesse.x * (b1.mass - b2.mass) + (2 * b2.mass * b2.vitesse.x))
+// / (b1.mass + b2.mass)
+// Calcul des nouvelles vélocités normales après la collision
+v1n = (v1n * (this.mass - autre.mass) + 2 * autre.mass * v2n) / (this.mass + autre.mass);
+
+// Mise à jour des vecteurs de vélocité
+un.mult(v1n);
+ut.mult(v1t);
+
+// Addition des composantes normales et tangentielles pour obtenir la vélocité finale
+un.add(ut);
+
+// La vélocité résultante pour "this" est maintenant dans un vecteur temporaire
+PVector tempVel = un.get();
+```
+
+## Exemple de résultat
+![alt text](assets/collision_balles.webp)
+
+
+
+
+---
+
+# Références
+- [Collision circulaire](https://code.tutsplus.com/when-worlds-collide-simulating-circle-circle-collisions--gamedev-769t)
 
 <!-- Tableau html à 2 colonnes pour copier coller
 
