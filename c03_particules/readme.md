@@ -433,6 +433,9 @@ Les systèmes de particules sont un outil puissant pour simuler des phénomènes
 ---
 
 # Exercice
+
+![alt text](assets/smoke.gif)
+
 Explorez l'exemple du cours [`s03e_smoke`](https://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s03e_smoke.pdez).
 - Vous pouvez modifier le `blendMode` pour obtenir des effets différents.
 - Lisez la documentation de la fonction `blendMode()` pour comprendre comment elle fonctionne.
