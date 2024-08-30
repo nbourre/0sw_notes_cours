@@ -15,7 +15,6 @@ Apprendre les rudiments de l’environnement de développement Godot.
   - [Volet Inspector](#volet-inspector)
   - [La zone de travail (workspace)](#la-zone-de-travail-workspace)
   - [Volet inférieur](#volet-inférieur)
-  - [](#)
   - [Les types d’environnement de travail](#les-types-denvironnement-de-travail)
 - [Scènes et nœuds](#scènes-et-nœuds)
   - [Les nœuds](#les-nœuds)
@@ -30,16 +29,15 @@ Apprendre les rudiments de l’environnement de développement Godot.
   - [Monter la scène](#monter-la-scène)
   - [Signification des éléments d'ajustement](#signification-des-éléments-dajustement)
   - [Ajouter un script](#ajouter-un-script)
-- [Le script](#le-script)
-- [Le script (suite)](#le-script-suite)
-- [Signal et GetNode](#signal-et-getnode)
-- [Exécution du script](#exécution-du-script)
-- [GetNode()](#getnode)
+  - [Le script](#le-script)
+  - [Signal et GetNode](#signal-et-getnode)
+  - [Exécution du script](#exécution-du-script)
+- [`GetNode()`](#getnode)
 - [Autres informations sur le script](#autres-informations-sur-le-script)
 - [Les fonctions de rappel](#les-fonctions-de-rappel)
-- [Les fonctions de rappel](#les-fonctions-de-rappel-1)
 - [\_Process(float delta)](#_processfloat-delta)
 - [\_PhysicsProcess(float delta)](#_physicsprocessfloat-delta)
+- [Comparaison entre \_Process et \_PhysicsProcess](#comparaison-entre-_process-et-_physicsprocess)
 - [Les groupes](#les-groupes)
 - [Les méthodes surchargeables](#les-méthodes-surchargeables)
 - [Créer et détruire un nœud](#créer-et-détruire-un-nœud)
@@ -155,6 +153,7 @@ Apprendre les rudiments de l’environnement de développement Godot.
 - Comme plusieurs IDE, le volet inférieur contient plusieurs outils de débogage ainsi que d’édition d’animations.
 
 ![alt text](assets/volet_inferieur.png)
+
 ---
 
 ## Les types d’environnement de travail
@@ -225,7 +224,7 @@ Apprendre les rudiments de l’environnement de développement Godot.
 
 ---
 
-- Plusieurs choses se passent après avoir cliqué sur Create :
+- Plusieurs choses se passent après avoir cliqué sur `Create` :
   - Premièrement, la scène se met en 2D car un `Label` est un nœud de type 2D.
   - Deuxièmement, l’étiquette apparaît sélectionnée dans la scène dans le coin supérieur gauche du *viewport*.
 - La seconde étape sera de changer le texte dans le volet `Inspector`.
@@ -331,43 +330,69 @@ Apprendre les rudiments de l’environnement de développement Godot.
 - L’éditeur de script s’ouvrira.
 - Un bouton apparaîtra à côté du Panel. En cliquant dessus, on ouvre le script attaché.
 
+![alt text](assets/panel_script.png)
+
 ---
 
-# Le script
+## Le script
 
-- La méthode "_Ready" est générée automatiquement.
+![alt text](assets/Brainslug.png)
+
+- La méthode `_Ready` est générée automatiquement.
 - Celle-ci s’exécute une fois que tous les enfants entrent en activité dans la scène.
 - Le rôle du script est d’ajouter des comportements à un nœud.
 
 ---
 
-# Le script (suite)
+- Ajoutez la méthode suivante : 
 
-TODO : Ajouter code
+```csharp
+public void OnButtonPressed()
+{
+    Label label = GetNode<Label>("Label");
+    label.Text = "Bonjour!";
+}
+```
+
+- Modifiez la méthode `_Ready` pour qu’elle ressemble à ceci :
+
+```csharp
+public override void _Ready()
+{
+    Button button = GetNode<Button>("Button");
+
+    // Ajoute un événement au bouton
+    btn.Pressed += OnButtonPressed; 
+}
+```
+
+Dans `_Ready`, on retrouve :
+- la méthode `GetNode<T>(nomNoeud)` qui permet de retrouver le nœud relatif au nœud possédant le script.
+- on associe la méthode `OnButtonPressed` à l’événement `Pressed` du bouton.
 
 ---
 
-# Signal et GetNode
+## Signal et GetNode
 
-- Godot utilise le terme "signal" qui est un synonyme d’événement.
-- La convention Godot pour le nom des méthodes de signaux est celle-ci : On[NomNoeud][NomSignal].
+- Godot utilise le terme **`signal`** qui est un synonyme d’événement.
+- La convention Godot pour le nom des méthodes de signaux est celle-ci : On *[NomNoeud]* *[NomSignal]*.
   - Dans notre cas : OnButtonPressed.
 - Pour attacher un signal à un événement, il suffit d’ajouter la méthode à l’événement.
 - La méthode GetNode<T>(nomNoeud) permet de retrouver le nœud relatif au nœud possédant le script.
 
 ---
 
-# Exécution du script
+## Exécution du script
 
 - Vous pouvez exécuter la scène pour tester le script.
 
 ---
 
-# GetNode()
+# `GetNode()`
 
-- La méthode GetNode() est fréquemment utilisée pour retrouver un nœud.
+- La méthode `GetNode()` est fréquemment utilisée pour retrouver un nœud.
 - Le chemin donné en paramètre est une string relative au nœud possédant le script.
-- Assumons que le nœud courant est "Character" et le graphe suivant :
+- Assumons que le nœud courant est `Character` et le graphe suivant :
   - /root
   - /root/Character
   - /root/Character/Sword
@@ -376,7 +401,7 @@ TODO : Ajouter code
   - /root/Swamp/Alligator
   - /root/Swamp/Mosquito
   - /root/Swamp/Goblin
-- Les chemins possibles sont :
+- Des chemins possibles sont :
   - GetNode("Sword")
   - GetNode("Backpack/Dagger")
   - GetNode("../Swamp/Alligator")
@@ -386,38 +411,32 @@ TODO : Ajouter code
 
 # Autres informations sur le script
 
-- Remarquez que le script hérite du nœud.
+- Remarquez que le script précédent hérite du nœud.
   - Par exemple : `public class XYZ : Panel`.
 - N’oubliez pas que c’est du C#, ainsi les propriétés du nœud sont directement accessibles dans le code.
-  - Par exemple, la propriété "Text" sera accessible pour un nœud de type Label.
+  - Par exemple, la propriété `Text` sera accessible pour un nœud de type `Label`.
 - Il est possible d’utiliser Visual Studio Code pour éditer le code et avoir l’auto-complétion.
-- Veuillez consulter ce lien : [https://giulianob.svbtle.com/godot-csharp-setup](https://giulianob.svbtle.com/godot-csharp-setup).
+- Veuillez consulter ce lien : [How to Use Visual Studio and vs Code with Godot 4](https://www.youtube.com/watch?v=OtfxxY4AeVQ).
 
 ---
 
 # Les fonctions de rappel
 
-TODO : Ajouter image
-
----
-
-# Les fonctions de rappel
-
-- Godot fonctionne beaucoup avec des callbacks (fonctions de rappel) ou des fonctions virtuelles.
-- Cela évite de créer plusieurs "if" qui sont vérifiés à chaque fois dans une boucle.
+- Godot fonctionne beaucoup avec des *callbacks* (fonctions de rappel) ou des fonctions virtuelles.
+  - Cela évite de créer plusieurs `if` qui sont vérifiés à chaque fois dans une boucle.
 - Toutefois, on peut quand même utiliser des fonctions de traitements continues comme les boucles de jeux classiques.
-- Godot offre "_Process(float delta)" et "_PhysicsProcess()".
+- Godot offre `_Process(float delta)` et `_PhysicsProcess()`.
 
 ---
 
 # _Process(float delta)
 
-- La méthode _Process est appelée à chaque début de frame.
+- La méthode `_Process` est appelée à chaque début de frame.
 - Elle n’est pas synchronisée à aucune fréquence.
-- Elle est donc exécutée à temps variable.
+- Elle est donc exécutée à un interval de temps variable.
 - Pour gérer la variabilité, le paramètre delta contient le temps défilé depuis le dernier appel de la fonction.
-- Voir le projet "c01d_process".
-- delta peut être utilisé pour calculer des variations constantes, cela indépendamment du taux de rafraîchissement.
+- Voir le projet `c01d_process`.
+- `delta` peut être utilisé pour calculer des variations constantes, cela indépendamment du taux de rafraîchissement.
 - Il s’agit d’une valeur en fraction de seconde, par exemple 0.016s.
 - Par exemple, le mouvement d’une balle doit aller à 60px/sec, peu importe la puissance de la machine.
 - Il suffit de multiplier la vitesse par le delta.
@@ -432,6 +451,16 @@ TODO : Ajouter image
 - Cependant, sur un appareil plus lent (ex. RasPi), les attentes pourraient être imprévisibles.
 - Il est possible de configurer le taux de rafraîchissement dans les réglages du projet sous "Physics -> Common -> Physics FPS".
 - Elle est exécutée après chaque exécution de la _process.
+
+---
+
+# Comparaison entre _Process et _PhysicsProcess
+
+Voici une animation pour comparer les deux méthodes :
+
+![alt text](assets/process_vs_physicsprocess.gif)
+
+// TODO : Ajouter une animation avec delta
 
 ---
 
