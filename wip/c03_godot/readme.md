@@ -45,8 +45,6 @@ Apprendre les rudiments de l’environnement de développement Godot.
 - [Les signaux](#les-signaux)
 - [Les signaux : Exercice](#les-signaux--exercice)
 - [Les signaux : Exercice (suite)](#les-signaux--exercice-suite)
-- [Les signaux : Exercice (suite)](#les-signaux--exercice-suite-1)
-- [Les signaux : Exercice (suite)](#les-signaux--exercice-suite-2)
 - [Les signaux en code](#les-signaux-en-code)
 - [Les signaux en code : Exercice](#les-signaux-en-code--exercice)
 - [Signaux personnalisés](#signaux-personnalisés)
@@ -543,8 +541,6 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
 
 ---
 
-// TODO : Compléter
-
 # Les signaux : Exercice
 
 - Dans un premier temps, nous allons faire un exemple en utilisant l’interface.
@@ -560,54 +556,75 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
 
 # Les signaux : Exercice (suite)
 
-- Attachez un script à ExempleTimer.
-- Sélectionnez Timer.
-- Dans les propriétés, cochez "On" pour Autostart.
+- Attachez un script à `ExempleTimer`.
+- Sélectionnez `Timer`.
+- Dans les propriétés, cochez `On` pour Autostart.
   - Cela va faire en sorte que le chronomètre va débuter dès le démarrage de la scène.
-- Allez dans l’onglet "Node"; vous allez voir les différents signaux acceptés pour chaque classe héritée.
+- Allez dans l’onglet `Node`; vous allez voir les différents signaux acceptés pour chaque classe héritée.
   - Cela ressemble drôlement aux événements dans Visual Studio.
 - Double-cliquez sur `timeout()`, une fenêtre apparaîtra.
 
----
+&nbsp;
 
-# Les signaux : Exercice (suite)
-
-- Timer est en bleu car c’est l’objet émettant le signal.
-- Dans le "Receiver Method", on voit la méthode que l’observateur exécutera lorsqu’il recevra le message.
+- `Timer` est en bleu car c’est l’objet émettant le signal.
+- Dans le `Receiver Method`, on voit la méthode que l’observateur exécutera lorsqu’il recevra le message.
 - On peut changer le nom de la méthode.
 - Sélectionnez le nœud racine auquel vous aviez attaché un script.
-- Cliquez sur "Connect".
-  - Bug alert! Il semble que la fonction générée soit à l’extérieur de la classe.
+- Cliquez sur `Connect`.
+  - **Bug alert!** Il semble que la fonction générée soit à l’extérieur de la classe.
+  
+![alt text](assets/node_signal.png)
 
----
+&nbsp;
 
-# Les signaux : Exercice (suite)
+- Ajoutez le code ci-bas :
+  
+```csharp
+public void _on_timer_timeout() {
+    var sprite = GetNode<Sprite2D>("../Icon");
+    sprite.Visible = !sprite.Visible;
+    GD.Print("Clignotement");
+}
+```
 
-TODO : Ajouter code
+- Question : Que fait ce code?
+- Exécutez le projet.
+
 
 ---
 
 # Les signaux en code
 
 - Il est possible de connecter des signaux via le code au lieu de l’éditeur.
-  - C’est surtout utilisé lorsque l’on crée des instances via le code et que l’on doit y attacher des signaux.
+- C’est surtout utilisé lorsque l’on crée des instances via le code et que l’on doit y attacher des signaux.
   - Pensez aux écouteurs d’événement en JavaScript que l’on attache en code avec "addEventListener".
 - Pour attacher un signal avec le code, il faudra utiliser le nom de l’événement et ajouter la fonction à celui-ci.
 
-TODO : Ajouter code
+Voici un exemple où on attache 2 fonctions à un événement :
+
+```csharp
+// Exemple où on attache 2 fonctions à un événement
+monObjet.eventName += eventFunctionA;
+monObjet.eventName += eventFunctionB;
+```
 
 ---
 
 # Les signaux en code : Exercice
 
-- Avec le projet ExempleTimer :
-  - Dans l’éditeur, déconnectez le signal `timeout()` à l’aide du bouton Disconnect.
-  - Nous allons utiliser la méthode `Connect()` dans la méthode `_Ready()` pour connecter.
+- Avec le projet `ExempleTimer` :
+- Dans l’éditeur, déconnectez le signal `timeout()` à l’aide du bouton `Disconnect`.
+- Nous allons utiliser la méthode `Connect()` dans la méthode `_Ready()` pour connecter.
+  - La syntaxe est la suivante : `objet.nomSignal += nomMethode`. 
 - Dans la méthode `_Ready()`, ajoutez le code qui suit.
 
-TODO : Ajouter code
+```csharp
+GetNode<Timer>("Timer").Timeout += _on_timer_timeout;
+```
 
 ---
+
+TODO : Continuer ici
 
 # Signaux personnalisés
 
