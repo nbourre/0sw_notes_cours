@@ -43,12 +43,10 @@ Apprendre les rudiments de l’environnement de développement Godot.
 - [Créer et détruire un nœud](#créer-et-détruire-un-nœud)
 - [Exercice](#exercice)
 - [Les signaux](#les-signaux)
-- [Les signaux](#les-signaux-1)
 - [Les signaux : Exercice](#les-signaux--exercice)
 - [Les signaux : Exercice (suite)](#les-signaux--exercice-suite)
 - [Les signaux : Exercice (suite)](#les-signaux--exercice-suite-1)
 - [Les signaux : Exercice (suite)](#les-signaux--exercice-suite-2)
-- [Les signaux : Exercice (suite)](#les-signaux--exercice-suite-3)
 - [Les signaux en code](#les-signaux-en-code)
 - [Les signaux en code : Exercice](#les-signaux-en-code--exercice)
 - [Signaux personnalisés](#signaux-personnalisés)
@@ -456,13 +454,9 @@ Dans `_Ready`, on retrouve :
 
 # Comparaison entre _Process et _PhysicsProcess
 
-Voici une animation pour comparer les deux méthodes :
+Voici une animation pour comparer les deux méthodes ainsi qu'une version avec delta. :
 
-![alt text](assets/process_vs_physicsprocess.gif)
-
----
-
-// TODO : Ajouter une animation avec delta
+![Projet c01d_process](assets/process_vs_physicsprocess_delta.webp)
 
 ---
 
@@ -470,37 +464,37 @@ Voici une animation pour comparer les deux méthodes :
 
 - On se rappelle que Godot fonctionne avec un système de graphe (arbre hiérarchique).
 - Il est possible d’associer les nœuds à des groupes pour exécuter des instructions à l’ensemble du groupe.
-- Il faut faire appel à la méthode "AddToGroup(nomGroupe)".
+- Il faut faire appel à la méthode `AddToGroup(nomGroupe)`.
   - Exemple de cas :
     - Indiquer à un groupe d’ennemis d’atteindre un point donné sur la carte.
     - Notifier les objets qu’un événement X est arrivé.
-- La fonction "GetTree().GetNodesInGroup(nomGroupe)" permet de récupérer les nœuds qui sont dans un groupe nommé en paramètre.
+- La fonction `GetTree().GetNodesInGroup(nomGroupe)` permet de récupérer les nœuds qui sont dans un groupe nommé en paramètre.
 
 ---
 
 # Les méthodes surchargeables
 
-- _EnterTree() : Appelé lorsque le nœud s’intègre au graphe.
+- `_EnterTree()` : Appelée lorsque le nœud s’intègre au graphe.
   - Pour chaque nœud enfant, cette méthode est appelée.
-- _Ready() : Appelé après _EnterTree().
+- `_Ready()` : Appelée après _EnterTree().
   - Lorsque tous les nœuds enfants sont intégrés dans le graphe.
-- _ExitTree() : Appelé lorsque le nœud sort du graphe.
+- `_ExitTree()` : Appelée lorsque le nœud sort du graphe.
   - Tous les nœuds enfants ont quitté le graphe à ce point.
-- Exemple :
-  - NœudA entre en scène : NœudA._EnterTree() est exécuté.
-  - NœudB est ajouté à NœudA : NœudB._EnterTree() et NœudB._Ready() sont appelés.
-  - NœudC est ajouté à NœudA : NœudC._Enter Tree() et NœudC._Ready() sont appelés.
-  - NœudA._Ready() est exécuté.
+  - Exemple :
+    - NœudA entre en scène : `NœudA._EnterTree()` est exécutée.
+    - NœudB est ajouté à NœudA : `NœudB._EnterTree()` et ensuite `NœudB._Ready()` sont appelées.
+    - NœudC est ajouté à NœudA : `NœudC._EnterTree()` et ensuite `NœudC._Ready()` sont appelése.
+    - `NœudA._Ready()` est exécutée.
 
 ---
 
 # Créer et détruire un nœud
 
 - Il est important de disposer des objets lorsqu’ils ne sont plus utilisés pour optimiser l’utilisation de la mémoire.
-- Exemple :
+- Exemple de création d'un nœud :
   - `Sprite _sprite = new Sprite();`
   - `AddChild(_sprite); // Ajoute un enfant au nœud courant`
-- Destruction :
+- Exemple de destruction d'un nœud :
   - Méthode 1 : `_nomNoeud.Free(); // Libère le nœud`
     - Problème potentiel au niveau des threads si le nœud exécute une tâche.
   - Méthode 2 : `_nomNoeud.QueueFree(); // Libère le nœud après que ses tâches sont complétées`
@@ -513,44 +507,54 @@ Voici une animation pour comparer les deux méthodes :
   - Modifiez le script en y ajoutant les méthodes ci-contre dans chacun des nœuds.
   - Exécutez.
 
-TODO : Ajouter code
+```csharp
+    public override void _Ready()
+    {
+        GD.Print($"{nameof(TestPanel)} ready");
+        GetNode("Button").Connect("pressed", this, nameof(OnButtonPressed));
+    }
+    public override void _EnterTree()
+    {
+        GD.Print($"{nameof(TestPanel)} enter tree");
+    }
+    bool test = true;
+    public override void _Process(float delta)
+    {
+        if (test) {
+            GD.Print($"{nameof(TestPanel)} process");
+            test = false;
+        }
+    }
+```
+
 
 ---
 
 # Les signaux
-
-- Les événements de Godot
-
----
-
-# Les signaux
-
-- Godot fonctionne avec le patron de conception de l’observateur.
+- Les signaux sont les événements de Godot
+- Godot fonctionne avec le **patron de conception de l’observateur**.
 - Ce patron permet à un nœud d’envoyer un message que certains nœuds peuvent écouter et réagir en conséquence.
-- Par exemple, au lieu de vérifier continuellement si un bouton est appuyé, il suffit que le bouton envoie un signal lorsqu’il est appuyé.
-- Lecture suggérée :
-  - Game Programming Patterns - Observers
-  - Wikipedia - Observer Pattern
+  - Par exemple, au lieu de vérifier continuellement si un bouton est appuyé, il suffit que le bouton envoie un signal lorsqu’il est appuyé.
+- Lectures suggérées :
+  - [Game Programming Patterns - Observers](https://gameprogrammingpatterns.com/observer.html)
+  - [Wikipedia - Observer Pattern](https://en.wikipedia.org/wiki/Observer_pattern)
 - Les signaux permettent de découpler les objets du jeu, ce qui permet une meilleure organisation et gestion du code.
 - Ainsi, lorsqu’un signal est émis, seulement les objets intéressés peuvent réagir.
 
 ---
 
+// TODO : Compléter
+
 # Les signaux : Exercice
 
 - Dans un premier temps, nous allons faire un exemple en utilisant l’interface.
-- Nous allons utiliser les nœuds Timer et Sprite pour faire clignoter une image.
-- Ajoutez la hiérarchie suivante :
-  - ExempleTimer : Node2D
-  - Timer : Timer
-  - Sprite : Sprite2D
-
----
-
-# Les signaux : Exercice (suite)
-
-- Sélectionnez le Sprite2D dans les nœuds.
-- Dans l’inspecteur, à la propriété Texture, sélectionnez Load et chargez l’image Icon.svg.
+- Nous allons utiliser les nœuds `Timer` et `Sprite` pour faire clignoter une image.
+- Dans un projet quelconque, ajoutez la hiérarchie suivante :
+  - ExempleTimer : `Node2D`
+    - Timer : `Timer`
+    - Sprite : `Sprite2D`
+- Sélectionnez le `Sprite2D` dans les nœuds.
+- Dans l’inspecteur, à la propriété `Texture`, sélectionnez `Load` et chargez l’image `Icon.svg`.
 
 ---
 
