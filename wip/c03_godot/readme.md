@@ -460,6 +460,8 @@ Voici une animation pour comparer les deux méthodes :
 
 ![alt text](assets/process_vs_physicsprocess.gif)
 
+---
+
 // TODO : Ajouter une animation avec delta
 
 ---
