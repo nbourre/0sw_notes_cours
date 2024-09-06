@@ -46,9 +46,22 @@ Apprendre les rudiments de l’environnement de développement Godot.
 - [Les signaux : Exercice](#les-signaux--exercice)
 - [Les signaux : Exercice (suite)](#les-signaux--exercice-suite)
 - [Les signaux en code](#les-signaux-en-code)
-- [Les signaux en code : Exercice](#les-signaux-en-code--exercice)
-- [Signaux personnalisés](#signaux-personnalisés)
+  - [Exercice](#exercice-1)
+  - [Signaux personnalisés](#signaux-personnalisés)
 - [Instanciation](#instanciation)
+  - [Exercice : Instanciation](#exercice--instanciation)
+    - [Objectifs de l'exercice](#objectifs-de-lexercice)
+  - [Exercice : Instanciation simple](#exercice--instanciation-simple)
+    - [Étapes :](#étapes-)
+  - [Exercice : Instanciation multiple](#exercice--instanciation-multiple)
+  - [Exercice : Modification des instances](#exercice--modification-des-instances)
+- [Conception de jeux avec des scènes](#conception-de-jeux-avec-des-scènes)
+  - [Exemple de structure de jeu](#exemple-de-structure-de-jeu)
+  - [](#)
+- [Conclusion : Premiers pas avec Godot](#conclusion--premiers-pas-avec-godot)
+- [Note importante](#note-importante)
+  - [Attention :](#attention-)
+  - [Exercice](#exercice-2)
 
 
 ---
@@ -506,23 +519,23 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
   - Exécutez.
 
 ```csharp
-    public override void _Ready()
-    {
-        GD.Print($"{nameof(TestPanel)} ready");
-        GetNode("Button").Connect("pressed", this, nameof(OnButtonPressed));
-    }
-    public override void _EnterTree()
-    {
-        GD.Print($"{nameof(TestPanel)} enter tree");
-    }
-    bool test = true;
-    public override void _Process(float delta)
-    {
-        if (test) {
-            GD.Print($"{nameof(TestPanel)} process");
-            test = false;
-        }
-    }
+    public override void _Ready()
+    {
+        GD.Print($"{nameof(TestPanel)} ready");
+        GetNode("Button").Connect("pressed", this, nameof(OnButtonPressed));
+    }
+    public override void _EnterTree()
+    {
+        GD.Print($"{nameof(TestPanel)} enter tree");
+    }
+    bool test = true;
+    public override void _Process(float delta)
+    {
+        if (test) {
+            GD.Print($"{nameof(TestPanel)} process");
+            test = false;
+        }
+    }
 ```
 
 
@@ -581,8 +594,8 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
   
 ```csharp
 public void _on_timer_timeout() {
-    var sprite = GetNode<Sprite2D>("../Icon");
-    sprite.Visible = !sprite.Visible;
+    var sprite = GetNode<Sprite2D>("../Icon");
+    sprite.Visible = !sprite.Visible;
     GD.Print("Clignotement");
 }
 ```
@@ -610,7 +623,7 @@ monObjet.eventName += eventFunctionB;
 
 ---
 
-# Les signaux en code : Exercice
+## Exercice
 
 - Avec le projet `ExempleTimer` :
 - Dans l’éditeur, déconnectez le signal `timeout()` à l’aide du bouton `Disconnect`.
@@ -624,17 +637,29 @@ GetNode<Timer>("Timer").Timeout += _on_timer_timeout;
 
 ---
 
-TODO : Continuer ici
+## Signaux personnalisés
 
-# Signaux personnalisés
-
-- Il est possible de créer des signaux personnalisés.
-  - Exemples d’utilité :
-    - Un personnage tire
-    - Des ennemis approchent un lieu précis
+- Il est possible de créer des signaux personnalisés ([Source](https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html#custom-signals)).
+- Exemples d’utilité :
+  - Un personnage tire et je veux signaler que le projectile a été tiré.
+  - Des ennemis approchent un lieu précis, je veux signaler que l’événement est arrivé.
+  - Etc.
 - Pour émettre un signal, on appelle la méthode `EmitSignal()`.
 
-TODO : Ajouter code
+Exemple :
+
+```csharp
+public class Player : CharacterBody2D
+{
+    [Signal]
+    public delegate void Hit(int damage);
+
+    public override void _Ready()
+    {
+        EmitSignal(nameof(Hit), 42);
+    }
+}
+```
 
 ---
 
@@ -642,6 +667,97 @@ TODO : Ajouter code
 
 - Dans les petits projets l’utilisation d’une seule scène avec quelques nœuds peut fonctionner mais dans les projets plus grands le nombre de nœuds peut devenir ingérable
 - L’instanciation permet d’intégrer des scènes sauvegardées à l’intérieur d’une autre scène
+
+![alt text](assets/instanciating.png)
+
+---
+
+## Exercice : Instanciation
+
+- À l’aide du fichier [`instancing_starter.zip`](https://github.com/godotengine/godot-docs-project-starters/releases/download/latest-4.x/instancing_starter.zip), décompressez le fichier à l’endroit désiré.
+- À partir du gestionnaire de projet, importez ce dernier dans Godot.
+  - Il se peut qu’il y ait un avertissement de version. Acceptez la mise à jour du projet.
+   Réalisez l'exercice qui se retrouve [ici](https://docs.godotengine.org/en/stable/getting_started/step_by_step/instancing.html#instancing-by-example)
+
+**Résumé du projet**
+
+- Le projet contient deux scènes : `Ball.tscn` et `Main.tscn`.
+- La scène `Ball` utilise un `RigidBody2D` pour la gestion de la physique.
+- La scène principale utilise `StaticBody2D` pour les obstacles que la balle peut rencontrer.
+
+### Objectifs de l'exercice
+
+- Instancier la scène `Ball` dans la scène `Main`.
+- Permettre à la balle d'interagir avec les obstacles.
+- Tester et ajuster la configuration des propriétés physiques (ex. : bounce).
+
+---
+
+## Exercice : Instanciation simple
+
+### Étapes :
+
+1. Pour ajouter une instance de la balle dans la scène, sélectionnez le nœud racine.
+2. Cliquez sur le bouton d’instance (icône de maillon de chaîne).
+3. Placez la balle dans la scène, puis exécutez le projet pour observer le comportement.
+
+![alt text](assets/instanciating_ball.gif)
+
+---
+
+## Exercice : Instanciation multiple
+
+1. Sélectionnez l’instance de la balle dans la scène.
+2. Dupliquez l’instance en utilisant le raccourci `[Ctrl] + D` pour ajouter plusieurs balles à la scène.
+3. Exécutez le projet et observez l’interaction des différentes instances avec les obstacles.
+
+![alt text](assets/instanciating_balls.gif)
+
+---
+
+## Exercice : Modification des instances
+
+1. Pour modifier le comportement des balles, ajustez la propriété `Bounce` dans le `PhysicsMaterial` de la balle pour la rendre plus rebondissante.
+2. Modifiez la scène `Ball.tscn` pour que toutes les instances héritent des changements.
+3. Si vous souhaitez personnaliser une seule instance, sélectionnez l’instance dans `Main.tscn` et apportez des modifications spécifiques.
+
+---
+
+# Conception de jeux avec des scènes
+
+- Le concept de **scènes** est au cœur du fonctionnement de Godot.
+- Cela permet de structurer efficacement les projets de manière hiérarchique.
+
+## Exemple de structure de jeu
+
+- Chaque rectangle représente une scène (ou un groupe de scènes) que vous pouvez instancier dans une scène parent. Ce système modulaire facilite le développement et l'organisation des ressources dans des projets complexes.
+
+
+![alt text](assets/game_with_scenes.png)
+---
+
+# Conclusion : Premiers pas avec Godot
+
+Vous avez appris à :
+- Créer et instancier des scènes dans Godot.
+- Gérer plusieurs instances et ajuster leurs propriétés.
+- Structurer un projet avec une approche modulaire en utilisant des scènes.
+
+Ne vous inquiétez pas si tout n’est pas encore clair, cela deviendra plus naturel en travaillant sur des projets plus avancés.
+
+---
+
+# Note importante
+
+## Attention :
+Il existe encore de nombreux tutoriels et projets utilisant Godot 3.x. Assurez-vous d’adapter les tutoriels pour la version 4.x de Godot lorsque nécessaire.
+
+---
+
+## Exercice
+
+Veuillez effectuer le didacticiel complet que l’on retrouve ici [Lien vers le didacticiel](https://docs.godotengine.org/fr/4.x/getting_started/first_2d_game/index.html).
+
 
 
 <!-- Tableau html à 2 colonnes pour copier coller
