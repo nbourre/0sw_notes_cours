@@ -1,6 +1,6 @@
 # Premier pas avec Godot <!-- omit in toc -->
 
-Apprendre les rudiments de l’environnement de développement Godot.
+Apprendre les rudiments de l’environnement de développement Godot. 
 
 ---
 
@@ -64,6 +64,7 @@ Apprendre les rudiments de l’environnement de développement Godot.
   - [Exercice](#exercice-2)
 
 
+
 ---
 
 # Plan de leçon
@@ -77,7 +78,7 @@ Apprendre les rudiments de l’environnement de développement Godot.
 # Notes préliminaires
 
 - Godot est un moteur de jeux vidéo 2D et 3D à code source ouvert.
-- Le langage de base est le `GDScript` qui est un pseudo-python mais pour alléger la charge cognitive nous allons utiliser le langage C# pour le développement des projets.
+- Le langage de base est le `GDScript` qui est un pseudo-python mais pour alléger la charge cognitive nous allons utiliser le langage C# pour les premiers cours.
 - J’utiliserai l’interface en anglais pour faciliter la recherche de ressources.
 - Vous pouvez utiliser la langue qui vous convient.
 - Au moment de réviser ces notes j’utilisais la version 4.3 avec C# Mono.
@@ -371,7 +372,10 @@ public override void _Ready()
     Button button = GetNode<Button>("Button");
 
     // Ajoute un événement au bouton
-    btn.Pressed += OnButtonPressed; 
+    btn.Pressed += OnButtonPressed;
+
+    // Méthode alternative qui donne plus de contrôle
+    // button.Connect(Button.SignalName.Pressed, Callable.From(OnButtonPressed), (uint)GodotObject.ConnectFlags.Persist);
 }
 ```
 
@@ -438,7 +442,7 @@ Dans `_Ready`, on retrouve :
 
 ---
 
-# _Process(float delta)
+# \_Process(float delta)
 
 - La méthode `_Process` est appelée à chaque début de frame.
 - Elle n’est pas synchronisée à aucune fréquence.
@@ -453,9 +457,9 @@ Dans `_Ready`, on retrouve :
 
 ---
 
-# _PhysicsProcess(float delta)
+# \_PhysicsProcess(float delta)
 
-- Similaire à _Process, cette méthode diffère car elle est synchronisée au FPS par défaut, qui est de 60 FPS.
+- Similaire à `_Process`, cette méthode diffère car elle est synchronisée au FPS par défaut, qui est de 60 FPS.
 - Elle est dépendante du FPS de l’application.
 - Cependant, sur un appareil plus lent (ex. RasPi), les attentes pourraient être imprévisibles.
 - Il est possible de configurer le taux de rafraîchissement dans les réglages du projet sous "Physics -> Common -> Physics FPS".
@@ -621,6 +625,11 @@ monObjet.eventName += eventFunctionA;
 monObjet.eventName += eventFunctionB;
 ```
 
+<details><summary>🥚🐣</summary>
+<img src="assets/flying_toasters_no_bg.webp"/>
+</details>
+
+
 ---
 
 ## Exercice
@@ -756,8 +765,8 @@ Il existe encore de nombreux tutoriels et projets utilisant Godot 3.x. Assurez-v
 
 ## Exercice
 
-Veuillez effectuer le didacticiel complet que l’on retrouve ici [Lien vers le didacticiel](https://docs.godotengine.org/fr/4.x/getting_started/first_2d_game/index.html).
-
+- Veuillez effectuer le didacticiel complet que l’on retrouve ici [Lien vers le didacticiel](https://docs.godotengine.org/fr/4.x/getting_started/first_2d_game/index.html).
+- Apportez des modifications à votre jeu pour le personnaliser.
 
 
 <!-- Tableau html à 2 colonnes pour copier coller
