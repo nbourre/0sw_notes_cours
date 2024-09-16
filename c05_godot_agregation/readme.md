@@ -5,6 +5,9 @@ Programmation créative - L’agrégation et les collisions
 - [Plan de leçon](#plan-de-leçon)
 - [Récupération du projet](#récupération-du-projet)
   - [Projet sans agrégation](#projet-sans-agrégation)
+- [Calculer le vecteur de braquage](#calculer-le-vecteur-de-braquage)
+  - [Algo](#algo)
+  - [Exemple](#exemple)
 - [Qu’est-ce qu’une agrégation?](#quest-ce-quune-agrégation)
   - [Exemples d’agrégation](#exemples-dagrégation)
   - [Notions scientifiques](#notions-scientifiques)
@@ -12,14 +15,12 @@ Programmation créative - L’agrégation et les collisions
     - [Algorithme](#algorithme)
     - [Visualisation](#visualisation)
   - [L’alignement](#lalignement)
-    - [Algo](#algo)
+    - [Algo](#algo-1)
     - [Visualisation](#visualisation-1)
   - [La cohésion](#la-cohésion)
     - [Calcul](#calcul)
-    - [Algo](#algo-1)
+    - [Algo](#algo-2)
     - [Visualisation](#visualisation-2)
-    - [Calculer le vecteur de braquage](#calculer-le-vecteur-de-braquage)
-      - [Algo](#algo-2)
   - [Sommation des forces](#sommation-des-forces)
   - [Jouer avec les forces](#jouer-avec-les-forces)
 - [Références](#références)
@@ -44,11 +45,36 @@ Programmation créative - L’agrégation et les collisions
 - Il s'agit seulement d'objets (boids) qui se déplacent dans une direction aléatoire.
 - Parcourez le code pour comprendre les grandes lignes (5 min)
 
----
-
 ## Projet sans agrégation
 Les boids ne se déplace qu’avec une vitesse initiale
 ![alt text](assets/flock_nothing.gif)
+
+---
+
+# Calculer le vecteur de braquage
+- Avant de débuter avec l’agrégation, il est important de comprendre comment calculer un vecteur de braquage
+- Dans certaine situation, on voudrait qu’un objet atteigne une cible tout en ayant une vitesse de rotation limitée
+  - Exemple : Véhicule qui se braque dans une direction
+- C'est le cas avec la force de cohésion
+
+## Algo
+- Trouver le vecteur de différence entre la cible et l’objet
+- Limiter le vecteur de différence (vitesse max)
+- Trouver la différence entre le vecteur de différence en la vitesse de l’objet (vitesse de braquage)
+- Limiter le vecteur de braquage
+- Retourner le vecteur de braquage
+
+![alt text](assets/steering.gif)
+
+## Exemple
+```gdscript
+# Dans un node2D
+func steering(target: Vector2) -> Vector2:
+	var desired = (target - location).normalized() * top_speed
+	var steer = desired - velocity  # Calculer la force de direction vers la cible
+	steer = steer.limit_length(top_steer)
+	return steer
+```
 
 ---
 
@@ -186,22 +212,6 @@ Voici ce que vous devriez voir
 Voici ce que vous devriez voir.
 
 ![alt text](assets/flock_cohesion.gif)
-
----
-
-### Calculer le vecteur de braquage
-- Dans certaine situation, on voudrait qu’un objet atteigne une cible tout en ayant une vitesse de rotation limitée
-  - Exemple : Véhicule qui se braque dans une direction
-- C'est le cas avec la force de cohésion
-
-#### Algo
-- Trouver le vecteur de différence entre la cible et l’objet
-- Limiter le vecteur de différence (vitesse max)
-- Trouver la différence entre le vecteur de différence en la vitesse de l’objet (vitesse de braquage)
-- Limiter le vecteur de braquage
-- Retourner le vecteur de braquage
-
-![alt text](assets/steering.gif)
 
 ---
 
