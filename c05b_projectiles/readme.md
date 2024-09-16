@@ -1,4 +1,22 @@
-# Mécanique des Projectiles en Godot
+# Mécanique des Projectiles en Godot <!-- omit in toc -->
+
+# Sommaire <!-- omit in toc -->
+- [Introduction](#introduction)
+- [Objectifs d'apprentissage](#objectifs-dapprentissage)
+- [Création d’un projectile simple](#création-dun-projectile-simple)
+  - [Exemple de projectile avec `Node2D`](#exemple-de-projectile-avec-node2d)
+    - [Explication](#explication)
+  - [Création d'un tireur de projectiles simple](#création-dun-tireur-de-projectiles-simple)
+    - [Code pour le tireur de projectiles](#code-pour-le-tireur-de-projectiles)
+    - [Explication](#explication-1)
+- [Gestion des tirs avec intervalle de temps](#gestion-des-tirs-avec-intervalle-de-temps)
+  - [Explication :](#explication-)
+- [Optimisation des projectiles (Object pooling)](#optimisation-des-projectiles-object-pooling)
+  - [Création du `Pool` d'objets](#création-du-pool-dobjets)
+  - [Modification du tireur pour utiliser le `Pool`](#modification-du-tireur-pour-utiliser-le-pool)
+  - [Modification du projectile](#modification-du-projectile)
+- [Autres améliorations possibles](#autres-améliorations-possibles)
+- [Conclusion](#conclusion)
 
 # Introduction
 
@@ -10,8 +28,10 @@ La mécanique des projectiles est une partie importante dans la création de jeu
 - Utiliser des forces et la physique pour simuler le mouvement d'un projectile.
 - Implémenter des comportements comme les collisions ou la désactivation des projectiles hors de l'écran.
 - Gérer le tir des projectiles dans un intervalle de temps.
+- Optimiser les performances en utilisant le pooling d'objets pour les projectiles.
 
 > Note : J'utiliserai les ressources "Top-down shooter" de Kenney pour les graphismes des projectiles. Vous pouvez les trouver sur [Kenney.nl](https://kenney.nl/assets/top-down-shooter).
+
 
 # Création d’un projectile simple
 Pour commencer, nous allons créer un projectile basique qui se déplace en ligne droite. Le projectile sera instancié et ajouté à la scène lorsqu'un bouton est pressé.
@@ -22,11 +42,11 @@ Dans cette leçon, nous allons utiliser un `Node2D` pour un projectile simple qu
 
 Voici la hiérarchie de noeud que l'on aura :
 - `Node2D` (Projectile)
-  - `Sprite` (Apparence du projectile)
+  - `Sprite2D` (Apparence du projectile)
   - `Area2D` (Zone de collision)
     - `CollisionShape2D` (Forme de collision)
 
-Voici l'image utilisée pour le `Sprite` du projectile :
+Voici l'image utilisée pour le `Sprite2D` du projectile :
 
 ![alt text](assets/laserRed01.png)
 
@@ -36,7 +56,7 @@ Voici l'image utilisée pour le `Sprite` du projectile :
 On attachera un script au `Node2D` pour gérer le mouvement du projectile.
 
 ```gd
-extends Area2D
+extends Node2D
 
 var speed = 750
 
@@ -52,14 +72,20 @@ func _on_Bullet_body_entered(body):
 
 Il faudra connecter le signal `body_entered` de l'`Area2D` à la méthode `_on_Bullet_body_entered` pour gérer les collisions.
 
+> **Note** : La propriété `transform` est celle que l'on retrouve dans l'inspecteur pour les noeuds 2D. Elle représente la transformation du noeud (position, rotation, échelle).
+
 ### Explication
 - On retire le projectile lorsqu'il entre en collision avec un autre corps.
 - On retire également le corps représentant l'ennemi lorsqu'il est touché par le projectile.
+
 
 ---
 
 ## Création d'un tireur de projectiles simple
 Pour le tireur de projectiles, nous allons utiliser un `CharacterBody2D` qui peut se déplacer et tirer des projectiles.
+
+Voici l'image qui sera utilisé pour le tireur :
+![alt text](assets/manBlue_gun.png)
 
 Voici la hiérarchie de noeud que l'on aura :
 - `CharacterBody2D` (Tireur de projectiles)
@@ -108,12 +134,13 @@ func shoot():
 - `look_at()` : Oriente le tireur vers la position de la souris.
 - `transform.x` : Vecteur de direction du tireur.
 - `shoot()` : Instancie un projectile, l'ajoute à la scène principale et le positionne au niveau du `Muzzle` (point de tir).
+- `global_transform` : Est une propriété qui permet de positionner un noeud dans l'espace global de la scène.
 
-## 2. Gestion des tirs avec intervalle de temps
+# Gestion des tirs avec intervalle de temps
 
 Pour simuler un intervalle entre les tirs, nous devons ajouter quelques éléments pour la gestion du temps.
 
-Il faudra connaître la fréquence de tir et le temps écoulé depuis le dernier tir pour déterminer si le tireur peut tirer à nouveau.
+Il faudra connaître la **fréquence de tir** et le **temps écoulé** depuis le dernier tir pour déterminer si le tireur peut tirer à nouveau.
 
 **Exemple d'implémentation :**
 
@@ -150,19 +177,19 @@ func shoot():
 
 ```
 
-### Explication :
+## Explication :
 - `shoot_interval` : Définit l'intervalle de temps entre les tirs.
 - `time_since_last_shot` : Un accumulateur qui suit le temps écoulé depuis le dernier tir.
 
 ---
 
-## Optimisation des projectiles (Object pooling)
+# Optimisation des projectiles (Object pooling)
 
 Dans les jeux, tirer et détruire des projectiles à répétition peut être coûteux en termes de performance. Une méthode efficace consiste à recycler les projectiles (Object Pooling). Au lieu de détruire les projectiles, ils sont désactivés et réutilisés. Cela réduit les allocations de mémoire et les suppressions, ce qui peut améliorer significativement les performances, surtout lorsque de nombreux projectiles sont générés.
 
 Il faudra créer un nouvelle scène pour le `Pool` de projectiles. Cette scène ne contiendra qu'un `Node` que nous nommerons `BulletPool`. Ce `Node` contiendra un tableau de projectiles disponibles et un tableau de projectiles actifs.
 
-### Création du `Pool` d'objets
+## Création du `Pool` d'objets
 
 Voici le code pour le `Pool` de projectiles :
 
@@ -211,7 +238,7 @@ Dans l'inspecteur, il faudra associer la scène `Bullet` au `BulletPool` de proj
 - `get_bullet()` : Récupère un projectile disponible dans le pool.
 - `return_bullet()` : Réinitialise et retourne le projectile dans le pool.
 
-### Modification du tireur pour utiliser le `Pool`
+## Modification du tireur pour utiliser le `Pool`
 
 Il faudra adapter le tireur pour utiliser le `Pool` de projectiles au lieu d'instancier de nouveaux projectiles à chaque tir.
 
@@ -241,7 +268,7 @@ func shoot():
 - `bullet_pool` : Instance du `BulletPool` dans le jeu.
 - `bullet_pool.get_bullet()` : Récupère un projectile du pool pour le tir.
 
-### Modification du projectile
+## Modification du projectile
 
 Le projectile émettra un signal lorsqu'il sortira de l'écran pour être recyclé dans le `BulletPool`. Ce dernier écoutera ce signal pour récupérer le projectile et le remettre dans le pool.
 
@@ -273,6 +300,11 @@ func is_out_of_screen() -> bool:
 
 ```
 
-## Conclusion
+# Autres améliorations possibles
+- Créer un Singleton pour gérer les `Pools` de projectiles.
+- Créer une fabrique de projectiles pour gérer différents types de projectiles.
+- Détacher la dépendance du `BulletPool` du tireur.
+
+# Conclusion
 
 Les projectiles dans Godot sont simples à implémenter mais peuvent devenir complexes en fonction des interactions et des effets que vous souhaitez ajouter. En utilisant des méthodes comme le pooling et la gestion des collisions, vous pouvez optimiser les performances et gérer efficacement de nombreux projectiles à l'écran.
