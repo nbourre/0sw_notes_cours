@@ -35,15 +35,13 @@ Programmation créative - L’agrégation et les collisions
   - Cohésion
   - Séparation
   - Alignement
-- TBD : Les collisions de base
-- TBD : Les projectiles
 
 ---
 
 # Récupération du projet
 - Pour cette leçon, nous allons utiliser le projet `c05_godot_agregation`
 - Testez l’application
-- Seulement des boids qui se promènent
+- Il s'agit seulement d'objets (boids) qui se déplacent dans une direction aléatoire.
 - Parcourez le code pour comprendre les grandes lignes (5 min)
 
 ---
@@ -64,7 +62,11 @@ Les boids ne se déplace qu’avec une vitesse initiale
 
 ## Exemples d’agrégation
 
-![alt text](assets/Média1.webp) | ![alt text](assets/Média2.webp)
+![alt text](assets/Média1.webp)
+Volée d'étourneaux
+
+![alt text](assets/Média2.webp)
+Banc de thons
 
 ---
 
@@ -73,13 +75,13 @@ Les boids ne se déplace qu’avec une vitesse initiale
   - La cohésion
   - La séparation
   - L’alignement
-- L’addition de ces trois forces sur un ensemble d’agents simule l’effet du comportement de troupeau chez les animaux
+- L’addition de ces trois forces sur un ensemble d’agents simule l’effet du comportement de troupeau chez les animaux.
 
 ![alt text](assets/coh_sep_ali.png)
 
 ---
 
-- Chacune des forces s’applique dans une limite de distance
+- Chacune des forces s’applique dans une **limite de distance**
 - Généralement l’ordre de distance est la répulsion, l’alignement et ensuite la cohésion
 
 ![alt text](assets/fish_illustration.png)
@@ -89,7 +91,7 @@ Les boids ne se déplace qu’avec une vitesse initiale
 ## La séparation ou répulsion
 - La force de séparation ou de répulsion est celle qui permet à l’agent de d’éloigner des voisins trop près
 - On pourrait la définir comme la bulle personnelle
-- On calcule en effectuant la moyenne de la différence des distances divisé par la distance
+- On calcule en effectuant la ${\color{blue}moyenne\ de\ la\ différence\ des\ distances}$ divisé par la ${\color{blue}distance}$
 - Ensuite on trouve le vecteur pour trouver la force de braquage
 
 ---
