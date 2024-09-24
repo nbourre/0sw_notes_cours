@@ -11,9 +11,9 @@ Le noeud [`CharacterBody2D`](https://docs.godotengine.org/en/stable/classes/clas
 
 Il s'agit d'une classe spécialisée de `PhysicsBody2D` qui est destinés à être contrôlés par l'utilisateur.  Ils ne sont pas du tout affectés par la physique, mais ils affectent d'autres corps physiques sur leur trajectoire. Ils sont principalement utilisés pour fournir une API de haut niveau permettant de déplacer des objets avec une détection de murs et de pentes (méthode [`move_and_slide()`](https://docs.godotengine.org/en/stable/classes/class_characterbody2d.html#class-characterbody2d-method-move-and-slide)) en plus de la détection générale des collisions fournie par [`PhysicsBody2D.move_and_collide()`](https://docs.godotengine.org/en/stable/classes/class_physicsbody2d.html#class-physicsbody2d-method-move-and-collide). Cela le rend utile pour les corps physiques hautement configurables qui doivent se déplacer de manière spécifique et entrer en collision avec le monde, comme c'est souvent le cas avec les personnages contrôlés par l'utilisateur.
 
-Pour les objets de jeu qui n'ont pas besoin d'un mouvement complexe ou d'une détection de collision, tels que les plates-formes mobiles, [AnimatableBody2D](https://docs.godotengine.org/en/stable/classes/class_animatablebody2d.html#class-animatablebody2d) est plus simple à configurer.
+> **Note** : Pour les objets de jeu qui n'ont pas besoin d'un mouvement complexe ou d'une détection de collision, tels que les plates-formes mobiles, [AnimatableBody2D](https://docs.godotengine.org/en/stable/classes/class_animatablebody2d.html#class-animatablebody2d) est plus simple à configurer.
 
-Ce noeud requiert un noeud `CollisionShape2D` ou `CollisionPolygon2D` pour fonctionner. Il est possible d'en ajouter plusieurs pour gérer les collisions avec différents types de formes.
+CharacterBody2D requiert un noeud `CollisionShape2D` ou `CollisionPolygon2D` pour fonctionner. Il est possible d'en ajouter plusieurs pour gérer les collisions avec différents types de formes.
 
 Un noeud pour représenter l'image du joueur est aussi commun. Il peut s'agir d'un noeud `Sprite2D` ou `AnimatedSprite` par exemple.	
 
@@ -27,7 +27,7 @@ Les principales propriétés pour ce noeud sont les suivantes:
 | Propriété | Valeur | Description |
 | --------- | ------ | ----------- |
 | `MotionMode` | `Grounded` | S'applique lorsque les notions de murs, de plafond et de sol sont pertinentes. Dans ce mode, le mouvement du corps réagira aux pentes (accélération/ralentissement). Ce mode convient aux jeux à défilement latéral tels que les jeux de plateformes. |
-| `MotionMode` | `Floating` | S'applique lorsque les notions de sol et de plafond n'existent pas. Toutes les collisions seront signalées comme étant sur un mur. Dans ce mode, lorsque vous glissez, la vitesse restera toujours constante. Ce mode convient aux jeux en vue de dessus. |
+| `MotionMode` | `Floating` | S'applique lorsque les notions de sol et de plafond n'existent pas. Toutes les collisions seront signalées comme étant sur un mur. Dans ce mode, lorsque vous glissez, la vitesse restera toujours constante. Ce mode convient, entre autres, aux jeux en vue de dessus. |
 | `UpDirection` | `Vector2D` | Définit la direction de la gravité. |
 
 Il y a d'autres propriétés qui peuvent être utiles pour configurer le noeud selon vos besoins.
@@ -38,6 +38,8 @@ Il y a plusieurs possibilités pour représenter l'image du joueur. Il peut s'ag
 ![Alt text](assets/characterbody2d_02_collisionShape_over_sprite.png)
 
 ![Alt text](assets/characterBody2D_polygon2d.png)
+
+Dans le cas de ce vaisseau, j'ai utilisé des noeuds `Polygon2D` pour représenter la forme du vaisseau. 
 
 ## Collision
 Pour effectuer la gestion des collisions, le noeud `CharacterBody2D` a besoin d'un noeud `CollisionShape2D` ou `CollisionPolygon2D` pour fonctionner.
@@ -62,6 +64,38 @@ Les propriétés importantes pour ce noeud sont les suivantes:
 Pour contrôler le joueur, il est possible d'utiliser un script. Il est possible d'utiliser un script `GDScript` ou `C#`. Depuis Godot 4, il y a la possibilité d'utiliser le script par défaut. Il s'agit d'un script adapté pour les jeux de plateforme.
 
 ### Plateforme
+Le script par défaut en GDScript est le suivant:
+
+```gdscript
+extends CharacterBody2D
+
+
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
+
+
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction := Input.get_axis("ui_left", "ui_right")
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	move_and_slide()
+```
+
+---
+
 Le script par défaut en C# est le suivant:
 
 ```csharp
@@ -112,7 +146,31 @@ public partial class player : CharacterBody2D
 ```
 
 ### Top-down
-Il n'y a pas de script par défaut pour les jeux en vue de dessus. Il est possible d'utiliser le script suivant:
+Il n'y a pas de script par défaut pour les jeux en vue de dessus. Il est possible d'utiliser les scripts C# ou GDScript suivant:
+
+#### GDScript
+
+```gdscript
+extends CharacterBody2D
+
+@export var max_speed: float = 1500.0
+@export var acceleration: float = 10.0
+
+func _physics_process(delta):
+    var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").normalized()
+
+    if direction.length() > 0:
+        velocity = velocity.lerp(direction * max_speed, acceleration * delta)
+    else:
+        velocity = velocity.lerp(Vector2.ZERO, acceleration * delta)
+
+    # Pour pointer vers la souris
+    # look_at(get_global_mouse_position())
+
+    move_and_slide()
+```
+
+#### C#
 
 ```csharp
 using Godot;
@@ -177,3 +235,7 @@ Il restera à ajouer le monde dans lequel le joueur évoluera. Ce sujet sera vu 
 
 ![Alt text](assets/characterbody2d_04_test.gif)
 
+---
+
+# Références
+- [Everything to Know About the Camera2d in Godot 4 (Full Guide) - Anglais - 25 min](https://www.youtube.com/watch?v=RlSpjIb7TLo)
