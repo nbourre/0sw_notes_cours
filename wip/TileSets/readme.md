@@ -24,7 +24,13 @@ Cette démonstration utilise les tuiles suivantes tirées du pack ["Abstract Pla
 
 Créez un nouveau nœud **TileMapLayer**, puis sélectionnez-le et créez une nouvelle ressource **TileSet** dans l'inspecteur :
 
+<center>
+
 ![Création d'une nouvelle ressource TileSet dans le nœud TileMapLayer](assets/using_tilesets_create_new_tileset.webp)
+
+</center>
+
+> **Note** : Pour ceux qui ont utilisé les versions précédentes à la version 4.3, le noeud pour créer des maps de tuiles s'appele `TileMap` et non `TileMapLayer`.
 
 ---
 
@@ -39,7 +45,7 @@ Une fois que vous avez créé un **TileSet**, vous devez y ajouter des tuiles. V
 3. Cliquez sur "Ajouter une texture" et sélectionnez votre image de tuiles (*tilesheet*).
 4. Ajustez la taille des tuiles en fonction des dimensions de votre *tilesheet* (par exemple, 64x64).
 
-![Ajout d'une texture de tuiles dans l'éditeur de TileSet](assets/using_tilesets_add_texture.webp)
+![Ajout d'une texture de tuiles dans l'éditeur de TileSet](https://docs.godotengine.org/en/stable/_images/using_tilesets_specify_size_then_edit.webp)
 
 ---
 
