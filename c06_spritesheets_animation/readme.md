@@ -194,7 +194,7 @@ func _process(_delta):
 - Sélectionner `Nouveau...` pour ajouter une nouvelle animation.
 - Dans la fenêtre qui apparaît, nommez l'animation "walk" et confirmez.
 
-![alt text](Godot_v4.3-stable_mono_win64_0n5PbanZ6u.gif)
+![alt text](assets/Godot_v4.3-stable_mono_win64_0n5PbanZ6u.gif)
 
 ---
 
