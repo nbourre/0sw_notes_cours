@@ -12,11 +12,14 @@
   - [Exercices](#exercices)
   - [Sauvegarder le TileSet](#sauvegarder-le-tileset)
 - [Utilisation des TileMaps](#utilisation-des-tilemaps)
-- [Créer un jeu de terrain (`Terrain Sets`)](#créer-un-jeu-de-terrain-terrain-sets)
+  - [Créer un jeu de terrain (`Terrain Sets`)](#créer-un-jeu-de-terrain-terrain-sets)
+    - [Méthode alternative pour créer un jeu de terrain](#méthode-alternative-pour-créer-un-jeu-de-terrain)
+  - [Propriétés importantes `TileMapLayer`](#propriétés-importantes-tilemaplayer)
   - [Placer les tuiles dans la TileMap](#placer-les-tuiles-dans-la-tilemap)
+  - [Peinture de tuiles automatiques](#peinture-de-tuiles-automatiques)
 - [Conclusion](#conclusion)
-
-
+- [Exercices](#exercices-1)
+- [Références](#références)
 
 ---
 
@@ -130,18 +133,20 @@ On peut aussi utiliser le rectangle de base pour créer des formes plus complexe
 ---
 
 ## Sauvegarder le TileSet
+Dans bien des cas lorsque l'on crée un jeu, on réutilise les mêmes tuiles pour plusieurs niveaux. Il est donc important de sauvegarder le `TileSet` pour pouvoir le réutiliser dans d'autres scènes.
 
+Pour sauvegarder un `TileSet`, il suffit de cliquer sur le bouton `Enregistrer` sur la propriété `TileSet`.
+
+![alt text](assets/TileSet_save.png)
 
 ---
 
 # Utilisation des TileMaps
 Un TileMap est une grille de tuiles utilisée pour créer la disposition d’un jeu. Il y a plusieurs avantages à utiliser des nœuds `TileMapLayer` pour concevoir vos niveaux. Tout d'abord, ils vous permettent de dessiner une mise en page en "peignant" des tuiles sur une grille, ce qui est beaucoup plus rapide que de placer des nœuds `Sprite2D` individuellement un par un. Ensuite, ils permettent des niveaux plus grands car ils sont optimisés pour dessiner un grand nombre de tuiles. Enfin, ils vous permettent d'ajouter des fonctionnalités supplémentaires à vos tuiles avec des formes de collision, d'occlusion et de navigation.
 
-
-
 ---
 
-# Créer un jeu de terrain (`Terrain Sets`)
+## Créer un jeu de terrain (`Terrain Sets`)
 Dans les versions précédentes de Godot, il y avait un mécanisme nommé `AutoTiling` qui permettait de créer des terrains de manière automatique. Depuis la version 4, ce mécanisme a été remplacé par les `Terrain Sets`.
 
 Les terrains permettent de créer des connexions entre les tuiles de manière automatique. Cela permet de créer des terrains de manière plus rapide et plus efficace.
@@ -188,6 +193,45 @@ Ainsi, on pourrait se retrouver une configuration comme suit :
 
 ![alt text](assets/Terrain_peering_bit_examples.png)
 
+Une fois que vous avez configuré les connexions entre les tuiles, il sera possible de peindre les tuiles dans la `TileMap` en utilisant l'outil `Pinceau`. Nous verrons comment faire cela dans la section suivante.
+
+---
+
+### Méthode alternative pour créer un jeu de terrain
+Il est possible d'accelérer la création d'un jeu de terrain en utilisant l'onglet `Paint` dans l'éditeur de `TileSet`.
+
+1. Sélectionnez le jeu de terrain que vous souhaitez modifier.
+2. Sélectionnez l'outil `Paint`.
+3. Sous `Painting`, sélectionnez le jeu de terrain que vous souhaitez modifier.
+4. Sélectionnez `Terrain`
+5. Sélectionnez les tuiles à inclure dans le jeu de terrain.
+
+![alt text](assets/TileSet_Terrain_Select_Tile.gif)
+
+6. Tracez les bits de terrain sur les tuiles.
+
+![alt text](assets/TileSet_Terrain_Select_Bits.gif)
+
+Voici le résultat final de mon jeu de terrain :
+
+![alt text](assets/TileSet_top_down_complete.png)
+
+---
+
+## Propriétés importantes `TileMapLayer`
+
+Les propriétés suivantes sont importantes pour configurer votre `TileMapLayer` :
+- `TileSet` : Le `TileSet` à utiliser pour la `TileMap`.
+- **Rendering**
+  - **Y Sort Origin** : L'origine de l'ordonnancement Y. Cela détermine comment les tuiles sont ordonnées en fonction de leur position Y. Cette propriété ne fonctionne que si la propriété `Y Sort Enabled` est à vrai sur les paramètres de `CanvasItem`.
+  - **X Draw Order Reversed** : Si vrai, les tuiles sont dessinées de droite à gauche. Cela peut être utile pour les jeux de plateforme où les tuiles de fond sont dessinées avant les tuiles de premier plan. Cette propriété ne fonctionne que si la propriété `Y Sort Enabled` est à vrai sur les paramètres de `CanvasItem`.
+- **Physics**
+  - **Collision Enabled** : Si vrai, les collisions sont activées pour les tuiles de cette `TileMapLayer`.
+- **Navigation**
+  - **Navigation Enabled** : Si vrai, la navigation est activée pour les tuiles de cette `TileMapLayer`.
+
+Si vous n'avez créé de couche de physique, de navigation ou d'occlusion pour votre `TileSet`, vous n'avez pas besoin de configurer ces propriétés.
+
 ---
 
 ## Placer les tuiles dans la TileMap
@@ -198,14 +242,54 @@ Une fois que vos tuiles et leurs propriétés sont configurées, vous pouvez les
 2. Ouvrez l'éditeur de **TileMap** et choisissez votre **TileSet**.
 3. Peignez vos tuiles directement dans la scène en utilisant l'outil pinceau.
 
-![Peindre les tuiles dans la TileMap](assets/using_tilesets_paint_tiles.webp)
+![Peindre les tuiles dans la TileMap](assets/TileMap_placing_tiles.gif)
 
 ---
 
-**TODO : Insert code**
+## Peinture de tuiles automatiques
+Si vous avez configuré un jeu de terrain, vous pouvez peindre des tuiles automatiquement en utilisant l'outil `Pinceau` :
+
+1. Sélectionnez le volet `TileMap`
+2. Sélectionnez l'onglet `Terrains`
+3. Sélectionnez le terrain
+4. Tracez les tuiles sur la `TileMap`
+ 
+![alt text](assets/TileMap_painting.gif)
+
+Exemple d'un jeu top-down
+
+![alt text](assets/TileMap_painting_top_down.gif)
+
+Dépendamment de la configuration de votre jeu de terrain, les tuiles se connecteront automatiquement.
+
+> **Note** : La configuration des terrains demande un peu de pratique pour bien comprendre comment les tuiles se connectent. Il est recommandé de faire des tests pour bien comprendre le fonctionnement.
+
+> **Note** : L'outil semble plus adapté pour les terrains avec vue de dessus.
+
+Il y a un modèle de base pour les terrains avec le mode "Corners and Sides" qui est disponible dans la référence qui est disponible à la fin de ce document.
+
+![alt text](assets/template_corners_and_sides.png)
+
+Sur le site itch.io, il y a plusieurs *tilesheets* qui sont disponibles pour les terrains. Vous pouvez rechercher `Godot TileSet` pour trouver des *tilesheets* qui sont compatibles avec Godot.
 
 ---
 
 # Conclusion
 
-Utiliser les **TileSets** dans Godot vous permet de concevoir rapidement et efficacement des niveaux tout en optimisant les performances grâce aux outils comme les **Autotiles** et les formes de collision. Cela simplifie la gestion des grands environnements et la personnalisation des interactions dans vos jeux.
+Les outils de `TileSet` et de `TileMap` sont des outils puissants pour créer des jeux 2D. Ils permettent de créer des niveaux de manière plus rapide et plus efficace. Ils permettent aussi de créer des niveaux plus grands et plus complexes.
+
+Cependant, l'outil `Terrain` n'est pas prêt à la production. Il est recommandé de faire des tests pour bien comprendre comment les tuiles se connectent.
+
+---
+
+# Exercices
+- Trouvez vous un *tilesheet* sur le site itch.io qui serait compatible avec votre projet de session.
+- Créez un `TileSet` avec le *tilesheet* que vous avez trouvé.
+- Créez un `TileMap` et peignez les tuiles dans la scène.
+
+
+---
+
+# Références
+- [Guide to TileSet Terrains](https://github.com/dandeliondino/godot-4-tileset-terrains-docs)
+- [TileSet Explorer](https://donitz.itch.io/tileset-explorer)
