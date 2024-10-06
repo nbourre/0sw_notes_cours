@@ -4,61 +4,68 @@ Améliorons nos personnages!
 # Plan de leçon <!-- omit in toc -->
 - [Étude de cas](#étude-de-cas)
 - [Machine à état fini](#machine-à-état-fini)
+  - [Principe de Single Responsibility (Responsabilité Unique)](#principe-de-single-responsibility-responsabilité-unique)
+    - [Exemple](#exemple)
+  - [Résumé](#résumé)
 - [Projet Godot](#projet-godot)
+  - [](#)
   - [Modification au code](#modification-au-code)
   - [Solution intermédiaire](#solution-intermédiaire)
     - [Diagramme d'états](#diagramme-détats)
   - [Solution intermédiaire : Modification du code](#solution-intermédiaire--modification-du-code)
   - [Résumé de la solution temporaire](#résumé-de-la-solution-temporaire)
 - [Design pattern : L'état](#design-pattern--létat)
-  - [Implémentation dans Godot](#implémentation-dans-godot)
+- [Implémentation dans Godot](#implémentation-dans-godot)
+  - [`BaseState`](#basestate)
+  - [`StateMachine`](#statemachine)
+- [Conclusion](#conclusion)
 - [Références](#références)
 
 # Étude de cas
 
 Évaluons le code suivant :
 ```gdscript
-# Classe Heroine
-func handle_input(input: String) -> void:
-    if input == "PRESS_B":
+# Classe Hero
+func handle_input() -> void:
+    if Input.is_action_just_pressed("jump"):
         y_velocity = JUMP_VELOCITY
         set_graphics(IMAGE_JUMP)
 ```
 *Code 01* 
 
-Question : Quel est le problème?
+Question : Quels problèmes peut-on déceler?
 
 <details><summary>Réponse</summary>
-- Rien ne ll'empêche de faire du air jumping
+- Parmi ceux que je vois rapidement, rien ne l'empêche de faire du air jumping
 </details>
 
 ```gdscript
-func handle_input(input: String) -> void:
-    if input == "PRESS_B":
+func handle_input() -> void:
+    if Input.is_action_just_pressed("jump"):
         if not is_jumping:
             is_jumping = true
             # Jump...
 
-// Solution : air jumping résolu avec le booléen isJumping_.
-// Maintenant, on veut que l’héroïne puisse se pencher lorsque l’on appuie en bas et se relever lorsque l’on relâche
+# Solution : air jumping résolu avec le booléen isJumping_.
+# Maintenant, on veut que l’héroïne puisse se pencher lorsque l’on appuie en bas et se relever lorsque l’on relâche
 ```
 *Code 02*
 
 ```gdscript
-func handle_input(input: String) -> void:
-    if input == "PRESS_B":
+func handle_input() -> void:
+    if Input.is_action_just_pressed("jump"):
         if not is_jumping:
             # Jump...
-    elif input == "PRESS_DOWN":
+    elif Input.is_action_just_pressed("down"):
         if not is_jumping:
             set_graphics(IMAGE_DUCK)
-    elif input == "RELEASE_DOWN":
+    elif Input.is_action_just_released("down"):
         set_graphics(IMAGE_STAND)
 
 ```
 *Code 03*
 
-**Quelques secondes pour trouver le bogue :)**
+**Quelques secondes pour trouver d'autres bogues :)**
 
 - Le joueur pourra :
   - Appuyer sur la flèche du bas pour se pencher
@@ -68,15 +75,15 @@ func handle_input(input: String) -> void:
 - Corrigeons en ajoutant des nouveaux drapeaux...
 
 ```gdscript
-func handle_input(input: String) -> void:
-    if input == "PRESS_B":
+func handle_input() -> void:
+    if Input.is_action_just_pressed("jump"):
         if not is_jumping and not is_ducking:
             # Jump...
-    elif input == "PRESS_DOWN":
+    elif Input.is_action_just_pressed("down"):
         if not is_jumping:
             is_ducking = true
             set_graphics(IMAGE_DUCK)
-    elif input == "RELEASE_DOWN":
+    elif Input.is_action_just_released("down"):
         if is_ducking:
             is_ducking = false
             set_graphics(IMAGE_STAND)
@@ -84,23 +91,23 @@ func handle_input(input: String) -> void:
 ```
 *Code 04*
 
-Parfait! On a corrigé notre bogue.
+Parfait! On a corrigé quelques bogues.
 
-Maintenant, ça serait amusant si l’héroïne pouvant faire un dive attack lorsque le joueur appuie sur la touche du bas dans les airs.
+Maintenant, ça serait cool si l’héroïne pouvait faire un dive attack lorsque le joueur appuie sur la touche du bas dans les airs.
 
 ```gdscript
-func handle_input(input: String) -> void:
-    if input == "PRESS_B":
+func handle_input() -> void:
+    if Input.is_action_just_pressed("jump"):
         if not is_jumping and not is_ducking:
             # Jump...
-    elif input == "PRESS_DOWN":
+    elif Input.is_action_just_pressed("down"):
         if not is_jumping:
             is_ducking = true
             set_graphics(IMAGE_DUCK)
         else:
             is_jumping = false
             set_graphics(IMAGE_DIVE)
-    elif input == "RELEASE_DOWN":
+    elif Input.is_action_just_released("down"):
         if is_ducking:
             # Stand...
 
@@ -134,31 +141,52 @@ Chasse aux bogues encore…
   - La machine ne peut être qu’en un seul état à la fois.
   - Une séquence d’actions ou d’entrées est envoyée à la machine. Dans notre cas, ce seront les boutons d’une manette.
   - Chaque état a un jeu de transitions, chacune de celle-ci est associée à une entrée et pointe vers un état. Quand un événement est déclenché, s’il est reconnu par une transition pour l’état courant, la machine passera à l’état que la transition pointe vers.
+  - Chaque état a une responsabilité unique. Par exemple, l’état de saut s’occupe de la logique du saut, l’état de plonge s’occupe de la logique de plonge, etc.
+
+Bien sûr! Voici une section concise sur le principe de la "Single Responsibility" dans le contexte des machines à états finis (FSM) :
 
 ---
 
-- Ce qu’il faut retenir ce sont : **états**, **entrées** et **transitions**
+## Principe de Single Responsibility (Responsabilité Unique)
+
+Dans le contexte d'une machine à états finis (FSM), chaque état devrait avoir une seule responsabilité : gérer un comportement spécifique du personnage et les transitions associées. Cela signifie que chaque état (comme "Idle", "Running", "Jumping") doit :
+- Définir ce que le personnage fait pendant cet état (animation, mouvement, etc.).
+- Gérer les transitions qui mènent vers d'autres états.
+
+En adoptant ce principe de responsabilité unique, chaque état devient indépendant et modulaire. Cela rend le code :
+- **Facile à comprendre** : Chaque état est clairement défini et gère uniquement ses propres comportements et transitions.
+- **Facile à maintenir** : Si tu dois modifier le comportement d'un état, tu n'as qu'à changer le code de cet état sans affecter les autres.
+- **Facile à étendre** : Ajouter de nouveaux états (par exemple, "Dashing" ou "Wall Slide") devient plus simple, car chaque état est isolé dans son propre script ou section de code.
+
+### Exemple
+Prenons deux états : "Idle" (immobile) et "Running" (course). Le script de l'état "Idle" ne doit gérer que ce qui est pertinent pour être immobile (comme jouer l'animation "Idle" et détecter quand passer à l'état "Running" si une touche directionnelle est pressée). Il ne devrait pas avoir de logique pour ce que le personnage doit faire en courant ou en sautant.
+
+En respectant ce principe, chaque état devient une "boîte noire" : un module isolé qui gère ses propres règles, transitions et comportements, sans se soucier des détails internes des autres états.
+
+---
+
+## Résumé
+- Chaque état a une responsabilité unique
+- Les éléments clés à retenir : **états**, **entrées**, **sorties** et **transitions**
 - Il y a un design pattern (DP) nommé **État** qui permet de constuire une FSM
 
 ---
 
 # Projet Godot
-- Le jeu de plateforme du dernier cours représente bien le sujet précédent
-- Nous allons travailler avec ce projet
-- Activez la branche « platformer_done »
-  - `git checkout platformer_done`
-- Créez et activez une nouvelle branche « platformer_fsm »
-  - `git checkout –b platformer_fsm`
-  - L’option `-b` permet de créer une nouvelle branche et activer celle-ci
-- Ouvrez le projet `c03a_platformer_completed`
+- Pour suivre, j'ai créé deux projets Godot simple soit un platformer et un demo RPG
+- Il s'agit des projets "c07_platformer_fsm" et "c08_fsm_done" dans le dépôt `0SW_projets_cours`
 
+Le projet platformer est fait à l'aide de C# et le projet RPG est fait à l'aide de GDScript.
+
+![alt text](assets/fsm_demo.gif)
 ---
 
 ## Modification au code
 - Avant toute chose, nous allons améliorer le code de base
 - À la première ligne de la méthode `_PhysicsProcess`, ajoutez le code pour connaître la direction appuyée
 
-```gdscript 
+```gdscript
+# Ou l'équivalent dans votre code
 var dir = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
 ```
 
@@ -223,7 +251,7 @@ L'ordre pour tracer le diagramme est relativement simple :
 Dans la classe `Player`, ajoutez l’énumération ci-bas ainsi qu’un attribut pour sauvegarder l’état.
 
 ```gdscript
-extends KinematicBody2D
+extends CharacterBody2D
 class_name Player
 
 enum State { STATE_JUMPING, STATE_IDLE, STATE_RUNNING, STATE_FALLING }
@@ -454,79 +482,184 @@ Principe :
   - L’avantage de faire l’intégration dans les états est la facilité de créer de nouveaux états
   - Le désavantage, c’est que chaque état doit connaître l’état qui suit la transition ainsi il y a un couplage par transition qui se forment
 
-
 ---
 
-## Implémentation dans Godot
+# Implémentation dans Godot
 - Pour implémenter ce DP, il faudra tricher à quelques endroits pour optimiser les caractéristiques de Godot
+
+## `BaseState`
 - La première étape sera de créer une classe générique qui aura les méthodes de base pour l’ensemble des états
 - Nous appellerons cette classe `BaseState`
   - Celle-ci héritera de la classe Node pour avoir les fonctionnalités de Godot
 
 ```gdscript
 extends Node
+class_name BaseState
 
-class_name State
-
-# Reference à la `StateMachine`
-var _state_machine: StateMachine
+# Signal pour annoncer un changement d’état
+signal Transitioned
 
 func handle_inputs(input_event: InputEvent) -> void:
-    pass
+	pass
 
 func update(delta: float) -> void:
-    pass
+	pass
 
 func physics_update(delta: float) -> void:
-    pass
+	pass
 
-func enter(message: Dictionary = {}) -> void:
-    pass
+func enter() -> void:
+	pass
 
 func exit() -> void:
-    pass
+	pass
 
 
 ```
 *Code 13*
 
-> **Rappel**
-> 
-> Une méthode virtuel est une méthode qui peut être redéfinie dans une classe dérivée. Une méthode virtuelle est définie avec le mot-clé `virtual` et peut être redéfinie avec le mot-clé `override` dans une classe dérivée.
-
 ---
 
-Une fois que nous avons notre classe de base, nous pouvons créer nos états. Nous allons créer un état pour chaque action que le personnage peut faire. Nous allons donc créer les états suivants :
-- Idle
-- Running
-- Jumping
-- Falling
+## `StateMachine`
+
+- La classe `StateMachine` sera la classe qui gérera les états
+- Elle aure l'état initial, l'état courant et les états disponibles
+
+Voici le code de la classe `StateMachine`
 
 ```gdscript
-extends State
+extends Node
 
-func enter(message: Dictionary = {}) -> void:
-    _state_machine._player._anim_player.play("Idle")
+@export var initial_state : BaseState
+var current_state : BaseState
+var states : Dictionary = {}
 
-func handle_inputs(input_event: InputEvent) -> void:
-    if input_event.is_action_pressed("ui_right"):
-        _state_machine._player.dir = 1
-        _state_machine.transition_to("Running")
-    elif input_event.is_action_pressed("ui_left"):
-        _state_machine._player.dir = -1
-        _state_machine.transition_to("Running")
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	for child in get_children():
+		if child is BaseState:
+			states[child.name.to_lower()] = child
+			child.Transitioned.connect(on_child_transition)
+	
+	if initial_state :
+		initial_state.enter()
+		current_state = initial_state
+	
+func _process(delta: float) -> void:
+	if current_state:
+		current_state.update(delta)
 
-    if input_event.is_action_just_pressed("ui_jump"):
-        _state_machine.transition_to("Jumping")
+func _physics_process(delta: float) -> void:
+	if current_state:
+		current_state.physics_update(delta)
 
-func physics_update(delta: float) -> void:
-    if _state_machine._player._velocity.y > 0:
-        _state_machine.transition_to("Falling")
-
+# Fonction pour changer d'état
+func on_child_transition(state, new_state_name):
+	if state != current_state:
+		return
+	
+	var new_state = states.get(new_state_name.to_lower())
+	
+	if !new_state:
+		return
+		
+	if current_state:
+		current_state.exit()
+		
+	new_state.enter()
+	current_state = new_state
 
 ```
 
+---
+
+Une fois que nous avons nos classes de base, nous pouvons créer nos états. Nous allons créer un état pour chaque action que le personnage peut faire. Nous allons donc créer les états suivants :
+- Idle
+- Walk
+
+Voici le code pour l’état `Idle` du joueur dans le RPG
+
+```gdscript
+extends BaseState
+class_name PlayerIdle
+
+@export var player : Player
+var anim_player : AnimationPlayer
+
+func manage_input() -> void:	
+	var dir : Vector2 = Input.get_vector("left", "right", "up", "down").normalized()
+	
+	if (dir.length() > 0):
+		Transitioned.emit(self, "Walk")
+
+func enter():
+	anim_player = player.get_animation_player()	
+	
+func update(delta: float) -> void:
+	if not anim_player :
+		anim_player = player.get_animation_player()
+	manage_input()
+	
+func physics_update(delta: float) -> void:
+	if not anim_player : return
+		
+	anim_player.play("idle_front")
+
+```
+
+Voici le code pour l’état `Walk` du joueur dans le RPG
+
+```gdscript
+extends BaseState
+class_name PlayerWalk
+
+@export var player : Player
+var anim_player : AnimationPlayer
+
+@export var move_speed := 50.0
+
+func manage_input() -> Vector2:	
+	var dir : Vector2 = Input.get_vector("left", "right", "up", "down").normalized()
+
+	return dir
+
+func update(delta : float) -> void:
+	if not anim_player :
+		anim_player = player.get_animation_player()
+
+	var dir := manage_input()
+	
+	if dir.length() > 0 :
+		player.velocity = dir * move_speed
+	else :
+		player.velocity = player.velocity.move_toward(Vector2.ZERO, 10)
+	
+	if (player.velocity.length() == 0) :
+		Transitioned.emit(self, "idle")
+	
+	player.direction = dir
+
+func physics_update(delta: float) -> void:
+	
+	if (player.velocity.length() > 0) :
+		if (player.velocity.x > 0 or player.velocity.x < 0) :
+			anim_player.play("walk_side")
+			if (player.velocity.x > 0) :
+				player.sprite.flip_h = false
+			elif (player.velocity.x < 0) :
+				player.sprite.flip_h = true
+		elif (player.velocity.y < 0) :
+			anim_player.play("walk_back")
+		elif (player.velocity.y > 0) :
+			anim_player.play("walk_front")
+```
+
+# Conclusion
+- La machine à état fini est un outil puissant pour gérer les états d’un objet
+- Le design pattern État permet de structurer les états de manière modulaire
+- On pourrait améliorer le projet en utilisant un `PlayerBaseState` ou `EnemyBaseState` pour éviter de répéter le code commun.
 
 ---
 # Références
 - [Design Pattern Guru : State pattern](https://refactoring.guru/design-patterns/state)
+- [Machine à état fini et animation d’attaque](https://www.youtube.com/watch?v=ow_Lum-Agbs)
