@@ -17,13 +17,12 @@ Améliorons nos personnages!
 # Étude de cas
 
 Évaluons le code suivant :
-```cpp
-void Heroine::handleInput(Input input){
-    if (input == PRESS_B)    {
-        yVelocity_ = JUMP_VELOCITY;
-        setGraphics(IMAGE_JUMP);    
-    }
-}
+```gdscript
+# Classe Heroine
+func handle_input(input: String) -> void:
+    if input == "PRESS_B":
+        y_velocity = JUMP_VELOCITY
+        set_graphics(IMAGE_JUMP)
 ```
 *Code 01* 
 
@@ -33,35 +32,29 @@ Question : Quel est le problème?
 - Rien ne ll'empêche de faire du air jumping
 </details>
 
-```cpp
-void Heroine::handleInput(Input input)
-    if (input == PRESS_B){
-        if (!isJumping_){
-            isJumping_ = true;
-            // Jump...
-        }
-    }
-}
+```gdscript
+func handle_input(input: String) -> void:
+    if input == "PRESS_B":
+        if not is_jumping:
+            is_jumping = true
+            # Jump...
 
 // Solution : air jumping résolu avec le booléen isJumping_.
 // Maintenant, on veut que l’héroïne puisse se pencher lorsque l’on appuie en bas et se relever lorsque l’on relâche
 ```
 *Code 02*
 
-```cpp
-void Heroine::handleInput(Input input){
-    if (input == PRESS_B){
-        // Jump if not jumping...
-    }
-    else if (input == PRESS_DOWN){
-        if (!isJumping_){
-                setGraphics(IMAGE_DUCK);
-                }
-        }
-    else if (input == RELEASE_DOWN){
-        setGraphics(IMAGE_STAND);
-    }
-}
+```gdscript
+func handle_input(input: String) -> void:
+    if input == "PRESS_B":
+        if not is_jumping:
+            # Jump...
+    elif input == "PRESS_DOWN":
+        if not is_jumping:
+            set_graphics(IMAGE_DUCK)
+    elif input == "RELEASE_DOWN":
+        set_graphics(IMAGE_STAND)
+
 ```
 *Code 03*
 
@@ -74,33 +67,20 @@ void Heroine::handleInput(Input input){
   - On aura une image debout lorsqu’il sera dans les airs
 - Corrigeons en ajoutant des nouveaux drapeaux...
 
-```cpp
-void Heroine::handleInput(Input input)
-{
-  if (input == PRESS_B)
-  {
-    if (!isJumping_ && !isDucking_)
-    {
-      // Jump...
-    }
-  }
-  else if (input == PRESS_DOWN)
-  {
-    if (!isJumping_)
-    {
-      isDucking_ = true;
-      setGraphics(IMAGE_DUCK);
-    }
-  }
-  else if (input == RELEASE_DOWN)
-  {
-    if (isDucking_)
-    {
-      isDucking_ = false;
-      setGraphics(IMAGE_STAND);
-    }
-  }
-}
+```gdscript
+func handle_input(input: String) -> void:
+    if input == "PRESS_B":
+        if not is_jumping and not is_ducking:
+            # Jump...
+    elif input == "PRESS_DOWN":
+        if not is_jumping:
+            is_ducking = true
+            set_graphics(IMAGE_DUCK)
+    elif input == "RELEASE_DOWN":
+        if is_ducking:
+            is_ducking = false
+            set_graphics(IMAGE_STAND)
+
 ```
 *Code 04*
 
@@ -108,37 +88,22 @@ Parfait! On a corrigé notre bogue.
 
 Maintenant, ça serait amusant si l’héroïne pouvant faire un dive attack lorsque le joueur appuie sur la touche du bas dans les airs.
 
-```cpp
-void Heroine::handleInput(Input input)
-{
-  if (input == PRESS_B)
-  {
-    if (!isJumping_ && !isDucking_)
-    {
-      // Jump...
-    }
-  }
-  else if (input == PRESS_DOWN)
-  {
-    if (!isJumping_)
-    {
-      isDucking_ = true;
-      setGraphics(IMAGE_DUCK);
-    }
-    else
-    {
-      isJumping_ = false;
-      setGraphics(IMAGE_DIVE);
-    }
-  }
-  else if (input == RELEASE_DOWN)
-  {
-    if (isDucking_)
-    {
-      // Stand...
-    }
-  }
-}
+```gdscript
+func handle_input(input: String) -> void:
+    if input == "PRESS_B":
+        if not is_jumping and not is_ducking:
+            # Jump...
+    elif input == "PRESS_DOWN":
+        if not is_jumping:
+            is_ducking = true
+            set_graphics(IMAGE_DUCK)
+        else:
+            is_jumping = false
+            set_graphics(IMAGE_DIVE)
+    elif input == "RELEASE_DOWN":
+        if is_ducking:
+            # Stand...
+
 
 ```
 *Code 05*
@@ -152,7 +117,7 @@ Chasse aux bogues encore…
 
 ---
 
-- On rage et on met au poubelle ce que l’on vient d’écrire et on se met à gribouiller un diagramme de flux de donnée où on fait des carré pour chaque chose que le personnage peut faire soit être debout, penché, en saut et en plonge.
+- On rage et on met au poubelle ce que l’on vient d’écrire et on se met à gribouiller un diagramme de flux de donnée où on fait des carrés pour chaque chose que le personnage peut faire soit être debout, penché, en saut et en plonge.
 - Lorsqu’il répond à une commande, on fait une flèche de l’état initial, vers l’état final en inscrivant l’action nécessaire.
 
 ![Esquisse d'une machine à état fini](assets/fsm_esquisse.jpg)
@@ -193,44 +158,40 @@ Chasse aux bogues encore…
 - Avant toute chose, nous allons améliorer le code de base
 - À la première ligne de la méthode `_PhysicsProcess`, ajoutez le code pour connaître la direction appuyée
 
-```cpp 
+```gdscript 
 var dir = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
 ```
 
 Remplacez le code d'avant ci-bas avec celui après.
 
-```cpp
-// AVANT
-if (Input.IsActionPressed("ui_left")) {
-    motion.x += ACCEL * dir;
-    facing_right = false;
-    animPlayer.Play("Run");
-} else if (Input.IsActionPressed("ui_right")) {
-    motion.x += ACCEL * dir;
-    facing_right = true;
-    animPlayer.Play("Run");
-} else {
-    motion = motion.LinearInterpolate(Vector2.Zero, 0.2f);
-    animPlayer.Play("Idle");
-}
+```gdscript
+# AVANT
+if Input.is_action_pressed("ui_left"):
+    motion.x += ACCEL * dir
+    facing_right = false
+    anim_player.play("Run")
+elif Input.is_action_pressed("ui_right"):
+    motion.x += ACCEL * dir
+    facing_right = true
+    anim_player.play("Run")
+else:
+    motion = motion.linear_interpolate(Vector2.ZERO, 0.2)
+    anim_player.play("Idle")
 ``` 
 *Code 06*
 
-```cpp
-// APRÈS
-if (dir != 0) {
-    motion.x += ACCEL * dir;
-    animPlayer.Play("Run");
-}               
-if (dir > 0) {
-    facing_right = true;
-} else if (dir < 0) {
-    facing_right = false;
-} else {
-    motion = motion.LinearInterpolate(Vector2.Zero, 0.2f);
-    animPlayer.Play("Idle");
-}
-
+```gdscript
+# APRÈS
+if dir != 0:
+    motion.x += ACCEL * dir
+    anim_player.play("Run")
+if dir > 0:
+    facing_right = true
+elif dir < 0:
+    facing_right = false
+else:
+    motion = motion.linear_interpolate(Vector2.ZERO, 0.2)
+    anim_player.play("Idle")
 ```
 *Code 07*
 
@@ -261,20 +222,15 @@ L'ordre pour tracer le diagramme est relativement simple :
 
 Dans la classe `Player`, ajoutez l’énumération ci-bas ainsi qu’un attribut pour sauvegarder l’état.
 
-```cpp
-public class player : KinematicBody2D
-{
+```gdscript
+extends KinematicBody2D
+class_name Player
 
-    enum State {
-        STATE_JUMPING,
-        STATE_IDLE,
-        STATE_RUNNING,
-        STATE_FALLING
-    };
-    
-    State currentState = State.STATE_IDLE;
-    // ..
+enum State { STATE_JUMPING, STATE_IDLE, STATE_RUNNING, STATE_FALLING }
 
+var current_state: State = STATE_IDLE
+
+# ...
 ```
 *Code 08*
 
@@ -282,93 +238,73 @@ Ajouter un switch-case pour la gestion des états.
 
 Voici le code de `_PhysicsProcess` modifié
 
-```cpp
+```gdscript
+func _physics_process(delta: float) -> void:
+    var dir = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 
-public override void _PhysicsProcess(float delta)
-{
-    var dir = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
+    motion.x += ACCEL * dir
+    motion.y += GRAVITY
 
-    motion.x += ACCEL * dir;
-    motion.y += GRAVITY;
+    if facing_right:
+        current_sprite.flip_h = false
+    else:
+        current_sprite.flip_h = true
 
-    if (facing_right) {
-        currentSprite.FlipH = false;
-    } else {
-        currentSprite.FlipH = true;
-    }
+    match current_state:
+        State.STATE_FALLING:
+            if is_on_floor():
+                current_state = State.STATE_IDLE
+                anim_player.play("Idle")
+        State.STATE_IDLE:
+            if dir != 0:
+                current_state = State.STATE_RUNNING
+                anim_player.play("Run")
+            elif Input.is_action_just_pressed("ui_jump"):
+                current_state = State.STATE_JUMPING
+                motion.y = -JUMP_FORCE
+                anim_player.play("Jump")
+            elif not is_on_floor() and motion.y > 0:
+                current_state = State.STATE_FALLING
+                anim_player.play("Fall")
+        State.STATE_JUMPING:
+            if motion.y >= 0:
+                current_state = State.STATE_FALLING
+                anim_player.play("Fall")
+            else:
+                anim_player.play("Jump")
+        State.STATE_RUNNING:
+            if dir > 0:
+                facing_right = true
+            elif dir < 0:
+                facing_right = false
+            else:
+                current_state = State.STATE_IDLE
+                motion = motion.linear_interpolate(Vector2.ZERO, 0.2)
+                anim_player.play("Idle")
 
-    switch(currentState) {
-        case State.STATE_FALLING:
-            if (IsOnFloor()) {
-                currentState = State.STATE_IDLE;
-                animPlayer.Play("Idle");
-            }
-            break;
-        case State.STATE_IDLE:                
-            if (dir != 0) {
-                currentState = State.STATE_RUNNING;
-                animPlayer.Play("Run");
-            }
-            if (Input.IsActionJustPressed("ui_jump")) {
-                currentState = State.STATE_JUMPING;
-                motion.y = -JUMPFORCE;
-                animPlayer.Play("jump");
-            }
-            if (!IsOnFloor()) {
-                if (motion.y > 0) {
-                    currentState = State.STATE_FALLING;
-                    animPlayer.Play("fall");
-                }
-            }                
-            break;
-        case State.STATE_JUMPING:
-            if (motion.y >= 0) {
-                currentState = State.STATE_FALLING;
-                animPlayer.Play("fall");
-            } else {
-                animPlayer.Play("jump");
-            }                
-            break;
-      case State.STATE_RUNNING:                
-            if (dir > 0) {
-                facing_right = true;
-            } else if (dir < 0) {
-                facing_right = false;
-            } else {
-                currentState = State.STATE_IDLE;
-                motion = motion.LinearInterpolate(Vector2.Zero, 0.2f);   
-                animPlayer.Play("Idle");
-            }
-            if (!IsOnFloor()) {
-                if (motion.y > 0) {
-                    currentState = State.STATE_FALLING;
-                    animPlayer.Play("fall");
-                }
-            }
-            if (Input.IsActionJustPressed("ui_jump")) {
-                currentState = State.STATE_JUMPING;
-                motion.y = -JUMPFORCE;
-                animPlayer.Play("jump");
-            }                
-            break;
-        default:
-            animPlayer.Play("Idle");
-            break;
-    }
+            if not is_on_floor() and motion.y > 0:
+                current_state = State.STATE_FALLING
+                anim_player.play("Fall")
+            elif Input.is_action_just_pressed("ui_jump"):
+                current_state = State.STATE_JUMPING
+                motion.y = -JUMP_FORCE
+                anim_player.play("Jump")
+        _:
+            anim_player.play("Idle")
 
-    motion.x = Mathf.Lerp(motion.x, MAXSPEED * motion.x > 0 ? 1 : -1, (ACCEL * 1f) / MAXSPEED);
+    motion.x = lerp(motion.x, MAX_SPEED * (1 if motion.x > 0 else -1), (ACCEL * 1.0) / MAX_SPEED)
 
-    if(motion.y > MAXFALLSPEED) {
-        motion.y = MAXFALLSPEED;
-    }
-    motion = MoveAndSlide(motion, UP);
-}
+    if motion.y > MAX_FALL_SPEED:
+        motion.y = MAX_FALL_SPEED
+
+    motion = move_and_slide(motion, UP)
+
 
 ```
 *Code 09*
 
 **Points saillants**
-- Toutes la gestions est dans un switch-case
+- Toutes la gestions est dans un `switch-case` (`match-case` en Godot)
 - Chaque état est indépendant
 
 Pour un lecteur, ce code a l’air compliqué. Pour améliorer la lisibilité, on crée des méthodes pour chaque état.
@@ -377,26 +313,21 @@ Pour un lecteur, ce code a l’air compliqué. Pour améliorer la lisibilité, o
 
 Ainsi, on crée des méthodes pour chaque état et ensuite on appelle ces méthodes dans les différents cas.
 
-```cpp
-//...
-switch(currentState) {
-    case State.STATE_FALLING:
-        fall();
-        break;
-    case State.STATE_IDLE:
-        idle();            
-        break;
-    case State.STATE_JUMPING:
-        jump();          
-        break;
-    case State.STATE_RUNNING:                
-        run();              
-        break;
-    default:
-        idle();
-        break;
-}
-//...
+```gdscript
+# Dans _PhysicsProcess
+match current_state:
+    State.STATE_FALLING:
+        fall()
+    State.STATE_IDLE:
+        idle()
+    State.STATE_JUMPING:
+        jump()
+    State.STATE_RUNNING:
+        run()
+    _:
+        idle()
+
+# ...
 
 ```
 *Code 10*
@@ -408,64 +339,50 @@ switch(currentState) {
 <details><summary>Cliquer pour voir le code de chacune des méthodes.</summary>
 
 
-```cpp
-void jump() {
-    if (motion.y >= 0) {
-        currentState = State.STATE_FALLING;
-        animPlayer.Play("fall");
-    } else {
-        animPlayer.Play("jump");
-    }      
-}
+```gdscript
+func jump() -> void:
+    if motion.y >= 0:
+        current_state = State.STATE_FALLING
+        anim_player.play("Fall")
+    else:
+        anim_player.play("Jump")
 
-void fall() {
-    if (IsOnFloor()) {
-        currentState = State.STATE_IDLE;
-        animPlayer.Play("Idle");
-    }
-}
+func fall() -> void:
+    if is_on_floor():
+        current_state = State.STATE_IDLE
+        anim_player.play("Idle")
 
-void idle() {
-    if (dir != 0) {
-        currentState = State.STATE_RUNNING;
-        animPlayer.Play("Run");
-    }
-    JumpCheck();
-    FallCheck(); 
-}
+func idle() -> void:
+    if dir != 0:
+        current_state = State.STATE_RUNNING
+        anim_player.play("Run")
+    jump_check()
+    fall_check()
 
-void FallCheck() {
-    if (!IsOnFloor()) {
-        if (motion.y > 0) {
-            currentState = State.STATE_FALLING;
-            animPlayer.Play("fall");
-        }
-    }  
-}
+func fall_check() -> void:
+    if not is_on_floor() and motion.y > 0:
+        current_state = State.STATE_FALLING
+        anim_player.play("Fall")
 
-void JumpCheck() {
-    if (Input.IsActionJustPressed("ui_jump")) {
-        currentState = State.STATE_JUMPING;
-        motion.y = -JUMPFORCE;
-        animPlayer.Play("jump");
-    }         
-}
+func jump_check() -> void:
+    if Input.is_action_just_pressed("ui_jump"):
+        current_state = State.STATE_JUMPING
+        motion.y = -JUMP_FORCE
+        anim_player.play("Jump")
 
+func run() -> void:
+    if dir > 0:
+        facing_right = true
+    elif dir < 0:
+        facing_right = false
+    else:
+        current_state = State.STATE_IDLE
+        motion = motion.linear_interpolate(Vector2.ZERO, 0.2)
+        anim_player.play("Idle")
 
-void run(){
-    if (dir > 0) {
-        facing_right = true;
-    } else if (dir < 0) {
-        facing_right = false;
-    } else {
-        currentState = State.STATE_IDLE;
-        motion = motion.LinearInterpolate(Vector2.Zero, 0.2f);   
-        animPlayer.Play("Idle");
-    }
+    jump_check()
+    fall_check()
 
-    JumpCheck(); 
-    FallCheck();
-}
 ```
 *Code 11*
 </details>
@@ -481,25 +398,26 @@ Exemple :
 - Disons que l’on désire que le personnage puisse voler, mais il devra courir pendant un certain temps avant de pouvoir s’exécuter.
 - Dans le code, il faudra faire un suivi du temps pendant l'état de la course.
 
-```cpp
-float chargeTime;
-void run(){
-    chargeTime += delta;
-    if (dir > 0) {
-        facing_right = true;
-    } else if (dir < 0) {
-        facing_right = false;
-    } else {
-        currentState = State.STATE_IDLE;
-        motion = motion.LinearInterpolate(Vector2.Zero, 0.2f);   
-        animPlayer.Play("Idle");
-    }
-    FlyCheck();
-    JumpCheck(); 
-    FallCheck();
-}
+```gdscript
+var charge_time: float = 0.0
 
-// On devra remettre à zéro le temps avant de changer vers l’état de courir
+func run() -> void:
+    charge_time += delta
+    if dir > 0:
+        facing_right = true
+    elif dir < 0:
+        facing_right = false
+    else:
+        current_state = State.STATE_IDLE
+        motion = motion.linear_interpolate(Vector2.ZERO, 0.2)
+        anim_player.play("Idle")
+
+    fly_check()
+    jump_check()
+    fall_check()
+
+
+# On devra remettre à zéro le temps avant de changer vers l’état de courir
 
 ```
 *Code 12*
@@ -545,66 +463,29 @@ Principe :
 - Nous appellerons cette classe `BaseState`
   - Celle-ci héritera de la classe Node pour avoir les fonctionnalités de Godot
 
-```cpp
-using Godot;
-using System.Collections.Generic;
+```gdscript
+extends Node
 
-public class State : Node
-{
-    /// <summary>
-    /// # Reference à la `StateMachine` pour appeler sa méthode `transition_to()` directement.
-    /// C'est notre triche pour l'implémentation du DP État, car cela ajoute une dépendance entre
-    /// l'état et l'objet `StateMachine`, mais une méthode efficace pour nos besoins
-    /// La machine à état qui l'assignera.
-    /// </summary>
-    public StateMachine _stateMachine = null;
+class_name State
 
-    /// <summary>
-    /// Fonction virtuelle. Reçoit les événements de `_unhandled_input()`.
-    /// </summary>
-    /// <param name="inputEvent"></param>
-    public virtual void HandleInputs(InputEvent inputEvent)
-    {
-        return;
-    }
+# Reference à la `StateMachine`
+var _state_machine: StateMachine
 
-    /// <summary>
-    /// Fonction virtuel correspondant à `_process()`.
-    /// </summary>
-    /// <param name="delta"></param>
-    public virtual void Update(float delta)
-    {
-        return;
-    }
+func handle_inputs(input_event: InputEvent) -> void:
+    pass
 
-    /// <summary>
-    /// Fonction virtuel correspondant à `_PhysicsProcess()`
-    /// </summary>
-    /// <param name="delta"></param>
-    public virtual void PhysicsUpdate(float delta)
-    {
-        return;
-    }
+func update(delta: float) -> void:
+    pass
 
-    /// <summary>
-    /// Fonction virtuelle. Appelée par la machine à état pour modifier l'état courant. Le paramètre `msg`
-    /// est un dictionnaire avec des données arbitraires que l'état peut utiliser pour initialiser.
-    /// </summary>
-    /// <param name="message"></param>
-    public virtual void Enter(Dictionary<string, bool> message = null)
-    {
-        return;
-    }
+func physics_update(delta: float) -> void:
+    pass
 
-    /// <summary>
-    /// Fonction virtuelle. Appelée par la machine à état avant de changer l'état courant. Utilisez cette
-    /// fonction pour nettoyer les ressources utilisées par l'état.
-    /// </summary>
-    public virtual void Exit()
-    {
-        return;
-    }
-}
+func enter(message: Dictionary = {}) -> void:
+    pass
+
+func exit() -> void:
+    pass
+
 
 ```
 *Code 13*
@@ -621,44 +502,27 @@ Une fois que nous avons notre classe de base, nous pouvons créer nos états. No
 - Jumping
 - Falling
 
-```cpp
-using Godot;
-using System.Collections.Generic;
+```gdscript
+extends State
 
-public class Idle : State
-{
-    public override void Enter(Dictionary<string, bool> message = null)
-    {
-        _stateMachine._player._animPlayer.Play("Idle");
-    }
+func enter(message: Dictionary = {}) -> void:
+    _state_machine._player._anim_player.play("Idle")
 
-    public override void HandleInputs(InputEvent inputEvent)
-    {
-        if (inputEvent.IsActionPressed("ui_right"))
-        {
-            _stateMachine._player.dir = 1;
-            _stateMachine.transition_to("Running");
-        }
-        else if (inputEvent.IsActionPressed("ui_left"))
-        {
-            _stateMachine._player.dir = -1;
-            _stateMachine.transition_to("Running");
-        }
+func handle_inputs(input_event: InputEvent) -> void:
+    if input_event.is_action_pressed("ui_right"):
+        _state_machine._player.dir = 1
+        _state_machine.transition_to("Running")
+    elif input_event.is_action_pressed("ui_left"):
+        _state_machine._player.dir = -1
+        _state_machine.transition_to("Running")
 
-        if (inputEvent.IsActionJustPressed("ui_jump"))
-        {
-            _stateMachine.transition_to("Jumping");
-        }
-    }
+    if input_event.is_action_just_pressed("ui_jump"):
+        _state_machine.transition_to("Jumping")
 
-    public override void PhysicsUpdate(float delta)
-    {
-        if (_stateMachine._player._velocity.y > 0)
-        {
-            _stateMachine.transition_to("Falling");
-        }
-    }
-}
+func physics_update(delta: float) -> void:
+    if _state_machine._player._velocity.y > 0:
+        _state_machine.transition_to("Falling")
+
 
 ```
 
