@@ -155,7 +155,7 @@ Chasse aux bogues encore…
 - On rage et on met au poubelle ce que l’on vient d’écrire et on se met à gribouiller un diagramme de flux de donnée où on fait des carré pour chaque chose que le personnage peut faire soit être debout, penché, en saut et en plonge.
 - Lorsqu’il répond à une commande, on fait une flèche de l’état initial, vers l’état final en inscrivant l’action nécessaire.
 
-![](assets/fsm_esquisse.jpg)
+![Esquisse d'une machine à état fini](assets/fsm_esquisse.jpg)
 
 - Félicitations! Vous venez de réaliser un diagramme de **machine à état fini**!
 
@@ -252,7 +252,7 @@ L'ordre pour tracer le diagramme est relativement simple :
 1. Identifier les états
 2. Tracer les transitions et écrire les conditions de transition
 
-![](assets/platform_fsm.png)
+![Diagramme d'état fini d'un personnage de jeu de plateforme](assets/platform_fsm.png)
 
 3. Créer l'énumération qui contiendra les états.
 
@@ -516,7 +516,7 @@ Avec cette solution, nous avons eu besoin de modifier deux méthodes.
 - Objectif : Permettre à un objet de modifier son comportement après un changement d’état interne
 - Exemple de problème : Une section de l’application possède un switch avec trop de cas dépendant de l’état de celle-ci.
 
-![](assets/State_Design_Pattern_UML_Class_Diagram.svg)
+![Diagramme de classe du design pattern de l'état](assets/State_Design_Pattern_UML_Class_Diagram.svg)
 
 ---
 
