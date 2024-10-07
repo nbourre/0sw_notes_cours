@@ -2,13 +2,16 @@
 Améliorons nos personnages!
 
 # Plan de leçon <!-- omit in toc -->
+- [Introduction : Une approche par l'absurde](#introduction--une-approche-par-labsurde)
+  - [Pourquoi par l'absurde?](#pourquoi-par-labsurde)
+  - [Ce que vous apprendrez](#ce-que-vous-apprendrez)
+- [Applicabilité dans le développement de logiciels standards](#applicabilité-dans-le-développement-de-logiciels-standards)
 - [Étude de cas](#étude-de-cas)
 - [Machine à état fini](#machine-à-état-fini)
   - [Principe de Single Responsibility (Responsabilité Unique)](#principe-de-single-responsibility-responsabilité-unique)
     - [Exemple](#exemple)
   - [Résumé](#résumé)
 - [Projet Godot](#projet-godot)
-  - [](#)
   - [Modification au code](#modification-au-code)
   - [Solution intermédiaire](#solution-intermédiaire)
     - [Diagramme d'états](#diagramme-détats)
@@ -18,10 +21,48 @@ Améliorons nos personnages!
 - [Implémentation dans Godot](#implémentation-dans-godot)
   - [`BaseState`](#basestate)
   - [`StateMachine`](#statemachine)
+  - [Solutions complètes](#solutions-complètes)
 - [Conclusion](#conclusion)
 - [Références](#références)
 
+
+---
+
+# Introduction : Une approche par l'absurde
+
+Aujourd'hui, nous allons introduire un concept clé dans le développement de jeux vidéo : la **machine à états finis** (FSM). Pour bien comprendre pourquoi la FSM est une solution puissante, nous allons d'abord explorer une approche alternative... qui ne fonctionne pas très bien.
+
+## Pourquoi par l'absurde?
+Plutôt que de plonger directement dans le concept de la FSM, nous allons commencer par examiner du code qui, à première vue, peut sembler correct, mais qui comporte de nombreux problèmes de conception. Ce code va nous servir de point de départ pour découvrir les difficultés d'une approche simple (et erronée) à la gestion des comportements complexes de notre personnage.
+
+## Ce que vous apprendrez
+- Vous verrez comment une implémentation naïve de la gestion des états d'un personnage peut rapidement devenir ingérable.
+- Vous découvrirez les pièges classiques, comme les bogues qui apparaissent lorsqu'on ajoute de nouvelles fonctionnalités, les difficultés de maintenir du code avec de multiples conditions, et la complexité croissante des transitions entre les comportements.
+- Vous comprendrez, étape par étape, comment une FSM peut simplifier la gestion des états de votre personnage et pourquoi il s'agit d'un design pattern essentiel dans la création de jeux vidéo.
+
+À travers cette méthode par l'absurde, nous vous montrerons que même si une solution simple peut sembler fonctionner initialement, elle devient rapidement une source de bugs et de difficultés. Cela nous amènera naturellement à introduire la FSM comme une solution propre, modulaire, et extensible pour gérer les comportements complexes dans vos jeux.
+
+---
+
+# Applicabilité dans le développement de logiciels standards
+
+Bien que notre point de départ soit le développement de jeux vidéo, la **machine à états finis** (FSM) est un concept largement utilisé dans de nombreux domaines de l'ingénierie logicielle. Comprendre comment implémenter et utiliser une FSM vous servira également dans le développement de logiciels "standards". Voici quelques exemples concrets :
+
+1. **Interfaces utilisateur complexes (UI/UX) :** La FSM est souvent utilisée pour gérer les transitions entre différents états d'une application, tels que des écrans de connexion, des fenêtres modales, ou des transitions entre différents modes d'édition. Cela permet de gérer de manière claire et extensible les comportements de l'interface utilisateur.
+
+2. **Automates de traitement de texte ou de flux :** Les FSM sont couramment utilisées pour analyser et traiter des chaînes de texte, des protocoles de communication ou des workflows métiers. Par exemple, un logiciel de parsing XML ou JSON peut utiliser une FSM pour déterminer comment traiter chaque balise ou élément rencontré.
+
+3. **Gestion d'états dans les systèmes embarqués :** Dans les systèmes embarqués (comme des microcontrôleurs), la FSM est souvent utilisée pour gérer les différents états d'un dispositif électronique (veille, actif, erreur) ou pour traiter les interruptions de manière structurée.
+
+4. **Contrôle de processus métier :** De nombreux logiciels d'entreprise utilisent des FSM pour gérer des processus complexes, tels que le suivi des commandes, la gestion des stocks, ou le flux de travail (workflow) d'approbation de documents. Chaque état correspond à une étape du processus, et les transitions entre les états sont contrôlées par des événements ou des actions utilisateur.
+
+En résumé, bien que nous utilisions le contexte des jeux vidéo pour introduire les FSM, cette approche est un outil fondamental pour concevoir des systèmes clairs et robustes dans une variété de domaines logiciels. L'apprentissage de ce concept vous permettra de gérer efficacement les comportements et les transitions dans des systèmes de plus en plus complexes, que vous soyez en train de concevoir un jeu, une application mobile, ou un système industriel.
+
+
+---
+
 # Étude de cas
+Dans un premier jet, nous allons voir comment une approche naïve de la gestion des états d'un personnage d'un jeu de type plateforme peut rapidement devenir un cauchemar de maintenance et de bugs. Nous allons examiner un exemple de code qui tente de gérer les états d'un personnage (debout, en mouvement, en saut, etc.) de manière simple, mais qui finit par devenir complexe et fragile à mesure que de nouvelles fonctionnalités sont ajoutées.
 
 Évaluons le code suivant :
 ```gdscript
@@ -39,6 +80,8 @@ Question : Quels problèmes peut-on déceler?
 - Parmi ceux que je vois rapidement, rien ne l'empêche de faire du air jumping
 </details>
 
+---
+
 ```gdscript
 func handle_input() -> void:
     if Input.is_action_just_pressed("jump"):
@@ -46,9 +89,10 @@ func handle_input() -> void:
             is_jumping = true
             # Jump...
 
-# Solution : air jumping résolu avec le booléen isJumping_.
-# Maintenant, on veut que l’héroïne puisse se pencher lorsque l’on appuie en bas et se relever lorsque l’on relâche
+# Solution : air jumping résolu avec le booléen `is_jumping`.
+# Maintenant, on veut que le héro puisse se pencher lorsque l’on appuie en bas et se relever lorsque l’on relâche
 ```
+
 *Code 02*
 
 ```gdscript
@@ -73,6 +117,8 @@ func handle_input() -> void:
   - Relâcher la flèche du bas lorsque dans les airs
   - On aura une image debout lorsqu’il sera dans les airs
 - Corrigeons en ajoutant des nouveaux drapeaux...
+
+---
 
 ```gdscript
 func handle_input() -> void:
@@ -110,8 +156,6 @@ func handle_input() -> void:
     elif Input.is_action_just_released("down"):
         if is_ducking:
             # Stand...
-
-
 ```
 *Code 05*
 
@@ -143,7 +187,7 @@ Chasse aux bogues encore…
   - Chaque état a un jeu de transitions, chacune de celle-ci est associée à une entrée et pointe vers un état. Quand un événement est déclenché, s’il est reconnu par une transition pour l’état courant, la machine passera à l’état que la transition pointe vers.
   - Chaque état a une responsabilité unique. Par exemple, l’état de saut s’occupe de la logique du saut, l’état de plonge s’occupe de la logique de plonge, etc.
 
-Bien sûr! Voici une section concise sur le principe de la "Single Responsibility" dans le contexte des machines à états finis (FSM) :
+Vous aurez deviné que la machine est représentée par le personnage et les transitions sont les actions que le personnage peut faire.
 
 ---
 
@@ -159,9 +203,9 @@ En adoptant ce principe de responsabilité unique, chaque état devient indépen
 - **Facile à étendre** : Ajouter de nouveaux états (par exemple, "Dashing" ou "Wall Slide") devient plus simple, car chaque état est isolé dans son propre script ou section de code.
 
 ### Exemple
-Prenons deux états : "Idle" (immobile) et "Running" (course). Le script de l'état "Idle" ne doit gérer que ce qui est pertinent pour être immobile (comme jouer l'animation "Idle" et détecter quand passer à l'état "Running" si une touche directionnelle est pressée). Il ne devrait pas avoir de logique pour ce que le personnage doit faire en courant ou en sautant.
+Prenons deux états : `Idle` (immobile) et "Running" (course). Le script de l'état `Idle` ne doit gérer que ce qui est pertinent pour être immobile (comme jouer l'animation `Idle` et détecter quand passer à l'état `Running` si une touche directionnelle est pressée). Il ne devrait pas avoir de logique pour ce que le personnage doit faire en courant ou en sautant.
 
-En respectant ce principe, chaque état devient une "boîte noire" : un module isolé qui gère ses propres règles, transitions et comportements, sans se soucier des détails internes des autres états.
+En respectant ce principe, chaque état devient une "**boîte noire**" : un module isolé qui gère ses propres règles, transitions et comportements, sans se soucier des détails internes des autres états.
 
 ---
 
@@ -173,12 +217,10 @@ En respectant ce principe, chaque état devient une "boîte noire" : un module i
 ---
 
 # Projet Godot
-- Pour suivre, j'ai créé deux projets Godot simple soit un platformer et un demo RPG
-- Il s'agit des projets "c07_platformer_fsm" et "c08_fsm_done" dans le dépôt `0SW_projets_cours`
+- Pour suivre, je vous suggère de partir avec le projet de plateforme `c03a_platformer_base_completed` dans le dépôt `0sw_projets_cours`
 
-Le projet platformer est fait à l'aide de C# et le projet RPG est fait à l'aide de GDScript.
+![alt text](assets/platform_without_fsm.gif)
 
-![alt text](assets/fsm_demo.gif)
 ---
 
 ## Modification au code
@@ -210,6 +252,8 @@ else:
 
 ```gdscript
 # APRÈS
+var dir = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
+
 if dir != 0:
     motion.x += ACCEL * dir
     anim_player.play("Run")
@@ -653,6 +697,15 @@ func physics_update(delta: float) -> void:
 		elif (player.velocity.y > 0) :
 			anim_player.play("walk_front")
 ```
+
+## Solutions complètes
+
+Vous avez accès aux projets ayant les solutions complètes soit `c07_platformer_fsm` et `c08_rpg_done` respectivement.
+
+Le projet platformer est fait à l'aide de C# et le projet RPG est fait à l'aide de GDScript.
+ 
+![alt text](assets/fsm_demo.gif)
+
 
 # Conclusion
 - La machine à état fini est un outil puissant pour gérer les états d’un objet
