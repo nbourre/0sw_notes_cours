@@ -6,6 +6,7 @@
   - [Comment ça marche](#comment-ça-marche)
 - [Noeud RayCast2D](#noeud-raycast2d)
 - [Dans le code](#dans-le-code)
+- [Fonctions utiles](#fonctions-utiles)
 - [Conclusion](#conclusion)
 - [Références](#références)
 
@@ -88,6 +89,14 @@ func handle_player():
 
 ---
 
+# Fonctions utiles
+- `is_colliding()`: Retourne `true` si le rayon touche un objet.
+- `get_collider()`: Retourne la référence avec laquelle le rayon entre en collision.
+- `get_collision_point()`: Retourne le point de collision.
+- `get_collision_normal()`: Retourne la normale de la collision.
+
+---
+
 # Conclusion
 - Le ray casting est une technique très utilisée dans les jeux vidéos pour détecter les collisions entre objets.
 - Godot propose un noeud `RayCast2D` qui permet de faire du ray casting en 2D.
@@ -99,4 +108,5 @@ func handle_player():
 
 # Références
 - [RayCast In Godot Tutorial: How To Create Smarter Enemies (Enemy AI)](https://www.youtube.com/watch?v=_AheThiIiyg)
-- 
+- [KidsCanCode - Godot Recipes - RayCast2D](https://kidscancode.org/godot_recipes/4.x/kyn/raycast2d/index.html)
+- [How to use RayCast2D in Godot]([https](https://youtu.be/VqyxnKuAUH8?si=yhb4MgAw16hCczqK)
