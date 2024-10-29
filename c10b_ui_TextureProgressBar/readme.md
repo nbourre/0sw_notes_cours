@@ -9,6 +9,7 @@
 - [Ajout de texte](#ajout-de-texte)
   - [Le script avec le texte](#le-script-avec-le-texte)
 - [Utilisation](#utilisation)
+  - [Mise à jour de la barre de progression](#mise-à-jour-de-la-barre-de-progression)
 - [Références](#références)
 
 ---
@@ -73,18 +74,88 @@ func update_value (new_value : int, max : int):
 ```
 
 # Utilisation
-Disons que l'on désire afficher une barre de progression pour la vie d'un personnage. On pourrait utiliser la composition pour ajouter une barre de progression au personnage ou encore détacher la barre de progression du personnage et la placer ailleurs.
+Disons que l'on désire afficher une barre de progression pour la vie d'un personnage sur le HUD principal, il suffit de mettre un noeud `CanvasLayer` et d'y ajouter le `GenericProgressBar`.
+
+On pourrait utiliser la composition pour contrôler la barre de progression au jeu ou au personnage.
+
+Dans le cas présent, j'ajoute la barre de progression à la scène principale et je la configure pour afficher la vie du joueur.
 
 ```gd
 class_name World
 extends Node2D
 
-var player : Player
-var health_bar : GenericProgressBar
+@onready var player : Player = $Player
+@onready var level : LevelOne = $Level
+
+@onready var health_bar : GenericProgressBar = $Bars/GenericProgressBar
 
 func _ready():
-    player = $
+    health_bar.bar_name = "HP"
+	  health_bar.update_value(100, 100)
 
+```
+
+Voici le résultat actuel:
+
+![alt text](assets/screenshot_with_bar.png)
+
+## Mise à jour de la barre de progression
+Dans cette partie, on va mettre à jour la barre de progression en fonction de la vie du joueur. Cependant, je ne vais que la simuler avec un `Timer`. L'adaptation se fera facilement selon votre jeu.
+
+Nous allons mettre à jour le script du joueur pour qu'il émette un signal lorsque sa vie change.
+
+Nous allons ajouter un noeud `Timer` à la scène du joueur pour simuler la perte de vie.
+
+```gd
+class_name Player
+extends GenericCharacter
+
+signal PlayerHit(value : int, max_value : int)
+var life_timer : Timer = Timer.new()
+var hp : int = 100
+var max_hp : int = 100
+var hp_increment : int = 2
+
+func _ready() -> void:
+	anim_player = $AnimationPlayer
+	sprite = $Sprite2D
+	anim_player.play("idle")
+	add_child(life_timer)
+	life_timer.wait_time = 1.0
+	life_timer.autostart = true
+	life_timer.timeout.connect(_on_life_timer_timeout)
+	life_timer.start()
+	
+
+func _physics_process(delta: float) -> void:
+	move_and_slide()
+
+func _on_life_timer_timeout() -> void :
+	
+	if (hp <= 0 || hp >= max_hp):
+		hp_increment = -hp_increment
+	
+	hp += hp_increment
+			
+	PlayerHit.emit(hp, max_hp)
+```
+
+Dans la scène possédant le joueur, on va connecter le signal `PlayerHit` à la fonction `hp_update` de la barre de progression.
+
+```gd
+func _ready() -> void:
+	health_bar.bar_name = "HP"
+	health_bar.update_value(100, 100)
+	player.PlayerHit.connect(hp_update)
+	
+func hp_update(value : int, value_max : int):
+	health_bar.update_value(value, value_max)
+```
+
+Voici le résultat final:
+
+![alt text](assets/progress_bar_working.gif)
 
 ---
 # Références
+- [Godot documentation : TextureProgressBar](https://docs.godotengine.org/en/stable/classes/class_textureprogressbar.html)
