@@ -3,13 +3,13 @@
 # Table des matières <!-- omit in toc -->
 - [Introduction](#introduction)
 - [Configuration](#configuration)
-  - [Image de fond et de progression](#image-de-fond-et-de-progression)
-  - [Les propriétés](#les-propriétés)
+	- [Image de fond et de progression](#image-de-fond-et-de-progression)
+	- [Les propriétés](#les-propriétés)
 - [Le script](#le-script)
 - [Ajout de texte](#ajout-de-texte)
-  - [Le script avec le texte](#le-script-avec-le-texte)
+	- [Le script avec le texte](#le-script-avec-le-texte)
 - [Utilisation](#utilisation)
-  - [Mise à jour de la barre de progression](#mise-à-jour-de-la-barre-de-progression)
+	- [Mise à jour de la barre de progression](#mise-à-jour-de-la-barre-de-progression)
 - [Références](#références)
 
 ---
@@ -28,6 +28,7 @@ Il est relavivement simple à utiliser. Pour la configuration, il suffit d'avoir
 Quelques propriétés d'intérêt:
 
 - `Nine Patch Stretch` : Permet de définir si l'image de fond peut être étirée ou non.
+  - [Courte vidéo explicative](https://www.youtube.com/watch?v=1u4817DKvb8)
   - Important, l'image de fond doit être rectangulaire, les lignes horizontales et verticales seront étirées, mais les coins resteront intacts.
   - L'option `Stretch Margin` apparait lorsqu'on coche cette option. Elle permet de définir les marges qui ne seront pas étirées.
 
