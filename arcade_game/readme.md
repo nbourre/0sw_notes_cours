@@ -109,7 +109,7 @@ Vous pouvez maintenant envoyer le fichier `.pck` sur l'arcade. Pour cela, vous p
 
 - L'adresse de l'arcade est 172.22.215.250.
 - Le nom d'utilisateur est `etd`.
-- Le mot de passe est `shawi`.
+- Le mot de passe est `etdshawi`.
 
 Une fois que cela est fait, vous pouvez m'aviser pour que je puisse le mettre en ligne.
 
