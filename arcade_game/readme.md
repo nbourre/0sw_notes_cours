@@ -108,6 +108,7 @@ Une fois que le modèle d'exportation est installé, vous pouvez exporter le jeu
 Vous pouvez maintenant envoyer le fichier `.pck` sur l'arcade. Pour cela, vous pouvez utiliser un logiciel de transfert de fichier comme FileZilla ou autres client FTP.
 
 - L'adresse de l'arcade est 172.22.215.250.
+  - À partir du réseau étudiant
 - Le nom d'utilisateur est `etd`.
 - Le mot de passe est `etdshawi`.
 
