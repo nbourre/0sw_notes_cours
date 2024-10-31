@@ -4,6 +4,7 @@
 - [Les shaders dans Godot](#les-shaders-dans-godot)
   - [Projet de base](#projet-de-base)
   - [Créer un shader](#créer-un-shader)
+    - [La classe `Material`](#la-classe-material)
   - [Écrire le code GLSL](#écrire-le-code-glsl)
     - [Exemple simple](#exemple-simple)
   - [Utiliser des variables](#utiliser-des-variables)
@@ -11,13 +12,16 @@
     - [Variable `UV`](#variable-uv)
     - [Variable `TEXTURE`](#variable-texture)
     - [Exemple](#exemple)
+  - [Révision des mots-clés](#révision-des-mots-clés)
 - [Rendre public des paramètres du shader](#rendre-public-des-paramètres-du-shader)
   - [Le mot clé `uniform`](#le-mot-clé-uniform)
 - [Utiliser le shader dans un jeu](#utiliser-le-shader-dans-un-jeu)
-  - [Sauvegarder le shader](#sauvegarder-le-shader)
   - [Appliquer le shader sur un objet](#appliquer-le-shader-sur-un-objet)
   - [Utiliser le shader dans un script](#utiliser-le-shader-dans-un-script)
     - [Autres exemples](#autres-exemples)
+- [Ressources](#ressources)
+  - [Godot Shaders](#godot-shaders)
+  - [Shader-Lib](#shader-lib)
 - [Conclusion](#conclusion)
 - [Références](#références)
 
@@ -50,23 +54,29 @@ Dans le projet, vous devez avoir un sprite avec une texture. Comme indiquer pré
 Pour créer un nouveau shader, vous pouvez suivre les étapes suivantes:
 
 1. Sélectionnez le noeud `Sprite`
-2. Dans l'inspecteur, sélectionnez le menu déroulant `Material`
+2. Dans l'inspecteur sous la section `CanvasItem`, sélectionnez le menu déroulant `Material`
 3. Cliquez sur le bouton `New ShaderMaterial`
    - Une sphère apparait dans l'inspecteur
    - Un nouveau noeud `ShaderMaterial` est créé dans la hiérarchie
    ![](assets/shader_tutorial_02.gif)
 4. Cliquez `Material` dans l'inspecteur
 5. Créez un nouveau `Shader` pour la propriété du même nom
-6. Donnez un nom au fichier du shader. Par exemple `blink_white.gdshader`
+6. Donnez un nom au fichier du shader. Par exemple `blink_shader.gdshader`
    ![](assets/shader_tutorial_03.gif)
-6. Double-cliquez sur le nouveau fichier pour développer l'éditeur de shader
+6. Cliquez sur le nouveau fichier pour développer l'éditeur de shader
     ![Alt text](assets/shader_tutorial_03b.gif)
 
+### La classe `Material`
+Un `Material` (matériau?) est un ensemble de propriétés qui définissent comment un objet est rendu. Il contient des informations sur la couleur, la texture, la brillance, la transparence, etc. Il peut aussi contenir un shader qui permet de définir comment l'objet est rendu. Il s'agit d'un type de ressource.
+
+Pour tracer différent objet avec le même shader, le matériau doit être attaché à chaque objet.
+
+Tous les objets qui héritent de `CanvasItem` ont une propriété `Material`. Cela inclut les `Sprite`, les `TextureRect`, les `Control`, etc. Il y a aussi l'option d'hériter du matériau du parent.
 
 ## Écrire le code GLSL
 Le langage GLSL est basé sur le C. Il est donc possible d'utiliser des variables, des fonctions, des boucles, des conditions, etc.
 
-Comme j'en ai fait part, nous allons programmer un shader relativement simple. Nous allons travailler sur les pixels directement.
+Comme j'en ai fait part, nous allons programmer un *shader* relativement simple. Nous allons travailler sur les pixels directement.
 
 La première étape sera de déterminer le type de shader que nous allons utiliser. Dans notre cas, nous allons utiliser un shader 2D. La première ligne de code doit définir le type de shader avec la syntaxe suivante.
 
@@ -85,7 +95,7 @@ Nous allons donc utiliser le type `shader_type canvas_item;`.
 shader_type canvas_item; // Première ligne de code
 ```
 
-Ensuite, il faudra utiliser la fonction de shader qui sera utilisée. Dans notre cas, nous allons utiliser la fonction `fragment`. Cette fonction est appelée pour chaque pixel du sprite. Ainsi, nous allons donc pouvoir modifier les pixels directement. Elle permet de déterminer la couleur que le pixel doit avoir.
+Ensuite, il faudra utiliser la fonction de shader qui sera utilisée. Dans notre cas, nous allons utiliser la fonction `fragment`. **Cette fonction est appelée pour chaque pixel du sprite**. Ainsi, nous allons donc pouvoir modifier les pixels directement. Elle permet de déterminer la couleur que le pixel doit avoir.
 
 ```glsl
 shader_type canvas_item;
@@ -97,11 +107,11 @@ void fragment() {
 
 > **Note**
 >
-> Si le sprite a une dimension de 1920x1080, la fonction `fragment` sera appelée 2 073 600 fois et ce à chaque seconde!
+> Si le sprite a une dimension de 1920x1080, la fonction `fragment` sera appelée 124 416 000 fois et ce à chaque seconde!
 
 ### Exemple simple
 
-La variable `COLOR` contient la couleur du pixel et est de type `vec4` soit un vecteur de 4 valeurs. La première valeur est le rouge, la deuxième le vert, la troisième le bleu et la quatrième l'alpha (transparence). Les valeurs sont comprises **entre 0 et 1**.
+La variable `COLOR` contient la couleur du pixel et est de type `vec4` soit un vecteur de 4 valeurs qui représente la valeur des couches RGBA. Chaque valeur des composants est comprise **entre 0 et 1**.
 
 Assignons la valeur 1 à tous les composantes de `COLOR` pour obtenir un pixel blanc.
 
@@ -126,19 +136,30 @@ Pour être un peu plus efficace, on peut sauvegarder la valeur dans une variable
 
 ![](assets/shader_tutorial_06.gif)
 
+```glsl
+shader_type canvas_item;
+
+void fragment() {
+	vec4 color = vec4(0.5, 0.5, .75, 0.5);
+	COLOR = color;
+}
+```
+
 ## Pixel avec une texture
 On remarque que la couleur change pour l'ensemble des pixels. Ce n'est généralement pas ce que l'on désire. On peut donc utiliser une texture pour déterminer la couleur du pixel. Pour ce faire, on va utiliser les variables `COLOR`, `UV` et `TEXTURE`.
 
 ### Variable `UV`
-La variable `UV` contient les coordonnées du pixel. Il s'agit d'un type `vec2`. La première valeur est la coordonnée horizontale et la deuxième la coordonnée verticale. Les valeurs sont comprises **entre 0 et 1**.
+La variable `UV` contient les coordonnées du pixel (*fragment*). Il s'agit donc d'une paire de valeurs. Ainsi, elle est représenté par un type `vec2`. La première valeur est la coordonnée horizontale et la deuxième la coordonnée verticale. Les valeurs sont comprises **entre 0 et 1**.
 
 ![](assets/shader_iconuv.webp)
 
 Exemple  
 ```glsl
 void fragment() {
-  // À chaque pixel, on met la composante bleue à 0.5
-  COLOR = vec4(UV, 0.5, 1.0);
+  // À chaque pixel, on met la composante bleue à 1.0
+  // Plus la coordonnée horizontale est grande, plus le rouge est intense
+  // Plus la coordonnée verticale est grande, plus le vert est intense
+  COLOR = vec4(UV, 1.0, 1.0);
 }
 ```
 ![](assets/shader_tutorial_07.gif)
@@ -167,15 +188,33 @@ void fragment() {
   COLOR = color;
 }
 ```
+
 Vous avez remarqué la fonction `mix()`? Cette fonction permet de mélanger deux couleurs. Le premier paramètre est la première couleur, le second est la 2e couleur et la troisième valeur est le pourcentage de mélange de la 2e couleur sur la 1ère. Ici, on met la valeur à 1 pour appliquer 100% de la 2e couleur.
 
 ![](assets/shader_tutorial_08.gif)
+
+## Révision des mots-clés
+
+Nous avons vu les mots-clés suivantes:
+- `COLOR` : Couleur du pixel
+  - Chaque composante est accessible par `r`, `g`, `b` et `a`
+- `UV` : Coordonnées du pixel
+  - Chaque composante est accessible par `x` et `y`
+- `TEXTURE` : Texture du sprite
+
+Les fonctions suivantes ont été utilisées:
+- `vecX()` : Créer un vecteur de X valeurs
+- `texture(sample2D sampler, vec2 coord)` : Obtenir la couleur d'une texture à une position donnée
+- `mix(x, y, a)` : Interpoler entre deux valeurs
+  - `x` : Valeur de départ.
+  - `y` : Valeur d'arrivée.
+  - `a` : Pourcentage de la valeur d'arrivée.
 
 # Rendre public des paramètres du shader
 Maintenant que l'on connaît les bases du shader, il est temps de rendre public des paramètres du shader. Cela permettra de modifier les paramètres du shader dans Godot (ou tout autre moteur de jeu).
 
 ## Le mot clé `uniform`
-Le mot clé `uniform` est utilisé pour définir une donnée à partir de l'inspecteur de Godot. Cette valeur sera la même à travers l'ensemble du shader.
+Le mot-clé `uniform` en GLSL est utilisé pour déclarer une variable dont la valeur est fixée par le programme principal (comme Godot ou un moteur graphique), et commune à tous les fragments ou vertex pendant un rendu. Les variables uniformes sont utiles pour transmettre des informations globales aux shaders, comme la couleur de la lumière, le temps, les textures, ou des transformations, sans les recalculer pour chaque pixel ou sommet.
 
 C'est un peu comme un `@export` en GDScript.
 
@@ -318,30 +357,56 @@ void fragment() {
 ```gdscript
 extends Node2D
 
-@onready var sprite = $Sprite
-@onready var flashTimer = $Timer
-var shader : ShaderMaterial
+@onready var sprite : Sprite2D = $Icon
+@onready var timer : Timer = $Flashtimer
+var shader : ShaderMaterial = sprite.material as ShaderMaterial
 
-func _ready():
-	shader = sprite.material
+func flash() -> void:
+	print("Flash")
+	shader.set_shader_parameter("flash_modifier", 1);
+	timer.start()
 
-func flash():
-	print("flashing")
-	shader.set_shader_parameter("flash_modifier", 1)
-	flashTimer.start()
+func _on_flashtimer_timeout() -> void:
+	print("Timer timeout")
+	shader.set_shader_parameter("flash_modifier", 0);
+	timer.stop()
 
-func _on_timer_timeout():
-	shader.set_shader_parameter("flash_modifier", 0)
-	flashTimer.stop()
-	print("flashing stopped")
-	
-func _process(delta):
-	if (Input.is_action_just_pressed("ui_select")) :
+func _process(delta: float) -> void:
+	if (Input.is_action_just_pressed("ui_select")):
 		flash()
-		print("flash pressed")
-
 ```
 
+Version alternative
+
+```gdscript
+extends Node2D
+
+@onready var sprite : Sprite2D = $Icon
+@onready var timer : Timer = $Flashtimer
+var shader : ShaderMaterial
+
+const NB_FLASH : int = 8
+var flash_counter : int
+var flash_value : int = 0;
+
+func _ready() -> void:
+	shader = sprite.material as ShaderMaterial
+
+func _on_flashtimer_timeout() -> void:
+	shader.set_shader_parameter("flash_modifier", flash_value * 0.5);
+	flash_value = !flash_value
+
+	if flash_counter < NB_FLASH:
+		flash_counter += 1
+	else:
+		flash_counter = 0
+		shader.set_shader_parameter("flash_modifier", 0);
+		timer.stop()
+
+func _process(delta: float) -> void:
+	if (Input.is_action_just_pressed("ui_select")):
+		timer.start()
+```
 
 </details>
 
@@ -352,6 +417,18 @@ func _process(delta):
 
 ![](assets/shader_tutorial_13_exC.gif)
 
+# Ressources
+
+## Godot Shaders
+Il y a un site web qui regroupe plusieurs shaders pour Godot. Vous pouvez les utiliser dans vos projets. [GodotShaders.com](https://godotshaders.com/)
+
+Cependant, c'est bien beau copier le travail des autres, mais c'est toujours important de comprendre comment la mécanique fonctionnent pour les adapter à vos besoins.
+
+## Shader-Lib
+`Shader-Lib` est un plugin pour Godot qui permet de créer des shaders à l'aide d'un outil visuel. Il est possible de créer des shaders sans écrire une seule ligne de code. Dans `AssetLib`, il suffit de chercher `Shader-Lib` pour l'installer.
+
+ [Shader-Lib](https://github.com/DigvijaysinhGohil/Godot-Shader-Lib/) est disponible sur GitHub. La documentation est disponible sur [GitBook](https://github.com/DigvijaysinhGohil/Godot-Shader-Lib/blob/main/documentation/Documentation.md).
+
 # Conclusion
 Une fois que les bases sont apprises, les `shaders` ne sont pas si compliqué. Il faut juste prendre le temps de comprendre comment ils fonctionnent et de les tester.
 
@@ -359,7 +436,9 @@ Il y a plusieurs ressources gratuites de disponibles sur [GodotShaders.com](http
 
 
 # Références
+- [Godot Shading Language](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shading_language.html) - Godot Documentation
 - [Your first 2D shader](https://docs.godotengine.org/en/stable/tutorials/shaders/your_first_shader/your_first_2d_shader.html)
 - [Shading Language](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shading_language.html) (GLSL) - OpenGL Wiki
 - [Godot 4 Shader Tutorial for Absolute Beginners](https://www.youtube.com/watch?v=KeHKKLuygoY)
 - [The book of shaders](https://thebookofshaders.com/)
+- [Godot 4 Shader Introduction for ABSOLUTE Beginners!](https://www.youtube.com/watch?v=rW_MjIeFz0Y)
