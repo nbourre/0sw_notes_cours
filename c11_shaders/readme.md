@@ -24,7 +24,7 @@
   - [Pourquoi utiliser un Vertex Shader?](#pourquoi-utiliser-un-vertex-shader)
   - [Création d’un Vertex Shader](#création-dun-vertex-shader)
     - [Exemple : Faire onduler un objet](#exemple--faire-onduler-un-objet)
-    - [Explications de l'exemple :](#explications-de-lexemple-)
+      - [Explications de l'exemple :](#explications-de-lexemple-)
     - [Variables Utilisées dans les Vertex Shaders](#variables-utilisées-dans-les-vertex-shaders)
     - [Exemple : Déformation aléatoire basée sur le temps](#exemple--déformation-aléatoire-basée-sur-le-temps)
 - [Ressources](#ressources)
@@ -506,25 +506,47 @@ Modifiez la fréquence de l'onde en fonction du temps pour créer un effet d'ani
     float frequency = 5.0 * TIME;   // Fréquence de l'onde
 ```
 
-![alt text](assets/grass_too_fast.gif)
+![alt text](assets/grass_wrong_movement.gif)
 
-On observe que l'effet est trop rapide. Pour ralentir l'effet, on peut multiplier le temps par une valeur plus petite.
+On observe que l'effet est trop rapide et il n'est pas ce que l'on désire. Pour ralentir l'effet, on peut multiplier le temps par une valeur plus petite.
 
 ```glsl
     float frequency = TIME * 0.5;   // Fréquence de l'onde
 ```
 
-<!-- TODO : Complete notes -->
+L'image ondule, mais entièrement. On veut que l'ondulation se propage sur l'axe Y. Pour ce faire, on va utiliser la position `y` du sommet pour déterminer l'ondulation.
 
-### Explications de l'exemple :
+```glsl
+    float wave_offset = sin(og_pos.y + frequency) * amplitude;
+```
+
+![alt text](assets/grass_waving_all.gif)
+
+C'est pratiquement ce que l'on veut. Selon la documentation, le plan cartésien
+
+Cependant, on veut que l'ondulation ne soit appliquer que si la position `y` est négative. Pour ce faire, on peut utiliser une condition `if`.
+
+```glsl
+	  float wave_offset = 0.0;
+    // Calcul de l'oscillation sur l'axe X en fonction de la position Y du sommet
+    if (og_pos.y < 0.0) {
+        wave_offset = sin(og_pos.y + frequency) * amplitude;
+    }
+    // Applique l'offset d'ondulation à la position X du sommet
+    VERTEX.x += wave_offset;
+```
+
+![alt text](assets/grass_done.gif)
+
+#### Explications de l'exemple :
 
 1. **Variables `amplitude` et `frequency`** :
    - `amplitude` contrôle l'intensité de l'onde, ou à quel point les sommets se déplacent horizontalement.
    - `frequency` contrôle la fréquence des ondulations, influençant la densité des vagues.
 
 2. **Oscillation en fonction de la position `y`** :
-   - Nous utilisons `sin(og_pos.y * frequency + TIME)` pour obtenir une valeur oscillante pour chaque sommet en fonction de sa position verticale (`y`) et du temps (`TIME`).
-   - Cela signifie que chaque ligne de sommets de l’objet aura un décalage différent, créant un effet de vague.
+   - Nous utilisons `sin(og_pos.y + frequency)` pour créer une oscillation sinusoïdale en fonction de la position `y` du sommet et de la fréquence.
+   - Nous appliquons l'oscillation seulement si la position `y` est négative, pour que l'effet ne soit visible que sur la partie supérieure de l'objet.
 
 3. **Application du déplacement** :
    - Le calcul de l'onde est appliqué à la coordonnée `x` de `VERTEX`, ce qui entraîne une ondulation horizontale.
