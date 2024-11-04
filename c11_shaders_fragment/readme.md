@@ -5,8 +5,9 @@
   - [Projet de base](#projet-de-base)
   - [Créer un shader](#créer-un-shader)
     - [La classe `Material`](#la-classe-material)
+- [Fragment Shader](#fragment-shader)
   - [Écrire le code GLSL](#écrire-le-code-glsl)
-    - [Exemple simple](#exemple-simple)
+  - [Exemple simple](#exemple-simple)
   - [Utiliser des variables](#utiliser-des-variables)
   - [Pixel avec une texture](#pixel-avec-une-texture)
     - [Variable `UV`](#variable-uv)
@@ -19,6 +20,13 @@
   - [Appliquer le shader sur un objet](#appliquer-le-shader-sur-un-objet)
   - [Utiliser le shader dans un script](#utiliser-le-shader-dans-un-script)
     - [Autres exemples](#autres-exemples)
+- [Vertex Shaders dans Godot](#vertex-shaders-dans-godot)
+  - [Pourquoi utiliser un Vertex Shader?](#pourquoi-utiliser-un-vertex-shader)
+  - [Création d’un Vertex Shader](#création-dun-vertex-shader)
+    - [Exemple : Faire onduler un objet](#exemple--faire-onduler-un-objet)
+    - [Explications de l'exemple :](#explications-de-lexemple-)
+    - [Variables Utilisées dans les Vertex Shaders](#variables-utilisées-dans-les-vertex-shaders)
+    - [Exemple : Déformation aléatoire basée sur le temps](#exemple--déformation-aléatoire-basée-sur-le-temps)
 - [Ressources](#ressources)
   - [Godot Shaders](#godot-shaders)
   - [Shader-Lib](#shader-lib)
@@ -73,6 +81,8 @@ Pour tracer différent objet avec le même shader, le matériau doit être attac
 
 Tous les objets qui héritent de `CanvasItem` ont une propriété `Material`. Cela inclut les `Sprite`, les `TextureRect`, les `Control`, etc. Il y a aussi l'option d'hériter du matériau du parent.
 
+# Fragment Shader
+
 ## Écrire le code GLSL
 Le langage GLSL est basé sur le C. Il est donc possible d'utiliser des variables, des fonctions, des boucles, des conditions, etc.
 
@@ -109,7 +119,7 @@ void fragment() {
 >
 > Si le sprite a une dimension de 1920x1080, la fonction `fragment` sera appelée 124 416 000 fois et ce à chaque seconde!
 
-### Exemple simple
+## Exemple simple
 
 La variable `COLOR` contient la couleur du pixel et est de type `vec4` soit un vecteur de 4 valeurs qui représente la valeur des couches RGBA. Chaque valeur des composants est comprise **entre 0 et 1**.
 
@@ -416,6 +426,137 @@ func _process(delta: float) -> void:
 ![](assets/shader_tutorial_13_exB.gif)
 
 ![](assets/shader_tutorial_13_exC.gif)
+
+---
+
+# Vertex Shaders dans Godot
+
+Contrairement aux *fragment shaders* qui agissent sur chaque pixel de l'objet, les *vertex shaders* agissent sur chaque sommet (ou *vertex*) de la géométrie de l'objet. Les vertex shaders sont donc utiles pour modifier la forme ou la position d'un objet, pour des effets tels que les déformations, les vagues, les ondulations, ou les animations basées sur les sommets.
+
+## Pourquoi utiliser un Vertex Shader?
+
+Le vertex shader permet de :
+- Déplacer des sommets pour créer des animations dynamiques ou des effets de distorsion.
+- Modifier la géométrie sans avoir besoin de créer de nouveaux modèles.
+- Optimiser certains effets visuels qui seraient coûteux à réaliser avec des calculs basés sur les pixels.
+
+Par exemple, dans un jeu, on peut utiliser un vertex shader pour faire onduler de l'herbe ou pour simuler un effet de vague sur un plan d'eau.
+
+## Création d’un Vertex Shader
+
+Pour activer un *vertex shader*, on commence par indiquer le type de shader et la fonction `vertex`. Voici un exemple de base qui utilise le type de shader `canvas_item` (pour les objets 2D) et la fonction `vertex` :
+
+```glsl
+shader_type canvas_item;
+
+void vertex() {
+    // Code du shader de sommet ici
+}
+```
+
+La fonction `vertex()` sera appelée pour chaque sommet de l'objet.
+
+### Exemple : Faire onduler un objet
+
+Voyons un exemple où nous faisons bouger les sommets de l'objet pour créer un effet d’ondulation. Nous allons utiliser la position de chaque sommet (`VERTEX`) et le temps (`TIME`) pour créer un déplacement en forme d'onde.
+
+- La variable `VERTEX` contient la position du sommet actuel. Nous allons modifier la position `x` du sommet en fonction de sa position `y` et du temps pour créer une onde horizontale.
+- La variable `TIME` contient le temps écoulé depuis le début de la scène. Nous allons l'utiliser pour animer l'onde. Elle est automatiquement mise à jour par Godot à chaque image.
+
+Pour effectuer un mouvement ondulatoire, nous allons utiliser la fonction `sin()` pour créer une oscillation sinusoïdale en fonction de la position `y` du sommet et du temps.
+
+Voici une animation pour vous rappeler la forme des cosinus et sinus par rapport à un cercle :
+
+![alt text](assets/Circle_cos_sin.gif)
+
+Objectif : Créer un effet d'ondulation sur de l'herbe.
+
+Voici le résultat attendu :
+
+![alt text](assets/grass_objective.gif)
+
+La première étape sera de déterminer l'amplitude et la fréquence de l'onde. L'amplitude contrôle l'intensité de l'onde ainsi le déplacement des sommets. La fréquence contrôle la densité des ondulations.
+
+```glsl
+shader_type canvas_item;
+
+void vertex() {
+    // Stocke la position originale du sommet
+    vec2 og_pos = VERTEX;
+    
+    // Paramètres d'ondulation
+    float amplitude = 100.0;  // Amplitude de l'onde
+    float frequency = 5.0;   // Fréquence de l'onde
+
+    // Calcul de l'oscillation sur l'axe X en fonction de la position Y du sommet
+    float wave_offset = sin(frequency) * amplitude;
+
+    // Applique l'offset d'ondulation à la position X du sommet
+    VERTEX.x += wave_offset;
+}
+```
+
+![alt text](assets/grass_no_movement.png)
+
+On observe que l'herbe a bien été déformée. Cependant, l'effet n'est pas encore animé. Pour cela, on va utiliser la variable `TIME` pour animer l'onde.
+
+Modifiez la fréquence de l'onde en fonction du temps pour créer un effet d'animation fluide.
+
+```glsl
+    float frequency = 5.0 * TIME;   // Fréquence de l'onde
+```
+
+![alt text](assets/grass_too_fast.gif)
+
+On observe que l'effet est trop rapide. Pour ralentir l'effet, on peut multiplier le temps par une valeur plus petite.
+
+```glsl
+    float frequency = TIME * 0.5;   // Fréquence de l'onde
+```
+
+<!-- TODO : Complete notes -->
+
+### Explications de l'exemple :
+
+1. **Variables `amplitude` et `frequency`** :
+   - `amplitude` contrôle l'intensité de l'onde, ou à quel point les sommets se déplacent horizontalement.
+   - `frequency` contrôle la fréquence des ondulations, influençant la densité des vagues.
+
+2. **Oscillation en fonction de la position `y`** :
+   - Nous utilisons `sin(og_pos.y * frequency + TIME)` pour obtenir une valeur oscillante pour chaque sommet en fonction de sa position verticale (`y`) et du temps (`TIME`).
+   - Cela signifie que chaque ligne de sommets de l’objet aura un décalage différent, créant un effet de vague.
+
+3. **Application du déplacement** :
+   - Le calcul de l'onde est appliqué à la coordonnée `x` de `VERTEX`, ce qui entraîne une ondulation horizontale.
+
+> **Note** : Ce shader est assez performant car il agit uniquement sur les sommets, ce qui demande moins de calculs qu’un effet appliqué aux pixels.
+
+### Variables Utilisées dans les Vertex Shaders
+
+Quelques variables importantes dans les *vertex shaders* :
+- **`VERTEX`** : Position du sommet actuel. Cette variable peut être modifiée pour déplacer les sommets.
+- **`UV`** : Coordonnées UV du sommet, permettant d'appliquer des textures.
+- **`TIME`** : Temps écoulé, souvent utilisé pour créer des animations.
+- **`COLOR`** : Couleur du sommet, qui peut être utilisée pour des effets de couleur par sommet (particulièrement utile en 3D).
+
+### Exemple : Déformation aléatoire basée sur le temps
+
+Voici un autre exemple où chaque sommet est décalé verticalement de façon aléatoire au fil du temps pour créer un effet de distorsion fluide.
+
+```glsl
+shader_type canvas_item;
+
+void vertex() {
+    float noise_factor = sin(VERTEX.x * 5.0 + TIME * 2.0);
+    VERTEX.y += noise_factor * 5.0;
+}
+```
+
+Dans cet exemple :
+- Le facteur de bruit `noise_factor` est calculé en fonction de la position en `x` et du `TIME` pour que chaque sommet ait un décalage unique et évolutif.
+- Ce décalage est appliqué à `VERTEX.y`, produisant une distorsion verticale qui change avec le temps.
+
+Ces shaders permettent de transformer et d'animer des objets sans avoir à changer la géométrie de base, et peuvent être combinés avec des *fragment shaders* pour des effets visuels plus complexes.
 
 # Ressources
 
