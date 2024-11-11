@@ -4,9 +4,13 @@
 <!-- Générer table des matières avec Markdown All-in-One -->
 - [Introduction](#introduction)
 - [Qu’est-ce qu’une ressource personnalisée ?](#quest-ce-quune-ressource-personnalisée-)
+- [Préparation du projet](#préparation-du-projet)
 - [Création d’une ressource de données pour le joueur](#création-dune-ressource-de-données-pour-le-joueur)
 - [Configurer le fichier de sauvegarde](#configurer-le-fichier-de-sauvegarde)
+- [Test de la sauvegarde et du chargement](#test-de-la-sauvegarde-et-du-chargement)
+  - [Observations](#observations)
 - [Ajouter un inventaire en tant que sous-ressource](#ajouter-un-inventaire-en-tant-que-sous-ressource)
+  - [Observations](#observations-1)
 - [Avantages des ressources personnalisées par rapport aux fichiers JSON](#avantages-des-ressources-personnalisées-par-rapport-aux-fichiers-json)
 - [Combinaison avec les fichiers JSON](#combinaison-avec-les-fichiers-json)
 - [Conclusion](#conclusion)
@@ -36,6 +40,30 @@ Les ressources personnalisées se prêtent particulièrement bien aux fichiers d
 
 ---
 
+# Préparation du projet
+Nous allons juste créer un projet avec des contrôles de base pour illustrer les concepts de sauvegarde et de chargement. Vous pouvez suivre ces étapes dans un nouveau projet ou ajouter ces fonctionnalités à un projet existant.
+
+![alt text](assets/screenshot.png)
+
+La structure de la scène est la suivante :
+- `Node2D` (Main) : racine de la scène.
+  - `HBoxContainer` : conteneur horizontal.
+    - `VBoxContainer` : conteneur vertical.
+      - `Button` (LoadButton) : bouton pour charger les données.
+      - `Button` (SaveButton) : bouton pour sauvegarder les données.
+      - `Button` (ChangeButton) : bouton pour modifier la santé du joueur.
+      - `Button` (AddButton) : bouton pour ajouter un item à l’inventaire.
+  - `Panel` : panneau pour afficher les informations.
+    - `Label` : étiquette pour afficher la santé du joueur.
+
+- Création d'un script `main.gd` pour gérer les interactions avec les boutons
+- Ajout des signaux pour les boutons `pressed` pour appeler les fonctions correspondantes.
+
+![alt text](assets/scene_panel.png)
+
+
+---
+
 # Création d’une ressource de données pour le joueur
 
 Pour gérer les données du joueur, comme sa santé, nous allons créer une ressource `PlayerData` :
@@ -51,12 +79,12 @@ Pour gérer les données du joueur, comme sa santé, nous allons créer une ress
 
    @export var health: int = 100
 
-   func change_health(value: int):
+   func change_health(value: int) -> void:
        health += value
    ```
 
 2. **Explication :**
-   - `health` est une propriété exportée, ce qui signifie qu'elle sera visible et modifiable dans l’éditeur.
+   - `health` est une propriété exportée qui stocke la santé du joueur.
    - La méthode `change_health` permet de modifier la santé du joueur en fonction d’une valeur passée en paramètre, ce qui simplifie les opérations de gain ou de perte de santé.
 
 ---
@@ -77,16 +105,24 @@ Pour enregistrer les données du joueur sur le disque, nous devons configurer un
 2. **Initialiser les données du joueur :**
    - Instanciez `PlayerData` et assignez-la à une variable `player_data`.
    - Créez une fonction pour vérifier et, si besoin, créer le dossier de sauvegarde en utilisant `DirectoryAccess`.
+  
+   ```gd
+   var player_data = PlayerData.new()
+
+   func verify_save_directory(path: String):
+       DirAccess.make_dir_absolute(path)
+   ```
 
 3. **Sauvegarder et charger les données :**
    - Utilisez `ResourceSaver` pour sauvegarder et `ResourceLoader` pour charger.
 
    ```gd
-   func save_game():
-       ResourceSaver.save(save_file_path + save_file_name, player_data)
+   func save_game() -> void:
+       ResourceSaver.save(player_data, save_file_path + save_file_name)
 
-   func load_game():
-       player_data = ResourceLoader.load(save_file_path + save_file_name)
+   func load_game() -> void :
+      # duplicate(true) permet de charger une copie profonde (deep copy) de la ressource, i.e. une copie des sous-ressources. Autrement, les sous-ressources ne seront pas chargées (shallow copy).
+      playerData = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
    ```
 
 4. **Mise à jour de la santé :**
@@ -100,9 +136,20 @@ Pour enregistrer les données du joueur sur le disque, nous devons configurer un
 
 ---
 
+# Test de la sauvegarde et du chargement
+Lors de la première exécution, cliquez sur le bouton `Save` pour enregistrer les données du joueur. Ensuite, cliquez sur le bouton `Change` pour modifier la santé du joueur. Enfin, cliquez sur le bouton `Load` pour charger les données sauvegardées.
+
+## Observations
+- Dans votre explorateur de fichiers, vous devriez voir un dossier `save` contenant le fichier `player_save.tres`.
+- Ouvrez le fichier `player_save.tres` avec un éditeur de texte pour voir les données sauvegardées.
+  - On y constate les différentes propriétés de `PlayerData`, comme la santé du joueur ainsi que les identifiants des ressources générées par Godot.
+
+---
+
 # Ajouter un inventaire en tant que sous-ressource
 
 En ajoutant un inventaire comme sous-ressource dans `PlayerData`, chaque item sera sauvegardé automatiquement avec les données du joueur.
+
 
 1. **Créer une ressource d’Item :**
    - Créez `item.gd` pour définir un objet `Item` avec une propriété `item_name`.
@@ -121,24 +168,47 @@ En ajoutant un inventaire comme sous-ressource dans `PlayerData`, chaque item se
    - Dans `playerdata.gd`, ajoutez une propriété exportée `inventory` comme un tableau d'objets `Item`.
 
    ```gd
-   @export var inventory: Array = []
+   @export var inventory := []
 
-   func add_item_to_inventory(item_name: String):
-       inventory.append(Item.new(item_name))
+   func add_item_to_inventory(item_name : String) -> void:
+      var item := Item.new(item_name)
+      inventory.append(item)
    ```
 
 3. **Ajouter des objets via le script principal :**
    - Dans `main.gd`, créez une méthode pour ajouter des éléments à l’inventaire, comme des pommes.
 
    ```gd
-   func add_item():
-       player_data.add_item_to_inventory("Apple")
+   func _on_add_button_pressed() -> void:
+      playerData.add_item_to_inventory("Apple")
    ```
 
 4. **Sauvegarde et restauration de l’inventaire :**
    - Lors de la sauvegarde, les sous-ressources contenues dans `inventory` seront automatiquement sauvegardées dans le fichier principal.
 
    En utilisant cette approche, chaque item est enregistré avec toutes ses propriétés, et lors du chargement, l’inventaire est recréé sans manipulation supplémentaire.
+
+## Observations
+- Après avoir ajouté des items à l’inventaire, sauvegardez et chargez les données pour voir comment les items sont stockés et restaurés.
+- Ouvrez le fichier `player_save.tres` pour voir comment les items sont sauvegardés en tant que sous-ressources.
+
+Voici le contenu de mon fichier `PlayerSave.tres` après avoir ajouté un item à l’inventaire :
+
+```ini
+[gd_resource type="Resource" script_class="PlayerData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://item.gd" id="1_0bwnc"]
+[ext_resource type="Script" path="res://player_data.gd" id="2_th76t"]
+
+[sub_resource type="Resource" id="Resource_21lwd"]
+script = ExtResource("1_0bwnc")
+item_name = "Apple"
+
+[resource]
+script = ExtResource("2_th76t")
+health = 95
+inventory = [SubResource("Resource_21lwd")]
+```
 
 ---
 
@@ -248,5 +318,6 @@ func _on_add_button_pressed() -> void:
 - [Documentation de Godot sur les ressources](https://docs.godotengine.org/en/stable/tutorials/scripting/resources.html)
 - [Save Files in Godot! (Custom Resource Tutorial)](https://www.youtube.com/watch?v=VGxYtJ3rXdE)
 - [SECURE saving with Encryption in Godot 4!](https://www.youtube.com/watch?v=mI4HfyBdV-k)
+- [TSCN file format](https://docs.godotengine.org/en/latest/contributing/development/file_formats/tscn.html)
 
 ![alt text](assets/Artificial__Intelligence_Aided.jpeg)
