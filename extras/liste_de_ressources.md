@@ -5,7 +5,8 @@
   - [Personnage rapidement](#personnage-rapidement)
 - [Jeux complets](#jeux-complets)
 - [Ressources](#ressources)
-  - [Assets](#assets)
+  - [Sprites et visuels](#sprites-et-visuels)
+  - [Sons et musiques](#sons-et-musiques)
 
 
 # Sujets précis
@@ -47,7 +48,7 @@ Create A Platformer Game in 20 SECONDS! (Godot 4)
 
 # Ressources
 
-## Assets
+## Sprites et visuels
 
 [Generic RUN n' GUN pack](https://bakudas.itch.io/generic-run-n-gun)
 
@@ -76,3 +77,7 @@ Create A Platformer Game in 20 SECONDS! (Godot 4)
 [Pixel Art Platformer - Village Props](https://cainos.itch.io/pixel-art-platformer-village-props)
 
 ![alt text](assets/UBnG88.png)
+
+## Sons et musiques
+
+- Générateur de son 8 bit [jsfxr](https://sfxr.me/)
