@@ -118,5 +118,4 @@ Vous pouvez maintenant envoyer le fichier `.pck` sur l'arcade. Pour cela, vous p
 À toutes les minutes, un script s'exécute pour vérifier la présence de nouveaux fichiers `.pck` dans le répertoire `/home/etd/ftp/upload`. Si un fichier est trouvé, il est automatiquement déplacé dans le répertoire des roms de Godot.
 
 ### Redémarrer l'arcade
-Avec le SFTP, si vous téléversez un fichier nommé `restart`, le script redémarrera `emulationstation`.
-
+Avec le SFTP, si vous téléversez un fichier nommé `restart.txt`, le script redémarrera `emulationstation` lorsqu'il le trouvera.
