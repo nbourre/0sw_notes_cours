@@ -10,6 +10,7 @@ Dans cette leçon, nous allons voir comment porter un jeu Godot sur l'arcade du 
   - [Télécharger le modèle d'exportation](#télécharger-le-modèle-dexportation)
   - [Exporter le jeu](#exporter-le-jeu-1)
   - [Copier le jeu sur l'arcade](#copier-le-jeu-sur-larcade)
+    - [Redémarrer l'arcade](#redémarrer-larcade)
 
 # Modification au code
 Pour adapter le jeu à l'arcade, il faudra apporter quelques modifications au code.
@@ -107,10 +108,15 @@ Une fois que le modèle d'exportation est installé, vous pouvez exporter le jeu
 ## Copier le jeu sur l'arcade
 Vous pouvez maintenant envoyer le fichier `.pck` sur l'arcade. Pour cela, vous pouvez utiliser un logiciel de transfert de fichier comme FileZilla ou autres client FTP.
 
+- Utiliser le protocole `SFTP`.
 - L'adresse de l'arcade est 172.22.215.250.
   - À partir du réseau étudiant
 - Le nom d'utilisateur est `etd`.
 - Le mot de passe est `etdshawi`.
+- Téléverser le fichier `.pck` dans le répertoire `upload` de l'utilisateur `etd`.
 
-Une fois que cela est fait, vous pouvez m'aviser pour que je puisse le mettre en ligne.
+À toutes les minutes, un script s'exécute pour vérifier la présence de nouveaux fichiers `.pck` dans le répertoire `/home/etd/ftp/upload`. Si un fichier est trouvé, il est automatiquement déplacé dans le répertoire des roms de Godot.
+
+### Redémarrer l'arcade
+Avec le SFTP, si vous téléversez un fichier nommé `restart`, le script redémarrera `emulationstation`.
 
