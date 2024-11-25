@@ -3,12 +3,14 @@
 # Table des matières <!-- omit in toc -->
 - [Introduction](#introduction)
 - [Jouer un son](#jouer-un-son)
-  - [Aperçu du son](#aperçu-du-son)
-  - [Code](#code)
+	- [Aperçu du son](#aperçu-du-son)
+	- [Code](#code)
 - [Jouer de la musique](#jouer-de-la-musique)
 - [Mettre sur pause et reprendre la musique](#mettre-sur-pause-et-reprendre-la-musique)
 - [Gestion du volume](#gestion-du-volume)
 - [Projet](#projet)
+- [Autres trucs et astuces](#autres-trucs-et-astuces)
+	- [Changement de scène](#changement-de-scène)
 - [Conclusion](#conclusion)
 - [Références](#références)
 
@@ -100,6 +102,13 @@ Il est important de configurer le curseur pour qu'il ait une valeur entre 0 et 1
 Vous pouvez tester le projet [`c13_audio`](https://github.com/nbourre/0sw_projets_cours.git) dans le dépôt des projets.
 
 ---
+
+# Autres trucs et astuces
+## Changement de scène
+Si vous avez de la musique qui joue dans une scène et que vous changez de scène, la musique aura de bonne chance de s'arrêter. La raison est que le noeud `AudioStreamPlayer` est un noeud enfant de la scène. Lorsque la scène est changée, le noeud `AudioStreamPlayer` est détruit et la musique s'arrête.
+
+Pour éviter cela, vous pouvez utiliser la fonctionnalité d'autoload de Godot. Pour ce faire, vous devez ajouter un script dans le répertoire `res://autoload` et ajouter le noeud `AudioStreamPlayer` dans ce script. De cette façon, le noeud `AudioStreamPlayer` sera toujours présent et la musique ne s'arrêtera pas.
+
 
 # Conclusion
 
