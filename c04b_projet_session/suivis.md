@@ -106,15 +106,19 @@ Les critères ne sont pas nécessairement des tâches. Vous devrez les convertir
 | Vie ou équivalent | Énergie, vie ou équivalent |
 | Pointage | Système de pointage avec HUD |
 | Son | Ajout de son interactif |
-| Algorithme 1 | |
-| Algorithme 2 | |
-| Algorithme 3 | |
-| Algorithme 4 | |
-| Algorithme 5 | |
-| Algorithme 6 | |
+| Mécanique de jeu 1 | |
+| Mécanique de jeu 2 | |
+| Mécanique de jeu 3 | |
+| Mécanique de jeu 4 | |
+| Mécanique de jeu innovante 5 | |
+| Mécanique de jeu innovante 6 | |
 | Menu | |
 | Scène de fin | |
 | Mise en pause | |
 | Projet finalisé | |
 | Données pour le débogage | |
 | Documentation | |
+
+TODO :
+- Ajouter des éléments de pointage aux critères.
+- Ajouter des éléments de qualité esthétique ou d'appréciation générale.
