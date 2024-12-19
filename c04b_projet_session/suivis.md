@@ -122,3 +122,4 @@ Les critères ne sont pas nécessairement des tâches. Vous devrez les convertir
 TODO :
 - Ajouter des éléments de pointage aux critères.
 - Ajouter des éléments de qualité esthétique ou d'appréciation générale.
+- Ajouter des éléments d'attitude ou de comportement envers le projet.
