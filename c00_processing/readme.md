@@ -268,7 +268,7 @@ void draw () {
     fill (0, 0, 204);
     rect (50, 200, 100, 25);
     fill (204, 0, 0, 200);
-    arc (75, 175, 75, 75, 0, HALF_PI + QUARTER_PI, PIE);
+    arc (75, 175, 75, 75, HALF_PI + QUARTER_PI, PIE);
 }
 ```
 
