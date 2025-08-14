@@ -1,6 +1,7 @@
 # Processing Crash Course <!-- omit in toc -->
 
 # Table des matières <!-- omit in toc -->
+- [Introduction](#introduction)
 - [Processing](#processing)
   - [Qu’est-ce que Processing?](#quest-ce-que-processing)
   - [Processing : Interface](#processing--interface)
@@ -16,6 +17,11 @@
   - [draw()](#draw)
 - [Les variables systèmes](#les-variables-systèmes)
 - [Exercice #1](#exercice-1)
+
+---
+
+# Introduction
+Avant de nous lancer en grand dans le développement de jeux vidéo avec Godot, nous allons retourner aux sources pour nous réapproprier les notions de base de mathématiques et de géométrie du secondaire. Nous allons utiliser un outil très simple qui permet de se familiariser avec la programmation créative : Processing.
 
 ---
 
@@ -61,10 +67,7 @@ la programmation créative
 - Cliquez sur le bouton `Run`
   - ou <kbd>CTRL</kbd> + <kbd>R</kbd>
 - `point (x, y);` est une méthode permettant de dessiner un point à la position x et y
-- Dans Java, la convention est que
-les méthodes utilisent le ***lower
-camel case***
-- Casse du bas chameau (Loi 101!)
+- En Java, la convention veut que les méthodes utilisent le ***lower camel case*** (casse du bas chameau - Loi 101 !)
 
 ![alt text](assets/Image4.png)
 
@@ -86,9 +89,9 @@ camel case***
 
 - Ajoutez la ligne `ellipse (40, 80, 20, 20);`
 - Exécutez le code
-- `ellipse (x, y, largeur, hauteur)` permet de dessiner une ellipse à la position x et y avec une largeur et hauteur déterminer
+- `ellipse (x, y, largeur, hauteur)` permet de dessiner une ellipse à la position x et y avec une largeur et une hauteur déterminées
 - Ajoutez 2 autres ellipses dans votre programme
-- La méthode `size (largeur, hauteur)` permet de configurer la dimension de la fenêtre
+- La méthode `size (largeur, hauteur)` permet de configurer les dimensions de la fenêtre
   - On utilise cette méthode au début du code
   - Exemple : `size (640, 480);`
 
@@ -110,17 +113,15 @@ cartésiennes
 
 ## Arc de cercle
 - Il est possible de tracer des arcs de cercle avec Processing
-- La méthode pour dessiner un arc de cercle est `arc` et ses
-paramètres sont x, y, largeur, hauteur, début, fin et le type qui est
-optionnel
-- La syntaxe est la suivante
+- La méthode pour dessiner un arc de cercle est `arc` et ses paramètres sont x, y, largeur, hauteur, début, fin et le type qui est optionnel
+- La syntaxe est la suivante :
   - `arc (x, y, largeur, hauteur, début, fin [, type]);`
   - `Type` peut être `OPEN`, `CHORD` ou `PIE`
-- Exemple
+- Exemple :
 - `arc (75, 125, 50, 50, PI, PI + HALF_PI);`
-- `PI` représente la constante mathématique 3.1415…
+- `PI` représente la constante mathématique 3,1415…
   - Il y a `QUARTER_PI`, `HALF_PI`, `PI`, `TWO_PI`
-- Un cercle est 2 PI
+- Un cercle complet équivaut à 2 PI
 
 ![alt text](assets/Image7.png)
 
@@ -132,9 +133,9 @@ optionnel
 |--------------------------------|-----------------------------------------------|-----------------------------------------------------------|
 | **`point (x, y)`**               | x, y ← position du point                      |                                                           |
 | **`line (x1, y1, x2, y2)`**      |                                               |                                                           |
-| **`ellipse (x, y, w, h`)**       | w ← width = largeur                           | x, y représente le centre                                  |
+| **`ellipse (x, y, w, h)`**       | w ← width = largeur                           | x, y représentent le centre                                  |
 |                                | h ← height = hauteur                          |                                                           |
-| **`rect (x, y, w, h)`**          |                                               | x, y représente le coin supérieur gauche                  |
+| **`rect (x, y, w, h)`**          |                                               | x, y représentent le coin supérieur gauche                  |
 | **`triangle (x1, y1, x2, y2, x3, y3)`** |                                         | Dessine un triangle                                        |
 | **`quad (x1, y1, …, x4, y4)`**   |                                               | Dessine un quadrilatère                                    |
 | **`arc (x, y, w, h, start, end)`** ou | start, end ← Début et fin de l’arc en radian | Mode est le type de finition pour l’arc                   |
@@ -201,7 +202,7 @@ ellipse (width / 2 + 25, height/2, 90, 90);
 </tr>
 </table>
 
-> **\*** : Selon les sources entre 7 et 10 millions de couleurs… Il faudrait que je révise ma palette de 8 couleurs quand je peinture!
+> **\*** : Selon les sources, entre 7 et 10 millions de couleurs… Il faudrait que je révise ma palette de 8 couleurs quand je peins !
 
 ---
 
@@ -251,7 +252,7 @@ Voici le cycle de vie d’un programme Processing
 ```java
 void setup () {
     // Code de configuration                          
-    size (640, 480); // ou setup(640, 480, P2D) 
+    size (640, 480); // ou size(640, 480, P2D) 
 }
 ```
 
@@ -259,21 +260,21 @@ void setup () {
 
 ## draw()
 - La méthode draw() est la boucle infinie du programme
-- Exemple
+- Exemple :
 
 ```java
 void draw () {
     background (0);
     fill (0, 0, 204);
     rect (50, 200, 100, 25);
-    fill (204, 0, 0, 200)
-    arc (75, 175, 75, 75, 0, HALF_PI + QUARTER_PI, PIE)
+    fill (204, 0, 0, 200);
+    arc (75, 175, 75, 75, 0, HALF_PI + QUARTER_PI, PIE);
 }
 ```
 
 
 # Les variables systèmes
-Processing offre plusieurs variables systèmes qui permettent de récupérer des valeurs qui sont disponibles au niveau du système
+Processing offre plusieurs variables système qui permettent de récupérer des valeurs qui sont disponibles au niveau du système :
 
 | Variable      | Description                                                                 |
 |---------------|-----------------------------------------------------------------------------|
