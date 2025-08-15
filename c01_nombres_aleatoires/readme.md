@@ -21,7 +21,7 @@
 - Comprendre la distribution normale
 
 # Introduction
-Un ordinateur est une machine déterministe. Cela signifie que si vous lui donnez les mêmes données d'entrée, il donnera toujours la même sortie. Ainsi, il ne peut pas générer de nombres aléatoires. Cela peut être un problème si vous voulez simuler des phénomènes aléatoires. Pour cela, on utilise des générateurs de nombres aléatoires.
+Un ordinateur est une machine déterministe. Cela signifie que si vous lui donnez les mêmes données d'entrée, il donnera toujours la même sortie. Ainsi, il ne peut pas générer de vrais nombres aléatoires. Cela peut être un problème si vous voulez simuler des phénomènes aléatoires. Pour cela, on utilise des générateurs de nombres pseudo-aléatoires.
 
 Ces nombres sont générés à partir d'une graine (**seed**) qui est un nombre initial. Si vous utilisez la même graine, vous obtiendrez les mêmes nombres aléatoires. Cela peut être utile pour déboguer un programme.
 
@@ -57,6 +57,9 @@ void draw() {
     } else {
         y -= step;
     }
+    
+    // Dessiner le point
+    point(x, y);
 }
 ```
 
@@ -100,28 +103,28 @@ Si on veut que le marcheur tende vers l'ouest, comme dans l'exemple ci-contre, c
 
 <summary>Indice</summary>
 
-On peut utiliser une distribution uniforme pour guider le marcheur. Par exemple, si on veut que le marcheur aille plus souvent vers l'ouest, on peut générer un nombre aléatoire entre 0 et 1. Si le nombre est inférieur à 0.4, on ira vers l'ouest.
+On peut utiliser une distribution uniforme pour guider le marcheur. Par exemple, si on veut que le marcheur aille plus souvent vers l'ouest, on peut générer un nombre aléatoire entre 0 et 1. Si le nombre est inférieur à 0,4, on ira vers l'ouest.
 
 </details>
 
 
 ## Dans les jeux
-On retrouve la distribution uniforme dans plusieurs types de jeux. Par exemple, dans un jeu de cartes, chaque carte a la même probabilité d'apparaître. Dans un jeu de dés, chaque face a la même probabilité d'apparaître. Certains jeux utilisent la distribution uniforme pour générer des physiques de personnages aléatoires.
+On retrouve la distribution uniforme dans plusieurs types de jeux. Par exemple, dans un jeu de cartes, chaque carte a la même probabilité d'apparaître. Dans un jeu de dés, chaque face a la même probabilité d'apparaître. Certains jeux utilisent la distribution uniforme pour générer des caractéristiques physiques de personnages aléatoires.
 
 ![alt text](assets/ark_random_char.jpg)
 
 # Distribution normale
-Disons que l'on désire générer une population de zombies. Chaque zombie a une taille donnée en mètre. Dans une population réelle, la taille des zombies ne suit pas une distribution uniforme, c'est-à-dire qu'il y a plus de chance que l'on tombe sur un zombie de 1.72 mètre qu'un zombie de 2 mètres. Dans ma population, j'ai plus de zombies qui ont des tailles variants entre 1.65 et 1.75 mètre que des individus de 2 mètres et plus. La même chose pour des zombies de moins de 1.50 mètres. La hauteur des populations animales suit généralement une distribution normale. Ainsi, il y a une concentration des hauteurs plus fréquentes autour de la moyenne qu'aux extrêmes.
+Disons que l'on désire générer une population de zombies. Chaque zombie a une taille donnée en mètres. Dans une population réelle, la taille des zombies ne suit pas une distribution uniforme, c'est-à-dire qu'il y a plus de chances que l'on tombe sur un zombie de 1,72 mètre qu'un zombie de 2 mètres. Dans ma population, j'ai plus de zombies qui ont des tailles variant entre 1,65 et 1,75 mètre que des individus de 2 mètres et plus. La même chose pour des zombies de moins de 1,50 mètre. La taille des populations animales suit généralement une distribution normale. Ainsi, il y a une concentration des tailles plus fréquentes autour de la moyenne qu'aux extrêmes.
 
 ---
 
-Voici un graphique montant une distribution normale.
+Voici un graphique montrant une distribution normale.
 
 ![alt text](assets/2000px-standard_deviation_diagram_svg.png)
 
 La lettre grecque μ (mu) représente la moyenne et σ (sigma) l'écart-type. L'écart-type est une mesure de la dispersion des valeurs autour de la moyenne. Plus l'écart-type est grand, plus les valeurs sont dispersées. Plus l'écart-type est petit, plus les valeurs sont regroupées autour de la moyenne.
 
-Ainsi à ±1 écart-type, on retrouve 68% de la population. À ±2 écart-type, on retrouve 95% de la population. À ±3 écart-type, on retrouve 99.7% de la population.
+Ainsi, à ±1 écart-type, on retrouve 68 % de la population. À ±2 écart-types, on retrouve 95 % de la population. À ±3 écart-types, on retrouve 99,7 % de la population.
 
 > **Note :** La distribution normale est également appelée distribution gaussienne, courbe normale ou cloche de Gauss.
 
@@ -145,38 +148,36 @@ Voici le code pour l'animation précédente :
 
 int[] randomCounts;
 
-void setup () {
-  size (800, 320);
+void setup() {
+  size(800, 320);
   randomCounts = new int[50];
-  
 }
 
-void draw () {
-  
-  background (255);
+void draw() {
+  background(255);
   
   float num = randomGaussian();
   float sd = 5; // Standard deviation | Écart-type
   float mean = randomCounts.length / 2; // Moyenne
   
-  int index = int (sd * num + mean);
+  int index = int(sd * num + mean);
   randomCounts[index]++;
   
-  stroke (0);
-  fill (175);
+  stroke(0);
+  fill(175);
   int w = width / randomCounts.length;
   
   for (int x = 0; x < randomCounts.length; x++) {
-    rect (x * w, height - randomCounts[x], w - 1, randomCounts[x]);
+    rect(x * w, height - randomCounts[x], w - 1, randomCounts[x]);
   }  
 }
 ```
 
 ## Comment faire pour gérer la distribution normale?
-Pour générer une distribution normale, on fait ce que l'on appelle un changement d'échelle.
+Pour générer une distribution normale, on fait ce que l'on appelle un changement d'échelle :
 - On prend une valeur aléatoire générée par `randomGaussian()`
-- On la multiplie par l'écart-type désiré.
-- On ajoute ensuite la moyenne désirée.
+- On la multiplie par l'écart-type désiré
+- On ajoute ensuite la moyenne désirée
 
 Cela nous donne une valeur aléatoire avec la distribution normale désirée.
 
@@ -185,13 +186,13 @@ float num = randomGaussian();
 float sd = 5; // Standard deviation | Écart-type
 float mean = randomCounts.length / 2; // Moyenne
 
-int value = int (sd * num + mean);
+int value = int(sd * num + mean);
 ```
 
 ## Exemple de cas d'utilisation
 Dans un jeu de tir, on peut utiliser une distribution normale pour gérer la précision des tirs. Lorsque le joueur tire, on génère une valeur aléatoire avec une distribution normale selon son niveau de fatigue, la distance de la cible, etc. Par exemple, après un sprint, le joueur sera plus fatigué et sa précision sera moins bonne. Ainsi, en augmentant l'écart-type, on augmente la dispersion des tirs.
 
-Dans les logiciels de dessin, on peut utiliser une distribution normale pour simuler l'aérographe. Plus l'écart-type est grand, plus la zone de peinture sera grande et dispersé.
+Dans les logiciels de dessin, on peut utiliser une distribution normale pour simuler l'aérographe. Plus l'écart-type est grand, plus la zone de peinture sera grande et dispersée.
 
 <table>
 <tr>
@@ -202,7 +203,7 @@ Dans les logiciels de dessin, on peut utiliser une distribution normale pour sim
 </td>
 
 <td>
-Dans l'exemple ci-contre, la zone rouge est chaude et bleue froide. Ainsi, la dimension de la zone rouge est  proportionnelle à l'écart-type en X et Y.
+Dans l'exemple ci-contre, la zone rouge est chaude et la zone bleue est froide. Ainsi, la dimension de la zone rouge est proportionnelle à l'écart-type en X et Y.
 </td>
 </tr>
 </table>
@@ -220,7 +221,7 @@ void setup() {
 
 void draw() {
   fill(127, 127, 127, 10);
-  rect (0, 0, width, height);
+  rect(0, 0, width, height);
 
   if (mousePressed) {
     drawBullet();
@@ -246,8 +247,8 @@ void drawBullet() {
   float sd = precision + fatigue; // Standard deviation | Écart-type
   float mean = 0; // Moyenne
 
-  int x = int (sd * numX + mean);
-  int y = int (sd * numY + mean);
+  int x = int(sd * numX + mean);
+  int y = int(sd * numY + mean);
 
   fill(0);
   ellipse(mouseX + x, mouseY + y, 5, 5);
