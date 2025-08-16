@@ -9,15 +9,21 @@
   - [Simplification de l'exemple avec les vecteurs](#simplification-de-lexemple-avec-les-vecteurs)
 - [Vecteur : classe](#vecteur--classe)
 - [Vecteur : déplacement](#vecteur--déplacement)
-- [Exercice](#exercice)
+- [Exercice 1 : Balle qui rebondit avec vecteurs](#exercice-1--balle-qui-rebondit-avec-vecteurs)
 - [Opérations d’intérêt](#opérations-dintérêt)
 - [Termes à connaître](#termes-à-connaître)
 - [Accélération](#accélération)
 - [Autres opérations](#autres-opérations)
 - [Trajectoire](#trajectoire)
-- [Exercice](#exercice-1)
+- [Exercice](#exercice)
+- [Concepts avancés (Bonus)](#concepts-avancés-bonus)
+  - [Interpolation linéaire (lerp)](#interpolation-linéaire-lerp)
+  - [Distance entre deux points](#distance-entre-deux-points)
+  - [Rotation d'un vecteur](#rotation-dun-vecteur)
+  - [Angle entre deux vecteurs](#angle-entre-deux-vecteurs)
+  - [Applications pratiques](#applications-pratiques)
 - [Références](#références)
-
+  - [Ressources supplémentaires](#ressources-supplémentaires)
 
 
 
@@ -112,6 +118,24 @@ On simplifie le code en utilisant les vecteurs.
 - Dans cette classe, on y retrouve les propriétés X et Y en `float`.
 - On y retrouve plusieurs méthodes pour effectuer des opérations avec les vecteurs.
 
+**Création d'un vecteur** :
+```java
+// Création d'un vecteur à la position (10, 20)
+PVector position = new PVector(10, 20);
+
+// Création d'un vecteur de vitesse
+PVector vitesse = new PVector(2, -1); // 2 pixels/frame vers la droite, 1 pixel/frame vers le haut
+
+// Accès aux composantes
+float x = position.x;  // Récupère la composante X
+float y = position.y;  // Récupère la composante Y
+```
+
+**Propriétés principales** :
+- `x` : Composante horizontale
+- `y` : Composante verticale (attention : Y augmente vers le bas dans Processing)
+- `z` : Composante en profondeur (pour la 3D)
+
 ---
 
 # Vecteur : déplacement
@@ -124,24 +148,86 @@ On simplifie le code en utilisant les vecteurs.
   - Exemple : L’unité pixel.
 
 ```java
-location = new PVector(50, 50);
-vitesse = new PVector(1, 1);
-// On additionne à location le vecteur de vitesse
-location.add(vitesse)
+// Variables globales
+PVector location;
+PVector vitesse;
 
-// Équivalent sans vecteur
-locX = 50;
-locY = 50;
-vitX = 1;
-vitY = 1;
+void setup() {
+  size(400, 300);
+  location = new PVector(50, 50);    // Position initiale
+  vitesse = new PVector(2, 1.5);     // 2 pixels/frame en X, 1.5 en Y
+}
+
+void draw() {
+  background(255);
+  
+  // Déplacement : position = position + vitesse
+  location.add(vitesse);
+  
+  // Dessiner la balle
+  ellipse(location.x, location.y, 20, 20);
+  
+  // Rebond sur les bords
+  if (location.x > width || location.x < 0) {
+    vitesse.x *= -1;  // Inverse la direction X
+  }
+  if (location.y > height || location.y < 0) {
+    vitesse.y *= -1;  // Inverse la direction Y
+  }
+}
+```
+
+**Équivalent sans vecteur** (plus verbeux) :
+```java
+float locX = 50, locY = 50;
+float vitX = 2, vitY = 1.5;
+
+// Dans draw()
 locX += vitX;
 locY += vitY;
+// + gestion des rebonds pour chaque composante...
 ```
 
 ---
 
-# Exercice
-- Dans un exercice précédent, vous deviez faire une ellipse qui rebondit sur les côtés de la fenêtre. Améliorez le code pour utiliser des vecteurs pour déplacer la balle.
+# Exercice 1 : Balle qui rebondit avec vecteurs
+**Objectif** : Convertir une animation de balle qui rebondit pour utiliser des vecteurs.
+
+**Instructions détaillées** :
+1. Créez deux variables globales de type `PVector` :
+   - `position` : pour la position de la balle
+   - `vitesse` : pour la vitesse de déplacement
+
+2. Dans `setup()` :
+   - Initialisez `position` au centre de l'écran
+   - Initialisez `vitesse` avec des valeurs comme (3, 2)
+
+3. Dans `draw()` :
+   - Effacez l'écran avec `background()`
+   - Déplacez la balle : `position.add(vitesse)`
+   - Dessinez la balle à la position actuelle
+   - Gérez les rebonds en inversant les composantes de vitesse
+
+**Code de base à compléter** :
+```java
+PVector position;
+PVector vitesse;
+
+void setup() {
+  size(600, 400);
+  // TODO: Initialiser position et vitesse
+}
+
+void draw() {
+  background(240);
+  
+  // TODO: Déplacer la balle
+  // TODO: Dessiner la balle
+  // TODO: Gérer les rebonds
+}
+```
+
+**Bonus** : Ajoutez des couleurs ou faites varier la taille de la balle.
 
 ---
 
@@ -209,10 +295,10 @@ PVector dir = PVector.sub(souris, location);
 ---
 
 - Nous avons maintenant le vecteur qui pointe directement à l’emplacement de la souris.
-- Si nous additionnons la direction à la position, l’objet apparaîtrait immédiatement à la souris et ce n’est pas l’effet désiré.
-- Ce que l’on doit faire, c’est de décider à quelle vitesse l’objet doit se rendre à la souris.
+- Si nous additionnons la direction à la position, l'objet apparaîtrait immédiatement à la souris et ce n'est pas l'effet désiré.
+- Ce que l'on doit faire, c'est de décider à quelle vitesse l'objet doit se rendre à la souris.
 - Pour ce faire, on normalisera le vecteur pour ensuite le multiplier par une valeur qui déterminera sa vitesse en unité.
-- Pour finaliser, on applique ce vecteur à l’accélération.
+- Pour finaliser, on applique ce vecteur à l'accélération.
 
 ---
 
@@ -222,7 +308,67 @@ PVector dir = PVector.sub(souris, location);
   - Essayez avec différentes vitesses.
 
 
+# Concepts avancés (Bonus)
+
+## Interpolation linéaire (lerp)
+L'interpolation permet de créer des transitions fluides entre deux vecteurs.
+
+```java
+PVector debut = new PVector(100, 100);
+PVector fin = new PVector(400, 300);
+float progression = 0; // De 0 à 1
+
+void draw() {
+  background(240);
+  
+  // Progression automatique
+  progression += 0.01;
+  if (progression > 1) progression = 0;
+  
+  // Interpolation entre début et fin
+  PVector position = PVector.lerp(debut, fin, progression);
+  
+  ellipse(position.x, position.y, 20, 20);
+}
+```
+
+## Distance entre deux points
+```java
+PVector point1 = new PVector(100, 100);
+PVector point2 = new PVector(mouseX, mouseY);
+
+float distance = PVector.dist(point1, point2);
+// Ou : float distance = PVector.sub(point2, point1).mag();
+```
+
+## Rotation d'un vecteur
+```java
+PVector v = new PVector(50, 0); // Vecteur horizontal
+v.rotate(PI/4); // Rotation de 45 degrés (PI/4 radians)
+```
+
+## Angle entre deux vecteurs
+```java
+PVector v1 = new PVector(1, 0);
+PVector v2 = new PVector(0, 1);
+float angle = PVector.angleBetween(v1, v2); // Résultat : PI/2 (90°)
+```
+
+## Applications pratiques
+- **Jeux de tir** : Calculer la trajectoire des projectiles
+- **Animation** : Mouvements fluides et naturels
+- **Intelligence artificielle** : Comportements de groupe (boids)
+- **Physique** : Simulation de forces, collisions
+- **Interface utilisateur** : Animations d'éléments GUI
+
+---
+
 # Références
 - À lire pour le prochain cours
 - https://natureofcode.com/book/introduction/
 - https://natureofcode.com/book/chapter-1-vectors/
+
+## Ressources supplémentaires
+- [Documentation officielle PVector](https://processing.org/reference/PVector.html)
+- [The Nature of Code - Vectors (vidéo)](https://www.youtube.com/watch?v=mWJkvxQXIa8)
+- [Exemples interactifs de vecteurs](https://p5js.org/examples/math-vector-math.html)
