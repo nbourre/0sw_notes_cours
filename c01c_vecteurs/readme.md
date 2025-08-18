@@ -261,6 +261,10 @@ PVector resultat = PVector.add(a, b);  // a et b restent inchangés
 
 
 
+https://github.com/user-attachments/assets/909774ad-a93a-4d33-8459-8265d2c59d02
+
+
+
 
 ## Multiplication et division par un scalaire
 ```java
