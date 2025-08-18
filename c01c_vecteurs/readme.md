@@ -5,19 +5,14 @@
 # Table des matières <!-- omit in toc -->
 - [Vecteur : définition](#vecteur--définition)
 - [Vecteur : utilité](#vecteur--utilité)
-- [Vecteur : exemple](#vecteur--exemple)
-  - [Simplification de l'exemple avec les vecteurs](#simplification-de-lexemple-avec-les-vecteurs)
-- [Vecteur : classe](#vecteur--classe)
-- [Vecteur : déplacement](#vecteur--déplacement)
+- [Vecteur : exemple de problème sans vecteurs](#vecteur--exemple-de-problème-sans-vecteurs)
+  - [Simplification avec les vecteurs](#simplification-avec-les-vecteurs)
+- [Vecteur : la classe PVector](#vecteur--la-classe-pvector)
+  - [Vecteur : déplacement et mouvement](#vecteur--déplacement-et-mouvement)
 - [Exercice 1 : Balle qui rebondit avec vecteurs](#exercice-1--balle-qui-rebondit-avec-vecteurs)
-- [Opérations d’intérêt](#opérations-dintérêt)
-- [Termes à connaître](#termes-à-connaître)
-- [Accélération](#accélération)
-- [Autres opérations](#autres-opérations)
-- [Trajectoire](#trajectoire)
-- [Exercice](#exercice)
-- [Concepts avancés (Bonus)](#concepts-avancés-bonus)
-  - [Interpolation linéaire (lerp)](#interpolation-linéaire-lerp)
+- [Opérations mathématiques avec les vecteurs](#opérations-mathématiques-avec-les-vecteurs)
+  - [Addition et soustraction](#addition-et-soustraction)
+  - [Multiplication et division par un scalaire](#multiplication-et-division-par-un-scalaire)
   - [Distance entre deux points](#distance-entre-deux-points)
   - [Rotation d'un vecteur](#rotation-dun-vecteur)
   - [Angle entre deux vecteurs](#angle-entre-deux-vecteurs)
@@ -25,326 +20,278 @@
 - [Références](#références)
   - [Ressources supplémentaires](#ressources-supplémentaires)
 
-
+---
 
 # Vecteur : définition
 - Le terme **vecteur** peut signifier plusieurs choses dépendant du contexte.
-  - En biologie : Décrit un organisme qui transmet une infection d’un hôte à un autre.
+  - En biologie : Décrit un organisme qui transmet une infection d'un hôte à un autre.
   - En programmation : Décrit une structure de tableau de données.
-- En mathématique, un vecteur est un concept permettant de représenter une longueur (magnitude) et une direction.
+- **En mathématique**, un vecteur est un concept permettant de représenter une **magnitude** (longueur) et une **direction**.
+- Un vecteur peut être représenté graphiquement par une flèche : la longueur indique la magnitude, l'orientation indique la direction.
 
 ![alt text](assets/Image1.png)
 
 # Vecteur : utilité
 - Dans le monde des jeux vidéo, réalité virtuelle ou autre simulation, les vecteurs sont utilisés partout.
-- **C’est une connaissance fondamentale à la programmation de jeux et applis multimédia.**
-- C’est un bloc de construction nécessaire pour toute application ayant des implications mathématiques.
+- **C'est une connaissance fondamentale à la programmation de jeux et d'applications multimédia.**
+- C'est un bloc de construction nécessaire pour toute application ayant des implications mathématiques.
+- **Exemples d'utilisation** :
+  - Position d'objets dans l'espace
+  - Vitesse et direction de déplacement
+  - Forces physiques (gravité, vent, friction)
+  - Calcul de trajectoires et de collisions
 
 ---
 
-# Vecteur : exemple
+# Vecteur : exemple de problème sans vecteurs
 
-- Voici du code représentant une balle qui rebondit aux limites de l’écran
-- [Lien pour l’exécuter](pde://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s01_no_vectors.pdez)
-  - Au moment d’écrire ces lignes, il y avait un bug dans Processing. Il faut cliquer une 2e fois sur le lien tout en ayant une fenêtre ouverte.
+- Voici du code représentant une balle qui rebondit aux limites de l'écran
+- [Lien pour l'exécuter](pde://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s01_no_vectors.pdez)
 
 ![alt text](assets/Image2.png)
 
-- Ce que l’on remarque est l’utilisation de plusieurs variables X et Y similaires.
-  - Position X et Y.
-  - Vitesse X et Y.
-- Une des complications est la gestion de toutes ces variables.
-- Imaginez maintenant que vous devez gérer l’accélération, la position d’une cible, le vent et la friction.
-  - Quelles seraient les variables probables?
-  - Utilisation de deux variables dans chacun des cas.
-  - Dans un monde 3D ce serait 3 variables…
+**Problèmes identifiés** :
+- Utilisation de plusieurs variables X et Y similaires :
+  - Position X et Y
+  - Vitesse X et Y
+- Complexité de gestion de toutes ces variables
+- Imaginez maintenant que vous devez gérer l'accélération, la position d'une cible, le vent et la friction...
+  - **Variables probables** : `accelX`, `accelY`, `targetX`, `targetY`, `windX`, `windY`, `frictionX`, `frictionY`
+  - **En 2D** : 2 variables par concept
+  - **En 3D** : 3 variables par concept → explosion du nombre de variables !
 
 ---
 
-## Simplification de l'exemple avec les vecteurs
+## Simplification avec les vecteurs
 
 <table style="border: none;">
 
 <tr>
-<td>
+<td style="width: 50%;">
 
+**Sans vecteurs (verbeux)**
 ```java
-float x;
-float y;
-float z;
+float x, y, z;
+float xSpeed, ySpeed, zSpeed;
+float xAccel, yAccel, zAccel;
+float targetX, targetY, targetZ;
 ```
 
 </td>
-<td>
+<td style="width: 50%;">
 
-Vecteur location; // ou position
+**Avec vecteurs (concis)**
+```java
+PVector position;
+PVector velocity;
+PVector acceleration;
+PVector target;
+```
 
 </td>
 </tr>
 
 <tr>
-<td>
+<td colspan="2">
 
-```java
-float xSpeed;
-float ySpeed;
-float zSpeed;
-```
-
-</td>
-<td>
-
-Vecteur speed; // ou velocity
-
-</td>
-</tr>
-
-<tr>
-
-<td  colspan="2">
-
-On simplifie le code en utilisant les vecteurs.
+✅ **Avantages** : Code plus lisible, moins d'erreurs, opérations mathématiques simplifiées
 
 </td>
 </tr>
 
 </table>
 
-
 ---
 
-# Vecteur : classe
+# Vecteur : la classe PVector
 - Processing offre la classe `PVector` qui représente un vecteur.
-- Dans cette classe, on y retrouve les propriétés X et Y en `float`.
-- On y retrouve plusieurs méthodes pour effectuer des opérations avec les vecteurs.
+- **Propriétés principales** :
+  - `x` : Composante horizontale
+  - `y` : Composante verticale (⚠️ Y augmente vers le bas dans Processing)
+  - `z` : Composante en profondeur (pour la 3D, optionnelle)
 
-**Création d'un vecteur** :
+**Création et utilisation** :
 ```java
 // Création d'un vecteur à la position (10, 20)
 PVector position = new PVector(10, 20);
 
 // Création d'un vecteur de vitesse
-PVector vitesse = new PVector(2, -1); // 2 pixels/frame vers la droite, 1 pixel/frame vers le haut
+PVector vitesse = new PVector(2, -1); // 2 px/frame → droite, 1 px/frame ↑ haut
 
 // Accès aux composantes
 float x = position.x;  // Récupère la composante X
 float y = position.y;  // Récupère la composante Y
-```
 
-**Propriétés principales** :
-- `x` : Composante horizontale
-- `y` : Composante verticale (attention : Y augmente vers le bas dans Processing)
-- `z` : Composante en profondeur (pour la 3D)
+// Modification des composantes
+position.x = 50;
+position.y = 100;
+```
 
 ---
 
-# Vecteur : déplacement
-- Pour simuler du mouvement à l’aide des vecteurs, il faut utiliser la translation.
-  - Pour effectuer une translation, il suffit d’additionner la vitesse à la position.
-- Le mouvement est un déplacement dans le temps.
-- La vitesse représente un déplacement dans le temps.
-- La vitesse peut être représentée par un vecteur.
-- Le déplacement est une distance dans une unité donnée.
-  - Exemple : L’unité pixel.
+## Vecteur : déplacement et mouvement
 
+**Concepts clés** :
+- **Mouvement** = déplacement dans le temps
+- **Vitesse** = vecteur représentant un déplacement par unité de temps
+- **Translation** = addition de la vitesse à la position
+
+**Formule fondamentale** :
+```
+nouvelle_position = ancienne_position + vitesse
+```
+
+**Exemple complet** :
 ```java
 // Variables globales
-PVector location;
+PVector position;
 PVector vitesse;
 
 void setup() {
-  size(400, 300);
-  location = new PVector(50, 50);    // Position initiale
-  vitesse = new PVector(2, 1.5);     // 2 pixels/frame en X, 1.5 en Y
+  size(600, 400);
+  position = new PVector(width/2, height/2);  // Centre de l'écran
+  vitesse = new PVector(3, 2);                // 3 px/frame en X, 2 en Y
 }
 
 void draw() {
-  background(255);
+  background(240);
   
-  // Déplacement : position = position + vitesse
-  location.add(vitesse);
+  // 1. Déplacement : position = position + vitesse
+  position.add(vitesse);
   
-  // Dessiner la balle
-  ellipse(location.x, location.y, 20, 20);
+  // 2. Dessiner la balle
+  fill(255, 100, 100);
+  ellipse(position.x, position.y, 30, 30);
   
-  // Rebond sur les bords
-  if (location.x > width || location.x < 0) {
+  // 3. Rebond sur les bords
+  if (position.x > width - 15 || position.x < 15) {
     vitesse.x *= -1;  // Inverse la direction X
   }
-  if (location.y > height || location.y < 0) {
+  if (position.y > height - 15 || position.y < 15) {
     vitesse.y *= -1;  // Inverse la direction Y
   }
 }
 ```
 
-**Équivalent sans vecteur** (plus verbeux) :
+**Comparaison sans vecteur** (beaucoup plus verbeux) :
 ```java
-float locX = 50, locY = 50;
-float vitX = 2, vitY = 1.5;
+float posX = 300, posY = 200;
+float vitX = 3, vitY = 2;
 
 // Dans draw()
-locX += vitX;
-locY += vitY;
-// + gestion des rebonds pour chaque composante...
+posX += vitX;
+posY += vitY;
+
+if (posX > width - 15 || posX < 15) vitX *= -1;
+if (posY > height - 15 || posY < 15) vitY *= -1;
+// + répétition pour chaque objet...
 ```
 
 ---
 
 # Exercice 1 : Balle qui rebondit avec vecteurs
-**Objectif** : Convertir une animation de balle qui rebondit pour utiliser des vecteurs.
 
-**Instructions détaillées** :
+**Objectif** : Créer une animation de balle qui rebondit en utilisant des vecteurs.
+
+**Instructions** :
 1. Créez deux variables globales de type `PVector` :
    - `position` : pour la position de la balle
    - `vitesse` : pour la vitesse de déplacement
 
 2. Dans `setup()` :
    - Initialisez `position` au centre de l'écran
-   - Initialisez `vitesse` avec des valeurs comme (3, 2)
+   - Initialisez `vitesse` avec des valeurs comme (4, 3)
 
 3. Dans `draw()` :
-   - Effacez l'écran avec `background()`
-   - Déplacez la balle : `position.add(vitesse)`
+   - Effacez l'écran avec `background(240)`
+   - Déplacez la balle avec `position.add(vitesse)`
    - Dessinez la balle à la position actuelle
-   - Gérez les rebonds en inversant les composantes de vitesse
+   - Gérez les rebonds en inversant les composantes appropriées
 
-**Code de base à compléter** :
+**Code de base** :
 ```java
 PVector position;
 PVector vitesse;
 
 void setup() {
   size(600, 400);
-  // TODO: Initialiser position et vitesse
+  // TODO: Initialiser position au centre
+  // TODO: Initialiser vitesse (ex: 4, 3)
 }
 
 void draw() {
   background(240);
   
   // TODO: Déplacer la balle
-  // TODO: Dessiner la balle
-  // TODO: Gérer les rebonds
+  // TODO: Dessiner la balle (cercle de diamètre 25)
+  // TODO: Gérer les rebonds sur les 4 bords
 }
 ```
 
-**Bonus** : Ajoutez des couleurs ou faites varier la taille de la balle.
+**Bonus** : 
+- Ajoutez de la couleur qui change selon la direction
+- Laissez une traînée en utilisant `background(240, 20)` au lieu de `background(240)`
+- Ajoutez plusieurs balles avec des vitesses différentes
 
 ---
 
-# Opérations d’intérêt
-- Soustraction
-  - Idem que l’addition.
-  - Méthode `sub(PVector)`.
-  - Exemple : Pour trouver la distance entre deux vecteurs.
-- Multiplication par un scalaire
-  - On multiplie chacun des composants du vecteur par une valeur scalaire.
-  - 𝐴 ∗ 𝑣 (𝑥, 𝑦) = 𝑣 (𝐴𝑥, 𝐴𝑦).
-  - Méthode `mult(float)`.
-- Division par un scalaire
-  - Idem que la multiplication.
+# Opérations mathématiques avec les vecteurs
 
----
-
-# Termes à connaître
-
-- Magnitude
-  - La magnitude est la longueur du vecteur en utilisant le théorème de Pythagore.
-- Normalisation
-  - Ramène le vecteur à une longueur de 1 unité.
-  - On divise le vecteur par sa longueur.
-  - Cela donne la direction du vecteur.
-  - Exemple : Pour limiter la vitesse d’un objet. On normalise le vecteur de vitesse puis on le multiplie par la vitesse maximale.
-
-# Accélération
-- L’accélération est le taux de variation de la vitesse.
-- En programmation, on additionne l’accélération à la vitesse.
-
+## Addition et soustraction
 ```java
-acceleration = new PVector(1, 1);
-vitesse = new PVector(0, 0);
-vitesse.add(acceleration);
-location.add(vitesse);
+PVector a = new PVector(3, 4);
+PVector b = new PVector(1, 2);
+
+// Addition : a = a + b
+a.add(b);          // a devient (4, 6)
+
+// Soustraction : a = a - b  
+a.sub(b);          // a devient (2, 2)
+
+// Sans modifier l'original
+PVector resultat = PVector.add(a, b);  // a et b restent inchangés
 ```
 
----
-
-# Autres opérations
-- Dans un jeu, on limite souvent les vitesses.
-- Pour limiter les vitesses, on ajoute une méthode qui limite la longueur d’un vecteur.
-- L’algorithme est le suivant :
-  - Si `vecteur.longueur > max`
-    - `vecteur.normalise()` // On le met à une longueur de 1 unité.
-    - `vecteur.mult(max)`
-  - Fin si
-
----
-
-# Trajectoire
-- À chaque fois que l’on désire calculer une trajectoire, il faut calculer la magnitude et la direction.
-- Prenons l’exemple où l’on désire que notre objet se déplace vers la souris.
-- Calculons la direction.
-  - Celle-ci est la distance entre le X et Y de l’objet et le X et Y de la souris.
-
+## Multiplication et division par un scalaire
 ```java
-PVector souris = new PVector(mouseX, mouseY);
-PVector dir = PVector.sub(souris, location);
+PVector v = new PVector(3, 4);
+
+// Multiplication par un scalaire
+v.mult(2);         // v devient (6, 8) - double la magnitude
+v.mult(0.5);       // v devient (1.5, 2) - divise la magnitude par 2
+
+// Division par un scalaire
+v.div(2);          // v devient (0.75, 1)
 ```
 
-![alt text](assets/Image3.png)
-
----
-
-- Nous avons maintenant le vecteur qui pointe directement à l’emplacement de la souris.
-- Si nous additionnons la direction à la position, l'objet apparaîtrait immédiatement à la souris et ce n'est pas l'effet désiré.
-- Ce que l'on doit faire, c'est de décider à quelle vitesse l'objet doit se rendre à la souris.
-- Pour ce faire, on normalisera le vecteur pour ensuite le multiplier par une valeur qui déterminera sa vitesse en unité.
-- Pour finaliser, on applique ce vecteur à l'accélération.
-
----
-
-# Exercice
-- Modifiez l’exercice avec la balle pour avoir une forme qui accélère dans la direction de la flèche appuyée par l’utilisateur.
-- Faites un projet où une image (cible, balle, etc.) poursuit la souris.
-  - Essayez avec différentes vitesses.
-
-
-# Concepts avancés (Bonus)
-
-## Interpolation linéaire (lerp)
-L'interpolation permet de créer des transitions fluides entre deux vecteurs.
-
-```java
-PVector debut = new PVector(100, 100);
-PVector fin = new PVector(400, 300);
-float progression = 0; // De 0 à 1
-
-void draw() {
-  background(240);
-  
-  // Progression automatique
-  progression += 0.01;
-  if (progression > 1) progression = 0;
-  
-  // Interpolation entre début et fin
-  PVector position = PVector.lerp(debut, fin, progression);
-  
-  ellipse(position.x, position.y, 20, 20);
-}
-```
+**Utilité** : Changer la vitesse sans changer la direction.
 
 ## Distance entre deux points
 ```java
 PVector point1 = new PVector(100, 100);
-PVector point2 = new PVector(mouseX, mouseY);
+PVector point2 = new PVector(400, 300);
 
+// Méthode 1 : fonction statique
 float distance = PVector.dist(point1, point2);
-// Ou : float distance = PVector.sub(point2, point1).mag();
+
+// Méthode 2 : soustraction + magnitude
+PVector diff = PVector.sub(point2, point1);
+float distance2 = diff.mag();  // Même résultat
 ```
 
 ## Rotation d'un vecteur
 ```java
-PVector v = new PVector(50, 0); // Vecteur horizontal
-v.rotate(PI/4); // Rotation de 45 degrés (PI/4 radians)
+PVector v = new PVector(1, 0);
+float angle = PI/2;  // 90 degrés
+
+// Méthode 1 : utiliser rotate()
+v.rotate(angle);    // v devient (0, 1)
+
+// Méthode 2 : utiliser des formules trigonométriques
+float x = v.x * cos(angle) - v.y * sin(angle);
+float y = v.x * sin(angle) + v.y * cos(angle);
+v.set(x, y);
+
 ```
 
 ## Angle entre deux vecteurs
