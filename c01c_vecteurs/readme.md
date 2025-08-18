@@ -294,6 +294,10 @@ float distance = PVector.dist(point1, point2);
 
 
 
+https://github.com/user-attachments/assets/4a196351-de20-4260-ad83-98dc7b44a483
+
+
+
 ## Rotation d'un vecteur
 ```java
 PVector v = new PVector(1, 0);
