@@ -141,6 +141,13 @@ position.y = 100;
 nouvelle_position = ancienne_position + vitesse
 ```
 
+**Rappel** :
+L'addition de vecteurs se fait composante par composante, c'est-à-dire :
+```
+nouvelle_position.x = ancienne_position.x + vitesse.x
+nouvelle_position.y = ancienne_position.y + vitesse.y
+```
+
 **Exemple complet** :
 ```java
 // Variables globales
@@ -318,4 +325,5 @@ float angle = PVector.angleBetween(v1, v2); // Résultat : PI/2 (90°)
 ## Ressources supplémentaires
 - [Documentation officielle PVector](https://processing.org/reference/PVector.html)
 - [The Nature of Code - Vectors (vidéo)](https://www.youtube.com/watch?v=mWJkvxQXIa8)
+- [The Nature of Code - Vectors (chapitre)](https://natureofcode.com/vectors/)
 - [Exemples interactifs de vecteurs](https://p5js.org/examples/math-vector-math.html)
