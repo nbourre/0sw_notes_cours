@@ -271,11 +271,11 @@ https://github.com/user-attachments/assets/909774ad-a93a-4d33-8459-8265d2c59d02
 PVector v = new PVector(2, 1);
 
 // Multiplication par un scalaire
-v.mult(3);         // v devient (6, 3) - double la magnitude
-v.mult(0.5);       // v devient (3, 1.5) - divise la magnitude par 2
+PVector resultat = PVector.mult(v, 3);  // Multiplie v par 3
+PVector resultatB = PVector.mult(v, -1.5);  // Multiplie v par -1.5
 
 // Division par un scalaire
-v.div(2);          // v devient (1.5, 0.75)
+PVector resultatC = PVector.div(v, 2);          // v devient (1.5, 0.75)
 ```
 
 https://github.com/user-attachments/assets/708984b6-d1a7-404b-b227-afb59d83f2d6
