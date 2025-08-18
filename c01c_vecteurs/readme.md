@@ -280,21 +280,19 @@ PVector resultatC = PVector.div(v, 2);          // v devient (1.5, 0.75)
 
 https://github.com/user-attachments/assets/708984b6-d1a7-404b-b227-afb59d83f2d6
 
-
 **Utilité** : Changer la vitesse sans changer la direction.
 
 ## Distance entre deux points
 ```java
-PVector point1 = new PVector(100, 100);
-PVector point2 = new PVector(400, 300);
+PVector point1 = new PVector(1, 2);
+PVector point2 = new PVector(4, 2);
 
-// Méthode 1 : fonction statique
+// Méthode : fonction statique (Pythagore)
 float distance = PVector.dist(point1, point2);
 
-// Méthode 2 : soustraction + magnitude
-PVector diff = PVector.sub(point2, point1);
-float distance2 = diff.mag();  // Même résultat
 ```
+
+
 
 ## Rotation d'un vecteur
 ```java
