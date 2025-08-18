@@ -246,18 +246,21 @@ void draw() {
 
 ## Addition et soustraction
 ```java
-PVector a = new PVector(3, 4);
+PVector a = new PVector(5, 4);
 PVector b = new PVector(1, 2);
 
 // Addition : a = a + b
-a.add(b);          // a devient (4, 6)
+a.add(b);          // a devient (6, 6)
 
-// Soustraction : a = a - b  
-a.sub(b);          // a devient (2, 2)
+// Soustraction : a = a - b
+a.sub(b);          // a devient (5, 4)
 
 // Sans modifier l'original
 PVector resultat = PVector.add(a, b);  // a et b restent inchangés
 ```
+
+
+
 
 ## Multiplication et division par un scalaire
 ```java
