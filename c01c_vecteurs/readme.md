@@ -268,15 +268,17 @@ https://github.com/user-attachments/assets/909774ad-a93a-4d33-8459-8265d2c59d02
 
 ## Multiplication et division par un scalaire
 ```java
-PVector v = new PVector(3, 4);
+PVector v = new PVector(2, 1);
 
 // Multiplication par un scalaire
-v.mult(2);         // v devient (6, 8) - double la magnitude
-v.mult(0.5);       // v devient (1.5, 2) - divise la magnitude par 2
+v.mult(3);         // v devient (6, 3) - double la magnitude
+v.mult(0.5);       // v devient (3, 1.5) - divise la magnitude par 2
 
 // Division par un scalaire
-v.div(2);          // v devient (0.75, 1)
+v.div(2);          // v devient (1.5, 0.75)
 ```
+
+https://github.com/user-attachments/assets/5371b42e-271e-4e32-8291-a7e7029cec31
 
 **Utilité** : Changer la vitesse sans changer la direction.
 
