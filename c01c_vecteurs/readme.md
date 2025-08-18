@@ -278,7 +278,8 @@ v.mult(0.5);       // v devient (3, 1.5) - divise la magnitude par 2
 v.div(2);          // v devient (1.5, 0.75)
 ```
 
-https://github.com/user-attachments/assets/5371b42e-271e-4e32-8291-a7e7029cec31
+https://github.com/user-attachments/assets/708984b6-d1a7-404b-b227-afb59d83f2d6
+
 
 **Utilité** : Changer la vitesse sans changer la direction.
 
