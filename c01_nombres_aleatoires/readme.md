@@ -14,6 +14,7 @@
   - [Question](#question)
 - [Exercices](#exercices)
 - [Le bruit de Perlin](#le-bruit-de-perlin)
+  - [Exemple](#exemple)
 
 # Objectifs
 - Comprendre les bases des nombres aléatoires
@@ -173,6 +174,8 @@ void draw() {
 }
 ```
 
+
+
 ## Comment faire pour gérer la distribution normale?
 Pour générer une distribution normale, on fait ce que l'on appelle un changement d'échelle :
 - On prend une valeur aléatoire générée par `randomGaussian()`
@@ -188,6 +191,8 @@ float mean = randomCounts.length / 2; // Moyenne
 
 int value = int(sd * num + mean);
 ```
+
+Voici [un exemple de code](pde://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s01_distribution_comparaison.pdez) qui compare les deux types de distribution où l'on peut voir comment on peut contrôler les valeurs.
 
 ## Exemple de cas d'utilisation
 Dans un jeu de tir, on peut utiliser une distribution normale pour gérer la précision des tirs. Lorsque le joueur tire, on génère une valeur aléatoire avec une distribution normale selon son niveau de fatigue, la distance de la cible, etc. Par exemple, après un sprint, le joueur sera plus fatigué et sa précision sera moins bonne. Ainsi, en augmentant l'écart-type, on augmente la dispersion des tirs.
@@ -314,3 +319,7 @@ De quel côté est la distribution uniforme et pourquoi?
 
 # Le bruit de Perlin
 Voici le lien vers mes notes sur le [bruit de Perlin](https://moodle.cshawi.ca/mod/page/view.php?id=10607&forceview=1)
+
+
+## Exemple
+Voici un [exemple](pde://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s01_simulation_fatigue.pdez) combinant le bruit de Perlin et la distribution normale.
