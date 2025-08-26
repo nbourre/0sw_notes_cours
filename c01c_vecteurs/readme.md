@@ -46,7 +46,7 @@
 # Vecteur : exemple de problème sans vecteurs
 
 - Voici du code représentant une balle qui rebondit aux limites de l'écran
-- [Lien pour l'exécuter](pde://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s01_no_vectors.pdez)
+- [Lien pour l'exécuter](https://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s01_no_vectors.pdez)
 
 ![alt text](assets/Image2.png)
 
