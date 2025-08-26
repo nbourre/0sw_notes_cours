@@ -1,30 +1,49 @@
-# Le déplacement avec les vecteurs <!-- omit in toc -->
-Les projets du cours sont disponibles sur [GitHub](https://github.com/nbourre/0sw_processing_exemples)
+# Déplacement d'un objet avec les vecteurs
 
-# Table des matières <!-- omit in toc -->
-- [Objectifs](#objectifs)
-- [Le déplacement avec les vecteurs](#le-déplacement-avec-les-vecteurs)
-  - [Note](#note)
-- [La vitesse](#la-vitesse)
-  - [Résumé](#résumé)
-  - [Exercices](#exercices)
-- [L'accélération](#laccélération)
-  - [Résumé](#résumé-1)
-  - [Exercices](#exercices-1)
-- [Destination cible](#destination-cible)
-- [Références](#références)
 
-# Objectifs
-- Comprendre l'utilisation d'un vecteur de vitesse
-- Comprendre l'utilisation d'un vecteur d'accélération
-- Comprendre l'utilisation des forces pour déplacer un objet
+## Objectifs
+- Comprendre le rôle du vecteur vitesse
+- Comprendre le rôle du vecteur accélération
+- Découvrir comment les forces déplacent un objet
 
-# Le déplacement avec les vecteurs
-Maintenant que nous avons vu comment représenter un vecteur, nous allons voir comment nous pouvons utiliser les vecteurs pour déplacer un objet.
+## Astuce pour visualiser les vecteurs
 
-## Note
+Pour t'aider à mieux comprendre le mouvement, tu peux utiliser la fonction suivante pour afficher un vecteur sous forme de flèche dans Processing. Elle prend en paramètre le vecteur à afficher, la position de départ, et la couleur de la flèche.
 
-Je vais utiliser une classe abstraite nommé `GraphicObject` pour représenter un objet graphique. Cette classe contient les méthodes `display` et `update`. La méthode `display` permet d'afficher l'objet graphique et la méthode `update` permet de mettre à jour l'objet graphique.
+```java
+// Affiche une flèche représentant le vecteur v à partir du point (x, y)
+void drawVectorArrow(PVector v, float x, float y, color arrowColor) {
+  pushMatrix();
+    translate(x, y);
+    stroke(arrowColor);
+    strokeWeight(2);
+    fill(arrowColor);
+    
+    // Dessine la ligne principale
+    line(0, 0, v.x, v.y);
+
+    // Dessine la tête de flèche
+    float arrowSize = 7;
+    float angle = atan2(v.y, v.x);
+
+    pushMatrix();
+      translate(v.x, v.y);
+      rotate(angle);
+      triangle(0, 0, -arrowSize, arrowSize/2, -arrowSize, -arrowSize/2);
+    popMatrix();
+  popMatrix();
+}
+```
+
+N'hésite pas à utiliser cette fonction dans tes exercices pour afficher la vitesse, l'accélération ou tout autre vecteur !
+Dans ce chapitre, tu vas apprendre à utiliser les vecteurs pour déplacer un objet dans Processing. On part de la représentation d'un vecteur, puis on l'applique au mouvement.
+
+
+## Structure de base
+
+On utilise une classe abstraite `GraphicObject` pour représenter un objet graphique. Elle possède deux méthodes principales :
+- `display` : affiche l'objet
+- `update` : met à jour sa position
 
 ```java
 abstract class GraphicObject {
@@ -43,7 +62,8 @@ abstract class GraphicObject {
 }
 ```
 
-Je vais aussi utiliser une classe `Mover` qui hérite de la classe `GraphicObject`. On modifiera la classe `Mover` pour ajouter des forces à l'objet plus tard dans ce cours.
+
+La classe `Mover` hérite de `GraphicObject`. On la modifiera plus tard pour gérer les forces.
 
 ```java
 class Mover extends GraphicObject {
@@ -74,18 +94,17 @@ class Mover extends GraphicObject {
   }
 ```
 
-# La vitesse
+
+# 1. La vitesse
 ![alt text](assets/ludicrous_speed.webp)
 
-La vitesse est un vecteur qui représente la vitesse d'un objet. La vitesse est la dérivée de la position par rapport au temps. La vitesse est donc la variation de la position par rapport au temps. La vitesse est un vecteur qui a une **direction** et une **magnitude**. La direction de la vitesse est la direction dans laquelle l'objet se déplace et la magnitude de la vitesse est la vitesse de l'objet.
+La vitesse est un vecteur : elle a une direction et une grandeur (magnitude). Elle indique à quelle vitesse et dans quelle direction l'objet se déplace.
 
-Si je dis qu'un véhicule se déplace à 20 km/h, je vous donne la magnitude de la vitesse. Cependant, je ne connais pas la direction de la vitesse. Si j'ajoute l'information que le véhicule se déplace vers le nord, je vous donne la direction de la vitesse.
+Exemple : « 20 km/h vers le nord » donne la magnitude (20 km/h) et la direction (nord).
 
-Pour déplacer un objet, on additionne la vitesse à la position de l'objet.
+Pour déplacer un objet, on ajoute le vecteur vitesse à sa position à chaque image :
 
 $$ \text{position} = \text{position} + \text{vitesse} $$
-
-Dans la classe `Mover`, on ajoute la vitesse à la position de l'objet dans la méthode `update`.
 
 ```java
 void update(int deltaTime) {
@@ -93,7 +112,8 @@ void update(int deltaTime) {
 }
 ```
 
-Voici un exemple de code qui déplace un objet en ligne droite.
+
+Exemple : déplacement en ligne droite
 
 ```java
 Mover mover;
@@ -124,39 +144,40 @@ void display() {
 }
 ```
 
-Voici le résultat de ce code.
 
+Résultat :
 ![alt text](assets/moving_example.gif)
 
-## Résumé
 
-- La vitesse est un vecteur qui a une direction et une magnitude.
-- Pour déplacer un objet, on ajoute la vitesse à la position de l'objet.
+**À retenir**
+- La vitesse est un vecteur (direction + magnitude)
+- Pour déplacer un objet, on ajoute la vitesse à la position
 
 ## Exercices
 - Reproduisez l'exemple de cette section en modifiant la vitesse de l'objet.
 
-# L'accélération
+## Exercices optionnels
+- Modifie la vitesse de l'objet pour qu'il se déplace dans une autre direction.
+- Ajoute un deuxième objet avec une vitesse différente.
+- Affiche la magnitude et la direction du vecteur vitesse à l'écran.
+
+# 2. L'accélération
 ![alt text](assets/acceleration.webp)
 
-L'accélération est un vecteur qui représente la variation de la vitesse par rapport au temps. L'accélération est la dérivée de la vitesse par rapport au temps. L'accélération est un vecteur. La direction de l'accélération est la direction dans laquelle la vitesse de l'objet change et la magnitude de l'accélération est la variation de la vitesse de l'objet.
+L'accélération est aussi un vecteur : elle indique comment la vitesse change au fil du temps (variation de la vitesse).
+
+Sur le graphique ci-dessous, la courbe bleue est la vitesse, la ligne verte est l'accélération à l'instant $t$.
 
 ![alt text](assets/Acceleration_graph.svg)
 
-Dans ce graphique, la courbe bleue représente la vitesse de l'objet. La ligne verte représente la variation de la vitesse au temps $t$ soit l'accélération.
-
-> **Note** : Ceux qui ont des connaissances en mathématiques peuvent voir que l'accélération est la dérivée de la vitesse par rapport au temps.
-
----
-
-Pour accélérer un objet, on ajoute l'accélération à la vitesse de l'objet.
+Pour accélérer un objet, on ajoute le vecteur accélération à la vitesse :
 
 $$ \text{vitesse} = \text{vitesse} + \text{accélération} $$
 
-L'équation de base pour déplacer un objet est donc :
+Donc, pour déplacer un objet avec accélération :
 
-$$ \text{vitesse} = \text{vitesse} + \text{accélération} \newline
- \text{position} = \text{position} + \text{vitesse} $$
+$$ \text{vitesse} = \text{vitesse} + \text{accélération} $$
+$$ \text{position} = \text{position} + \text{vitesse} $$
 
 Le code de la méthode `update` de la classe `Mover` devient donc :
 
@@ -182,13 +203,15 @@ Le code de la méthode `update` de la classe `Mover` devient donc :
   }
 ```
 
-Vous remarquerez que je multiplie l'accélération par 0 à la fin de la méthode `update`. Cela permet de réinitialiser l'accélération à chaque frame. Sinon, l'accélération s'accumulerait et l'objet accélérerait indéfiniment.
 
-J'ai aussi ajouté une méthode `checkEdge` qui permet de vérifier si l'objet touche les bords de la fenêtre. Si l'objet touche un bord, la vitesse de l'objet est inversée.
+Remarque :
+- On remet l'accélération à zéro à chaque frame pour éviter qu'elle ne s'accumule.
+- La méthode `checkEdge` inverse la vitesse si l'objet touche un bord.
 
 ---
 
-Voici un exemple où on ajoute de l'accélération à un objet sur l'axe des Y.
+
+Exemple : accélération sur l'axe Y (effet de gravité)
 
 ```java
 long currentTime;
@@ -240,33 +263,35 @@ void timeManagement (){
 
 ---
 
-Voici le résultat de ce code.
 
+Résultat :
 ![alt text](assets/example_acceleration.gif)
 
 ---
 
-Vous remarquerez que l'objet accélère vers le bas. C'est parce que j'ai ajouté de l'accélération sur l'axe des Y. Évidemment, on remarque aussi que cela donne un effet de gravité.
 
-En effet, la gravité est une accélération qui attire les objets vers le bas. Dans le prochain chapitre, nous allons voir comment nous pouvons utiliser les forces pour déplacer un objet.
+L'objet accélère vers le bas car l'accélération est positive sur Y : cela simule la gravité.
 
-## Résumé
-- L'accélération est un vecteur qui représente la variation de la vitesse par rapport au temps.
-- Pour accélérer un objet, on ajoute l'accélération à la vitesse de l'objet.
+
+**À retenir**
+- L'accélération est un vecteur (variation de la vitesse)
+- Pour accélérer un objet, on ajoute l'accélération à la vitesse
 
 ## Exercices
 - Reproduisez l'exemple de cette section en modifiant l'accélération de l'objet.
   - Inversez l'accélération sur l'axe des Y.
 
----
+## Exercices optionnels
+- Change la valeur de l'accélération pour simuler une gravité plus forte ou plus faible.
+- Inverse l'accélération sur l'axe Y pour voir l'objet accélérer vers le haut.
+- Ajoute une accélération sur l'axe X pour un mouvement diagonal.
 
-
-# Destination cible
+# 3. Aller vers une cible
 ![alt text](assets/cible.gif)
 
-Parfois, on veut que notre objet se déplace vers une destination. Pour cela, on peut utiliser la méthode `PVector.sub` qui permet de soustraire un vecteur à un autre vecteur.
+Pour déplacer un objet vers une destination, on utilise la soustraction de vecteurs (`PVector.sub`).
 
-Voic un exemple où l'on a modifié la classe `Mover` pour ajouter des méthodes qui permettent de déplacer l'objet vers une destination.
+Exemple : la classe `Mover` modifiée pour viser une cible
 
 ```java
 class Mover extends GraphicObject {
@@ -330,7 +355,8 @@ class Mover extends GraphicObject {
 }
 ```
 
-Voici un exemple où l'on déplace un mover vers la position de la souris.
+
+Exemple : déplacement vers la souris
 
 ```java
 long currentTime;
@@ -378,7 +404,24 @@ void timeManagement (){
 }
 ```
 
+---
+
+# Synthèse
+
+Ce chapitre t'a permis de comprendre comment utiliser les vecteurs pour déplacer un objet dans Processing :
+- La vitesse détermine la direction et la rapidité du déplacement.
+- L'accélération permet de faire varier la vitesse, simulant des effets comme la gravité.
+- En combinant ces notions, on peut déplacer un objet vers une cible ou simuler des mouvements réalistes.
+
+Pour aller plus loin, expérimente avec les exemples et les exercices proposés, puis consulte la référence “Nature of Code” pour approfondir la modélisation physique avec les vecteurs.
+
+---
+
 
 # Références
-- [Nature of Code - Chapter 1](https://natureofcode.com/book/chapter-1-vectors/)
+- [Nature of Code - Chapitre 1](https://natureofcode.com/book/chapter-1-vectors/)
+
+---
+
+
 
