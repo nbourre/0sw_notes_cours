@@ -261,10 +261,7 @@ a.sub(b);          // a devient (5, 4)
 PVector resultat = PVector.add(a, b);  // a et b restent inchangés
 ```
 
-
-
-https://github.com/user-attachments/assets/909774ad-a93a-4d33-8459-8265d2c59d02
-
+https://github.com/user-attachments/assets/11c4a151-d5f9-4dfe-ac7f-f20e9ef7bac3
 
 
 
