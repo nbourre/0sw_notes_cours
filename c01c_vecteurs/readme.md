@@ -46,7 +46,7 @@
 # Vecteur : exemple de problème sans vecteurs
 
 - Voici du code représentant une balle qui rebondit aux limites de l'écran
-- [Lien pour l'exécuter](pde://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s01_no_vectors.pdez)
+- [Fichier pour l'exécuter sur votre poste](pde://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s01_no_vectors.pdez)
 
 ![alt text](assets/Image2.png)
 
@@ -58,7 +58,7 @@
 - Imaginez maintenant que vous devez gérer l'accélération, la position d'une cible, le vent et la friction...
   - **Variables probables** : `accelX`, `accelY`, `targetX`, `targetY`, `windX`, `windY`, `frictionX`, `frictionY`
   - **En 2D** : 2 variables par concept
-  - **En 3D** : 3 variables par concept → explosion du nombre de variables !
+  - **En 3D** : 3 variables par concept → explosion du nombre de variables!
 
 ---
 
@@ -107,7 +107,7 @@ PVector target;
 - Processing offre la classe `PVector` qui représente un vecteur.
 - **Propriétés principales** :
   - `x` : Composante horizontale
-  - `y` : Composante verticale (⚠️ Y augmente vers le bas dans Processing)
+  - `y` : Composante verticale
   - `z` : Composante en profondeur (pour la 3D, optionnelle)
 
 **Création et utilisation** :
@@ -153,6 +153,8 @@ nouvelle_position.y = ancienne_position.y + vitesse.y
 // Variables globales
 PVector position;
 PVector vitesse;
+int rayon = 30;
+int diametre = rayon * 2;
 
 void setup() {
   size(600, 400);
@@ -168,13 +170,13 @@ void draw() {
   
   // 2. Dessiner la balle
   fill(255, 100, 100);
-  ellipse(position.x, position.y, 30, 30);
-  
+  ellipse(position.x, position.y, diametre, diametre);
+
   // 3. Rebond sur les bords
-  if (position.x > width - 15 || position.x < 15) {
+  if (position.x > width - rayon || position.x < rayon) {
     vitesse.x *= -1;  // Inverse la direction X
   }
-  if (position.y > height - 15 || position.y < 15) {
+  if (position.y > height - rayon || position.y < rayon) {
     vitesse.y *= -1;  // Inverse la direction Y
   }
 }
@@ -230,8 +232,8 @@ void draw() {
   background(240);
   
   // TODO: Déplacer la balle
-  // TODO: Dessiner la balle (cercle de diamètre 25)
   // TODO: Gérer les rebonds sur les 4 bords
+  // TODO: Dessiner la balle (cercle de diamètre 25)
 }
 ```
 
