@@ -36,9 +36,15 @@ Pour développer des jeux, il est essentiel de comprendre comment les forces agi
     <td><img src="assets/n4s_physics.gif" alt="alt text"></td>
     <td><img src="assets/ragdoll_physics.gif" alt="alt text"></td>
   </tr>
+
 </table>
 
-![alt text](assets/physics_bug.webp)
+<table>
+  <tr>
+    <td><img src="assets/physics_bug.webp" alt="alt text"></td>
+    <td><img src="assets/boop.gif" alt="alt text"></td>
+  </tr>
+</table>
 
 ---
 
