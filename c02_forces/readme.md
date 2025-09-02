@@ -6,6 +6,7 @@
 ---
 
 # Table des matières <!-- omit in toc -->
+- [Motivation](#motivation)
 - [Introduction](#introduction)
   - [Clone et branchage du projet](#clone-et-branchage-du-projet)
 - [Force](#force)
@@ -25,7 +26,18 @@
 - [Exercices](#exercices)
 - [Références](#références)
 
+---
 
+# Motivation
+Pour développer des jeux, il est essentiel de comprendre comment les forces agissent sur les objets. Cela nous permet de créer des mouvements réalistes et d'interagir avec l'environnement de manière convaincante.
+
+![alt text](assets/n4s_physics.gif)
+
+![alt text](assets/ragdoll_physics.gif)
+
+![alt text](assets/physics_bug.webp)
+
+---
 
 # Introduction
 Dans ce chapitre, on verra comment appliquer différents types de forces à un objet ou plusieurs
