@@ -31,9 +31,12 @@
 # Motivation
 Pour développer des jeux, il est essentiel de comprendre comment les forces agissent sur les objets. Cela nous permet de créer des mouvements réalistes et d'interagir avec l'environnement de manière convaincante.
 
-![alt text](assets/n4s_physics.gif)
-
-![alt text](assets/ragdoll_physics.gif)
+<table>
+  <tr>
+    <td><img src="assets/n4s_physics.gif" alt="alt text"></td>
+    <td><img src="assets/ragdoll_physics.gif" alt="alt text"></td>
+  </tr>
+</table>
 
 ![alt text](assets/physics_bug.webp)
 
