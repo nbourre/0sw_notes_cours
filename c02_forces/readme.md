@@ -95,7 +95,8 @@ git checkout -b c02_forces
 - C'est la loi la plus importante pour nous.
 - **La force est égale à la masse multipliée par l’accélération.**
 - L’accélération est directement proportionnelle à la force et inversement proportionnelle à la masse.
-  - Ainsi, si vous êtes sur un chariot, le plus fort que l’on vous pousse, le plus rapide que vous vous déplacerez. Toutefois, plus lourd vous êtes, plus lentement vous vous déplacerez.
+  - Ainsi, si vous êtes sur un chariot, le plus fort que l’on vous pousse, le plus rapide que vous vous déplacerez. Toutefois, plus lourd vous êtes, plus lentement vous vous déplacerez. <br />
+  ![alt text](assets/mario-kart-world-bowser-toad-drift.jpg)
 
 Ainsi la formule est :
 - $F = ma$
