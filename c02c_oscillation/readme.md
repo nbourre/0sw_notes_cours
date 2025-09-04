@@ -368,6 +368,8 @@ Réalisez un petit vaisseau simple qui pivote à l’aide des flèches gauche et
 
 ![alt text](assets/collision_circulaire.gif)
 
+- Code : Exemples/s03_collision_cercles
+
 ---
 
 ## Trouver le point de contact
@@ -393,6 +395,8 @@ float collisionPointY = ((this.position.y * autre.radius) + (autre.position.y * 
 - La théorie derrière les collisions élastiques se trouve sur [Wikipédia](https://code.tutsplus.com/when-worlds-collide-simulating-circle-circle-collisions--gamedev-769t).
 
 ![alt text](assets/collision_elastique.gif)
+
+- Voir Exemples/s04_collision_cercles_impact
 
 ---
 
