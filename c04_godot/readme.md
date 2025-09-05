@@ -63,8 +63,6 @@ Apprendre les rudiments de l’environnement de développement Godot.
   - [Attention :](#attention-)
   - [Exercice](#exercice-2)
 
-
-
 ---
 
 # Plan de leçon
@@ -81,9 +79,9 @@ Apprendre les rudiments de l’environnement de développement Godot.
 - Le langage de base est le `GDScript` qui est un pseudo-python mais pour alléger la charge cognitive nous allons utiliser le langage C# pour les premiers cours.
 - J’utiliserai l’interface en anglais pour faciliter la recherche de ressources.
 - Vous pouvez utiliser la langue qui vous convient.
-- Au moment de réviser ces notes j’utilisais la version 4.3 avec C# Mono.
+- Au moment de réviser ces notes j’utilisais la version 4.4 avec C# Mono.
 - Je vous invite à regarder les séries de vidéos suivantes :
-  - [Mes vidéos](https://youtu.be/D89lwa1TZ5c?si=Lb6ZWMvspNOkuoea) sur Godot (Attention! Certaines datent de l’ancienne version)
+  - [Mes vidéos](https://youtu.be/D89lwa1TZ5c?si=Lb6ZWMvspNOkuoea) sur Godot (Attention! Certaines datent d'ancienne version)
 
 ---
 
@@ -99,7 +97,7 @@ Apprendre les rudiments de l’environnement de développement Godot.
   - Rechercher des projets dans un dossier (Scan)
   - Importer un projet
   - Effectuer d’autres opérations sur des projets
-- Pour modifier la langue, il suffit de cliquer sur le bouton dans le coin supérieur droit avec une icône de globe.
+- Pour modifier la langue, il suffit de cliquer sur le bouton dans le coin supérieur droit où il est inscrit "Settings"
 
 ---
 
@@ -174,13 +172,14 @@ Apprendre les rudiments de l’environnement de développement Godot.
 - L’environnement **2D** sert principalement pour le… 2D et les interfaces.
 - L’environnement **3D** sert à travailler avec les meshes, l’éclairage, et le design de niveau pour les jeux 3D.
 - L’environnement **Script** est un éditeur de code complet avec un débogueur.
+- L'environnement **Game** permet de visualiser le jeu directement dans l'environnement pour faire des tests rapides.
 - L’environnement **AssetLib** est une librairie de ressources telles que des scripts, des images, des add-ons, etc.
 
 ---
 
 # Scènes et nœuds
 
-- [Documentation officielle](https://docs.godotengine.org/en/stable/getting_started/step_by_step/scenes_and_nodes.html)
+- [Documentation officielle](https://docs.godotengine.org/fr/4.x/getting_started/step_by_step/nodes_and_scenes.html)
 - Ma vidéo [Débuter avec Godot 4](https://www.youtube.com/watch?v=D89lwa1TZ5c)
 - Godot fonctionne sous le concept de **scènes** et **nœuds**.
 
