@@ -5,7 +5,7 @@ Apprendre les rudiments de l’environnement de développement Godot.
 ---
 
 # Table des matières <!-- omit in toc -->
-- [Préface](#préface)
+- [Préambule](#préambule)
 - [Plan de leçon](#plan-de-leçon)
 - [Notes préliminaires](#notes-préliminaires)
 - [Gestionnaire de projets](#gestionnaire-de-projets)
@@ -61,13 +61,16 @@ Apprendre les rudiments de l’environnement de développement Godot.
   - [Exemple de structure de jeu](#exemple-de-structure-de-jeu)
   - [](#)
 - [Conclusion : Premiers pas avec Godot](#conclusion--premiers-pas-avec-godot)
+  - [Bilan des apprentissages](#bilan-des-apprentissages)
+  - [Conseils pour progresser](#conseils-pour-progresser)
+  - [Pour aller plus loin](#pour-aller-plus-loin)
 - [Note importante](#note-importante)
   - [Attention :](#attention-)
   - [Exercice](#exercice-2)
 
 ---
 
-# Préface
+# Préambule
 
 Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub [0sw_projets_cours](https://github.com/nbourre/0sw_projets_cours) qui contient les projets de cours. Vous pouvez aussi fourcher le dépôt si vous préférez.
 
@@ -576,6 +579,7 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
 - Ce patron permet à un nœud d’envoyer un message que certains nœuds peuvent écouter et réagir en conséquence.
   - Par exemple, au lieu de vérifier continuellement si un bouton est appuyé, il suffit que le bouton envoie un signal lorsqu’il est appuyé.
 - Lectures suggérées :
+  - [Documentation officielle sur les signaux](https://docs.godotengine.org/fr/4.x/classes/class_signal.html)
   - [Game Programming Patterns - Observers](https://gameprogrammingpatterns.com/observer.html)
   - [Wikipedia - Observer Pattern](https://en.wikipedia.org/wiki/Observer_pattern)
 - Les signaux permettent de découpler les objets du jeu, ce qui permet une meilleure organisation et gestion du code.
@@ -674,10 +678,10 @@ GetNode<Timer>("Timer").Timeout += _on_timer_timeout;
 
 ## Signaux personnalisés
 
-- Il est possible de créer des signaux personnalisés ([Source](https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html#custom-signals)).
+- Il est possible de créer des signaux personnalisés ([Source](https://docs.godotengine.org/fr/stable/getting_started/step_by_step/signals.html#custom-signals)).
 - Exemples d’utilité :
   - Un personnage tire et je veux signaler que le projectile a été tiré.
-  - Des ennemis approchent un lieu précis, je veux signaler que l’événement est arrivé.
+  - Des ennemis approchent un lieu précis, on veut signaler que l’événement est arrivé.
   - Etc.
 - Pour émettre un signal, on appelle la méthode `EmitSignal()`.
 
@@ -773,12 +777,34 @@ public class Player : CharacterBody2D
 
 # Conclusion : Premiers pas avec Godot
 
-Vous avez appris à :
-- Créer et instancier des scènes dans Godot.
-- Gérer plusieurs instances et ajuster leurs propriétés.
-- Structurer un projet avec une approche modulaire en utilisant des scènes.
 
-Ne vous inquiétez pas si tout n’est pas encore clair, cela deviendra plus naturel en travaillant sur des projets plus avancés.
+## Bilan des apprentissages
+
+Au terme de cette introduction, vous avez découvert :
+- L’interface de Godot et ses principaux volets (Scene, Inspector, FileSystem, etc.)
+- La gestion des projets et la création d’un nouveau projet
+- Le concept fondamental de scènes et de nœuds, et leur organisation hiérarchique
+- Comment ajouter et configurer des nœuds (Label, Button, Panel, Node2D, etc.)
+- L’exécution d’une scène et la configuration de la scène principale
+- L’attachement de scripts aux nœuds, l’utilisation de C# et GDScript
+- La connexion d’événements (signaux) pour interagir avec l’interface
+- Les fonctions de rappel (_Ready, _Process, _PhysicsProcess, etc.)
+- L’instanciation de scènes et la gestion de plusieurs instances
+- La structuration d’un projet de jeu avec une approche modulaire
+
+## Conseils pour progresser
+- N’hésitez pas à explorer l’interface et à tester les différents types de nœuds
+- Consultez la documentation officielle et les vidéos recommandées pour approfondir
+- Essayez de modifier les exemples pour mieux comprendre leur fonctionnement
+- Travaillez sur de petits projets pour vous familiariser avec la logique de Godot
+
+## Pour aller plus loin
+- Expérimentez avec les signaux personnalisés et la gestion des groupes
+- Explorez les méthodes surchargeables pour personnaliser le comportement des nœuds
+- Testez l’instanciation dynamique de scènes pour des jeux plus complexes
+- Personnalisez vos projets en modifiant les propriétés, les scripts et la structure des scènes
+
+Ne vous inquiétez pas si tout n’est pas encore clair : la pratique et l’expérimentation sont essentielles pour progresser. Plus vous créerez de projets, plus l’utilisation de Godot deviendra intuitive.
 
 ---
 
