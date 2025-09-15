@@ -1,6 +1,8 @@
 # Algorithme d'agrégation <!-- omit in toc -->
 Programmation créative - L’agrégation et les collisions
 
+![alt text](assets/flocking.webp)
+
 ## Table des matières <!-- omit in toc -->
 - [Plan de leçon](#plan-de-leçon)
 - [Récupération du projet](#récupération-du-projet)
@@ -80,7 +82,7 @@ func steering(target: Vector2) -> Vector2:
 
 # Qu’est-ce qu’une agrégation?
 - Une agrégation est un groupe d’agents dans lequel chaque individu est indépendant et dépendant des autres individus
-- Dans la littérature, on va lire sur le *swarm*|*flocking behaviour*
+- Dans la littérature, on va lire sur le *swarm* ou *flocking behaviour*
 - Chaque individu se nomme un *boid*
 - Synonyme : Essaim, troupeau, banc, volée, etc.
 
@@ -104,6 +106,8 @@ Banc de thons
 - L’addition de ces trois forces sur un ensemble d’agents simule l’effet du comportement de troupeau chez les animaux.
 
 ![alt text](assets/coh_sep_ali.png)
+
+> **Note** : On peut ajouter d’autres forces comme l’attraction vers une cible ou la répulsion d’un obstacle.
 
 ---
 
@@ -182,6 +186,27 @@ Voici ce que vous devriez voir
 - Calculer la moyenne des vitesses du voisinage
 - Calculer la force de braquage avec la moyenne trouvée
 
+```gdscript
+# Calcul de la force d'alignement (se déplacer dans la même direction que les boids voisins)
+func alignment(boids: Array) -> Vector2:
+	var average_velocity = Vector2()
+	var total = 0
+	
+	for other in boids:
+		var distance = location.distance_to(other.position)
+		if distance < radius_alignment and other != self:
+			average_velocity += other.velocity  # Ajouter la vitesse des autres boids voisins
+			total += 1
+		if total > max_neighbor - 1 :
+			break
+	if total > 0:
+		average_velocity /= total  # Moyenne des vitesses des boids voisins
+		average_velocity = average_velocity.normalized() * top_speed
+		var steer = average_velocity - velocity  # Calculer la force de direction pour s'aligner
+		steer = steer.limit_length(top_steer)
+		return steer
+	return Vector2()
+```
 
 ### Visualisation
 - Dans l'inspecteur, activez la propriété `Alignment`
@@ -202,6 +227,25 @@ Voici ce que vous devriez voir
 ### Algo
 - Cible <- Calculer la moyenne des positions des voisins
 - Calculer le vecteur de braquage pour atteindre la cible
+
+```gdscript
+# Calcul de la force de cohésion (se rapprocher des autres boids)
+func cohesion(boids: Array) -> Vector2:
+	var average_position = Vector2()
+	var total = 0
+
+	for other in boids:
+		var distance = location.distance_to(other.position)
+		if distance < radius_cohesion and other != self:
+			average_position += other.position  # Ajouter les positions des boids voisins
+			total += 1
+		if total > max_neighbor - 1 :
+			break
+	if total > 0:
+		average_position /= total  # Moyenne des positions des boids voisins
+		return seek(average_position)  # Chercher à se rapprocher du centre de la masse
+	return Vector2()
+```
 
 ---
 
@@ -231,6 +275,7 @@ Voici ce que vous devriez voir.
 ---
 
 # Références
+- [En 5 niveaux de difficulté : Comment fonctionne un banc de poissons?](https://www.youtube.com/watch?v=Ch7VxxTBe1c)
 - http://en.wikipedia.org/wiki/Swarm_behaviour
 - http://processing.org/examples/flocking.html
 - http://igeo.jp/tutorial/43.html
