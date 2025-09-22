@@ -24,6 +24,7 @@
   - [Contrôler une animation avec `AnimationPlayer`](#contrôler-une-animation-avec-animationplayer)
 - [Détail sur l'`AnimationPlayer`](#détail-sur-lanimationplayer)
 - [Résumé](#résumé)
+- [Références](#références)
 
 ---
 
@@ -76,7 +77,7 @@
 - Glissez le fichier d'image dans le volet *FileSystem*
 - Ensuite, vous aurez accès à ce fichier dans les ressources du projet
 
-![alt text](assets/godot_import_image.gif)
+![alt text](assets/drag_drop_spritesheet.gif)
 
 ---
 
@@ -87,8 +88,8 @@
   - CharacterBody2D
     - AnimatedSprite2D
     - CollisionShape2D
-- Lien vers la documentation officielle: [AnimatedSprite](https://docs.godotengine.org/en/stable/tutorials/2d/2d_sprite_animation.html)
-- Projet de démonstration: a20c02a_animatedSprite
+- Lien vers la documentation officielle: [AnimatedSprite](https://docs.godotengine.org/fr/stable/tutorials/2d/2d_sprite_animation.html)
+
 
 ---
 
@@ -100,7 +101,7 @@
     - Si le volet n’apparaît pas, cliquer sur SpriteFrames
   - Ce volet sert à définir les animations
 
-![alt text](assets/godot_animatedSprite.webp)
+![alt text](assets/spriteframe_new.gif)
 
 ---
 
@@ -136,13 +137,13 @@ Une fois que l'animation est prête, il est possible de contrôler l'animation �
 ```gd
 extends CharacterBody2D
 
-@onready var _animated_sprite = $AnimatedSprite2D
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-func _process(_delta):
+func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_right"):
-		_animated_sprite.play("run")
+		animated_sprite.play("run")
 	else:
-		_animated_sprite.stop()
+		animated_sprite.stop()
 ```
 
 > **Note**: Si on a suivi les étapes précédentes, il devrait y avoir un bogue. Pourquoi?
@@ -274,3 +275,10 @@ func _process(_delta):
 - Pour animer un sprite dans Godot, on utilise un `AnimatedSprite` ou un `AnimationPlayer`
 - `AnimatedSprite` est utilisé pour des animations simples
 - `AnimationPlayer` est utilisé pour des animations plus complexes
+
+---
+
+# Références
+- [Godot Docs – 2D Sprite Animation](https://docs.godotengine.org/fr/stable/tutorials/2d/2d_sprite_animation.html)
+- [Godot Docs – AnimationPlayer](https://docs.godotengine.org/fr/stable/classes/class_animationplayer.html)
+- [Godot Docs - Animation](https://docs.godotengine.org/fr/stable/tutorials/animation/index.html)
