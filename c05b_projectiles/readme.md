@@ -14,7 +14,6 @@
 - [Optimisation des projectiles (Object pooling)](#optimisation-des-projectiles-object-pooling)
   - [Création du `Pool` d'objets](#création-du-pool-dobjets)
   - [Modification du tireur pour utiliser le `Pool`](#modification-du-tireur-pour-utiliser-le-pool)
-  - [Modification du projectile](#modification-du-projectile)
 - [Autres améliorations possibles](#autres-améliorations-possibles)
 - [Conclusion](#conclusion)
 
@@ -57,22 +56,24 @@ On attachera un script au `Node2D` pour gérer le mouvement du projectile.
 
 ```gd
 extends Node2D
+class_name Projectile
 
-var speed = 750
+var speed : int = 750
 
-func _physics_process(delta):
-    position += transform.x * speed * delta
+func _physics_process(delta: float) -> void:
+	position += transform.x * speed * delta
+	
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	# On utilise mobs, mais cela peut être n'importe quel groupe
+	if body.is_in_group("mobs"):
+		body.queue_free()
+	queue_free()
 
-func _on_Bullet_body_entered(body):
-    # On utilise mobs, mais cela peut être n'importe quel groupe
-    if body.is_in_group("mobs"):
-        body.queue_free()
-    queue_free()
 ```
 
-Il faudra connecter le signal `body_entered` de l'`Area2D` à la méthode `_on_Bullet_body_entered` pour gérer les collisions.
+Il faudra connecter le signal `body_entered` de l'`Area2D` à la méthode `_on_area_2d_body_entered` pour gérer les collisions.
 
-> **Note** : La propriété `transform` est celle que l'on retrouve dans l'inspecteur pour les noeuds 2D. Elle représente la transformation du noeud (position, rotation, échelle).
+> **Note** : La propriété `transform` est celle que l'on retrouve dans l'inspecteur pour les noeuds 2D. Elle représente la transformation du noeud (position, rotation, échelle) par rapport à son parent. `transform.x` est un vecteur unitaire qui pointe dans la direction locale "droite" du noeud, en tenant compte de sa rotation.
 
 ### Explication
 - On retire le projectile lorsqu'il entre en collision avec un autre corps.
@@ -102,10 +103,9 @@ Voici la hiérarchie de noeud que l'on aura :
 
 ```gd
 extends CharacterBody2D
+class_name Player
 
-@export var speed = 200
-
-# Charger la scène du projectile
+@export var speed : int = 200
 @export var bullet_scene : PackedScene
 
 func get_input():
@@ -115,17 +115,15 @@ func get_input():
 	velocity = transform.x * dir * speed
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
-	
-	
-func _physics_process(delta):
+
+func _physics_process(delta: float) -> void:
 	get_input()
-	
-	move_and_slide()
-	
-func shoot():
-	var b = bullet_scene.instantiate()
+
+func shoot() -> void :
+	var b : Projectile = bullet_scene.instantiate()
 	get_parent().add_child(b)
 	b.global_transform = $Muzzle.global_transform
+
 
 ```
 
@@ -149,8 +147,8 @@ extends CharacterBody2D
 
 @export var speed = 200
 @export var bullet_scene : PackedScene
-var shoot_interval = 1.0 / 5.0  # 5 balles par seconde
-var time_since_last_shot = 0.0  # Chronomètre pour le tir
+var shoot_interval : float = 1.0 / 5.0  # 5 balles par seconde
+var last_shot : float = 0.0  # Chronomètre pour le tir
 
 func get_input(delta):
 	look_at(get_global_mouse_position())
@@ -161,12 +159,12 @@ func get_input(delta):
 
 	# Vérifier si l'intervalle de tir est respecté
 	if Input.is_action_just_pressed("shoot") :
-		if (time_since_last_shot >= shoot_interval) :
+		if (last_shot >= shoot_interval) :
 			shoot()
-			time_since_last_shot = 0.0  # Réinitialiser le chronomètre après le tir
+			last_shot = 0.0  # Réinitialiser le chronomètre après le tir
 
 func _physics_process(delta):
-	time_since_last_shot += delta  # Accumuler le temps écoulé entre les tirs
+	last_shot += delta  # Accumuler le temps écoulé entre les tirs
 	get_input(delta)
 	move_and_slide()
 
@@ -195,36 +193,36 @@ Voici le code pour le `Pool` de projectiles :
 
 ```gd
 extends Node
+class_name BulletPool
 
-@export var bullet_scene : PackedScene  # Scène du projectile
-@export var pool_size : int = 20  # Taille du pool
+@export var bullet_scene : PackedScene
+@export var pool_size : int = 20
 
 var bullet_pool : Array = []
 var available_bullets : Array = []
 
-func _ready():
-    # Créer le pool de projectiles
-    for i in range(pool_size):
-        var bullet = bullet_scene.instantiate()
-        bullet.connect("bullet_out_of_screen", self, "_on_bullet_out_of_screen")
-        add_child(bullet)
-        bullet.visible = false  # Masquer le projectile au début
-        bullet_pool.append(bullet)
-        available_bullets.append(bullet)
+func _ready() -> void:
+	for i in range(pool_size):
+		var bullet = bullet_scene.instantiate() as Projectile
+		bullet.bullet_out_of_screen.connect(_on_bullet_out_of_screen.bind(bullet))
+		add_child(bullet)
+		bullet.visible = false  # Masquer le projectile au début
+		bullet_pool.append(bullet)
+		available_bullets.append(bullet)	
 
-# Fonction pour récupérer un projectile du pool
-func get_bullet() -> Node2D:
-    if available_bullets.size() > 0:
-        var bullet = available_bullets.pop_back()
-        bullet.visible = true  # Rendre le projectile visible lorsqu'il est tiré
-        return bullet
-    else:
-        return null  # Si aucun projectile n'est disponible, retourner null
+func get_bullet() -> Projectile:
+	if available_bullets.size() > 0:
+		var bullet = available_bullets.pop_back()
+		bullet.visible = true  # Rendre le projectile visible lorsqu'il est tiré
+		return bullet
+	else:
+		return null  # Si aucun projectile n'est disponible, retourner null
+	
 
 # Réinitialiser le projectile lorsqu'il est hors de l'écran
 func _on_bullet_out_of_screen(bullet):
-    bullet.visible = false  # Masquer le projectile
-    available_bullets.append(bullet)  # Réintégrer le projectile dans le pool
+	bullet.visible = false  # Masquer le projectile
+	available_bullets.append(bullet)  # Réintégrer le projectile dans le pool
 
 ```
 
@@ -246,23 +244,22 @@ Il faudra modifier le `Player` à quelques endroits pour utiliser le `BulletPool
 
 ```gd
 @export var bullet_pool_scene : PackedScene  # Référence au gestionnaire de pool
-var bullet_pool : Node
+var bullet_pool : BulletPool
 
 #...
 
 func _ready() -> void:
-	bullet_pool = bullet_pool_scene.instantiate()
-	get_parent().add_child(bullet_pool)
+	bullet_pool = bullet_pool_scene.instantiate() as BulletPool
+	get_parent().add_child.call_deferred(bullet_pool)
 
 #...
 
 func shoot():
-    var bullet = bullet_pool.get_bullet()  # Récupérer un projectile du BulletPool
-    if bullet:
-        bullet.global_transform = $Muzzle.global_transform  # Positionner le projectile au niveau du Muzzle
-        bullet.visible = true  # Rendre le projectile visible
-```
-
+	var bullet : Projectile = bullet_pool.get_bullet() # Récupérer un projectile du BulletPool
+	if bullet :
+		bullet.global_transform = $Muzzle.global_transform # Positionner le projectile au niveau du Muzzle
+		bullet.visible = true # Rendre le projectile visible
+    
 **Explication**
 - `bullet_pool_scene` : Référence à la scène du `BulletPool`.
 - `bullet_pool` : Instance du `BulletPool` dans le jeu.
@@ -274,6 +271,7 @@ Le projectile émettra un signal lorsqu'il sortira de l'écran pour être recycl
 
 ```gd
 extends Node2D
+class_name Projectile
 
 var speed = 750
 
@@ -296,7 +294,7 @@ func _on_Bullet_body_entered(body):
 
 func is_out_of_screen() -> bool:
     var screen_rect = get_viewport_rect()
-    return position.x < 0 or position.x > screen_rect.size.x or position.y < 0 or position.y > screen_rect.size.y
+    return not screen_rect.has_point(position)
 
 ```
 
