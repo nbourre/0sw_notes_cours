@@ -26,29 +26,37 @@
 - [Résumé](#résumé)
 - [Références](#références)
 
+
 ---
 
 # Plan de leçon
-- Feuille de sprites (*spritesheet*)
-- Ajouter une feuille dans Godot
-- `AnimatedSprite`
-- Contrôle de base
-- Déplacer un joueur
+- Introduction aux spritesheets et leur importance
+- Ajouter une feuille de sprites dans Godot
+- Animation avec `AnimatedSprite2D`
+  - Configuration des `SpriteFrames`
+  - Ajouter des images d'animation
+  - Contrôle par script
+- Animation avec `AnimationPlayer`
+  - Configuration de la scène avec `Sprite2D`
+  - Ajuster les cadres (Hframes/Vframes)
+  - Créer et configurer les animations
+  - Contrôle par script
+- Comparaison entre `AnimatedSprite2D` et `AnimationPlayer`
 
 ---
 
 # Notes
 - Plusieurs des images que j'aie prises dans ces diapositives proviennent du site itch.io
 - Il y a plusieurs artistes qui offrent des ressources gratuites pour les jeux
-- Plusieurs ensembles d'images sont à vendre à des prix très abordables (moins d'un repas à la cafétéria! 😅)
+- Plusieurs ensembles d'images sont à vendre à des prix très abordables (moins dispendieux qu'un repas à la cafétéria! 😅)
 
 ---
 
 # Avant de débuter
-- Avec le dépôt « 0sw_projets_cours »
-- Faites un « git pull » pour mettre à jour le code
-- Créez une nouvelle branche « c06_spritesheet »
-- Assurez-vous que vous êtes sur la bonne branche soit « git branch »
+- Avec le dépôt `0sw_projets_cours`
+- Faites un `git pull` pour mettre à jour le code
+- Créez une nouvelle branche `c06_spritesheet`
+- Assurez-vous que vous êtes sur la bonne branche soit `git branch`
 
 ---
 
@@ -61,15 +69,13 @@
 
 # Les sprites animés
 - Les sprites animés représentent des dessins qui s’animent dans un jeu 2D
-- Généralement, un sprite est une feuille avec plusieurs dessins de la même animation dont chacun est une pose différente
+- Généralement, un *spritesheet* est une feuille avec plusieurs dessins (*sprites*) de la même animation dont chacun est une pose différente
 
 ![alt text](assets/Run-Sheet.png)
 
-- Pour animer, on affiche qu’une seule partie de la feuille à l’aide d’une « fenêtre » qui se promène dans celle-ci pour donner l’impression d’animation
+- Pour animer, on affiche qu’une seule partie de la feuille à l’aide d’une "*fenêtre*" qui se promène dans celle-ci pour donner l’impression d’animation
 
-![alt text](assets/Run.gif)
-
-<!-- TODO : Faire une animation de fenêtre sur une feuille de sprite -->
+![alt text](assets/animated_demo.gif)
 
 ---
 
