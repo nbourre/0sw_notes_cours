@@ -3,6 +3,7 @@
 ![alt text](assets/hex_map.png)
 
 # Table des matières <!-- omit in toc -->
+- [Pré-requis](#pré-requis)
 - [Introduction](#introduction)
 - [Création d’un nouveau TileSet](#création-dun-nouveau-tileset)
   - [Utilisation d'un tilesheet](#utilisation-dun-tilesheet)
@@ -27,6 +28,14 @@ Src : https://youtu.be/G6TC6ukmSc4?si=LgjDakCLC3O_O4qk&t=188
 prj : everthing -> jackie-codes
 
 -->
+
+# Pré-requis
+- Utilisez le projet `c07_plateforme` comme base.
+
+![alt text](assets/c07_plateforme_start.gif)
+
+---
+
 # Introduction
 
 Une **TileMap** est une grille de tuiles utilisée pour créer la disposition d’un jeu. Il y a plusieurs avantages à utiliser des nœuds `TileMapLayer` pour concevoir vos niveaux. Tout d'abord, ils vous permettent de dessiner une mise en page en "peignant" des tuiles sur une grille, ce qui est beaucoup plus rapide que de placer des nœuds `Sprite2D` individuellement un par un. Ensuite, ils permettent des niveaux plus grands car ils sont optimisés pour dessiner un grand nombre de tuiles. Enfin, ils vous permettent d'ajouter des fonctionnalités supplémentaires à vos tuiles avec des formes de collision, d'occlusion et de navigation.
@@ -49,12 +58,11 @@ Cette démonstration utilise les tuiles suivantes tirées du pack ["Abstract Pla
 
 
 
-Créez un nouveau nœud **TileMapLayer**, puis sélectionnez-le et créez une nouvelle ressource **TileSet** dans l'inspecteur :
+1. Créez un nouveau nœud **TileMapLayer**
+2. Sélectionnez-le nouveau noeud `TileMapLayer`
+3. Dans la propriété `Tile Set`, cliquez dessus pour créer une nouvelle ressource **TileSet** dans l'inspecteur :
 
 ![Création d'une nouvelle ressource TileSet dans le nœud TileMapLayer](assets/using_tilesets_create_new_tileset.webp)
-
-
-> **Note** : Pour ceux qui ont utilisé les versions précédentes à la version 4.3, le noeud pour créer des maps de tuiles s'appele `TileMap` et non `TileMapLayer`.
 
 ---
 
@@ -63,7 +71,7 @@ Créez un nouveau nœud **TileMapLayer**, puis sélectionnez-le et créez une no
 Une fois que vous avez créé un **TileSet**, vous devez y ajouter des tuiles. Vous pouvez le faire dans l'éditeur de **TileSet**.
 
 1. Ouvrez l'éditeur **TileSet** qui est dans le volet inférieur de l'éditeur de scène.
-2. Cliquez sur le bouton "Nouveau TileSet" en haut de l'éditeur.
+2. Ajustez la dimension des tuiles dans la propriété `Tile Size` de l'éditeur de **TileSet**. Dans notre exemple, les tuiles sont de 64×64 pixels.
 3. Cliquez sur "Ajouter une texture" et sélectionnez votre image de tuiles (*tilesheet*).
 4. Ajustez la taille des tuiles en fonction des dimensions de votre *tilesheet*. Dans le cas de notre exemple, les tuiles sont de 64×64 pixels.
 
@@ -98,7 +106,11 @@ Si vous utilisez la navigation 2D, vous devrez également définir des polygones
 
 Enfin, si vous utilisez des lumières et des ombres 2D ou des particules GPUParticles2D, vous voudrez peut-être également que votre TileSet puisse projeter des ombres et entrer en collision avec des particules. Cela nécessite de définir des polygones d'occlusion pour les tuiles "solides" sur le TileSet.
 
-Pour pouvoir définir des formes de collision, de navigation et d'occlusion pour chaque tuile, vous devrez d'abord créer une **couche de physique**, de **navigation** ou d'**occlusion** pour la ressource `TileSet`. Pour ce faire, sélectionnez le nœud TileMapLayer, cliquez sur la valeur de la propriété `TileSet` dans l'inspecteur pour l'éditer, puis dépliez les `couches de physique (Physics Layers)` et choisissez `Ajouter un élément (Add Element)`. :
+Pour pouvoir définir des formes de collision, de navigation et d'occlusion pour chaque tuile, vous devrez d'abord créer une **couche de physique**, de **navigation** ou d'**occlusion** pour la ressource `TileSet`.
+
+Pour ce faire,
+1. Sélectionnez le nœud `TileMapLayer` dans la scène.
+2. Cliquez sur la valeur de la propriété `TileSet` dans l'inspecteur pour l'éditer, puis dépliez les `couches de physique (Physics Layers)` et choisissez `Ajouter un élément (Add Element)`.
 
 ![alt text](assets/add_physics_layer.gif)
 
@@ -132,7 +144,7 @@ On peut aussi utiliser le rectangle de base pour créer des formes plus complexe
 ---
 
 ## Exercices
-- Attribuez des formes de collision à toutes les tuiles rouges qui ont une surface de marche.
+- Attribuez des formes de collision à toutes les tuiles rouges qui ont une surface pour marcher.
 
 ---
 
@@ -251,6 +263,9 @@ Une fois que vos tuiles et leurs propriétés sont configurées, vous pouvez les
 ---
 
 ## Peinture de tuiles automatiques
+
+> **Note :** Officiellemeent, la peinture de tuiles automatiques ne fonctionne qu'avec des tuiles carrées sans pentes. Il faudra ajouter une couche pour les terrains avec des pentes.
+
 Si vous avez configuré un jeu de terrain, vous pouvez peindre des tuiles automatiquement en utilisant l'outil `Pinceau` :
 
 1. Sélectionnez le volet `TileMap`
