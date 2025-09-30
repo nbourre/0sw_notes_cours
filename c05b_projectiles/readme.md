@@ -259,7 +259,9 @@ func shoot():
 	if bullet :
 		bullet.global_transform = $Muzzle.global_transform # Positionner le projectile au niveau du Muzzle
 		bullet.visible = true # Rendre le projectile visible
-    
+
+```
+
 **Explication**
 - `bullet_pool_scene` : Référence à la scène du `BulletPool`.
 - `bullet_pool` : Instance du `BulletPool` dans le jeu.
