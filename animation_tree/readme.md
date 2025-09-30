@@ -268,5 +268,5 @@ Si tout fonctionne bien, on devrait avoir un résultat similaire à celui-ci.
 ---
 
 # Référence
-- [KidsCanCode.org : Controlling animation states](https://kidscancode.org/godot_recipes/3.x/animation/animation_state_machine/)
+- [KidsCanCode.org : Controlling animation states](https://kidscancode.org/godot_recipes/4.x/animation/using_animation_sm/index.html)
 - [GDQuest - Finite state machine](https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/)
