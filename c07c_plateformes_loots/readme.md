@@ -12,7 +12,7 @@ Pour rendre le jeu plus amusant, on peut ajouter des pièces (ou objets) à rama
 
 Voici mon résultat du montage :
 
-![alt text](assets/nodes_completed.png)
+![alt text](assets/nodes_completed.gif)
 
 ![alt text](assets/coins_in_scene.png)
 
