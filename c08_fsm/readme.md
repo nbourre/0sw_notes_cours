@@ -752,7 +752,7 @@ func exit() -> void:
 
 ## Solutions complètes
 
-Vous avez accès aux projets ayant les solutions complètes soit `c07_platformer_fsm` et `c08_rpg_done` respectivement.
+Vous avez accès aux projets ayant les solutions complètes soit `c08_platformer_fsm` (en C#) et `c08_fsm_done` respectivement.
 
 Le projet platformer est fait à l'aide de C# et le projet RPG est fait à l'aide de GDScript.
  
