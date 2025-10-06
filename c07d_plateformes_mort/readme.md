@@ -1,9 +1,15 @@
 # Mourir <!-- omit in toc -->
 
-# Table des matières <!-- omit in toc -->
-<!-- Générer la table des matières automatiquement avec l'extension Markdown All in One -->
-
 ---
+
+# Table des matières <!-- omit in toc -->
+- [Introduction](#introduction)
+- [Mesurer la hauteur de la chute](#mesurer-la-hauteur-de-la-chute)
+- [Configurer les limites de la caméra](#configurer-les-limites-de-la-caméra)
+- [Créer une zone de mort (*Kill Zone*)](#créer-une-zone-de-mort-kill-zone)
+	- [Ajoutez la détection de collision](#ajoutez-la-détection-de-collision)
+- [Références](#références)
+
 
 # Introduction
 Dans le jeu actuel, lorsque le joueur tombe dans un trou, il continue à tomber indéfiniment.
@@ -32,7 +38,7 @@ Dans le jeu actuel, lorsque le joueur tombe dans un trou, il continue à tomber 
 8. Pour la propriété `Shape` du `CollisionShape2D`, choisissez `WorldBoundaryShape2D`.
 9. Déplacez le nœud `KillZone` en dessous de la caméra, juste en dessous de la limite inférieure.
 
-## Ajoutezz la détection de collision
+## Ajoutez la détection de collision
 10. Ajoutez un script à la scène `KillZone` pour gérer la détection de collision avec le joueur.
 11. Dans le script, connectez le signal `body_entered` pour détecter quand le joueur entre dans la zone de mort.
 12. Pour tester, affichez un message dans la console lorsque le joueur entre dans la zone de mort.
