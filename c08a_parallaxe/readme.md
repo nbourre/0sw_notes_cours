@@ -1,83 +1,90 @@
 # La parallaxe <!-- omit in toc -->
 
+# Table des matières <!-- omit in toc -->
 - [Introduction](#introduction)
-- [ParallaxBackground avec Godot](#parallaxbackground-avec-godot)
-  - [ParallaxLayer](#parallaxlayer)
+- [Parallax2D avec Godot 4](#parallax2d-avec-godot-4)
+  - [Propriétés importantes](#propriétés-importantes)
   - [Structure typique](#structure-typique)
 - [Défilement automatique](#défilement-automatique)
+  - [Bonnes pratiques sur les images](#bonnes-pratiques-sur-les-images)
 
+
+---
 
 # Introduction
-- La parallaxe donne une impression de profondeur en faisant défiler plusieurs couches d’images à différentes vitesses, ce qui permet de simuler un monde 3D en 2D.
-- On simule la parallaxe avec des images qui défilent à des vitesses variées
-- Pour simplifier la compréhension, nous allons prendre un décor à deux couches
-  - Disons `couche_0` pour le fond et `couche_1` pour le devant
-- `couche_0` restera immobile, car celle-ci représentera du décor lointain tel que des montages ou encore des étoiles
-- `couche_1` déroulera à une vitesse donnée, mais moins rapide que celle de la caméra disons 50%
-- Lors du défilement, si l’on atteint la limite de la couche_1, on refera une affiche de celle-ci à partir de l’autre extrémité
+- La **parallaxe** donne une impression de profondeur en faisant défiler plusieurs couches d’images à différentes vitesses, ce qui permet de simuler un monde 3D en 2D.
+- On simule la parallaxe avec des images qui défilent à des vitesses variées.
+- Pour simplifier la compréhension, prenons un décor à deux couches :
+
+  - `couche_0` pour le fond (immobile, ex. montagnes ou étoiles)
+  - `couche_1` pour le devant (défilement à 50 % de la vitesse de la caméra)
+- Lors du défilement, si l’on atteint la limite d’une image, on la répète à partir de l’autre extrémité.
 
 ![Alt text](assets/theory_live.gif)
 
-# ParallaxBackground avec Godot
+---
+
+# Parallax2D avec Godot 4
 
 ![Alt text](assets/Example.gif)
 
-- Pour faire un effet parallaxe avec Godot, on peut utiliser le nœud `ParallaxBackground`
-- Ensuite, il faut lui ajouter les nœuds enfants `ParallaxLayer`
-- Dans `ParallaxLayer`, il faut ensuite ajouter l’image que l’on désire via le nœud `Sprite`
+- Depuis **Godot 4**, les anciens nœuds `ParallaxBackground` et `ParallaxLayer` ont été **remplacés par un seul nœud : `Parallax2D`**.
+- Ce nœud combine toutes les fonctions de gestion du mouvement, du zoom et du défilement répétitif.
+- Il suffit donc d’ajouter un `Parallax2D` comme parent, et d’y placer des `Sprite2D`, `TextureRect` ou d’autres éléments visuels comme enfants.
 
-## ParallaxLayer
-- Les propriétés importantes de ce nœud sont `Motion.Scale X|Y` et `Mirroring`
-- `Scale` permet de déterminer la vitesse de défilement du paysage
-  - Une valeur < 1 va faire défiler le paysage plus lentement que la couche principale et vice versa
-- `Mirroring` permet de répéter le paysage lorsque l’image arrive à la fin de son affichage
+---
 
-![Alt text](assets/parallax_layer_props.png)
+## Propriétés importantes
+
+| Propriété                   | Description                                                                                                  |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **scroll_scale**            | Détermine la vitesse relative du défilement (ex. `0.5` = deux fois plus lent que la caméra).                 |
+| **repeat_size**             | Définit la taille de répétition de l’image si l’on veut qu’elle boucle.                                      |
+| **repeat_time**             | Nombre de fois que l'on répète l'image de part d'autre. Utile pour la caméra lorsque l'on zoome.                                                                      |
+
+| **follow_viewport** | Si activé, la couche suit automatiquement la caméra.                                                         |
+| **autoscroll**              | Vecteur 2D qui permet de faire défiler automatiquement la couche sans script, pratique pour les nuages ou les fonds animés. |
+
+![Alt text](assets/parallax2d_props.png)
+
+> *Note :* Si vous faites un jeu à défilement horizontal uniquement, vous pouvez laisser `scroll_scale.y` à `0` pour éviter tout mouvement vertical du décor.
+
+---
 
 ## Structure typique
-Voici un exemple de structure d’arbre pour un effet parallaxe à deux couches ou plus :
+
+Voici un exemple d’arbre de scène avec plusieurs couches parallaxes :
 
 ```
-ParallaxBackground
-    └─ ParallaxLayerA
-        └─ Sprite (Image)
-    └─ ParallaxLayerB
-        └─ Sprite (Image)
-    └─ ...
+Node2D (ou Camera2D)
+└─ Parallax2D (background)
+│   └─ Sprite2D (montagnes)
+└─ Parallax2D (midground)
+│   └─ Sprite2D (forêt)
+└─ Parallax2D (foreground)
+    └─ Sprite2D (herbe)
 ```
 
+Chaque `Parallax2D` possède ses propres paramètres `scroll_scale` et `repeat_size`.
+
+---
 
 # Défilement automatique
-- Il est possible de faire défiler automatiquement le paysage via un script
-- Par exemple, si l'on désire que des nuages lointain se déplace ou encore simuler un levé ou un couché de soleil.
-- Un autre cas d'utilisation est de simuler un déplacement de la caméra
-- Il suffit d’ajouter un script au nœud `ParallaxBackground` et de modifier dynamiquement la valeur de la propriété `MotionOffset`
 
-Voici un exemple de code :
+Le nœud `Parallax2D` offre directement une **propriété `autoscroll`**, qui permet de faire défiler le décor automatiquement sans avoir à écrire de code.
+C’est idéal pour créer un ciel animé, des nuages, ou un fond qui bouge légèrement pour donner vie à la scène.
 
-```cs
-public partial class ParallaxBackground : Godot.ParallaxBackground
-{
-    [Export]
-    float Cloud_Speed = -10f;
+![alt text](assets/autoscroll_example.gif)
 
-    ParallaxLayer cloudLayer;
-    Sprite2D cloudSprite;
+---
 
-    public override void _Ready()
-    {        
-        cloudLayer = GetNode<ParallaxLayer>("clouds");
-        cloudSprite = cloudLayer.GetNode<Sprite2D>("Sprite2D");
-    }
+## Bonnes pratiques sur les images
 
-    public override void _Process(double delta)
-    {
-        // Move the cloud automatically
-        cloudLayer.SetMotionOffset(
-            new Vector2(
-                cloudLayer.GetMotionOffset().X + (Cloud_Speed * (float)delta),
-                0));      
-    }
-}
+Pour éviter des problèmes d’échelle et de performance :
 
-```
+- Utilise des **images déjà adaptées à la résolution du jeu**.
+- Une image de fond trop petite devra être mise à l’échelle, ce qui peut créer des artéfacts visuels et ajoute de la complexité.
+- Il est préférable de préparer et ajuster les images à la bonne taille avec un logiciel externe (comme GIMP ou Paint.net) avant de les importer dans le projet.
+- Garde des proportions cohérentes entre les différentes couches pour éviter les déformations.
+
+![alt text](assets/autoscroll_example.gif)
