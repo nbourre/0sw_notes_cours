@@ -21,10 +21,10 @@ Améliorons nos personnages!
 - [Implémentation dans Godot](#implémentation-dans-godot)
   - [`BaseState`](#basestate)
   - [`StateMachine`](#statemachine)
+  - [Ajouter la machine à état au joueur](#ajouter-la-machine-à-état-au-joueur)
   - [Solutions complètes](#solutions-complètes)
 - [Conclusion](#conclusion)
 - [Références](#références)
-
 
 ---
 
@@ -217,7 +217,7 @@ En respectant ce principe, chaque état devient une "**boîte noire**" : un modu
 ---
 
 # Projet Godot
-- Pour suivre, je vous suggère de partir avec le projet de plateforme `c03a_platformer_base_completed` dans le dépôt `0sw_projets_cours`
+- Pour suivre, je vous suggère de partir avec le projet de plateforme [`c08a_platformer_base_completed`](https://github.com/nbourre/0sw_projets_cours/tree/master/c08a_platformer_base_completed) dans le dépôt `0sw_projets_cours`
 
 ![alt text](assets/platform_without_fsm.gif)
 
@@ -236,16 +236,19 @@ Remplacez le code d'avant ci-bas avec celui après.
 
 ```gdscript
 # AVANT
-if Input.is_action_pressed("ui_left"):
-    motion.x += ACCEL * dir
+# Gestion des mouvements horizontaux
+if Input.is_action_pressed("left"):
+    motion.x -= ACCEL
     facing_right = false
     anim_player.play("Run")
-elif Input.is_action_pressed("ui_right"):
-    motion.x += ACCEL * dir
+
+elif Input.is_action_pressed("right"):
+    motion.x += ACCEL
     facing_right = true
     anim_player.play("Run")
 else:
-    motion = motion.linear_interpolate(Vector2.ZERO, 0.2)
+    # Ralentissement progressif quand aucune touche n'est pressée
+    motion.x = lerp(motion.x, 0.0, 0.2)
     anim_player.play("Idle")
 ``` 
 *Code 06*
@@ -262,10 +265,10 @@ if dir > 0:
 elif dir < 0:
     facing_right = false
 else:
-    motion = motion.linear_interpolate(Vector2.ZERO, 0.2)
+    motion.x = lerp(motion.x, 0.0, 0.2)
     anim_player.play("Idle")
 ```
-*Code 07*
+*Code 07* : Amélioration logique
 
 ---
 
@@ -300,7 +303,12 @@ class_name Player
 
 enum State { STATE_JUMPING, STATE_IDLE, STATE_RUNNING, STATE_FALLING }
 
-var current_state: State = STATE_IDLE
+# Déclaration explicite du type
+var current_state: State = State.STATE_IDLE
+
+# Perle de culture : Méthode avec inférence de type
+# var current_state := State.STATE_IDLE
+
 
 # ...
 ```
@@ -311,65 +319,71 @@ Ajouter un switch-case pour la gestion des états.
 Voici le code de `_PhysicsProcess` modifié
 
 ```gdscript
-func _physics_process(delta: float) -> void:
-    var dir = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+# Fonction principale de physique appelée à chaque frame
+func _physics_process(delta : float) -> void :
+	# Calcul de la direction (non utilisé dans le code original - imperfection conservée)
+	var dir = Input.get_axis("left", "right")
+	
+	motion.x += ACCEL * dir
+	# Application de la gravité
+	motion.y += GRAVITY
+	
+	if facing_right:
+		current_sprite.flip_h = false
+	else:
+		current_sprite.flip_h = true
 
-    motion.x += ACCEL * dir
-    motion.y += GRAVITY
+	match current_state:
+		State.STATE_FALLING:
+			if is_on_floor():
+				current_state = State.STATE_IDLE
+				anim_player.play("Idle")
+		State.STATE_IDLE:
+			if dir != 0:
+				current_state = State.STATE_RUNNING
+				anim_player.play("Run")
+			elif Input.is_action_just_pressed("ui_jump"):
+				current_state = State.STATE_JUMPING
+				motion.y = -JUMP_FORCE
+				anim_player.play("Jump")
+			elif not is_on_floor() and motion.y > 0:
+				current_state = State.STATE_FALLING
+				anim_player.play("Fall")
+		State.STATE_JUMPING:
+			if motion.y >= 0:
+				current_state = State.STATE_FALLING 
+				anim_player.play("Fall")
+			else:
+				anim_player.play("Jump")
+		State.STATE_RUNNING:
+			if dir > 0:
+				facing_right = true
+			elif dir < 0:
+				facing_right = false
+			else:
+				current_state = State.STATE_IDLE
+				anim_player.play("Idle")
 
-    if facing_right:
-        current_sprite.flip_h = false
-    else:
-        current_sprite.flip_h = true
+			if not is_on_floor() and motion.y > 0:
+				current_state = State.STATE_FALLING
+				anim_player.play("Fall")
+			elif Input.is_action_just_pressed("ui_jump"):
+				current_state = State.STATE_JUMPING
+				motion.y = -JUMP_FORCE
+				anim_player.play("Jump")
+		_:
+			anim_player.play("Idle")
 
-    match current_state:
-        State.STATE_FALLING:
-            if is_on_floor():
-                current_state = State.STATE_IDLE
-                anim_player.play("Idle")
-        State.STATE_IDLE:
-            if dir != 0:
-                current_state = State.STATE_RUNNING
-                anim_player.play("Run")
-            elif Input.is_action_just_pressed("ui_jump"):
-                current_state = State.STATE_JUMPING
-                motion.y = -JUMP_FORCE
-                anim_player.play("Jump")
-            elif not is_on_floor() and motion.y > 0:
-                current_state = State.STATE_FALLING
-                anim_player.play("Fall")
-        State.STATE_JUMPING:
-            if motion.y >= 0:
-                current_state = State.STATE_FALLING
-                anim_player.play("Fall")
-            else:
-                anim_player.play("Jump")
-        State.STATE_RUNNING:
-            if dir > 0:
-                facing_right = true
-            elif dir < 0:
-                facing_right = false
-            else:
-                current_state = State.STATE_IDLE
-                motion = motion.linear_interpolate(Vector2.ZERO, 0.2)
-                anim_player.play("Idle")
+	if dir != 0:
+		motion.x = lerp(motion.x, MAX_SPEED * dir, (ACCEL * 1.0) / MAX_SPEED)
+	else:
+		motion.x = lerp(motion.x, 0.0, 0.2)
 
-            if not is_on_floor() and motion.y > 0:
-                current_state = State.STATE_FALLING
-                anim_player.play("Fall")
-            elif Input.is_action_just_pressed("ui_jump"):
-                current_state = State.STATE_JUMPING
-                motion.y = -JUMP_FORCE
-                anim_player.play("Jump")
-        _:
-            anim_player.play("Idle")
+	if motion.y > MAX_FALL_SPEED:
+		motion.y = MAX_FALL_SPEED
 
-    motion.x = lerp(motion.x, MAX_SPEED * (1 if motion.x > 0 else -1), (ACCEL * 1.0) / MAX_SPEED)
-
-    if motion.y > MAX_FALL_SPEED:
-        motion.y = MAX_FALL_SPEED
-
-    motion = move_and_slide(motion, UP)
+	velocity = motion
+	move_and_slide()
 
 
 ```
@@ -399,6 +413,8 @@ match current_state:
     _:
         idle()
 
+if dir != 0:
+    motion.x = lerp(motion.x, MAX_SPEED * dir, (ACCEL * 1.0) / MAX_SPEED)
 # ...
 
 ```
@@ -413,47 +429,48 @@ match current_state:
 
 ```gdscript
 func jump() -> void:
-    if motion.y >= 0:
-        current_state = State.STATE_FALLING
-        anim_player.play("Fall")
-    else:
-        anim_player.play("Jump")
+	if motion.y >= 0:
+		current_state = State.STATE_FALLING
+		anim_player.play("Fall")
+	else:
+		anim_player.play("Jump")
 
 func fall() -> void:
-    if is_on_floor():
-        current_state = State.STATE_IDLE
-        anim_player.play("Idle")
+	if is_on_floor():
+		current_state = State.STATE_IDLE
+		anim_player.play("Idle")
 
 func idle() -> void:
-    if dir != 0:
-        current_state = State.STATE_RUNNING
-        anim_player.play("Run")
-    jump_check()
-    fall_check()
+	motion.x = lerp(motion.x, 0.0, 0.2)
+
+	if dir != 0:
+		current_state = State.STATE_RUNNING
+		anim_player.play("Run")
+	jump_check()
+	fall_check()
 
 func fall_check() -> void:
-    if not is_on_floor() and motion.y > 0:
-        current_state = State.STATE_FALLING
-        anim_player.play("Fall")
+	if not is_on_floor() and motion.y > 0:
+		current_state = State.STATE_FALLING
+		anim_player.play("Fall")
 
 func jump_check() -> void:
-    if Input.is_action_just_pressed("ui_jump"):
-        current_state = State.STATE_JUMPING
-        motion.y = -JUMP_FORCE
-        anim_player.play("Jump")
+	if Input.is_action_just_pressed("ui_jump"):
+		current_state = State.STATE_JUMPING
+		motion.y = -JUMP_FORCE
+		anim_player.play("Jump")
 
 func run() -> void:
-    if dir > 0:
-        facing_right = true
-    elif dir < 0:
-        facing_right = false
-    else:
-        current_state = State.STATE_IDLE
-        motion = motion.linear_interpolate(Vector2.ZERO, 0.2)
-        anim_player.play("Idle")
+	if dir > 0:
+		facing_right = true
+	elif dir < 0:
+		facing_right = false
+	else:
+		current_state = State.STATE_IDLE
+		anim_player.play("Idle")
 
-    jump_check()
-    fall_check()
+	jump_check()
+	fall_check()
 
 ```
 *Code 11*
@@ -481,7 +498,6 @@ func run() -> void:
         facing_right = false
     else:
         current_state = State.STATE_IDLE
-        motion = motion.linear_interpolate(Vector2.ZERO, 0.2)
         anim_player.play("Idle")
 
     fly_check()
@@ -496,7 +512,7 @@ func run() -> void:
 
 Avec cette solution, nous avons eu besoin de modifier deux méthodes.
 - On doit ajouter une propriété pour garder le temps de recharge qui n’est utilisé que lorsque le personnage court
-- Le DP État permet de remédier à cette situation
+- Le **patron de conception (*design pattern*) de l'État** permet de remédier à cette situation
 
 ---
 
@@ -518,10 +534,9 @@ Principe :
 - Garder un pointeur qui garde l’état courant dans la classe contexte
 - Pour changer l’état, modifier le pointeur de l’état
 
-
 ---
 
-- Le DP État n’indique pas où l’on doit intégrer le changement d’état
+- Le patron de conception de l'État n’indique pas où l’on doit intégrer le changement d’état
 - On peut le faire dans la classe « contexte » ou dans chacun des états
   - L’avantage de faire l’intégration dans les états est la facilité de créer de nouveaux états
   - Le désavantage, c’est que chaque état doit connaître l’état qui suit la transition ainsi il y a un couplage par transition qui se forment
@@ -536,9 +551,29 @@ Principe :
 - Nous appellerons cette classe `BaseState`
   - Celle-ci héritera de la classe Node pour avoir les fonctionnalités de Godot
 
+
+Depuis la version 4.5 de Godot, on peut faire des classes abstraites en utilisant l'annotation `@abstract`.
+
 ```gdscript
+@abstract class_name BaseState
 extends Node
+
+# Signal pour annoncer un changement d’état
+signal Transitioned
+
+@abstract func handle_inputs(input_event: InputEvent) -> void
+@abstract func update(delta: float) -> void
+@abstract func physics_update(delta: float) -> void
+@abstract func enter() -> void
+@abstract func exit() -> void
+```
+**Code 13a**
+
+Si vous utilisez une version antérieure à Godot 4.5, voici le code sans l'annotation `@abstract` :
+
+```gdscript
 class_name BaseState
+extends Node
 
 # Signal pour annoncer un changement d’état
 signal Transitioned
@@ -558,9 +593,10 @@ func enter() -> void:
 func exit() -> void:
 	pass
 
-
 ```
-*Code 13*
+
+**Code 13b**
+
 
 ---
 
@@ -580,6 +616,7 @@ var states : Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    # Pour ajouter les états, il suffit de les ajouter comme enfants de la machine à état
 	for child in get_children():
 		if child is BaseState:
 			states[child.name.to_lower()] = child
@@ -619,88 +656,103 @@ func on_child_transition(state, new_state_name):
 
 Une fois que nous avons nos classes de base, nous pouvons créer nos états. Nous allons créer un état pour chaque action que le personnage peut faire. Nous allons donc créer les états suivants :
 - Idle
-- Walk
+- Run
 
 Voici le code pour l’état `Idle` du joueur dans le RPG
 
 ```gdscript
-extends BaseState
 class_name PlayerIdle
+extends BaseState
 
 @export var player : Player
 var anim_player : AnimationPlayer
 
-func manage_input() -> void:	
-	var dir : Vector2 = Input.get_vector("left", "right", "up", "down").normalized()
-	
-	if (dir.length() > 0):
-		Transitioned.emit(self, "Walk")
-
 func enter():
-	anim_player = player.get_animation_player()	
+	anim_player = player.get_animation_player()
 	
+
+func _input(event: InputEvent) -> void:
+	handle_inputs(event)
+
+func handle_inputs(input_event: InputEvent) -> void :
+	var dir : float = Input.get_axis("left", "right")
+
+	if (dir != 0):
+		Transitioned.emit(self, "PlayerRun")
+
 func update(delta: float) -> void:
 	if not anim_player :
 		anim_player = player.get_animation_player()
-	manage_input()
-	
+
 func physics_update(delta: float) -> void:
 	if not anim_player : return
-		
-	anim_player.play("idle_front")
+
+	anim_player.play("Idle")
+
+func exit() -> void:
+	pass
 
 ```
 
-Voici le code pour l’état `Walk` du joueur dans le RPG
+Voici le code pour l’état `Run` du joueur dans le RPG
 
 ```gdscript
+class_name PlayerRun
 extends BaseState
-class_name PlayerWalk
+
 
 @export var player : Player
 var anim_player : AnimationPlayer
 
 @export var move_speed := 50.0
 
-func manage_input() -> Vector2:	
-	var dir : Vector2 = Input.get_vector("left", "right", "up", "down").normalized()
+var dir : float = 0.0
 
-	return dir
+func _input(event: InputEvent) -> void:
+	handle_inputs(event)
+
+func handle_inputs(input_event: InputEvent) -> void :
+	dir = Input.get_axis("left", "right")
 
 func update(delta : float) -> void:
 	if not anim_player :
 		anim_player = player.get_animation_player()
 
-	var dir := manage_input()
-	
-	if dir.length() > 0 :
-		player.velocity = dir * move_speed
+	if dir != 0:
+		player.velocity.x =  lerp(player.velocity.x, player.MAX_SPEED * dir, (player.ACCEL * 1.0) / player.MAX_SPEED)
 	else :
-		player.velocity = player.velocity.move_toward(Vector2.ZERO, 10)
-	
-	if (player.velocity.length() == 0) :
-		Transitioned.emit(self, "idle")
-	
-	player.direction = dir
+		player.velocity.x = lerp(player.velocity.x, 0.0, 0.2)
+
+	if (player.velocity.x == 0) :
+		Transitioned.emit(self, "PlayerIdle")
+
+	player.facing_right = dir > 0
 
 func physics_update(delta: float) -> void:
-	
-	if (player.velocity.length() > 0) :
-		if (player.velocity.x > 0 or player.velocity.x < 0) :
-			anim_player.play("walk_side")
-			if (player.velocity.x > 0) :
-				player.sprite.flip_h = false
-			elif (player.velocity.x < 0) :
-				player.sprite.flip_h = true
-		elif (player.velocity.y < 0) :
-			anim_player.play("walk_back")
-		elif (player.velocity.y > 0) :
-			anim_player.play("walk_front")
+	if (player.velocity.x != 0):
+		player.facing_right = player.velocity.x > 0
+		if not anim_player : return
+		
+		anim_player.play("Run")
+
+func enter() -> void:
+	# Called when entering this state
+	pass
+
+func exit() -> void:
+	# Called when exiting this state
+	pass
+
 ```
+
+## Ajouter la machine à état au joueur
+- Pour ajouter la machine à état au joueur, il suffit d'ajouter un nœud enfant de type `StateMachine` au nœud `Player`.
+- Ensuite, il faut ajouter les états comme enfants de la machine à état.
+- Il faudra aussi assigner la variable `player` de chaque état avec le nœud `Player`.
 
 ## Solutions complètes
 
-Vous avez accès aux projets ayant les solutions complètes soit `c07_platformer_fsm` et `c08_rpg_done` respectivement.
+Vous avez accès aux projets ayant les solutions complètes soit `c08_platformer_fsm` (en C#) et `c08_fsm_done` respectivement.
 
 Le projet platformer est fait à l'aide de C# et le projet RPG est fait à l'aide de GDScript.
  
