@@ -6,7 +6,9 @@
   - [Propriétés importantes](#propriétés-importantes)
   - [Structure typique](#structure-typique)
 - [Défilement automatique](#défilement-automatique)
-  - [Bonnes pratiques sur les images](#bonnes-pratiques-sur-les-images)
+- [Bonnes pratiques sur les images](#bonnes-pratiques-sur-les-images)
+- [Contourner certains problèmes](#contourner-certains-problèmes)
+- [Exercice](#exercice)
 
 
 ---
@@ -78,7 +80,7 @@ C’est idéal pour créer un ciel animé, des nuages, ou un fond qui bouge lég
 
 ---
 
-## Bonnes pratiques sur les images
+# Bonnes pratiques sur les images
 
 Pour éviter des problèmes d’échelle et de performance :
 
@@ -88,3 +90,18 @@ Pour éviter des problèmes d’échelle et de performance :
 - Garde des proportions cohérentes entre les différentes couches pour éviter les déformations.
 
 ![alt text](assets/autoscroll_example.gif)
+
+---
+
+# Contourner certains problèmes
+- Parfois les images ne sont pas tout à fait adaptées pour le jeu, par exemple elles ne sont pas assez hautes. On peut remédier à cela en utilisant un `ColorRect` de la même couleur que les extrémités de l’image pour combler le vide.
+
+
+---
+
+# Exercice
+À partir du projet [c07d_pateforme_ennemi](https://github.com/nbourre/0sw_projets_cours/tree/master/c07_plateforme_ennemi).
+- Ajouter un décor avec les images fournies dans le dossier `Legacy-Fantasy-PurpleBay/Background`.
+  - La dimension des images est de 336x192
+  - Faites défiler les nuages automatiquements
+- Ajouter des props en avant-plan (arbres, herbes, etc.) qui défilent plus rapidement que le personnage.
