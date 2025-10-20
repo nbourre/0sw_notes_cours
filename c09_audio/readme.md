@@ -9,7 +9,7 @@
 	- [Changement de scène](#changement-de-scène)
 	- [Mettre sur pause et reprendre la musique](#mettre-sur-pause-et-reprendre-la-musique)
 - [Gestion du volume](#gestion-du-volume)
-	- [Meilleure gestion du volume](#meilleure-gestion-du-volume)
+- [Le mixeur audio](#le-mixeur-audio)
 - [Projet](#projet)
 - [Conclusion](#conclusion)
 - [Exercices](#exercices)
@@ -111,11 +111,22 @@ func _on_h_slider_drag_ended(value_changed: bool) -> void:
 
 Il est important de configurer le curseur pour qu'il ait une valeur entre 0 et 1. Il est aussi important de configurer la propriété `step` du curseur pour qu'il ait une valeur de 0.01. Cela permettra d'avoir une valeur plus précise pour le volume.
 
-## Meilleure gestion du volume
+# Le mixeur audio
 On pourrait gérer chaque noeud `AudioStreamPlayer` individuellement pour le volume, mais ce n'est pas très efficace. Une meilleure façon de gérer le volume est d'utiliser les **bus audio** de Godot.
 Godot vient avec un mixeur audio qui permet de gérer le volume de plusieurs sources audio. Pour accéder au mixeur audio, allez dans le volet inférieur et cliquez sur l'onglet `Audio`.
 
 ![alt text](assets/AudioMixer_nothing.png)
+
+Le bus `Master` est le bus principal qui contrôle le volume de tous les autres bus. Vous pouvez ajouter des bus supplémentaires pour gérer différents types de sons, comme la musique, les effets sonores, etc.
+
+Ainsi, on peut ajouter un bus `Music` pour la musique et un bus `SFX` pour les effets sonores.
+
+![alt text](assets/AudioMixer_2_buses.png)
+
+Ensuite, on peut assigner chaque noeud `AudioStreamPlayer` au bus approprié.
+
+![alt text](assets/Assign_bus_to_audio.png)
+
 
 
 ---
@@ -132,9 +143,9 @@ Dans cet article, je ne fais que montrer les bases de la gestion du son et de la
 ---
 
 # Exercices
-À partir du projet `c07_plateforme_background`, ajoutez des effets sonores pour les actions suivantes :
+À partir du projet `c07_plateforme_background` ou de votre projet de session, ajoutez des effets sonores pour les actions suivantes :
 - Musique de fond qui joue en boucle (time_for_adventure.mp3)
-- Ramassage d'une pièce (coin.wav)
+- Ramassage d'une pièce (coin.wav) ou d'un objet
 - Saut (jump.wav)
 
 ---
