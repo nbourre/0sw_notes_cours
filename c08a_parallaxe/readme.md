@@ -89,7 +89,7 @@ Pour éviter des problèmes d’échelle et de performance :
 - Il est préférable de préparer et ajuster les images à la bonne taille avec un logiciel externe (comme GIMP ou Paint.net) avant de les importer dans le projet.
 - Garde des proportions cohérentes entre les différentes couches pour éviter les déformations.
 
-![alt text](assets/autoscroll_example.gif)
+![alt text](assets/exemple_fin.gif)
 
 ---
 
