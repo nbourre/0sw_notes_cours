@@ -95,9 +95,9 @@ shader_type <type>;
 ```
 
 Les types valides sont les suivants:
-- spatial : pour le rendu 3D
-- canvas_item : pour le rendu 2D
-- particles : pour les systèmes de particules
+- `spatial` : pour le rendu 3D
+- `canvas_item` : pour le rendu 2D
+- `particles` : pour les systèmes de particules
 
 Nous allons donc utiliser le type `shader_type canvas_item;`.
 
@@ -272,7 +272,7 @@ Nous avons maintenant accès à un paramètre `Flash color` dans l'inspecteur de
 
 Exemple 2
 ```glsl
-uniform vec4 flash_color : hint_color = vec4(1.0);
+uniform vec4 flash_color : source_color = vec4(1.0);
 uniform float flash_modifer : hint_range(0.0, 1.0) = 1.0;
 
 void fragment() {
@@ -368,7 +368,7 @@ void fragment() {
 extends Node2D
 
 @onready var sprite : Sprite2D = $Icon
-@onready var timer : Timer = $Flashtimer
+@onready var timer : Timer = $FlashTimer
 var shader : ShaderMaterial = sprite.material as ShaderMaterial
 
 func flash() -> void:
@@ -392,7 +392,7 @@ Version alternative
 extends Node2D
 
 @onready var sprite : Sprite2D = $Icon
-@onready var timer : Timer = $Flashtimer
+@onready var timer : Timer = $FlashTimer
 var shader : ShaderMaterial
 
 const NB_FLASH : int = 8
