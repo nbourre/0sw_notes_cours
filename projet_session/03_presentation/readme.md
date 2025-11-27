@@ -41,3 +41,13 @@ Voici les principaux critères d'évaluation qui seront utilisés pour évaluer 
 10. **Impact global de la présentation**  
     - La présentation donne une impression globale positive et met en valeur le travail accompli.  
     - Échelle : 1 (impression faible) à 5 (très convaincant).
+
+11. **Maîtrise personnelle et authenticité du projet**
+    - L’étudiant démontre qu’il comprend ce qu’il présente. Il est capable d’expliquer ses choix, son code et ses mécanismes, même s’il a utilisé des outils d’assistance comme l’IA.
+    - Échelle :
+      - 1 : Plusieurs sections du projet sont mal comprises ou non expliquées — **suggère un usage excessif de l’IA sans appropriation**.
+      - 3 : Certaines explications sont vagues, mais l’étudiant comprend globalement son projet.
+      - 5 : L’étudiant maîtrise toutes les parties présentées — **il s’est clairement approprié le projet, même avec aide extérieure.**
+
+
+> **Avertissement :** Le critère sur l'authenticité permet de reconnaître l’effort personnel d’un(e) étudiant(e) dans la compréhension de son propre projet. L’usage de l’IA n’est pas interdit, mais le projet doit être compris et expliqué par la personne qui le présente. La pondération de ce critère peut influencer la note finale, surtout si l’étudiant(e) ne démontre pas une compréhension adéquate de son travail.
