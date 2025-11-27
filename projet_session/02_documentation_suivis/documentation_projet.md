@@ -6,12 +6,14 @@ Il y a deux volets pour la documentation :
 - Aide intégrée au projet
 
 ## Document court
-Dans ce document de tout au plus une page, vous expliquez les concepts utilisés dans le projet ainsi que les objectifs du jeu ou de la simulation. Vous devez aussi indiquer les sources d’information utilisées.
+Dans ce document de tout au plus deux pages, vous expliquez les concepts utilisés dans le projet ainsi que les objectifs du jeu ou de la simulation. Vous devez aussi indiquer les sources d’information utilisées.
 
-De plus, vous devez inclure au moins deux points saillants en lien avec le développement. Par exemple, vous pouvez expliquer comment vous avez fait pour pour faire une génération procédurale ou encore comment vous avez implémenté une machine à état fini.
+De plus, vous devez inclure **au moins deux points saillants** en lien avec le développement. Par exemple, vous pouvez expliquer comment vous avez fait pour pour faire une génération procédurale ou encore comment vous avez implémenté une machine à état fini.
 
 ## Exemple de document
 Dans le projet, je me suis un peu inspiré du mécanisme du premier jeu Age of Empire. Il y a un mécanisme permettant de générer de façon aléatoire un territoire géographique.
+
+Dans mon projet, on peut retrouver l'algorithme de génération procédurale à cet endroit (préciser l’endroit dans le projet). L'application de celle-ci se retrouve dans la génération du terrain (Précisez l'endroit dans le projet).
 
 La génération procédurale est un concept qui est très populaire dans le domaine du jeu vidéo. Il y a plusieurs approches pour générer un terrain. Par exemple, on peut utiliser un algorithme de bruit pour générer un terrain. Il y a plusieurs variantes de bruit qui peuvent être utilisé. Par exemple, le bruit de Perlin, le bruit de Worley, le bruit de Simplex, etc. Il y a aussi des approches plus complexes comme le bruit de Perlin fractal ou le bruit de Worley fractal. Il y a aussi des approches plus basique comme le bruit de Perlin 2D ou le bruit de Worley 2D.
 
@@ -39,10 +41,14 @@ L’algorithme du OSN n’est que la base pour l’algorithme de génération. E
 
 Pour effectuer cet algorithme, je me suis basé sur cet [article](https://www.redblobgames.com/maps/terrain-from-noise/). L’article discute plus en profondeur sur une mécanique pour simuler aussi la dispersion des objets et la création d’îles.
 
+---
+
 ## Aide intégrée
 Dans le projet, vous devez ajouter un menu **Options** (ou équivalent) dans lequel le joueur pourra retrouver les instructions pour utiliser le jeu. On devra y retrouver toutes les touches utilisées.
 
 >**Note :** On ne veut pas avoir les instructions dans le menu principal.
+
+---
 
 ## Structure du document
 Le document devra comporter les éléments suivants :
@@ -56,7 +62,7 @@ Le document devra comporter les éléments suivants :
     - Sous titre avec le nom du concept
     - Description du concept
     - Source de l’information
-    - Capture d’écran ou image illustrant le concept
+    - Capture d’écran ou image ou diagramme illustrant le concept à l'intérieur du projet
 
 # Grille de correction
 | Critère | Points |
@@ -68,5 +74,7 @@ Le document devra comporter les éléments suivants :
 
 # Travail à remettre
 - Le document MarkDown appelé `readme.md` à la racine de votre projet.
+  - Si le document est déjà existant, vous devez le modifier pour y ajouter les informations demandées.
+- L’aide intégrée au projet dans un menu **Options** ou équivalent.
 - Le document MarkDown remis sur Léa
 - Présenter la documentation intégrée au projet au professeur.
