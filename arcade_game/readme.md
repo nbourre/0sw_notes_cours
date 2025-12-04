@@ -20,20 +20,20 @@ L'arcade est équipée de deux joysticks et de 6 boutons. Il faudra adapter les 
 
 Voici un tableau du mapping des contrôles de l'arcade
 
-| Contrôle | Valeur dans Godot |
-|----------|-------------------|
-| Axe X | `joy_axis_0` |
-| Axe Y | `joy_axis_1` |
-| Bouton A | `joy_button_0` |
-| Bouton B | `joy_button_1` |
-| Bouton X | `joy_button_2` |
-| Bouton Y | `joy_button_3` |
-| Bouton L1 | `joy_button_4` |
-| Bouton R1 | `joy_button_5` |
-| Bouton L2 | `joy_button_7` |
-| Bouton R2 | `joy_button_6` |
-| Bouton Select | `joy_button_8` |
-| Bouton Start | `joy_button_9` |
+| Button    | Godot < 4.5    | Godot 4.5       |
+| --------- | -------------- | --------------- |
+| Axe X     | `joy_axis_0`   | `joy_axis_0`    |
+| Axe Y     | `joy_axis_1`   | `joy_axis_1`    |
+| Bouton A  | `joy_button_0` | `joy_button_3`  |
+| Bouton B  | `joy_button_1` | `joy_button_1`  |
+| Bouton X  | `joy_button_2` | `joy_button_0`  |
+| Bouton Y  | `joy_button_3` | `joy_button_2`  |
+| Bouton L1 | `joy_button_4` | `joy_button_9`  |
+| Bouton R1 | `joy_button_5` | `joy_button_10` |
+| Bouton L2 | `joy_button_7` | `joy_axis_5`    |
+| Bouton R2 | `joy_button_6` | `joy_axis_4`    |
+| Select    | `joy_button_8` | `joy_button_4`  |
+| Start     | `joy_button_9` | `joy_button_6`  |
 
 **Attention!** Au moment d'écrire ces lignes, le joystick de droite est le principal.
 
@@ -103,7 +103,9 @@ Une fois que le modèle d'exportation est installé, vous pouvez exporter le jeu
 2. Cliquer sur "Export..."
 3. Donner un nom au projet
 4. Cliquer sur "Export PCK/ZIP"
-5. Donner l'extension `.pck` au fichier
+5. Indiquer l'emplacement où sauvegarder le fichier, le nom du fichier sera celui affiché dans l'arcade.
+   - Ajouter un préfixe au nom du fichier pour indiquer votre année et la session (ex: `A25_`).
+6. Donner l'extension `.pck` au fichier
 
 ## Copier le jeu sur l'arcade
 Vous pouvez maintenant envoyer le fichier `.pck` sur l'arcade. Pour cela, vous pouvez utiliser un logiciel de transfert de fichier comme FileZilla ou autres client FTP.
