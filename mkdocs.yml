@@ -1,0 +1,119 @@
+site_name: Développement de systèmes embarqués (420-0SX - Cégep de Shawinigan)
+site_url: https://nbourre.github.io/0sx_notes_cours/
+theme:
+  name: material
+  language: fr
+  features:
+    - search.suggest
+    - search.highlight
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.top
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+
+plugins:
+  - search
+  - print-site
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      linenums: true
+      anchor_linenums: true
+      line_spans: true
+      pygments_lang_class: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.snippets:
+      base_path: .
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+
+extra_javascript:
+  - javascripts/mathjax.js
+  #- javascripts/tex-mml-chtml.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Accueil: index.md
+  - Cours 01:
+    - Résumé: c01/index.md
+    - Configuration de l'environnement de travail: c01/C01a_intro_config.md
+    - Introduction à la programmation: c01/C01b_intro_prog.md
+  - Cours 02:
+    - Résumé: c02/index.md
+    - Fonctions de communication: c02/C02_fonctions_comm.md
+    - Exercices pratiques: c02/C02_fonctions_comm_exo.md
+  - Cours 03: 
+    - Résumé: c03/index.md
+    - Programmation sans délai: c03/C03a_sans_delai.md
+    - Fonction `analogWrite()`: c03/C03b_fonction_analogWrite.md
+    - Branchements de base: c03/C03c_branchement_base.md
+    - Branchements exercices: c03/C03c_branchement_base_exo.md
+    - Programmation anti-rebond: c03/C03d_logique_antirebond.md
+    - Résistance de rappel: c03/C03e_resistance_de_rappel.md    
+    - Exercices pratiques: c03/C03f_exercices.md
+  - Cours 04:
+    - Résumé: c04/index.md
+    - Fonction `analogRead()`: c04/C04a_fonction_analogRead.md
+    - Traceur série: c04/C04c_traceur_serie.md
+    - Exercices pratiques: c04/C04x_exercices.md
+  - Cours 05:
+    - Résumé: c05/index.md
+    - Composants analogiques: c05/c05a_analog/index.md
+    - Programmation en tâche: c05/c05b_taches/index.md
+  - Cours 06:
+    - Résumé: c06/index.md
+    - Les librairies: c06/c06a_lib/index.md
+    - L'écran LCD 1602: c06/c06b_lcd/index.md
+    - Le capteur d'humidité et de température DHT11: c06/c06c_dht11/index.md
+    - Le capteur de distance: c06/c06d_hcsr04/index.md
+  - Cours 07:
+    - Résumé: c07/index.md
+    - Servo moteur: c07/c07a_servo/index.md
+    - Machine à états: c07/c07b_fsm/index.md
+    - Communication I2C: c07/c07c_i2c/index.md
+    - Moteur pas à pas: c07/c07d_stepper/index.md
+  - Cours 08:
+    - Résumé: c08/index.md
+    - Comm. série lecture: c08/c08a_serial_read/index.md
+    - POO de base: c08/c08b_poo_base/index.md
+    - Unité de puissance: c08/c08c_psu/index.md
+  - Cours 09:
+    - Résumé: c09/index.md
+    - Moteur DC: c09/c09a_moteur_dc/index.md
+    - Retour sur la machine à états: c09/c09b_fsm_revisited/index.md
+  - Cours 10:
+    - Résumé: c10/index.md
+    - Refactorisation: c10/c10a_refactorisation/index.md
+    - Matrice de LED: c10/c10b_max7219/index.md
+  - Cours 11:
+    - Résumé: c11/index.md
+    - Wifi: c11/c11a_wifi/index.md
+  - Cours 12 - MQTT: c12/index.md
+  - Extras:
+    - Algorithmes: extras/algorithmes.md
+    - Améliorer son code: extras/ameliorer_son_code.md
+    - Créer des fonctions: extras/C0x_fonctions_perso.md
+    - Dépannage: extras/depannage.md
+    - Loi d'Ohm: extras/loi_dohm.md
+    - Les pointeurs: extras/pointeurs.md
+    - Utiliser VS Code avec Arduino: extras/coder_avec_vscode/index.md
+    - Calcul de rampe linéaire: extras/calcul_rampe_lineaire.md
+
+not_in_nav: |
+  no_nav/*.md
