@@ -1,21 +1,5 @@
 # Mécanique des Projectiles en Godot <!-- omit in toc -->
 
-# Sommaire <!-- omit in toc -->
-- [Introduction](#introduction)
-- [Objectifs d'apprentissage](#objectifs-dapprentissage)
-- [Création d’un projectile simple](#création-dun-projectile-simple)
-  - [Exemple de projectile avec `Node2D`](#exemple-de-projectile-avec-node2d)
-    - [Explication](#explication)
-  - [Création d'un tireur de projectiles simple](#création-dun-tireur-de-projectiles-simple)
-    - [Code pour le tireur de projectiles](#code-pour-le-tireur-de-projectiles)
-    - [Explication](#explication-1)
-- [Gestion des tirs avec intervalle de temps](#gestion-des-tirs-avec-intervalle-de-temps)
-  - [Explication :](#explication-)
-- [Optimisation des projectiles (Object pooling)](#optimisation-des-projectiles-object-pooling)
-  - [Création du `Pool` d'objets](#création-du-pool-dobjets)
-  - [Modification du tireur pour utiliser le `Pool`](#modification-du-tireur-pour-utiliser-le-pool)
-- [Autres améliorations possibles](#autres-améliorations-possibles)
-- [Conclusion](#conclusion)
 
 # Introduction
 

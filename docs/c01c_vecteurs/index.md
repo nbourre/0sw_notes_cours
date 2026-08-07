@@ -2,25 +2,6 @@
 
 [Liste de vidéos de support](https://www.youtube.com/watch?v=mWJkvxQXIa8&list=PLRqwX-V7Uu6ZwSmtE13iJBcoI-r4y7iEc)
 
-# Table des matières <!-- omit in toc -->
-- [Vecteur : définition](#vecteur--définition)
-- [Vecteur : utilité](#vecteur--utilité)
-- [Vecteur : exemple de problème sans vecteurs](#vecteur--exemple-de-problème-sans-vecteurs)
-  - [Simplification avec les vecteurs](#simplification-avec-les-vecteurs)
-- [Vecteur : la classe PVector](#vecteur--la-classe-pvector)
-  - [Vecteur : déplacement et mouvement](#vecteur--déplacement-et-mouvement)
-- [Exercice 1 : Balle qui rebondit avec vecteurs](#exercice-1--balle-qui-rebondit-avec-vecteurs)
-- [Opérations mathématiques avec les vecteurs](#opérations-mathématiques-avec-les-vecteurs)
-  - [Addition et soustraction](#addition-et-soustraction)
-  - [Multiplication et division par un scalaire](#multiplication-et-division-par-un-scalaire)
-  - [Distance entre deux points](#distance-entre-deux-points)
-  - [Rotation d'un vecteur](#rotation-dun-vecteur)
-  - [Angle entre deux vecteurs](#angle-entre-deux-vecteurs)
-  - [Applications pratiques](#applications-pratiques)
-- [Références](#références)
-  - [Ressources supplémentaires](#ressources-supplémentaires)
-
----
 
 # Vecteur : définition
 - Le terme **vecteur** peut signifier plusieurs choses dépendant du contexte.

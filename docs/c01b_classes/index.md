@@ -10,11 +10,6 @@
   - Utiliser la flèche à droite du dernier onglet
 - Par la suite, il suffit de coder comme dans pratiquement n'importe quel langage orienté objetcessing <!-- omit in toc -->
 
-# Table des matières <!-- omit in toc -->
-- [Introduction](#introduction)
-- [Création d'une classe](#création-dune-classe)
-- [Classes internes vs classes génériques](#classes-internes-vs-classes-génériques)
-
 
 # Introduction
 

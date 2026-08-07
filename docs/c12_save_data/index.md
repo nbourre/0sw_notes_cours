@@ -2,23 +2,6 @@
 
 # Table des matières <!-- omit in toc -->
 <!-- Générer table des matières avec Markdown All-in-One -->
-- [Introduction](#introduction)
-- [Qu’est-ce qu’une ressource personnalisée ?](#quest-ce-quune-ressource-personnalisée-)
-- [Préparation du projet](#préparation-du-projet)
-- [Création d’une ressource de données pour le joueur](#création-dune-ressource-de-données-pour-le-joueur)
-- [Configurer le fichier de sauvegarde](#configurer-le-fichier-de-sauvegarde)
-- [Test de la sauvegarde et du chargement](#test-de-la-sauvegarde-et-du-chargement)
-  - [Observations](#observations)
-- [Ajouter un inventaire en tant que sous-ressource](#ajouter-un-inventaire-en-tant-que-sous-ressource)
-  - [Observations](#observations-1)
-- [Avantages des ressources personnalisées par rapport aux fichiers JSON](#avantages-des-ressources-personnalisées-par-rapport-aux-fichiers-json)
-- [Combinaison avec les fichiers JSON](#combinaison-avec-les-fichiers-json)
-- [Conclusion](#conclusion)
-- [Annexe](#annexe)
-- [Références](#références)
-
-
----
 
 # Introduction
 Dans Godot, une **ressource personnalisée** permet de structurer et de sauvegarder facilement des informations complexes, comme l'état du joueur ou l'inventaire d'objets, sans les complications associées à l'utilisation de fichiers JSON ou d'autres formats de stockage brut. Cette approche rend les sauvegardes plus simples à gérer et à charger.

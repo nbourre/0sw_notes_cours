@@ -2,33 +2,6 @@
 
 # Table des matières <!-- omit in toc -->
 <!-- Générer table des matières avec Markdown All-in-One -->
-- [Énoncé](#énoncé)
-- [Structure du projet](#structure-du-projet)
-- [Détails des points](#détails-des-points)
-  - [Le menu initial](#le-menu-initial)
-  - [Le cœur du jeu, simulation ou démonstration](#le-cœur-du-jeu-simulation-ou-démonstration)
-    - [Interaction](#interaction)
-    - [Graphisme et animation](#graphisme-et-animation)
-    - [Son](#son)
-    - [Algorithmes et mécanismes de jeux](#algorithmes-et-mécanismes-de-jeux)
-      - [Pointage des algorithmes](#pointage-des-algorithmes)
-      - [Conseils pour les algorithmes](#conseils-pour-les-algorithmes)
-- [Données pour les geeks](#données-pour-les-geeks)
-- [Scène de fin](#scène-de-fin)
-- [Mise en pause](#mise-en-pause)
-- [Liste des algorithmes et mécanismes suggérés](#liste-des-algorithmes-et-mécanismes-suggérés)
-  - [Génération procédurale](#génération-procédurale)
-  - [Pathfinding et navigation](#pathfinding-et-navigation)
-  - [Intelligence artificielle et comportement](#intelligence-artificielle-et-comportement)
-  - [Simulation et physique](#simulation-et-physique)
-  - [Algorithmes structurels](#algorithmes-structurels)
-  - [Relation entre catégories](#relation-entre-catégories)
-- [Remise](#remise)
-- [Grille d'évaluation détaillée](#grille-dévaluation-détaillée)
-  - [Notes pour les évaluateurs](#notes-pour-les-évaluateurs)
-- [Note pour Processing ou Monogame](#note-pour-processing-ou-monogame)
-
----
 
 # Énoncé
 

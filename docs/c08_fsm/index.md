@@ -1,32 +1,6 @@
 # La machine à état fini <!-- omit in toc -->
 Améliorons nos personnages!
 
-# Plan de leçon <!-- omit in toc -->
-- [Introduction : Une approche par l'absurde](#introduction--une-approche-par-labsurde)
-  - [Pourquoi par l'absurde?](#pourquoi-par-labsurde)
-  - [Ce que vous apprendrez](#ce-que-vous-apprendrez)
-- [Applicabilité dans le développement de logiciels standards](#applicabilité-dans-le-développement-de-logiciels-standards)
-- [Étude de cas](#étude-de-cas)
-- [Machine à état fini](#machine-à-état-fini)
-  - [Principe de Single Responsibility (Responsabilité Unique)](#principe-de-single-responsibility-responsabilité-unique)
-    - [Exemple](#exemple)
-  - [Résumé](#résumé)
-- [Projet Godot](#projet-godot)
-  - [Modification au code](#modification-au-code)
-  - [Solution intermédiaire](#solution-intermédiaire)
-    - [Diagramme d'états](#diagramme-détats)
-  - [Solution intermédiaire : Modification du code](#solution-intermédiaire--modification-du-code)
-  - [Résumé de la solution temporaire](#résumé-de-la-solution-temporaire)
-- [Design pattern : L'état](#design-pattern--létat)
-- [Implémentation dans Godot](#implémentation-dans-godot)
-  - [`BaseState`](#basestate)
-  - [`StateMachine`](#statemachine)
-  - [Ajouter la machine à état au joueur](#ajouter-la-machine-à-état-au-joueur)
-  - [Solutions complètes](#solutions-complètes)
-- [Conclusion](#conclusion)
-- [Références](#références)
-
----
 
 # Introduction : Une approche par l'absurde
 

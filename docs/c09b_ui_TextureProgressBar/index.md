@@ -1,18 +1,5 @@
 # Le `TextureProgressBar` <!-- omit in toc -->
 
-# Table des matières <!-- omit in toc -->
-- [Introduction](#introduction)
-- [Configuration](#configuration)
-	- [Image de fond et de progression](#image-de-fond-et-de-progression)
-	- [Les propriétés](#les-propriétés)
-- [Le script](#le-script)
-- [Ajout de texte](#ajout-de-texte)
-	- [Le script avec le texte](#le-script-avec-le-texte)
-- [Utilisation](#utilisation)
-	- [Mise à jour de la barre de progression](#mise-à-jour-de-la-barre-de-progression)
-- [Références](#références)
-
----
 # Introduction
 Le `TextureProgressBar` est un contrôle qui permet d'afficher une barre de progression avec une texture. En plus d'être une barre de progression, il peut aussi être utilisé pour afficher des jauges, des compteurs, etc.
 

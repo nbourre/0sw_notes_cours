@@ -1,15 +1,15 @@
 # 0sw_notes_cours
 Les notes pour le cours Programmation jeux et multimédias (420-0SW-SW).
 
-# Notes de cours
-- [Animation Tree](animation_tree/readme.md)
-- [CharacterBody2D](character_body_2d/readme.md)
-- [Machine à état fini](fsm/readme.md)
-- [Génération procédurale : Plateforme](procedural_generation_platform/readme.md)
-- [Autotiling](tilemap_terrain/readme.md)
-- [Parallaxe](parallaxe/readme.md)
-- [Débogueur](remote_debugger/readme.md)
-- [Shaders](shaders/readme.md)	
+Le contenu est publié sous forme de site [mkdocs](https://www.mkdocs.org/) : https://nbourre.github.io/0sw_notes_cours/
 
-# Work in progress
-- [WiP : AnimationTree](animation_tree/readme.md)
+## Développement local
+
+```
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+mkdocs serve
+```
+
+Les notes se trouvent dans le dossier [docs/](docs/), une sous-page par sujet.

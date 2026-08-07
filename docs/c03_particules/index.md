@@ -1,22 +1,5 @@
 # Systèmes de Particules <!-- omit in toc -->
 
-# Table des matières <!-- omit in toc -->
-- [Introduction](#introduction)
-- [Histoire et Concept](#histoire-et-concept)
-  - [Exemple de Code en Processing](#exemple-de-code-en-processing)
-- [Principe de fonctionnement](#principe-de-fonctionnement)
-- [Particule unique](#particule-unique)
-  - [Durée de vie et disparition de la particule](#durée-de-vie-et-disparition-de-la-particule)
-  - [Performance](#performance)
-- [Tableau de particules](#tableau-de-particules)
-  - [Génération séquentielle de particules](#génération-séquentielle-de-particules)
-- [L'émetteur de particules](#lémetteur-de-particules)
-- [Conclusion](#conclusion)
-- [Exercice](#exercice)
-- [Références](#références)
-
-
----
 
 # Introduction
 

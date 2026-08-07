@@ -2,14 +2,6 @@
 
 ---
 
-# Table des matières <!-- omit in toc -->
-- [Introduction](#introduction)
-- [Mesurer la hauteur de la chute](#mesurer-la-hauteur-de-la-chute)
-- [Configurer les limites de la caméra](#configurer-les-limites-de-la-caméra)
-- [Créer une zone de mort (*Kill Zone*)](#créer-une-zone-de-mort-kill-zone)
-	- [Ajoutez la détection de collision](#ajoutez-la-détection-de-collision)
-- [Références](#références)
-
 
 # Introduction
 Dans le jeu actuel, lorsque le joueur tombe dans un trou, il continue à tomber indéfiniment.

@@ -1,17 +1,5 @@
 # La parallaxe <!-- omit in toc -->
 
-# Table des matières <!-- omit in toc -->
-- [Introduction](#introduction)
-- [Parallax2D avec Godot 4](#parallax2d-avec-godot-4)
-  - [Propriétés importantes](#propriétés-importantes)
-  - [Structure typique](#structure-typique)
-- [Défilement automatique](#défilement-automatique)
-- [Bonnes pratiques sur les images](#bonnes-pratiques-sur-les-images)
-- [Contourner certains problèmes](#contourner-certains-problèmes)
-- [Exercice](#exercice)
-
-
----
 
 # Introduction
 - La **parallaxe** donne une impression de profondeur en faisant défiler plusieurs couches d’images à différentes vitesses, ce qui permet de simuler un monde 3D en 2D.

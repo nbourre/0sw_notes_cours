@@ -1,19 +1,5 @@
 # Le Tilemap Terrain <!-- omit in toc -->
 
-- [Introduction](#introduction)
-- [Ressources pour l'article](#ressources-pour-larticle)
-- [Prérequis](#prérequis)
-- [Création du terrain](#création-du-terrain)
-  - [Sélection d'un jeu de tuiles (TileSet)](#sélection-dun-jeu-de-tuiles-tileset)
-  - [Sélectionner les tuiles qui seront utilisées](#sélectionner-les-tuiles-qui-seront-utilisées)
-  - [Tracer le masque de terrain](#tracer-le-masque-de-terrain)
-  - [Ajout de tuiles supplémentaires](#ajout-de-tuiles-supplémentaires)
-  - [Probabilité](#probabilité)
-  - [Tracer le terrain](#tracer-le-terrain)
-- [Travailler avec les couches](#travailler-avec-les-couches)
-- [Résumé](#résumé)
-- [Références](#références)
-
 
 # Introduction
 Nous avons vu comment tracer une carte de tuiles manuellement. C'est utile, cependant, c'est un vrai travail de moine! Godot offre une fonctionnalité qui permet de réduire le travail grandement en utilisant les Terrains (anciennement autotile).

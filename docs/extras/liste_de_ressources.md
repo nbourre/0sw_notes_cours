@@ -1,13 +1,5 @@
 # Ressource Tutoriel pour Jeux de plateforme <!-- omit in toc -->
 
-# Table des matières <!-- omit in toc -->
-- [Sujets précis](#sujets-précis)
-  - [Personnage rapidement](#personnage-rapidement)
-- [Jeux complets](#jeux-complets)
-- [Ressources](#ressources)
-  - [Sprites et visuels](#sprites-et-visuels)
-  - [Sons et musiques](#sons-et-musiques)
-
 
 # Sujets précis
 

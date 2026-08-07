@@ -2,27 +2,6 @@
 
 ![alt text](assets/hex_map.png)
 
-# Table des matières <!-- omit in toc -->
-- [Pré-requis](#pré-requis)
-- [Introduction](#introduction)
-- [Création d’un nouveau TileSet](#création-dun-nouveau-tileset)
-  - [Utilisation d'un tilesheet](#utilisation-dun-tilesheet)
-  - [Ajout de tuiles au TileSet](#ajout-de-tuiles-au-tileset)
-- [Ajouter la collision, navigation et l'occlusion aux jeux de tuiles](#ajouter-la-collision-navigation-et-locclusion-aux-jeux-de-tuiles)
-  - [Définir des collisions pour les tuiles](#définir-des-collisions-pour-les-tuiles)
-  - [Exercices](#exercices)
-  - [Sauvegarder le TileSet](#sauvegarder-le-tileset)
-- [Utilisation des TileMaps](#utilisation-des-tilemaps)
-  - [Créer un jeu de terrain (`Terrain Sets`)](#créer-un-jeu-de-terrain-terrain-sets)
-    - [Méthode alternative pour créer un jeu de terrain](#méthode-alternative-pour-créer-un-jeu-de-terrain)
-  - [Propriétés importantes `TileMapLayer`](#propriétés-importantes-tilemaplayer)
-  - [Placer les tuiles dans la TileMap](#placer-les-tuiles-dans-la-tilemap)
-  - [Peinture de tuiles automatiques](#peinture-de-tuiles-automatiques)
-- [Conclusion](#conclusion)
-- [Exercices](#exercices-1)
-- [Références](#références)
-
----
 <!-- TODO : Voir les animations, le scattering, supprimer des tiles, etc.
 Src : https://youtu.be/G6TC6ukmSc4?si=LgjDakCLC3O_O4qk&t=188
 prj : everthing -> jackie-codes

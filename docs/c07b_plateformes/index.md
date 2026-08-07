@@ -2,21 +2,6 @@
 
 ![alt text](assets/example.gif)
 
-# Table des matières <!-- omit in toc -->
-- [Introduction](#introduction)
-- [Noeud AnimatableBody2D](#noeud-animatablebody2d)
-  - [Ajouter une plateforme](#ajouter-une-plateforme)
-  - [Corriger l'ordre de rendu](#corriger-lordre-de-rendu)
-  - [Collision à sens unique](#collision-à-sens-unique)
-- [Ajouter le déplacement avec un AnimationPlayer](#ajouter-le-déplacement-avec-un-animationplayer)
-- [Matière optionnelle](#matière-optionnelle)
-  - [Qu'est-ce qu'un Tween ?](#quest-ce-quun-tween-)
-    - [Exemple de code](#exemple-de-code)
-      - [Explication des Principales Lignes](#explication-des-principales-lignes)
-    - [Les méthodes d'intérêt de la classe `Tween`](#les-méthodes-dintérêt-de-la-classe-tween)
-    - [Conclusion](#conclusion)
-- [Références](#références)
-
 
 # Introduction
 Dans bien des jeux de type plateforme, les plateformes mobiles sont un élément essentiel pour créer des niveaux intéressants et stimulants. Dans cette leçon, nous allons apprendre à créer une plateforme mobile qui se déplace de manière fluide entre deux positions.

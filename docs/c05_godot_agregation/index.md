@@ -3,31 +3,6 @@ Programmation créative - L’agrégation et les collisions
 
 ![alt text](assets/flocking.webp)
 
-## Table des matières <!-- omit in toc -->
-- [Plan de leçon](#plan-de-leçon)
-- [Récupération du projet](#récupération-du-projet)
-  - [Projet sans agrégation](#projet-sans-agrégation)
-- [Calculer le vecteur de braquage](#calculer-le-vecteur-de-braquage)
-  - [Algo](#algo)
-  - [Exemple](#exemple)
-- [Qu’est-ce qu’une agrégation?](#quest-ce-quune-agrégation)
-  - [Exemples d’agrégation](#exemples-dagrégation)
-  - [Notions scientifiques](#notions-scientifiques)
-  - [La séparation ou répulsion](#la-séparation-ou-répulsion)
-    - [Algorithme](#algorithme)
-    - [Visualisation](#visualisation)
-  - [L’alignement](#lalignement)
-    - [Algo](#algo-1)
-    - [Visualisation](#visualisation-1)
-  - [La cohésion](#la-cohésion)
-    - [Calcul](#calcul)
-    - [Algo](#algo-2)
-    - [Visualisation](#visualisation-2)
-  - [Sommation des forces](#sommation-des-forces)
-  - [Jouer avec les forces](#jouer-avec-les-forces)
-- [Références](#références)
-
----
 
 # Plan de leçon
 - Récupération du projet

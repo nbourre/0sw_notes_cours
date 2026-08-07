@@ -1,16 +1,6 @@
 # Déployer le jeu sur l'arcade <!-- omit in toc -->
 Dans cette leçon, nous allons voir comment porter un jeu Godot sur l'arcade du département.
 
-# Table des matières <!-- omit in toc -->
-- [Modification au code](#modification-au-code)
-  - [Les contrôles](#les-contrôles)
-  - [Quitter le jeu](#quitter-le-jeu)
-  - [Simuler la souris](#simuler-la-souris)
-- [Exporter le jeu](#exporter-le-jeu)
-  - [Télécharger le modèle d'exportation](#télécharger-le-modèle-dexportation)
-  - [Exporter le jeu](#exporter-le-jeu-1)
-  - [Copier le jeu sur l'arcade](#copier-le-jeu-sur-larcade)
-    - [Redémarrer l'arcade](#redémarrer-larcade)
 
 # Modification au code
 Pour adapter le jeu à l'arcade, il faudra apporter quelques modifications au code.

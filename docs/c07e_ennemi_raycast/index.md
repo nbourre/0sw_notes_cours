@@ -1,19 +1,5 @@
 # Le ray casting <!-- omit in toc -->
 
-# Table des matières <!-- omit in toc -->
-- [Introduction](#introduction)
-- [Ajouter un ennemi - Recette rapide](#ajouter-un-ennemi---recette-rapide)
-  - [Script de déplacement de base](#script-de-déplacement-de-base)
-- [RayCasting](#raycasting)
-  - [Comment ça marche](#comment-ça-marche)
-- [Noeud RayCast2D](#noeud-raycast2d)
-- [Dans le code](#dans-le-code)
-- [Fonctions utiles](#fonctions-utiles)
-- [Conclusion](#conclusion)
-- [Extra - Améliorer la mort](#extra---améliorer-la-mort)
-- [Références](#références)
-
----
 
 ![alt text](assets/example_01.gif)
 

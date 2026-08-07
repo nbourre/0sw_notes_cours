@@ -1,20 +1,5 @@
 # AnimationTree <!-- omit in toc -->
 
-- [Problématique](#problématique)
-- [Solution](#solution)
-- [Préparation](#préparation)
-  - [Godot 3.5](#godot-35)
-  - [Godot 4.x](#godot-4x)
-- [Créer l'animation](#créer-lanimation)
-  - [Étape 1 : Convertir le noeud `Player` en scène.](#étape-1--convertir-le-noeud-player-en-scène)
-  - [Étape 2 : Ajouter un noeud `Camera2D`](#étape-2--ajouter-un-noeud-camera2d)
-  - [Étape 3 : Ajouter un noeud `Sprite`](#étape-3--ajouter-un-noeud-sprite)
-  - [Étape 4 : Ajouter un noeud `AnimationPlayer`](#étape-4--ajouter-un-noeud-animationplayer)
-- [Ajouter un noeud `AnimationTree`](#ajouter-un-noeud-animationtree)
-- [Programmer les transitions entre les états](#programmer-les-transitions-entre-les-états)
-  - [Étape 1 : Objets pour la gestion de l'animation](#étape-1--objets-pour-la-gestion-de-lanimation)
-  - [Étape 2 : Ajouter les méthodes pour gérer les transitions](#étape-2--ajouter-les-méthodes-pour-gérer-les-transitions)
-- [Référence](#référence)
 
 # Problématique
 Une situation courante : vous avez un grand nombre d'animations, et il devient difficile de gérer les transitions entre elles. Votre code est devenu plein d'instructions `if`, et chaque fois que vous changez quelque chose, tout se casse.

@@ -1,21 +1,5 @@
 # Jouer des sons et de la musique dans Godot <!-- omit in toc -->
 
-# Table des matières <!-- omit in toc -->
-- [Introduction](#introduction)
-- [Jouer un son](#jouer-un-son)
-	- [Aperçu du son](#aperçu-du-son)
-	- [Code](#code)
-- [Musique](#musique)
-	- [Changement de scène](#changement-de-scène)
-	- [Mettre sur pause et reprendre la musique](#mettre-sur-pause-et-reprendre-la-musique)
-- [Gestion du volume](#gestion-du-volume)
-- [Le mixeur audio](#le-mixeur-audio)
-- [Projet](#projet)
-- [Conclusion](#conclusion)
-- [Exercices](#exercices)
-- [Références](#références)
-
----
 # Introduction
 L'objectif de ce chapitre est de voir les bases de comment jouer des sons et de la musique dans Godot. Nous n'irons pas dans le détail de la gestion des bus audio, des effets audio, etc. Nous nous concentrerons sur les bases.
 

@@ -1,20 +1,5 @@
 # Les nombres aléatoires <!-- omit in toc -->
 
-# Table des matières <!-- omit in toc -->
-- [Objectifs](#objectifs)
-- [Introduction](#introduction)
-- [Le marcheur aléatoire](#le-marcheur-aléatoire)
-- [Nombre aléatoire](#nombre-aléatoire)
-  - [Marcheur aléatoire guidé](#marcheur-aléatoire-guidé)
-  - [Dans les jeux](#dans-les-jeux)
-- [Distribution normale](#distribution-normale)
-  - [Comment faire pour gérer la distribution normale?](#comment-faire-pour-gérer-la-distribution-normale)
-  - [Exemple de cas d'utilisation](#exemple-de-cas-dutilisation)
-- [Distribution uniforme vs normale](#distribution-uniforme-vs-normale)
-  - [Question](#question)
-- [Exercices](#exercices)
-- [Le bruit de Perlin](#le-bruit-de-perlin)
-  - [Exemple](#exemple)
 
 # Objectifs
 - Comprendre les bases des nombres aléatoires

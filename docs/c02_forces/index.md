@@ -5,28 +5,6 @@
 
 ---
 
-# Table des matières <!-- omit in toc -->
-- [Motivation](#motivation)
-- [Introduction](#introduction)
-  - [Clone et branchage du projet](#clone-et-branchage-du-projet)
-- [Force](#force)
-- [Première loi de Newton](#première-loi-de-newton)
-- [Troisième loi de Newton](#troisième-loi-de-newton)
-- [Deuxième loi de Newton](#deuxième-loi-de-newton)
-  - [Poids vs masse](#poids-vs-masse)
-  - [Exemple](#exemple)
-- [Accumulation des forces](#accumulation-des-forces)
-- [Travailler avec la masse](#travailler-avec-la-masse)
-  - [Exercice](#exercice)
-- [Autres forces](#autres-forces)
-  - [Travailler avec les formules de forces](#travailler-avec-les-formules-de-forces)
-  - [Friction](#friction)
-  - [Résistance des fluides](#résistance-des-fluides)
-- [Résumé](#résumé)
-- [Exercices](#exercices)
-- [Références](#références)
-
----
 
 # Motivation
 Pour développer des jeux, il est essentiel de comprendre comment les forces agissent sur les objets. Cela nous permet de créer des mouvements réalistes et d'interagir avec l'environnement de manière convaincante.

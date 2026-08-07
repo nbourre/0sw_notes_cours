@@ -1,24 +1,5 @@
 # Processing Crash Course <!-- omit in toc -->
 
-# Table des matières <!-- omit in toc -->
-- [Introduction](#introduction)
-- [Processing](#processing)
-  - [Qu’est-ce que Processing?](#quest-ce-que-processing)
-  - [Processing : Interface](#processing--interface)
-- [Premier jet](#premier-jet)
-- [Les formes primitives 2D](#les-formes-primitives-2d)
-  - [Arc de cercle](#arc-de-cercle)
-  - [Liste de formes primitives](#liste-de-formes-primitives)
-- [Couleurs](#couleurs)
-  - [Récapitulatif](#récapitulatif)
-- [Exercices courts](#exercices-courts)
-- [Programme Processing](#programme-processing)
-  - [setup()](#setup)
-  - [draw()](#draw)
-- [Les variables systèmes](#les-variables-systèmes)
-- [Exercice #1](#exercice-1)
-
----
 
 # Introduction
 Avant de nous lancer en grand dans le développement de jeux vidéo avec Godot, nous allons retourner aux sources pour nous réapproprier les notions de base de mathématiques et de géométrie du secondaire. Nous allons utiliser un outil très simple qui permet de se familiariser avec la programmation créative : Processing.

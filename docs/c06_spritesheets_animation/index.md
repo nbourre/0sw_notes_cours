@@ -1,33 +1,5 @@
 # Godot – Bases du jeux 2D <!-- omit in toc -->
 
-# Table des matières <!-- omit in toc -->
-- [Plan de leçon](#plan-de-leçon)
-- [Notes](#notes)
-- [Avant de débuter](#avant-de-débuter)
-- [Les spritesheets et textures](#les-spritesheets-et-textures)
-- [Les sprites animés](#les-sprites-animés)
-- [Ajouter une feuille dans Godot](#ajouter-une-feuille-dans-godot)
-- [AnimatedSprite](#animatedsprite)
-  - [SpriteFrames](#spriteframes)
-  - [Ajouter des images](#ajouter-des-images)
-  - [Animer l’image](#animer-limage)
-  - [Contrôler l’animation](#contrôler-lanimation)
-- [Animer avec AnimationPlayer](#animer-avec-animationplayer)
-  - [Configuration de la scène](#configuration-de-la-scène)
-  - [Ajuster le nombre de cadres](#ajuster-le-nombre-de-cadres)
-  - [Le volet `Animation`](#le-volet-animation)
-  - [Ajouter une animation dans `AnimationPlayer`](#ajouter-une-animation-dans-animationplayer)
-    - [Ajuster le temps de l'animation](#ajuster-le-temps-de-lanimation)
-    - [Ajouter des cadres dans la timeline](#ajouter-des-cadres-dans-la-timeline)
-    - [Ajuster les cadres de l'animation](#ajuster-les-cadres-de-lanimation)
-    - [Visualiser l'animation](#visualiser-lanimation)
-  - [Contrôler une animation avec `AnimationPlayer`](#contrôler-une-animation-avec-animationplayer)
-- [Détail sur l'`AnimationPlayer`](#détail-sur-lanimationplayer)
-- [Résumé](#résumé)
-- [Références](#références)
-
-
----
 
 # Plan de leçon
 - Introduction aux spritesheets et leur importance

@@ -2,33 +2,6 @@
 De la trigonométrie!... Oh boboy!
 ---
 
-# Table des matières <!-- omit in toc -->
-- [Plan de leçon](#plan-de-leçon)
-- [Trigo de base](#trigo-de-base)
-- [Cercle trigonométrique : Ce qu’il faut retenir](#cercle-trigonométrique--ce-quil-faut-retenir)
-- [Trigonométrie en programmation](#trigonométrie-en-programmation)
-- [`pushMatrix()` et `popMatrix()`](#pushmatrix-et-popmatrix)
-  - [Scénario](#scénario)
-  - [Les fonctions `pushMatrix()` et `popMatrix()`](#les-fonctions-pushmatrix-et-popmatrix)
-  - [Analogie `pushMatrix()` et `popMatrix()`](#analogie-pushmatrix-et-popmatrix)
-- [Exemple d’imbrication](#exemple-dimbrication)
-  - [Exemples visuels](#exemples-visuels)
-- [Mouvement angulaire](#mouvement-angulaire)
-- [Trouver l’angle de direction](#trouver-langle-de-direction)
-- [Coordonnées polaires](#coordonnées-polaires)
-- [Exercice](#exercice)
-- [Les collisions circulaires](#les-collisions-circulaires)
-  - [Plan de leçon](#plan-de-leçon-1)
-  - [Collision entre cercles](#collision-entre-cercles)
-  - [Trouver le point de contact](#trouver-le-point-de-contact)
-  - [Réponse à la collision](#réponse-à-la-collision)
-  - [Étape : Vecteur unitaire du point de contact](#étape--vecteur-unitaire-du-point-de-contact)
-  - [Étape : Projection de vecteur](#étape--projection-de-vecteur)
-  - [Exemple de résultat](#exemple-de-résultat)
-- [Références](#références)
-
-
----
 
 # Plan de leçon
 
