@@ -64,7 +64,7 @@ Les tâches sont représentées par des cartes. Chaque carte contient des inform
 
 - On peut ajouter des étiquettes, des assignés, des dates d'échéance, des descriptions, etc.
 - On peut créer un *issue* directement à partir de la carte.
-  - C'est ce que je recommande pour les tâches.
+    - C'est ce que je recommande pour les tâches.
 
 Pour ajouter une tâche :
 1. Cliquer sur le bouton `+ Add item` dans le bas de la colonne désirée.
@@ -79,12 +79,12 @@ Pour ajouter une tâche :
 
 ## Exercice
 1. Créez un projet sur GitHub pour votre projet de session.
-   1. Prenez la méthode de création qui vous convient.
+    1. Prenez la méthode de création qui vous convient.
 2. Assurez-vous que le dépôt est associé au projet.
 3. Ajoutez moi comme collaborateur. Mon username : `nbourre`.
 4. Ajoutez la colonne `Backlog`.
 5. Ajoutez les tâches à faire dans la colonne `Backlog`.
-   1. Voir ci-bas pour le tableau des critères que vous devrez convertir en tâches.
+    1. Voir ci-bas pour le tableau des critères que vous devrez convertir en tâches.
 
 ### Tableau des critères
 Les critères ne sont pas nécessairement des tâches. Vous devrez les convertir en tâches. Il peut y avoir plusieurs tâches pour le même critère. Par exemple, le critère `Animation` pourrait être converti en plusieurs tâches tel que `Trouver un sprite sheet`, `Créer les animations`, `Intégrer les animations`, etc.

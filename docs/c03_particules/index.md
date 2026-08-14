@@ -14,7 +14,7 @@ Le concept de système de particules a été introduit par William T. Reeves en 
 
 ---
 
- Pourquoi avons-nous besoin des systèmes de particules ?
+Pourquoi avons-nous besoin des systèmes de particules ?
 
 Les systèmes de particules permettent de modéliser des phénomènes complexes en utilisant un grand nombre de petits objets simples. Ils sont essentiels pour simuler des systèmes où de nombreux éléments interagissent, tels que des explosions, des nuages de fumée, ou même des foules de personnes.
 

@@ -110,7 +110,7 @@ Les formes de collision permettent de définir des zones de collision pour chaqu
 1. Dans l'éditeur de **TileSet**, sélectionnez une tuile avec l'outil de sélection.
 2. Développez la section "Physique" dans l'éditeur de **TileSet**.
 3. Dessinez la forme de collision directement sur la tuile.
-   - La touche rapide `F` permet de tracer un rectangle qui prend toute la tuile.
+    - La touche rapide `F` permet de tracer un rectangle qui prend toute la tuile.
 
 ![alt text](assets/TileSet_adding_collision.gif)
 
@@ -166,8 +166,8 @@ Pour créer un jeu de terrain, suivez les étapes suivantes :
 
 4. Ensuite dans le mode `Sélection`, sélectionnez un tuile que vous souhaitez ajouter à votre jeu de terrain.
 5. Dans la section `Terrains`, il y a deux propriétés à définir :
-   - `Terrain Set` : Il s'agit de l'identifiant du jeu de terrain.
-   - `Terrain` : Il s'agit de l'identificant de la tuile dans le jeu de terrain.
+    - `Terrain Set` : Il s'agit de l'identifiant du jeu de terrain.
+    - `Terrain` : Il s'agit de l'identificant de la tuile dans le jeu de terrain.
 
 ![alt text](assets/using_tilesets_configure_terrain_on_tile.webp)
 
@@ -222,12 +222,12 @@ Voici le résultat final de mon jeu de terrain :
 Les propriétés suivantes sont importantes pour configurer votre `TileMapLayer` :
 - `TileSet` : Le `TileSet` à utiliser pour la `TileMap`.
 - **Rendering**
-  - **Y Sort Origin** : L'origine de l'ordonnancement Y. Cela détermine comment les tuiles sont ordonnées en fonction de leur position Y. Cette propriété ne fonctionne que si la propriété `Y Sort Enabled` est à vrai sur les paramètres de `CanvasItem`.
-  - **X Draw Order Reversed** : Si vrai, les tuiles sont dessinées de droite à gauche. Cela peut être utile pour les jeux de plateforme où les tuiles de fond sont dessinées avant les tuiles de premier plan. Cette propriété ne fonctionne que si la propriété `Y Sort Enabled` est à vrai sur les paramètres de `CanvasItem`.
+    - **Y Sort Origin** : L'origine de l'ordonnancement Y. Cela détermine comment les tuiles sont ordonnées en fonction de leur position Y. Cette propriété ne fonctionne que si la propriété `Y Sort Enabled` est à vrai sur les paramètres de `CanvasItem`.
+    - **X Draw Order Reversed** : Si vrai, les tuiles sont dessinées de droite à gauche. Cela peut être utile pour les jeux de plateforme où les tuiles de fond sont dessinées avant les tuiles de premier plan. Cette propriété ne fonctionne que si la propriété `Y Sort Enabled` est à vrai sur les paramètres de `CanvasItem`.
 - **Physics**
-  - **Collision Enabled** : Si vrai, les collisions sont activées pour les tuiles de cette `TileMapLayer`.
+    - **Collision Enabled** : Si vrai, les collisions sont activées pour les tuiles de cette `TileMapLayer`.
 - **Navigation**
-  - **Navigation Enabled** : Si vrai, la navigation est activée pour les tuiles de cette `TileMapLayer`.
+    - **Navigation Enabled** : Si vrai, la navigation est activée pour les tuiles de cette `TileMapLayer`.
 
 Si vous n'avez créé de couche de physique, de navigation ou d'occlusion pour votre `TileSet`, vous n'avez pas besoin de configurer ces propriétés.
 

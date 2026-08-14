@@ -211,23 +211,23 @@ Il restera à ajouer le monde dans lequel le joueur évoluera. Ce sujet sera vu 
 
 ### Exercice
 1. Dans votre projet, créez une nouvelle scène avec un noeud `CharacterBody2D` à sa racine.
-   - Si vous n'avez pas de projet, créez un nouveau projet avec une scène principale ayant un noeud 2D à sa racine. Nommez la scène `World`.
+    - Si vous n'avez pas de projet, créez un nouveau projet avec une scène principale ayant un noeud 2D à sa racine. Nommez la scène `World`.
 
 2. Renommez le noeud `Player`. <br/>
-   ![Alt text](assets/characterbody2d_01_new.gif)
+    ![Alt text](assets/characterbody2d_01_new.gif)
 3. Glissez l'icône par défaut dans la scène pour créer un noeud `Sprite2D` enfant du noeud `Player` **ou** créez un noeud `Polygon2D` et tracez la forme du joueur. <br />
-   - Modifiez la position pour que le noeud soit à la position (0, 0).
+    - Modifiez la position pour que le noeud soit à la position (0, 0).
 4. Ajoutez un noeud enfant `CollisionShape2D` ou `CollisionPolygon2D` au noeud `Player`. <br />
-   - Si c'est un `CollisionShape2D`, pour la propriété `Shape`, sélectionnez `Rectangle` et donner la dimension 128x128. <br />
-   ![Alt text](assets/characterbody2d_02_collisionShape_over_spriteb.png)
-   - Si c'est un `CollisionPolygon2D`, tracez la forme désirée.
+    - Si c'est un `CollisionShape2D`, pour la propriété `Shape`, sélectionnez `Rectangle` et donner la dimension 128x128. <br />
+    ![Alt text](assets/characterbody2d_02_collisionShape_over_spriteb.png)
+    - Si c'est un `CollisionPolygon2D`, tracez la forme désirée.
 5. Ajoutez un noeud enfant `Camera2D` pour suivre le joueur.
-   - Activez la propriété permettant de lisser le mouvement de la caméra.
+    - Activez la propriété permettant de lisser le mouvement de la caméra.
 6. Ajoutez un script au noeud `Player`. Prenez le script qui vous convient soit pour le jeu de plateforme ou le *top-down*/*sideview*.
 7. Dans la scène principale, ajoutez un noeud `StaticBody2D` auquel vous ajoutez un noeud `CollisionPolygon2D` pour représenter le sol.
-   - Ajoutez un noeud `CollisionPolygon2D` pour représenter le plafond.
-   - Ajoutez un noeud `CollisionPolygon2D` pour représenter un mur.
-   - Tracez les formes désirées pour chaque noeud `CollisionPolygon2D`.
+    - Ajoutez un noeud `CollisionPolygon2D` pour représenter le plafond.
+    - Ajoutez un noeud `CollisionPolygon2D` pour représenter un mur.
+    - Tracez les formes désirées pour chaque noeud `CollisionPolygon2D`.
 8. Dans le menu `Debug`, activez l'affichage des collisions.
 9. Exécutez votre projet et vérifiez que le joueur se déplace correctement.
 

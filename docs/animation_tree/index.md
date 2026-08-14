@@ -55,19 +55,19 @@ Le noeud `Sprite` permettra d'ajouter facilement les images au noeud `AnimationP
 
 1. Ajouter un noeud `Sprite`.
 2. Glisser l'image `viking2.png` sur la propriété `Texture` du noeud `Sprite`
-   - On devrait obtenir une image similaire à cette capture d'écran
+    - On devrait obtenir une image similaire à cette capture d'écran
   
-   ![](assets/sprite_screen_shot.png)
+    ![](assets/sprite_screen_shot.png)
 
 3. Il faudra configurer le nombre d'images à l'horizontal et à la vertical qui sont respectivement 9 et 6.
-   - Il s'agit des propriétés `Hframes` et `Vframes` de la section `Animation`
+    - Il s'agit des propriétés `Hframes` et `Vframes` de la section `Animation`
 
 ### Étape 4 : Ajouter un noeud `AnimationPlayer`
 Le noeud `AnimationPlayer` permet, entre autres, de gérer les animations.
 
 1. Ajouter un noeud `AnimationPlayer`.
 2. Dans le volet inférieur nommé « Animation », ajouter une nouvelle animation appelée « Idle »
-   - On clique sur le bouton `Animation` et on sélectionne `Nouveau`
+    - On clique sur le bouton `Animation` et on sélectionne `Nouveau`
 
 On verra une bande avec des nombres apparaître, il s'agit de l'échelle de temps de l'animation. On peut *zommer* sur celle-ci en maintenant la touche <kbd>CTRL</kbd> enfoncée et en faisant aller la molette de la souris.
 - Dans le cadre du projet, je propose d'afficher le temps pour voir l'échelle affichée aux dizième de seconde.
@@ -127,34 +127,34 @@ Avant d'utiliser le noeud, il faut établir les différents états du personnage
 Les étapes de base seront les suivantes :
 
 1. Ajouter un noeud `AnimationTree` au personnage
-   - Un **volet `AnimationTree`** apparaîtra dans le bas de l'IDE.
+    - Un **volet `AnimationTree`** apparaîtra dans le bas de l'IDE.
 2. Sélectionner le type de machine que l'on désire avec la propriété `Tree Root`.
-   - Dans notre cas, ce sera un `AnimationNodeStateMachine`
-   - **Note :** Personnallement, n'ayant fait que du 2D, je n'ai exploré que l'option `AnimationNodeStateMachine`. Il se peut que vous ayez exploré d'autres options selon les tutoriels que vous avez suivi.
+    - Dans notre cas, ce sera un `AnimationNodeStateMachine`
+    - **Note :** Personnallement, n'ayant fait que du 2D, je n'ai exploré que l'option `AnimationNodeStateMachine`. Il se peut que vous ayez exploré d'autres options selon les tutoriels que vous avez suivi.
 3. Associer l'`AnimationPlayer` que l'on désire gérer.
-   - Dans notre cas, on n'a qu'un noeud `AnimationPlayer`.
+    - Dans notre cas, on n'a qu'un noeud `AnimationPlayer`.
 
 ![](assets/AnimationTree_Properties.png)
 
 4. Dans le volet `AnimationTree`, cliquer avec le bouton de droite dans l'espace de travail et ajouter l'animation `idle`.
-   - Activer la propriété `Active` de l'`AnimationTree`.
-   - Pour voir l'animation `idle`, il suffit d'appuyer sur le bouton `play` dans l'état (rectangle noir).
+    - Activer la propriété `Active` de l'`AnimationTree`.
+    - Pour voir l'animation `idle`, il suffit d'appuyer sur le bouton `play` dans l'état (rectangle noir).
  
 ![](assets/AnimationTree_add_state.gif)
 
 5. Répéter l'opération précédente en ajoutant l'animation `running`.
-   - On peut tester l'animation.
+    - On peut tester l'animation.
 6. Répèter l'opération précédente en ajoutant l'animation `attack1`.
-   - Tester l'animation.
-   - On remarque que l'attaque "gèle" après s'être exécutée. La raison est que l'animation ne boucle pas. Il faudra ajouter une transition pour qu'elle reviennent à l'état `idle`.
+    - Tester l'animation.
+    - On remarque que l'attaque "gèle" après s'être exécutée. La raison est que l'animation ne boucle pas. Il faudra ajouter une transition pour qu'elle reviennent à l'état `idle`.
 
 ![](assets/AnimationTree_attack_state.gif)
 
 7. Ajouter une transition d'`idle` vers l'attaque.
-   - Dans la petite barre d'outils, il y a une petite flèche avec une ligne (3e bouton). Ce bouton sert à ajouter des transitions entre les états.
-   - Pour ajouter une transition, il faut cliquer-glisser de l'état source et vers l'état destination.
+    - Dans la petite barre d'outils, il y a une petite flèche avec une ligne (3e bouton). Ce bouton sert à ajouter des transitions entre les états.
+    - Pour ajouter une transition, il faut cliquer-glisser de l'état source et vers l'état destination.
 8. Tester l'animation d'attaque
-   - Il gèle encore, car il n'y a pas de transition de l'attaque vers l'`idle`.
+    - Il gèle encore, car il n'y a pas de transition de l'attaque vers l'`idle`.
 9. Ajouter une transition entre l'état "attaque" vers `idle`.
 10. Tester l'attaque.
     - L'animation "gig", car elle passe successivement de l'`idle` à l'attaque et à l'`idle`. 

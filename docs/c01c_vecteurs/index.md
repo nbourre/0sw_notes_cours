@@ -5,8 +5,8 @@
 
 ## Vecteur : définition
 - Le terme **vecteur** peut signifier plusieurs choses dépendant du contexte.
-  - En biologie : Décrit un organisme qui transmet une infection d'un hôte à un autre.
-  - En programmation : Décrit une structure de tableau de données.
+    - En biologie : Décrit un organisme qui transmet une infection d'un hôte à un autre.
+    - En programmation : Décrit une structure de tableau de données.
 - **En mathématique**, un vecteur est un concept permettant de représenter une **magnitude** (longueur) et une **direction**.
 - Un vecteur peut être représenté graphiquement par une flèche : la longueur indique la magnitude, l'orientation indique la direction.
 
@@ -17,10 +17,10 @@
 - **C'est une connaissance fondamentale à la programmation de jeux et d'applications multimédia.**
 - C'est un bloc de construction nécessaire pour toute application ayant des implications mathématiques.
 - **Exemples d'utilisation** :
-  - Position d'objets dans l'espace
-  - Vitesse et direction de déplacement
-  - Forces physiques (gravité, vent, friction)
-  - Calcul de trajectoires et de collisions
+    - Position d'objets dans l'espace
+    - Vitesse et direction de déplacement
+    - Forces physiques (gravité, vent, friction)
+    - Calcul de trajectoires et de collisions
 
 ---
 
@@ -33,13 +33,13 @@
 
 **Problèmes identifiés** :
 - Utilisation de plusieurs variables X et Y similaires :
-  - Position X et Y
-  - Vitesse X et Y
+    - Position X et Y
+    - Vitesse X et Y
 - Complexité de gestion de toutes ces variables
 - Imaginez maintenant que vous devez gérer l'accélération, la position d'une cible, le vent et la friction...
-  - **Variables probables** : `accelX`, `accelY`, `targetX`, `targetY`, `windX`, `windY`, `frictionX`, `frictionY`
-  - **En 2D** : 2 variables par concept
-  - **En 3D** : 3 variables par concept → explosion du nombre de variables!
+    - **Variables probables** : `accelX`, `accelY`, `targetX`, `targetY`, `windX`, `windY`, `frictionX`, `frictionY`
+    - **En 2D** : 2 variables par concept
+    - **En 3D** : 3 variables par concept → explosion du nombre de variables!
 
 ---
 
@@ -87,9 +87,9 @@ PVector target;
 ## Vecteur : la classe PVector
 - Processing offre la classe `PVector` qui représente un vecteur.
 - **Propriétés principales** :
-  - `x` : Composante horizontale
-  - `y` : Composante verticale
-  - `z` : Composante en profondeur (pour la 3D, optionnelle)
+    - `x` : Composante horizontale
+    - `y` : Composante verticale
+    - `z` : Composante en profondeur (pour la 3D, optionnelle)
 
 **Création et utilisation** :
 ```java
@@ -185,18 +185,18 @@ if (posY > height - 15 || posY < 15) vitY *= -1;
 
 **Instructions** :
 1. Créez deux variables globales de type `PVector` :
-   - `position` : pour la position de la balle
-   - `vitesse` : pour la vitesse de déplacement
+    - `position` : pour la position de la balle
+    - `vitesse` : pour la vitesse de déplacement
 
 2. Dans `setup()` :
-   - Initialisez `position` au centre de l'écran
-   - Initialisez `vitesse` avec des valeurs comme (4, 3)
+    - Initialisez `position` au centre de l'écran
+    - Initialisez `vitesse` avec des valeurs comme (4, 3)
 
 3. Dans `draw()` :
-   - Effacez l'écran avec `background(240)`
-   - Déplacez la balle avec `position.add(vitesse)`
-   - Dessinez la balle à la position actuelle
-   - Gérez les rebonds en inversant les composantes appropriées
+    - Effacez l'écran avec `background(240)`
+    - Déplacez la balle avec `position.add(vitesse)`
+    - Dessinez la balle à la position actuelle
+    - Gérez les rebonds en inversant les composantes appropriées
 
 **Code de base** :
 ```java

@@ -94,7 +94,7 @@ Une fois que le modèle d'exportation est installé, vous pouvez exporter le jeu
 3. Donner un nom au projet
 4. Cliquer sur "Export PCK/ZIP"
 5. Indiquer l'emplacement où sauvegarder le fichier, le nom du fichier sera celui affiché dans l'arcade.
-   - Ajouter un préfixe au nom du fichier pour indiquer votre année et la session (ex: `A25_`).
+    - Ajouter un préfixe au nom du fichier pour indiquer votre année et la session (ex: `A25_`).
 6. Donner l'extension `.pck` au fichier
 
 ### Copier le jeu sur l'arcade
@@ -102,7 +102,7 @@ Vous pouvez maintenant envoyer le fichier `.pck` sur l'arcade. Pour cela, vous p
 
 - Utiliser le protocole `SFTP`.
 - L'adresse de l'arcade est 172.22.215.250.
-  - À partir du réseau étudiant
+    - À partir du réseau étudiant
 - Le nom d'utilisateur est `etd`.
 - Le mot de passe est `etdshawi`.
 - Téléverser le fichier `.pck` dans le répertoire `upload` de l'utilisateur `etd`.

@@ -25,9 +25,9 @@ Dans cette leçon, nous allons utiliser un `Node2D` pour un projectile simple qu
 
 Voici la hiérarchie de noeud que l'on aura :
 - `Node2D` (Projectile)
-  - `Sprite2D` (Apparence du projectile)
-  - `Area2D` (Zone de collision)
-    - `CollisionShape2D` (Forme de collision)
+    - `Sprite2D` (Apparence du projectile)
+    - `Area2D` (Zone de collision)
+        - `CollisionShape2D` (Forme de collision)
 
 Voici l'image utilisée pour le `Sprite2D` du projectile :
 
@@ -74,10 +74,10 @@ Voici l'image qui sera utilisé pour le tireur :
 
 Voici la hiérarchie de noeud que l'on aura :
 - `CharacterBody2D` (Tireur de projectiles)
-  - `Sprite` (Apparence du tireur)
-  - `CollisionShape2D` (Forme de collision)
-  - `Camera2D` (Caméra pour suivre le tireur)
-  - `Marker2D` (Marqueur pour la direction du tir)
+    - `Sprite` (Apparence du tireur)
+    - `CollisionShape2D` (Forme de collision)
+    - `Camera2D` (Caméra pour suivre le tireur)
+    - `Marker2D` (Marqueur pour la direction du tir)
 
 ![alt text](assets/player_nodes.png)
 

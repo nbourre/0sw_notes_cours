@@ -19,8 +19,8 @@ Pour l'article, on prend pour acquis les points suivants:
 - Godot 4 est installé
 - Un projet Godot 4 est créé
 - Le TileSet est créé
-  - Si ce n'est pas le cas, ajouter un noeud `Tilemap` avec un nouveau Tileset de 16x16 pixels.
-  - Glisser l'image fourni dans cet article.
+    - Si ce n'est pas le cas, ajouter un noeud `Tilemap` avec un nouveau Tileset de 16x16 pixels.
+    - Glisser l'image fourni dans cet article.
 
 ## Création du terrain
 Une fois que le TileSet est créé et importé, il faut créer le terrain.
@@ -34,8 +34,8 @@ Une fois que le TileSet est créé et importé, il faut créer le terrain.
 4. Ensuite, il faut ajouter un `Element`. Nous en ajouterons 2 soit un pour la terre et l'autre pour le gazon.
 5. Donner un nom au terrain. Pour l'article, je vais utiliser `Dirt` et `Grass`
 6. Pour la couleur, utiliser une couleur complémentaire au terrain
-   - Cela n'a aucun impact sur le jeu. C'est pour mieux discerner les masques de terrain dans l'éditeur.
-   - Il y a l'outil `Color Picker` pour sélectionner une couleur.
+    - Cela n'a aucun impact sur le jeu. C'est pour mieux discerner les masques de terrain dans l'éditeur.
+    - Il y a l'outil `Color Picker` pour sélectionner une couleur.
 
 </td><td>
 
@@ -71,7 +71,7 @@ Mon astuce personnelle est de tracer le sol ensuite les délimitations (exemple 
 1. Suivant les étapes précédentes, sélectionner le `Terrain Set 0`.
 2. Pour Terrain, sélectionner `Dirt`.
 3. Commencer à tracer les surfaces représentant le sol. <br /> ![Alt text](assets/tileset_paint_dirt.gif)
-   - La couleur du masque sera celle sélectionnée lors de la création des `Terrain`. Je propose toujours une couleur complémentaire, car c'est plus facile à distinguer.
+    - La couleur du masque sera celle sélectionnée lors de la création des `Terrain`. Je propose toujours une couleur complémentaire, car c'est plus facile à distinguer.
 
 Voici le résultat pour le sol. <br />
 ![Alt text](assets/tileset_paint_dirt_done.png)

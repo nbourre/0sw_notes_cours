@@ -108,7 +108,7 @@ Voici un graphique montrant une distribution normale.
 
 ![alt text](assets/2000px-standard_deviation_diagram_svg.png)
 
-La lettre grecque μ (mu) représente la moyenne et σ (sigma) l'écart-type. L'écart-type est une mesure de la dispersion des valeurs autour de la moyenne. Plus l'écart-type est grand, plus les valeurs sont dispersées. Plus l'écart-type est petit, plus les valeurs sont regroupées autour de la moyenne.
+La lettre grecque μ (mu) représente la moyenne et σ (sigma) l'écart-type. **L'écart-type** est une mesure de la dispersion des valeurs autour de la moyenne. Plus l'écart-type est grand, plus les valeurs sont dispersées. Plus l'écart-type est petit, plus les valeurs sont regroupées autour de la moyenne.
 
 Ainsi, à ±1 écart-type, on retrouve 68 % de la population. À ±2 écart-types, on retrouve 95 % de la population. À ±3 écart-types, on retrouve 99,7 % de la population.
 

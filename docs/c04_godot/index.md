@@ -26,7 +26,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 - Vous pouvez utiliser la langue qui vous convient.
 - Au moment de réviser ces notes j’utilisais la version 4.4 avec C# Mono.
 - Je vous invite à regarder les séries de vidéos suivantes :
-  - [Mes vidéos](https://youtu.be/D89lwa1TZ5c?si=Lb6ZWMvspNOkuoea) sur Godot (Attention! Certaines datent d'ancienne version)
+    - [Mes vidéos](https://youtu.be/D89lwa1TZ5c?si=Lb6ZWMvspNOkuoea) sur Godot (Attention! Certaines datent d'ancienne version)
 
 ---
 
@@ -38,10 +38,10 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 - C’est l’endroit où l’on retrouve nos projets récents.
 - Dans cette fenêtre, on peut :
-  - Créer un nouveau projet
-  - Rechercher des projets dans un dossier (Scan)
-  - Importer un projet
-  - Effectuer d’autres opérations sur des projets
+    - Créer un nouveau projet
+    - Rechercher des projets dans un dossier (Scan)
+    - Importer un projet
+    - Effectuer d’autres opérations sur des projets
 - Pour modifier la langue, il suffit de cliquer sur le bouton dans le coin supérieur droit où il est inscrit "Settings"
 
 ---
@@ -49,7 +49,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 ## Création d’un nouveau projet
 
 - Pour créer un nouveau projet, il faut le placer dans un dossier vide.
-  - Je suggère de regrouper vos projets au même endroit, il y a un bouton pour créer le dossier du projet.
+    - Je suggère de regrouper vos projets au même endroit, il y a un bouton pour créer le dossier du projet.
 - Godot s’occupera de la création des différents fichiers nécessaires pour le projet.
 - **Note :** J’utiliserai un seul dépôt pour mes projets Godot. Vous pouvez y accéder [ici](https://github.com/nbourre/0sw_projets_cours).
 
@@ -69,7 +69,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 - La barre de menus contient le menu principal, les workspaces, et les boutons de test.
 - Le volet `FileSystem` contient la structure du dossier du projet.
 - On y retrouve aussi les ressources (*assets*) :
-  - Images, sons, etc.
+    - Images, sons, etc.
 
 ![alt text](assets/filesystem.png)
 
@@ -115,12 +115,12 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 - Dans la partie supérieure de la fenêtre de Godot, il y a quatre boutons qui permettent de changer l’environnement de travail.
 - Il y a quatre environnements de travail (*workspaces*) :
-  - 2D, 3D, Script et AssetLib
+    - 2D, 3D, Script et AssetLib
 - L’environnement **2D** sert principalement pour le… 2D et les interfaces.
 - L’environnement **3D** sert à travailler avec les meshes, l’éclairage, et le design de niveau pour les jeux 3D.
 - L’environnement **Script** est un éditeur de code complet avec un débogueur.
 - L'environnement **Game** permet de visualiser le jeu directement dans l'environnement pour faire des tests rapides.
-  - L'option doit être activée dans les options de l'environnement de travail.
+    - L'option doit être activée dans les options de l'environnement de travail.
 - L’environnement **AssetLib** est une librairie de ressources telles que des scripts, des images, des add-ons, etc.
 
 ---
@@ -140,12 +140,12 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 - Les nœuds sont les ingrédients de base pour créer un jeu.
 - Chaque nœud a une fonctionnalité spécialisée.
 - Chaque nœud possède les attributs suivants :
-  - Il a un nom
-  - Il a des propriétés modifiables
-  - Il peut recevoir des fonctions de rappel (`callback`) pour traiter chaque *frame*
-  - Il peut être étendu pour avoir plus de fonctionnalités
-  - Il peut être ajouté à un autre nœud en tant qu’enfant
-    - Cela crée un graphe.
+    - Il a un nom
+    - Il a des propriétés modifiables
+    - Il peut recevoir des fonctions de rappel (`callback`) pour traiter chaque *frame*
+    - Il peut être étendu pour avoir plus de fonctionnalités
+    - Il peut être ajouté à un autre nœud en tant qu’enfant
+        - Cela crée un graphe.
 - Ne vous inquiétez pas si vous n’avez pas tout compris, on revient sur le sujet plus tard.
 
 ![alt text](assets/editor_intro_workspace_2d.webp)
@@ -157,9 +157,9 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 - Une scène est composée d’un groupe de nœuds organisés de façon hiérarchique.
 - Une scène :
-  - A toujours un nœud racine
-  - Peut être sauvegardée et chargée
-  - Peut être instanciée (comme un objet)
+    - A toujours un nœud racine
+    - Peut être sauvegardée et chargée
+    - Peut être instanciée (comme un objet)
 - Exécuter un jeu revient à exécuter une scène.
 - Un projet peut contenir plusieurs scènes, mais un jeu pour démarrer doit avoir une scène principale.
 
@@ -191,8 +191,8 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 ---
 
 - Plusieurs choses se passent après avoir cliqué sur `Create` :
-  - Premièrement, la scène se met en 2D car un `Label` est un nœud de type 2D.
-  - Deuxièmement, l’étiquette apparaît sélectionnée dans la scène dans le coin supérieur gauche du *viewport*.
+    - Premièrement, la scène se met en 2D car un `Label` est un nœud de type 2D.
+    - Deuxièmement, l’étiquette apparaît sélectionnée dans la scène dans le coin supérieur gauche du *viewport*.
 - La seconde étape sera de changer le texte dans le volet `Inspector`.
 - Modifiez la propriété `Text` pour "Bonjour le monde!".
 
@@ -216,10 +216,10 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 - Il faut configurer le projet pour sélectionner la scène principale.
 - Pour configurer le projet, il suffit d’aller dans le menu "Project --> Project settings".
 - Configurons le projet pour exécuter la scène principale :
-  - Dans le volet de gauche sous la catégorie `Application` sous `Run` (ou `Exécuter`)
-  - Changer la propriété `Main Scene` pour récupérer la scène de "Bonjour le monde".
-  - Fermer la fenêtre.
-  - Une fois modifié, lorsque l’on exécutera le jeu avec [F5], la scène principale sera lancée.
+    - Dans le volet de gauche sous la catégorie `Application` sous `Run` (ou `Exécuter`)
+    - Changer la propriété `Main Scene` pour récupérer la scène de "Bonjour le monde".
+    - Fermer la fenêtre.
+    - Une fois modifié, lorsque l’on exécutera le jeu avec [F5], la scène principale sera lancée.
 
 ---
 
@@ -233,8 +233,8 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 - Dans cette partie, nous allons faire un projet dans lequel un bouton changera le texte d’une étiquette à l’aide du code.
 - Sans extension, Godot accepte 2 langages :
-  - GDScript : Langage natif de Godot ressemblant à Python. C’est le favori de ceux qui apprennent à programmer. Il est utilisé dans la plupart des tutoriels.
-  - C# : Langage favori des programmeurs et des gros projets. C'est le langage que je vous suggère si vous désirez être sérieux avec Godot.
+    - GDScript : Langage natif de Godot ressemblant à Python. C’est le favori de ceux qui apprennent à programmer. Il est utilisé dans la plupart des tutoriels.
+    - C# : Langage favori des programmeurs et des gros projets. C'est le langage que je vous suggère si vous désirez être sérieux avec Godot.
 - On peut utiliser plusieurs langages dans un même projet.
 - Lien vers la [documentation officielle](https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html)
 
@@ -243,9 +243,9 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 ### Objectifs
 
 - On verra les éléments suivants :
-  - Attacher un script à un nœud
-  - Accrocher un élément graphique (UI) via un signal (événement)
-  - Écrire un script qui accède à d’autres nœuds dans la scène
+    - Attacher un script à un nœud
+    - Accrocher un élément graphique (UI) via un signal (événement)
+    - Écrire un script qui accède à d’autres nœuds dans la scène
 - Il est suggéré de survoler les références de GDScript.
 
 ---
@@ -253,15 +253,15 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 ### Monter la scène
 
 <table>
-  <tr>
-    <td>
+    <tr>
+        <td>
     
 - Avec le projet "Hello World"
 - Ajoutez les nœuds suivants dans la même hiérarchie :
-  - Node2D
-    - Panel
-      - Label
-      - Button
+    - Node2D
+        - Panel
+            - Label
+            - Button
 - Vous pouvez mettre un nœud à la racine de la scène en cliquant avec le bouton de droite.
 - Positionnez les contrôles pour obtenir ce qui est affiché ci-contre.
 - La propriété `Size` dans la section `Transform` de `Panel` permet de redimensionner le panneau.
@@ -274,7 +274,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
     
 
     </td>
-  </tr>
+    </tr>
 </table>
 
 ---
@@ -288,15 +288,15 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 ### Ajouter un script
 
 - Dans le volet `Scene`, renommez le `Node2D` pour `World`.
-  - Il s'agit d'une convention que l'on utilisera pour désigner le monde du jeu.
+    - Il s'agit d'une convention que l'on utilisera pour désigner le monde du jeu.
 - Cliquez avec le bouton droit sur le nœud `World` et sélectionnez `Attach Script`.
 - La boîte de dialogue pour la création de script s’affichera.
 
 ![alt text](assets/attach_script.png)
 
 - On peut y régler entre autres :
-  - Le langage de programmation
-  - Le nom du fichier
+    - Le langage de programmation
+    - Le nom du fichier
 - Sélectionnez le langage `C#`.
 - Il est possible de modifier le nom du fichier, mais Godot utilise par défaut le nom du nœud auquel le script est attaché. Dans notre cas, `World.cs`.
 - Cliquez sur `Create`.
@@ -314,7 +314,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 - Les méthodes `_Ready` et `_Process` sont générées automatiquement.
 - `Ready` s’exécute une fois que tous les enfants entrent en activité dans la scène.
 - `Process` s’exécute le plus souvent possible, idéalement à chaque frame.
-  - Le paramètre `delta` est le temps écoulé depuis la dernière exécution de la méthode.
+    - Le paramètre `delta` est le temps écoulé depuis la dernière exécution de la méthode.
 - Le rôle du script est d’ajouter des comportements à un nœud.
 
 ---
@@ -351,7 +351,7 @@ Dans `_Ready`, on retrouve :
 
 - Godot utilise le terme **`signal`** qui est un synonyme d’**événement**.
 - La convention Godot pour le nom des méthodes de signaux est celle-ci : On *[NomNoeud]* *[NomSignal]*.
-  - Dans notre cas : `OnButtonPressed`.
+    - Dans notre cas : `OnButtonPressed`.
 - Pour attacher un signal à un événement, il suffit d’ajouter la méthode à l’événement.
 - La méthode GetNode<T>(nomNoeud) permet de retrouver le nœud relatif au nœud possédant le script.
 
@@ -368,28 +368,28 @@ Dans `_Ready`, on retrouve :
 - La méthode `GetNode()` est fréquemment utilisée pour retrouver un nœud.
 - Le chemin donné en paramètre est une string relative au nœud possédant le script.
 - Assumons que le nœud courant est `Character` et le graphe suivant :
-  - /root
-  - /root/Character
-  - /root/Character/Sword
-  - /root/Character/Backpack/Dagger
-  - /root/MyGame
-  - /root/Swamp/Alligator
-  - /root/Swamp/Mosquito
-  - /root/Swamp/Goblin
+    - /root
+    - /root/Character
+    - /root/Character/Sword
+    - /root/Character/Backpack/Dagger
+    - /root/MyGame
+    - /root/Swamp/Alligator
+    - /root/Swamp/Mosquito
+    - /root/Swamp/Goblin
 - Des chemins possibles sont :
-  - GetNode("Sword")
-  - GetNode("Backpack/Dagger")
-  - GetNode("../Swamp/Alligator")
-  - GetNode("/root/MyGame")
+    - GetNode("Sword")
+    - GetNode("Backpack/Dagger")
+    - GetNode("../Swamp/Alligator")
+    - GetNode("/root/MyGame")
 
 ---
 
 ## Autres informations sur le script
 
 - Remarquez que le script précédent hérite du nœud.
-  - Par exemple : `public class XYZ : Node2D`.
+    - Par exemple : `public class XYZ : Node2D`.
 - N’oubliez pas que c’est du C#, ainsi les propriétés du nœud sont directement accessibles dans le code.
-  - Par exemple, la propriété `Text` sera accessible pour un nœud de type `Label`.
+    - Par exemple, la propriété `Text` sera accessible pour un nœud de type `Label`.
 - Il est possible d’utiliser Visual Studio Code pour éditer le code et avoir l’auto-complétion.
 - Veuillez consulter ce lien : [Setup Godot 4.3 C# In Windows With Visual Studio Code .NET8 in 7 minutes | 2024 | 2025 | Debug](https://www.youtube.com/watch?v=QetDIxDorFI).
 - Pour coder avec VS Code, je vous suggère d’installer l’extension [Godot Tools](https://marketplace.visualstudio.com/items?itemName=geequlim.godot-tools).
@@ -399,7 +399,7 @@ Dans `_Ready`, on retrouve :
 ## Les fonctions de rappel
 
 - Godot fonctionne beaucoup avec des *callbacks* (fonctions de rappel) ou des fonctions virtuelles.
-  - Cela évite de créer plusieurs `if` qui sont vérifiés à chaque fois dans une boucle.
+    - Cela évite de créer plusieurs `if` qui sont vérifiés à chaque fois dans une boucle.
 - Toutefois, on peut quand même utiliser des fonctions de traitements continues comme les boucles de jeux classiques.
 - Godot offre `_Process(double delta)` et `_PhysicsProcess()` qui permettent d'exécuter du code périodiquement.
 
@@ -416,7 +416,7 @@ Dans `_Ready`, on retrouve :
 - Il s’agit d’une valeur en fraction de seconde, par exemple 0.016s.
 - Par exemple, le mouvement d’une balle doit aller à 60px/sec, peu importe la puissance de la machine.
 - Il suffit de multiplier la vitesse par le delta.
-  - Ex : `vitesse.x = 60 * delta;`.
+    - Ex : `vitesse.x = 60 * delta;`.
 
 ---
 
@@ -443,9 +443,9 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
 - On se rappelle que Godot fonctionne avec un système de graphe (arbre hiérarchique).
 - Il est possible d’associer les nœuds à des groupes pour exécuter des instructions à l’ensemble du groupe.
 - Il faut faire appel à la méthode `AddToGroup(nomGroupe)`.
-  - Exemple de cas :
-    - Indiquer à un groupe d’ennemis d’atteindre un point donné sur la carte.
-    - Notifier les objets qu’un événement X est arrivé.
+    - Exemple de cas :
+        - Indiquer à un groupe d’ennemis d’atteindre un point donné sur la carte.
+        - Notifier les objets qu’un événement X est arrivé.
 - La fonction `GetTree().GetNodesInGroup(nomGroupe)` permet de récupérer les nœuds qui sont dans un groupe nommé en paramètre.
 - La fonction `GetTree().GetFirstNodeInGroup(nomGroupe)` permet de récupérer le premier nœud qui est dans un groupe nommé en paramètre.
 
@@ -454,16 +454,16 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
 ## Les méthodes surchargeables
 
 - `_EnterTree()` : Appelée lorsque le nœud s’intègre au graphe.
-  - Pour chaque nœud enfant, cette méthode est appelée.
+    - Pour chaque nœud enfant, cette méthode est appelée.
 - `_Ready()` : Appelée après _EnterTree().
-  - Lorsque tous les nœuds enfants sont intégrés dans le graphe.
+    - Lorsque tous les nœuds enfants sont intégrés dans le graphe.
 - `_ExitTree()` : Appelée lorsque le nœud sort du graphe.
-  - Tous les nœuds enfants ont quitté le graphe à ce point.
-  - Exemple :
-    - NœudA entre en scène : `NoeudA._EnterTree()` est exécutée.
-    - NœudB est ajouté à NœudA : `NoeudB._EnterTree()` et ensuite `NoeudB._Ready()` sont appelées.
-    - NœudC est ajouté à NœudA : `NoeudC._EnterTree()` et ensuite `NoeudC._Ready()` sont appelées.
-    - `NoeudA._Ready()` est exécutée.
+    - Tous les nœuds enfants ont quitté le graphe à ce point.
+    - Exemple :
+        - NœudA entre en scène : `NoeudA._EnterTree()` est exécutée.
+        - NœudB est ajouté à NœudA : `NoeudB._EnterTree()` et ensuite `NoeudB._Ready()` sont appelées.
+        - NœudC est ajouté à NœudA : `NoeudC._EnterTree()` et ensuite `NoeudC._Ready()` sont appelées.
+        - `NoeudA._Ready()` est exécutée.
 
 ---
 
@@ -471,18 +471,18 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
 
 - Il est important de disposer des objets lorsqu’ils ne sont plus utilisés pour optimiser l’utilisation de la mémoire.
 - Exemple de création d'un nœud :
-  - `Sprite _sprite = new Sprite();`
-  - `AddChild(_sprite); // Ajoute un enfant au nœud courant`
+    - `Sprite _sprite = new Sprite();`
+    - `AddChild(_sprite); // Ajoute un enfant au nœud courant`
 - Exemple de destruction d'un nœud :
-  - `_nomNoeud.QueueFree(); // Libère le nœud après que ses tâches sont complétées`
+    - `_nomNoeud.QueueFree(); // Libère le nœud après que ses tâches sont complétées`
 
 ---
 
 ## Exercice
 
 - Avec le projet `c01_godot` qui contient `Panel`, `Label` et `Button` :
-  - Modifiez le script `TestPanel.cs` en y ajoutant les méthodes ci-contre dans chacun des nœuds.
-  - Exécutez.
+    - Modifiez le script `TestPanel.cs` en y ajoutant les méthodes ci-contre dans chacun des nœuds.
+    - Exécutez.
 
 ```csharp
     public override void _Ready()
@@ -511,11 +511,11 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
 - Les signaux sont les événements de Godot
 - Godot fonctionne avec le **patron de conception de l’observateur**.
 - Ce patron permet à un nœud d’envoyer un message que certains nœuds peuvent écouter et réagir en conséquence.
-  - Par exemple, au lieu de vérifier continuellement si un bouton est appuyé, il suffit que le bouton envoie un signal lorsqu’il est appuyé.
+    - Par exemple, au lieu de vérifier continuellement si un bouton est appuyé, il suffit que le bouton envoie un signal lorsqu’il est appuyé.
 - Lectures suggérées :
-  - [Documentation officielle sur les signaux](https://docs.godotengine.org/fr/4.x/classes/class_signal.html)
-  - [Game Programming Patterns - Observers](https://gameprogrammingpatterns.com/observer.html)
-  - [Wikipedia - Observer Pattern](https://en.wikipedia.org/wiki/Observer_pattern)
+    - [Documentation officielle sur les signaux](https://docs.godotengine.org/fr/4.x/classes/class_signal.html)
+    - [Game Programming Patterns - Observers](https://gameprogrammingpatterns.com/observer.html)
+    - [Wikipedia - Observer Pattern](https://en.wikipedia.org/wiki/Observer_pattern)
 - Les signaux permettent de découpler les objets du jeu, ce qui permet une meilleure organisation et gestion du code.
 - Ainsi, lorsqu’un signal est émis, seulement les objets intéressés peuvent réagir.
 
@@ -526,9 +526,9 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
 - Dans un premier temps, nous allons faire un exemple en utilisant l’interface.
 - Nous allons utiliser les nœuds `Timer` et `Sprite` pour faire clignoter une image.
 - Dans un projet quelconque, ajoutez la hiérarchie suivante :
-  - ExempleTimer : `Node2D`
-    - Timer : `Timer`
-    - Sprite : `Sprite2D`
+    - ExempleTimer : `Node2D`
+        - Timer : `Timer`
+        - Sprite : `Sprite2D`
 - Sélectionnez le `Sprite2D` dans les nœuds.
 - Dans l’inspecteur, à la propriété `Texture`, sélectionnez `Load` et chargez l’image `Icon.svg`.
 
@@ -539,9 +539,9 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
 - Attachez un script à `ExempleTimer`.
 - Sélectionnez `Timer`.
 - Dans les propriétés, cochez `On` pour Autostart.
-  - Cela va faire en sorte que le chronomètre va débuter dès le démarrage de la scène.
+    - Cela va faire en sorte que le chronomètre va débuter dès le démarrage de la scène.
 - Allez dans l’onglet `Node`; vous allez voir les différents signaux acceptés pour chaque classe héritée.
-  - Cela ressemble drôlement aux événements dans Visual Studio.
+    - Cela ressemble drôlement aux événements dans Visual Studio.
 - Double-cliquez sur `timeout()`, une fenêtre apparaîtra.
 
 &nbsp;
@@ -551,7 +551,7 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
 - On peut changer le nom de la méthode.
 - Sélectionnez le nœud `ExempleTimer` auquel vous aviez attaché un script.
 - Cliquez sur `Connect`.
-  - **Bug alert!** Il semble que la fonction générée soit à l’extérieur de la classe.
+    - **Bug alert!** Il semble que la fonction générée soit à l’extérieur de la classe.
   
 ![alt text](assets/node_signal.png)
 
@@ -578,7 +578,7 @@ public void _on_timer_timeout() {
 
 - Il est possible de connecter des signaux via le code au lieu de l’éditeur.
 - C’est surtout utilisé lorsque l’on crée des instances via le code et que l’on doit y attacher des signaux.
-  - Pensez aux écouteurs d’événement en JavaScript que l’on attache en code avec "addEventListener".
+    - Pensez aux écouteurs d’événement en JavaScript que l’on attache en code avec "addEventListener".
 - Pour attacher un signal avec le code, il faudra utiliser le nom de l’événement et ajouter la fonction à celui-ci.
 
 Voici un exemple où on attache 2 fonctions à un événement :
@@ -601,7 +601,7 @@ monObjet.eventName += eventFunctionB;
 - Avec le projet `ExempleTimer` :
 - Dans l’éditeur, déconnectez le signal `timeout()` à l’aide du bouton `Disconnect`.
 - Nous allons utiliser la méthode `Connect()` dans la méthode `_Ready()` pour connecter.
-  - La syntaxe est la suivante : `objet.nomSignal += nomMethode`. 
+    - La syntaxe est la suivante : `objet.nomSignal += nomMethode`. 
 - Dans la méthode `_Ready()`, ajoutez le code qui suit.
 
 ```csharp
@@ -614,9 +614,9 @@ GetNode<Timer>("Timer").Timeout += _on_timer_timeout;
 
 - Il est possible de créer des signaux personnalisés ([Source](https://docs.godotengine.org/fr/stable/getting_started/step_by_step/signals.html#custom-signals)).
 - Exemples d’utilité :
-  - Un personnage tire et je veux signaler que le projectile a été tiré.
-  - Des ennemis approchent un lieu précis, on veut signaler que l’événement est arrivé.
-  - Etc.
+    - Un personnage tire et je veux signaler que le projectile a été tiré.
+    - Des ennemis approchent un lieu précis, on veut signaler que l’événement est arrivé.
+    - Etc.
 - Pour émettre un signal, on appelle la méthode `EmitSignal()`.
 
 Exemple :
@@ -649,8 +649,8 @@ public class Player : CharacterBody2D
 
 - À l’aide du fichier [`instancing_starter.zip`](https://github.com/godotengine/godot-docs-project-starters/releases/download/latest-4.x/instancing_starter.zip), décompressez le fichier à l’endroit désiré.
 - À partir du gestionnaire de projet, importez ce dernier dans Godot.
-  - Il se peut qu’il y ait un avertissement de version. Acceptez la mise à jour du projet.
-   Réalisez l'exercice qui se retrouve [ici](https://docs.godotengine.org/en/stable/getting_started/step_by_step/instancing.html#instancing-by-example)
+    - Il se peut qu’il y ait un avertissement de version. Acceptez la mise à jour du projet.
+        Réalisez l'exercice qui se retrouve [ici](https://docs.godotengine.org/en/stable/getting_started/step_by_step/instancing.html#instancing-by-example)
 
 **Résumé du projet**
 
@@ -758,16 +758,16 @@ Il existe encore de nombreux tutoriels et projets utilisant Godot 3.x. Assurez-v
 <!-- Tableau html à 2 colonnes pour copier coller
 
 <table>
-  <tr>
-    <td>
+    <tr>
+        <td>
     
 
-    </td>
-    <td>
+        </td>
+        <td>
     
 
-    </td>
-  </tr>
+        </td>
+    </tr>
 </table>
 
 -->

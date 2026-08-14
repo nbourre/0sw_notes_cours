@@ -8,11 +8,11 @@ Programmation créative - L’agrégation et les collisions
 - Récupération du projet
 - Chercher une cible
 - L’agrégation
-  - Qu’est-ce que l’agrégation?
-  - Notions scientifiques
-  - Cohésion
-  - Séparation
-  - Alignement
+    - Qu’est-ce que l’agrégation?
+    - Notions scientifiques
+    - Cohésion
+    - Séparation
+    - Alignement
 
 ---
 
@@ -31,7 +31,7 @@ Les boids ne se déplace qu’avec une vitesse initiale
 ## Calculer le vecteur de braquage
 - Avant de débuter avec l’agrégation, il est important de comprendre comment calculer un vecteur de braquage
 - Dans certaine situation, on voudrait qu’un objet atteigne une cible tout en ayant une vitesse de rotation limitée
-  - Exemple : Véhicule qui se braque dans une direction
+    - Exemple : Véhicule qui se braque dans une direction
 - C'est le cas avec la force de cohésion
 
 ### Algo
@@ -75,9 +75,9 @@ Banc de thons
 
 ### Notions scientifiques
 - Le principe de volée nécessite 3 forces
-  - La cohésion
-  - La séparation
-  - L’alignement
+    - La cohésion
+    - La séparation
+    - L’alignement
 - L’addition de ces trois forces sur un ensemble d’agents simule l’effet du comportement de troupeau chez les animaux.
 
 ![alt text](assets/coh_sep_ali.png)
@@ -103,13 +103,13 @@ Banc de thons
 
 #### Algorithme
 - Pour chaque agents qui sont dans la bulle de répulsion
-  - Diff <-- agent.position – autre.position
-  - Normalise diff
-  - Divise diff par la distance
-  - Somme la diff
+    - Diff <-- agent.position – autre.position
+    - Normalise diff
+    - Divise diff par la distance
+    - Somme la diff
 - Suivant
 - Diviser la somme par le nombre d’agents trouvés
-  - Cela calcule la direction à atteindre
+    - Cela calcule la direction à atteindre
 - Normaliser la division
 - Multiplier par la vitesse max
 - Soustraire la vitesse de l’agent
@@ -238,9 +238,9 @@ Voici ce que vous devriez voir.
 - Après avoir calculé les trois forces, on applique une pondération pour chacune d’elle
 - Par la suite, on les applique à l’agent
 - Le résultat final dépendra des facteurs suivants
-  - La distance de l’application de chaque force
-  - La pondération de chaque force
-  - Le nombre de voisins à considérer
+    - La distance de l’application de chaque force
+    - La pondération de chaque force
+    - Le nombre de voisins à considérer
 
 ![alt text](assets/flock_sep_ali_coh.gif)
 

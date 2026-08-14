@@ -86,10 +86,10 @@ func handle_input() -> void:
 **Quelques secondes pour trouver d'autres bogues :)**
 
 - Le joueur pourra :
-  - Appuyer sur la flèche du bas pour se pencher
-  - Appuyer sur B pour sauter lorsqu’il est penché
-  - Relâcher la flèche du bas lorsque dans les airs
-  - On aura une image debout lorsqu’il sera dans les airs
+    - Appuyer sur la flèche du bas pour se pencher
+    - Appuyer sur B pour sauter lorsqu’il est penché
+    - Relâcher la flèche du bas lorsque dans les airs
+    - On aura une image debout lorsqu’il sera dans les airs
 - Corrigeons en ajoutant des nouveaux drapeaux...
 
 ---
@@ -155,11 +155,11 @@ Chasse aux bogues encore…
 - [La machine à état fini](https://fr.wikipedia.org/wiki/Automate_fini) (FSM) fait partie de la famille de la [Théorie des automates](https://fr.wikipedia.org/wiki/Th%C3%A9orie_des_automates)
 - Il s’agit de la structure la plus simple
 - Ce qu’il faut savoir :
-  - Il y a un nombre déterminé d’état dans lequel la machine peut être. Par exemple : debout, saut, penché et plonge.
-  - La machine ne peut être qu’en un seul état à la fois.
-  - Une séquence d’actions ou d’entrées est envoyée à la machine. Dans notre cas, ce seront les boutons d’une manette.
-  - Chaque état a un jeu de transitions, chacune de celle-ci est associée à une entrée et pointe vers un état. Quand un événement est déclenché, s’il est reconnu par une transition pour l’état courant, la machine passera à l’état que la transition pointe vers.
-  - Chaque état a une responsabilité unique. Par exemple, l’état de saut s’occupe de la logique du saut, l’état de plonge s’occupe de la logique de plonge, etc.
+    - Il y a un nombre déterminé d’état dans lequel la machine peut être. Par exemple : debout, saut, penché et plonge.
+    - La machine ne peut être qu’en un seul état à la fois.
+    - Une séquence d’actions ou d’entrées est envoyée à la machine. Dans notre cas, ce seront les boutons d’une manette.
+    - Chaque état a un jeu de transitions, chacune de celle-ci est associée à une entrée et pointe vers un état. Quand un événement est déclenché, s’il est reconnu par une transition pour l’état courant, la machine passera à l’état que la transition pointe vers.
+    - Chaque état a une responsabilité unique. Par exemple, l’état de saut s’occupe de la logique du saut, l’état de plonge s’occupe de la logique de plonge, etc.
 
 Vous aurez deviné que la machine est représentée par le personnage et les transitions sont les actions que le personnage peut faire.
 
@@ -512,8 +512,8 @@ Principe :
 
 - Le patron de conception de l'État n’indique pas où l’on doit intégrer le changement d’état
 - On peut le faire dans la classe « contexte » ou dans chacun des états
-  - L’avantage de faire l’intégration dans les états est la facilité de créer de nouveaux états
-  - Le désavantage, c’est que chaque état doit connaître l’état qui suit la transition ainsi il y a un couplage par transition qui se forment
+    - L’avantage de faire l’intégration dans les états est la facilité de créer de nouveaux états
+    - Le désavantage, c’est que chaque état doit connaître l’état qui suit la transition ainsi il y a un couplage par transition qui se forment
 
 ---
 
@@ -523,7 +523,7 @@ Principe :
 ### `BaseState`
 - La première étape sera de créer une classe générique qui aura les méthodes de base pour l’ensemble des états
 - Nous appellerons cette classe `BaseState`
-  - Celle-ci héritera de la classe Node pour avoir les fonctionnalités de Godot
+    - Celle-ci héritera de la classe Node pour avoir les fonctionnalités de Godot
 
 
 Depuis la version 4.5 de Godot, on peut faire des classes abstraites en utilisant l'annotation `@abstract`.

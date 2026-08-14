@@ -6,8 +6,8 @@
 - On simule la parallaxe avec des images qui défilent à des vitesses variées.
 - Pour simplifier la compréhension, prenons un décor à deux couches :
 
-  - `couche_0` pour le fond (immobile, ex. montagnes ou étoiles)
-  - `couche_1` pour le devant (défilement à 50 % de la vitesse de la caméra)
+    - `couche_0` pour le fond (immobile, ex. montagnes ou étoiles)
+    - `couche_1` pour le devant (défilement à 50 % de la vitesse de la caméra)
 - Lors du défilement, si l’on atteint la limite d’une image, on la répète à partir de l’autre extrémité.
 
 ![Alt text](assets/theory_live.gif)
@@ -90,6 +90,6 @@ Pour éviter des problèmes d’échelle et de performance :
 ## Exercice
 À partir du projet [c07d_pateforme_ennemi](https://github.com/nbourre/0sw_projets_cours/tree/master/c07_plateforme_ennemi).
 - Ajouter un décor avec les images fournies dans le dossier `Legacy-Fantasy-PurpleBay/Background`.
-  - La dimension des images est de 336x192
-  - Faites défiler les nuages automatiquements
+    - La dimension des images est de 336x192
+    - Faites défiler les nuages automatiquements
 - Ajouter des props en avant-plan (arbres, herbes, etc.) qui défilent plus rapidement que le personnage.

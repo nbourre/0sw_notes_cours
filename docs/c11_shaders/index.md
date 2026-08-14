@@ -7,7 +7,7 @@
 - Les shaders sont écrits en GLSL (OpenGL Shading Language), un langage de programmation bas niveau.
 - Le code est compilé pour la carte graphique et exécuté sur le GPU (Graphics Processing Unit).
 - Les shaders sont écrits dans un fichier texte avec l'extension `.glsl` ou `.shader`
-  - Godot sauvegarde avec l'extension `.gdshader` pour les shaders écrits dans l'éditeur de code.
+    - Godot sauvegarde avec l'extension `.gdshader` pour les shaders écrits dans l'éditeur de code.
 - Les shaders sont utilisés dans Godot pour les matériaux, les post-process, les effets de particules, etc.
 
 > **Note**
@@ -32,13 +32,13 @@ Pour créer un nouveau shader, vous pouvez suivre les étapes suivantes:
 1. Sélectionnez le noeud `Sprite`
 2. Dans l'inspecteur sous la section `CanvasItem`, sélectionnez le menu déroulant `Material`
 3. Cliquez sur le bouton `New ShaderMaterial`
-   - Une sphère apparait dans l'inspecteur
-   - Un nouveau noeud `ShaderMaterial` est créé dans la hiérarchie
-   ![](assets/shader_tutorial_02.gif)
+    - Une sphère apparait dans l'inspecteur
+    - Un nouveau noeud `ShaderMaterial` est créé dans la hiérarchie
+    ![](assets/shader_tutorial_02.gif)
 4. Cliquez `Material` dans l'inspecteur
 5. Créez un nouveau `Shader` pour la propriété du même nom
 6. Donnez un nom au fichier du shader. Par exemple `blink_shader.gdshader`
-   ![](assets/shader_tutorial_03.gif)
+    ![](assets/shader_tutorial_03.gif)
 6. Cliquez sur le nouveau fichier pour développer l'éditeur de shader
     ![Alt text](assets/shader_tutorial_03b.gif)
 
@@ -175,18 +175,18 @@ Vous avez remarqué la fonction `mix()`? Cette fonction permet de mélanger deux
 
 Nous avons vu les mots-clés suivantes:
 - `COLOR` : Couleur du pixel
-  - Chaque composante est accessible par `r`, `g`, `b` et `a`
+    - Chaque composante est accessible par `r`, `g`, `b` et `a`
 - `UV` : Coordonnées du pixel
-  - Chaque composante est accessible par `x` et `y`
+    - Chaque composante est accessible par `x` et `y`
 - `TEXTURE` : Texture du sprite
 
 Les fonctions suivantes ont été utilisées:
 - `vecX()` : Créer un vecteur de X valeurs
 - `texture(sample2D sampler, vec2 coord)` : Obtenir la couleur d'une texture à une position donnée
 - `mix(x, y, a)` : Interpoler entre deux valeurs
-  - `x` : Valeur de départ.
-  - `y` : Valeur d'arrivée.
-  - `a` : Pourcentage de la valeur d'arrivée.
+    - `x` : Valeur de départ.
+    - `y` : Valeur d'arrivée.
+    - `a` : Pourcentage de la valeur d'arrivée.
 
 ## Rendre public des paramètres du shader
 Maintenant que l'on connaît les bases du shader, il est temps de rendre public des paramètres du shader. Cela permettra de modifier les paramètres du shader dans Godot (ou tout autre moteur de jeu).
@@ -509,15 +509,15 @@ Cependant, on veut que l'ondulation ne soit appliquer que si la position `y` est
 ##### Explications de l'exemple :
 
 1. **Variables `amplitude` et `frequency`** :
-   - `amplitude` contrôle l'intensité de l'onde, ou à quel point les sommets se déplacent horizontalement.
-   - `frequency` contrôle la fréquence des ondulations, influençant la densité des vagues.
+    - `amplitude` contrôle l'intensité de l'onde, ou à quel point les sommets se déplacent horizontalement.
+    - `frequency` contrôle la fréquence des ondulations, influençant la densité des vagues.
 
 2. **Oscillation en fonction de la position `y`** :
-   - Nous utilisons `sin(og_pos.y + frequency)` pour créer une oscillation sinusoïdale en fonction de la position `y` du sommet et de la fréquence.
-   - Nous appliquons l'oscillation seulement si la position `y` est négative, pour que l'effet ne soit visible que sur la partie supérieure de l'objet.
+    - Nous utilisons `sin(og_pos.y + frequency)` pour créer une oscillation sinusoïdale en fonction de la position `y` du sommet et de la fréquence.
+    - Nous appliquons l'oscillation seulement si la position `y` est négative, pour que l'effet ne soit visible que sur la partie supérieure de l'objet.
 
 3. **Application du déplacement** :
-   - Le calcul de l'onde est appliqué à la coordonnée `x` de `VERTEX`, ce qui entraîne une ondulation horizontale.
+    - Le calcul de l'onde est appliqué à la coordonnée `x` de `VERTEX`, ce qui entraîne une ondulation horizontale.
 
 > **Note** : Ce shader est assez performant car il agit uniquement sur les sommets, ce qui demande moins de calculs qu’un effet appliqué aux pixels.
 
@@ -558,7 +558,7 @@ Cependant, c'est bien beau copier le travail des autres, mais c'est toujours imp
 ### Shader-Lib
 `Shader-Lib` est un plugin pour Godot qui permet de créer des shaders à l'aide d'un outil visuel. Il est possible de créer des shaders sans écrire une seule ligne de code. Dans `AssetLib`, il suffit de chercher `Shader-Lib` pour l'installer.
 
- [Shader-Lib](https://github.com/DigvijaysinhGohil/Godot-Shader-Lib/) est disponible sur GitHub. La documentation est disponible sur [GitBook](https://github.com/DigvijaysinhGohil/Godot-Shader-Lib/blob/main/documentation/Documentation.md).
+[Shader-Lib](https://github.com/DigvijaysinhGohil/Godot-Shader-Lib/) est disponible sur GitHub. La documentation est disponible sur [GitBook](https://github.com/DigvijaysinhGohil/Godot-Shader-Lib/blob/main/documentation/Documentation.md).
 
 ## Conclusion
 Une fois que les bases sont apprises, les `shaders` ne sont pas si compliqué. Il faut juste prendre le temps de comprendre comment ils fonctionnent et de les tester.

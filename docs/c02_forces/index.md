@@ -10,18 +10,18 @@
 Pour développer des jeux, il est essentiel de comprendre comment les forces agissent sur les objets. Cela nous permet de créer des mouvements réalistes et d'interagir avec l'environnement de manière convaincante.
 
 <table>
-  <tr>
-    <td><img src="assets/n4s_physics.gif" alt="alt text"></td>
-    <td><img src="assets/ragdoll_physics.gif" alt="alt text"></td>
-  </tr>
+    <tr>
+        <td><img src="assets/n4s_physics.gif" alt="alt text"></td>
+        <td><img src="assets/ragdoll_physics.gif" alt="alt text"></td>
+    </tr>
 
 </table>
 
 <table>
-  <tr>
-    <td><img src="assets/physics_bug.webp" alt="alt text"></td>
-    <td><img src="assets/boop.gif" alt="alt text"></td>
-  </tr>
+    <tr>
+        <td><img src="assets/physics_bug.webp" alt="alt text"></td>
+        <td><img src="assets/boop.gif" alt="alt text"></td>
+    </tr>
 </table>
 
 ---
@@ -50,10 +50,10 @@ git checkout -b c02_forces
 ## Force 
 
 - En physique, une force est une interaction qui tend à modifier la vitesse d’un objet.
-  - **Lorsque la vitesse est modifiée, il y a obligatoirement une accélération.**
+    - **Lorsque la vitesse est modifiée, il y a obligatoirement une accélération.**
 - Une force peut accélérer le déplacement d’un objet avec une masse.
 - Une force possède une **magnitude** et une **direction**.
-  - **Vecteur**!
+    - **Vecteur**!
 - Ainsi, une force est un vecteur qui cause l’accélération d’un objet avec une masse.
 
 ---
@@ -61,11 +61,11 @@ git checkout -b c02_forces
 ## Première loi de Newton
 
 - Un objet au repos reste au repos, un objet en déplacement reste en déplacement.
-  - Plus en détail : Un objet au repos reste au repos, un objet en déplacement reste en déplacement à une vitesse et direction constantes à moins d’une force non équilibrée. Par exemple dans l’espace.
+    - Plus en détail : Un objet au repos reste au repos, un objet en déplacement reste en déplacement à une vitesse et direction constantes à moins d’une force non équilibrée. Par exemple dans l’espace.
 - $F = ma$ où $m$ est la masse et $a$ l’accélération.
-  - Celle que tout le monde a vue au secondaire!
+    - Celle que tout le monde a vue au secondaire!
 - La vitesse d’un objet atteindra une constante lorsqu’une force contraire annulera l’effet de la force initiale, i.e., que la somme des forces sera égale à zéro.
-  - Ex : On applique une force initiale à une balle dans l’espace loin des astres, l’objet atteindra une vitesse constante.
+    - Ex : On applique une force initiale à une balle dans l’espace loin des astres, l’objet atteindra une vitesse constante.
 
 ---
 
@@ -79,13 +79,13 @@ git checkout -b c02_forces
 ## Troisième loi de Newton
 
 - Pour toute action, il y a une réaction égale et contraire.
-  - En d’autres termes, les forces sont toujours en paire. Les deux forces sont égales mais dans une direction contraire.
-  - Il faut séparer les éléments en deux systèmes distincts.
+    - En d’autres termes, les forces sont toujours en paire. Les deux forces sont égales mais dans une direction contraire.
+    - Il faut séparer les éléments en deux systèmes distincts.
 - Exemples :
-  - Si je pousse un train immobile, le train ne bougera pas car une force égale va contre la mienne.
-    - Il y a le système du train et le mien.
-  - Si je pousse mon bureau, le bureau applique la même force sur ma main.
-    - On peut le sentir car le bureau compressera ma main et le bureau se déplacera à un moment donné.
+    - Si je pousse un train immobile, le train ne bougera pas car une force égale va contre la mienne.
+        - Il y a le système du train et le mien.
+    - Si je pousse mon bureau, le bureau applique la même force sur ma main.
+        - On peut le sentir car le bureau compressera ma main et le bureau se déplacera à un moment donné.
 - [Autres exemples](https://www.khanacademy.org/science/physics/forces-newtons-laws/newtons-laws-of-motion/a/what-is-newtons-third-law)
 
 ---
@@ -94,8 +94,8 @@ git checkout -b c02_forces
 - C'est la loi la plus importante pour nous.
 - **La force est égale à la masse multipliée par l’accélération.**
 - L’accélération est directement proportionnelle à la force et inversement proportionnelle à la masse.
-  - Ainsi, si vous êtes sur un chariot, le plus fort que l’on vous pousse, le plus rapide que vous vous déplacerez. Toutefois, plus lourd vous êtes, plus lentement vous vous déplacerez. <br />
-  ![alt text](assets/mario-kart-world-bowser-toad-drift.jpg)
+    - Ainsi, si vous êtes sur un chariot, le plus fort que l’on vous pousse, le plus rapide que vous vous déplacerez. Toutefois, plus lourd vous êtes, plus lentement vous vous déplacerez. <br />
+    ![alt text](assets/mario-kart-world-bowser-toad-drift.jpg)
 
 Ainsi la formule est :
 - $F = ma$
@@ -112,7 +112,7 @@ C'est cette formule que l'on va utiliser pour simuler les forces.
 - La masse d’un objet est une mesure de la quantité de matière dans un objet qui est exprimée en kilogramme.
 - Le poids, souvent mal interprété comme étant la masse, est techniquement la force de gravité sur un objet, soit le poids est la masse multipliée par la gravité, ce qui donne des **Newtons**.
 - La densité ($\rho$ dit rhô) est la quantité de masse par unité de volume.
-  - *On va en avoir besoin tantôt.*
+    - *On va en avoir besoin tantôt.*
 
 ---
 
@@ -122,10 +122,10 @@ C'est cette formule que l'on va utiliser pour simuler les forces.
 - Ainsi $F=ma$ à $F = a$.
 - Disons que l’on reprend la classe `Mover` avec les propriétés `location`, `vélocité`, et `accélération`.
 - La classe `Mover` est disponible dans le projet [`s02_forces_01`](https://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s02_forces_01.pdez) dans les exemples Processing.
-  - **Cliquez sur le lien pour télécharger et ouvrir le fichier directement.**
+    - **Cliquez sur le lien pour télécharger et ouvrir le fichier directement.**
 - Notre but est d’appliquer une force.
-  - Par exemple : `mover.applyForce(wind)`
-  - Ou encore : `mover.applyForce(gravity)`
+    - Par exemple : `mover.applyForce(wind)`
+    - Ou encore : `mover.applyForce(gravity)`
 
 Ajoutez la méthode suivante à la classe `Mover` :
 
@@ -204,7 +204,7 @@ void update() {
 
 - L’ajout de la masse est relativement simple.
 - En premier lieu, il faudra ajouter une propriété `mass` à notre objet qui sera un `float`.
-  - Nous ne nous encombrerons pas des unités de mesure. Ce qui est important, c’est que celles-ci soient toutes sur la même base.
+    - Nous ne nous encombrerons pas des unités de mesure. Ce qui est important, c’est que celles-ci soient toutes sur la même base.
 - Simplement, on pourrait modifier `applyForce` ainsi :
 
 ```java
@@ -223,7 +223,7 @@ void applyForce(PVector force) {
 ---
 
 - Le problème avec la question précédente est que l’on diviserait la force lors de l’application au deuxième objet.
-  - N'oubliez pas que les vecteurs sont des objets.
+    - N'oubliez pas que les vecteurs sont des objets.
 - Ainsi, il faut créer une copie du vecteur avant de pouvoir l’additionner.
 
 ```java
@@ -245,15 +245,15 @@ void applyForce(PVector force) {
 - Au secondaire, nous avons vu la friction, la tension, l’élasticité, et plus.
 - Dans cette partie, nous allons voir la friction et comment déconstruire une formule de force trouvée sur Wikipedia.
 - La friction est une force qui est utile pour simuler la perte de vitesse d’un objet.
-  - Par exemple, une balle qui roule au sol ou encore la résistance de l’air sur un objet qui est dans les airs.
+    - Par exemple, une balle qui roule au sol ou encore la résistance de l’air sur un objet qui est dans les airs.
 
 ---
 
 ### Travailler avec les formules de forces
 - Il faut comprendre le concept derrière une force pour pouvoir la simuler.
 - On déconstruit une force en deux parties
-  - Comment calculons-nous la direction d’une force?
-  - Comment calculons-nous la magnitude d’une force?
+    - Comment calculons-nous la direction d’une force?
+    - Comment calculons-nous la magnitude d’une force?
 - Traduire la formule en code pour un vecteur.
 
 ### Friction
@@ -262,10 +262,10 @@ void applyForce(PVector force) {
 
 Voici un exemple où on trouve converti la formule de la friction en code :
 - La formule de la friction est
-  $\vec{F}_{\text{friction}} = -\mu N \hat{v}$
+    $\vec{F}_{\text{friction}} = -\mu N \hat{v}$
 
 - $\mu$ tient pour le coefficient de friction.
-  - Ce coefficient est déterminé par le type de matériau. Par exemple, de la glace a un coefficient faible alors que du caoutchouc a un coefficient plus élevé.
+    - Ce coefficient est déterminé par le type de matériau. Par exemple, de la glace a un coefficient faible alors que du caoutchouc a un coefficient plus élevé.
 - $N$ tient pour la force normale, soit celle qui est perpendiculaire au mouvement.
 - $\hat{v}$ est le vecteur unitaire de la vélocité.
 - La friction est une force de dissipation, i.e., qu’elle fait perdre de l’énergie à une autre force.
@@ -352,12 +352,12 @@ void applyForce(PVector force) {
 Avec le projet inclus (s02_forces_01) avec ce cours :
 - Corriger les bogues du projet.
 - En utilisant les forces, simuler un ballon rempli d’hélium qui flotte vers le haut et qui rebondit lorsqu’il atteint le plafond.
-  - Ajouter du vent qui change au fil du temps avec un bruit de Perlin.
+    - Ajouter du vent qui change au fil du temps avec un bruit de Perlin.
 - Créez une application où il y a une cinquantaine d’objets de masse différente auxquels on applique des forces identiques à l’aide de la souris.
-  - Exemple : Cinquante objets auxquels on applique du vent.
+    - Exemple : Cinquante objets auxquels on applique du vent.
 - Créez une application où des objets tombent dans un liquide quelconque et dont l’on peut constater le ralentissement.
 - Défi! Simuler un objet qui a un parachute qui ouvre.
-  - [Lien vers la formule de la Nasa](https://www.grc.nasa.gov/WWW/k-12/VirtualAero/BottleRocket/airplane/rktvrecv.html)
+    - [Lien vers la formule de la Nasa](https://www.grc.nasa.gov/WWW/k-12/VirtualAero/BottleRocket/airplane/rktvrecv.html)
 
 ---
 

@@ -29,8 +29,8 @@ De la trigonométrie!... Oh boboy!
 ## Cercle trigonométrique : Ce qu’il faut retenir
 
 <table>
-  <tr>
-    <td>
+    <tr>
+        <td>
 
 - $2\pi\ rad = 360°$
 - $\pi\ rad = 180°$
@@ -46,7 +46,7 @@ De la trigonométrie!... Oh boboy!
     <img src="assets/cercle_trigo.png" />
 
     </td>
-  </tr>
+    </tr>
 </table>
 
 
@@ -69,8 +69,8 @@ float angle = atan2(enemy.y - player.y, enemy.x - player.x);
 
 - Dans la très grande majorité des cas, les fonctions trigonométriques en programmation sont en **radians et non en degrés**.
 - Formules de conversion :
-  - radians = PI * (degrés / 180)
-  - degrés = (radians * 180) / PI
+    - radians = PI * (degrés / 180)
+    - degrés = (radians * 180) / PI
 - Dans Processing, il existe la fonction `float radians(float degrees)`.
 
 ```java
@@ -90,9 +90,9 @@ popMatrix();
 ### Scénario
 
 - On veut faire un système solaire où les planètes tournent autour de l’étoile, et les lunes autour de leur planète.
-  - Certains astres dépendent de la position de l’astre parent par exemple la lune autour de la Terre
+    - Certains astres dépendent de la position de l’astre parent par exemple la lune autour de la Terre
 - Disons que l'on désire contrôler un bras robotisé avec plusieurs segments.
-  - Chaque segment dépend de la position du segment précédent.
+    - Chaque segment dépend de la position du segment précédent.
 - Ces calculs peuvent devenir complexes, car on doit calculer la position d'un objet en fonction de la position d'un autre objet.
 - Pour simplifier la tâche, on introduit le concept de **matrice de transformation**.
 
@@ -112,7 +112,7 @@ Pour simplifier :
 - Imaginez une matrice comme une feuille de papier quadrillée.
 - `pushMatrix()` met la feuille de côté dans sa position actuelle sur une pile.
 - On peut ensuite dessiner sur la feuille actuelle et faire des transformations.
-  - On peut par exemple faire des rotations, des translations, des mises à l’échelle comme si l'on déplaçait la feuille.
+    - On peut par exemple faire des rotations, des translations, des mises à l’échelle comme si l'on déplaçait la feuille.
 
 
 ![alt text](assets/transform_mat.svg)
@@ -127,8 +127,8 @@ En résumé, ces deux fonctions sont essentielles pour isoler les transformation
 ---
 
 <table>
-  <tr>
-    <td>
+    <tr>
+        <td>
 
 - **Il s'utilise toujours en pair push-pop.**
 - **On peut les imbriquer.**
@@ -141,7 +141,7 @@ En résumé, ces deux fonctions sont essentielles pour isoler les transformation
 
 ![alt text](assets/robot.webp)
     </td>
-  </tr>
+    </tr>
 </table>
     
 ---
@@ -149,8 +149,8 @@ En résumé, ces deux fonctions sont essentielles pour isoler les transformation
 ## Exemple d’imbrication
 
 <table>
-  <tr>
-    <td>
+    <tr>
+        <td>
     
 ![alt text](assets/solar_system.png)
 </td>
@@ -190,8 +190,8 @@ popMatrix();
 ### Exemples visuels
 
 <table>
-  <tr>
-    <td>
+    <tr>
+        <td>
     
 ![alt text](assets/rectangle_moving.gif)
 Projet : [s04_push_pop](https://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s04_push_pop.pdez)
@@ -217,17 +217,17 @@ Projet : [s04_syst_solaire](pde://github.com/nbourre/0sw_processing_exemples/raw
 
 
 <table>
-  <tr>
-    <td>
+    <tr>
+        <td>
 
 - On se rappelle de :
-  - $$vitesse = vitesse + acceleration$$
-  - $$location = location + vitesse$$
+    - $$vitesse = vitesse + acceleration$$
+    - $$location = location + vitesse$$
 - Pour la vitesse angulaire, c’est le même principe :
-  - $$\theta_{vitesse} = \theta_{vitesse} + \theta_{acceleration}$$
-  - $$\theta = \theta + \theta_{vitesse}$$
+    - $$\theta_{vitesse} = \theta_{vitesse} + \theta_{acceleration}$$
+    - $$\theta = \theta + \theta_{vitesse}$$
 
-  ![alt text](assets/angular_motion_Image.webp)
+    ![alt text](assets/angular_motion_Image.webp)
 
 </td>
     <td>
@@ -257,8 +257,8 @@ void display() {
   popMatrix();
 }
 ```
-  </td>
-  </tr>
+    </td>
+    </tr>
 </table>
 
 
@@ -268,22 +268,22 @@ void display() {
 
 - La fonction arctangente (`atan2`) permet de trouver l’angle de la vélocité.
 - **Pourquoi `atan2` et non `atan` ?**
-  - `atan` retourne un angle basé uniquement sur le rapport entre les côtés opposé et adjacent, sans savoir dans quel quadrant se trouve le point.
-  - `atan2`, en revanche, prend en compte à la fois l'opposé et l'adjacent, ainsi que leurs signes, ce qui permet de déterminer correctement le quadrant et d'obtenir un angle précis entre -π et π radians.
+    - `atan` retourne un angle basé uniquement sur le rapport entre les côtés opposé et adjacent, sans savoir dans quel quadrant se trouve le point.
+    - `atan2`, en revanche, prend en compte à la fois l'opposé et l'adjacent, ainsi que leurs signes, ce qui permet de déterminer correctement le quadrant et d'obtenir un angle précis entre -π et π radians.
 
 <table>
-  <tr>
-  <td>
+    <tr>
+    <td>
 
 <img src="assets/motion_detection.webp"/>
 
-  </td>
-  <td>
+    </td>
+    <td>
 
 <img src="assets/velocity_triangle.png" width="400"/>
 
-  </td>
-  </tr>
+    </td>
+    </tr>
 </table>
 
 ---
@@ -294,22 +294,22 @@ void display() {
 - Elles facilitent les calculs de rotation en utilisant uniquement la valeur de $\theta$ (thêta) et $r$ (rayon).
 - Une des utilisations les plus courantes est le mouvement circulaire, car on n'a qu'à incrémenter l'angle.
 - Les formules de conversion de polaires à cartésiennes :
-  - $x = r \cos(\theta)$
-  - $y = r \sin(\theta)$
+    - $x = r \cos(\theta)$
+    - $y = r \sin(\theta)$
 
 <table>
-  <tr>
-  <td>
+    <tr>
+    <td>
 
 ![alt text](assets/coord_polaire.webp)
 
-  </td>
-  <td>
+    </td>
+    <td>
 
 ![alt text](assets/triangle_polar.png)
 
-  </td>
-  </tr>
+    </td>
+    </tr>
 </table>
 
 
@@ -438,14 +438,14 @@ PVector tempVel = un.get();
 <!-- Tableau html à 2 colonnes pour copier coller
 
 <table>
-  <tr>
-    <td>
+    <tr>
+        <td>
     
 
-    </td>
-    <td>
-    </td>
-  </tr>
+        </td>
+        <td>
+        </td>
+    </tr>
 </table>
 
 -->

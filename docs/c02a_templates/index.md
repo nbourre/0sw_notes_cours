@@ -7,9 +7,9 @@
 - Ce dossier permet de créer un patron pour chaque mode de programmation de Processing.
 - Lors de la création d’un nouveau projet, le contenu du projet sera déjà rempli avec du code par défaut ainsi que les classes qui y sont présentes.
 - Chaque patron doit être dans un dossier nommé avec le nom du langage.
-  - Par exemple « Java ».
+    - Par exemple « Java ».
 - Dans chaque dossier, il devra y avoir un fichier nommé « sketch.pde ».
-  - Ainsi templates/Java/sketch.pde.
+    - Ainsi templates/Java/sketch.pde.
 
 ---
 
@@ -68,8 +68,8 @@ void timeManagement() {
 - Dans le fichier `sketch.pde`, collez le code qui est dans la section commentaire de cette diapo.
 - Testez le patron en créant un nouveau projet Java.
 - Ajoutez un objet abstrait nommé `GraphicObject` avec les propriétés et méthodes suivantes :
-  - `PVector location`, `velocity` et `acceleration`.
-  - `color fillColor`, `strokeColor` et `strokeWeight`.
-  - Méthode abstraite `void update (float deltaTime)` et `display()`.
-  - Cette classe servira à accélérer le développement d’objet graphique.
-  - Sauvegardez `GraphicObject` dans le patron.
+    - `PVector location`, `velocity` et `acceleration`.
+    - `color fillColor`, `strokeColor` et `strokeWeight`.
+    - Méthode abstraite `void update (float deltaTime)` et `display()`.
+    - Cette classe servira à accélérer le développement d’objet graphique.
+    - Sauvegardez `GraphicObject` dans le patron.

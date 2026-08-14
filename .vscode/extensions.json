@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "davidanson.vscode-markdownlint",
+    "yzhang.markdown-all-in-one",
+    "bierner.markdown-mermaid"
+  ]
+}

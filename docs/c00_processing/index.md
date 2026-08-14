@@ -7,8 +7,7 @@ Avant de nous lancer en grand dans le développement de jeux vidéo avec Godot, 
 ---
 
 ## Processing
-- Processing est un environnement de développement spécialisé dans
-la programmation créative
+- Processing est un environnement de développement spécialisé dans la programmation créative
 - Il permet de programmer principalement en Java
 - L’environnement est très simplifié, on est loin de Visual Studio!
 - [Lien](http://processing.org/download) pour télécharger Processing
@@ -17,21 +16,12 @@ la programmation créative
 
 ### Qu’est-ce que Processing?
 
-<table style="border: none;">
+<div class="grid cards" markdown>
 
-<tr>
-<td>
+- ![alt text](assets/Image1.png)
+- ![alt text](assets/Image2.png)
 
-![alt text](assets/Image1.png)
-
-</td>
-<td>
-
-![alt text](assets/Image2.png)
-
-</td>
-</tr>
-</table>
+</div>
 
 ---
 
@@ -44,9 +34,9 @@ la programmation créative
 ## Premier jet
 - Ouvrez l’application Processing
 - Tapez le code suivant :
-  - `point (50, 50);`
+    - `point (50, 50);`
 - Cliquez sur le bouton `Run`
-  - ou <kbd>CTRL</kbd> + <kbd>R</kbd>
+    - ou <kbd>CTRL</kbd> + <kbd>R</kbd>
 - `point (x, y);` est une méthode permettant de dessiner un point à la position x et y
 - En Java, la convention veut que les méthodes utilisent le ***lower camel case*** (casse du bas chameau - Loi 101 !)
 
@@ -56,7 +46,7 @@ la programmation créative
 
 1. Ajoutez trois autres points au programme que vous avez réalisé précédemment
 2. Ajoutez la ligne de code suivante :
-  `line (25, 25, 75, 50);`
+    `line (25, 25, 75, 50);`
 3. Exécutez le code
 4. Ajoutez trois autres lignes et essayez de comprendre comment fonctionne cette méthode
 
@@ -73,16 +63,15 @@ la programmation créative
 - `ellipse (x, y, largeur, hauteur)` permet de dessiner une ellipse à la position x et y avec une largeur et une hauteur déterminées
 - Ajoutez 2 autres ellipses dans votre programme
 - La méthode `size (largeur, hauteur)` permet de configurer les dimensions de la fenêtre
-  - On utilise cette méthode au début du code
-  - Exemple : `size (640, 480);`
+    - On utilise cette méthode au début du code
+    - Exemple : `size (640, 480);`
 
 ---
 
 ## Les formes primitives 2D
-- Ce que nous avons expérimenté dans les diapos précédentes sont ce que l’on appelle des formes primitives
+- Ce que nous avons expérimenté dans les sections précédentes sont ce que l’on appelle des formes primitives
 - Les formes primitives sont des objets graphiques de base
-- Elles sont faciles à dessiner lorsque l’on comprend les coordonnées
-cartésiennes
+- Elles sont faciles à dessiner lorsque l’on comprend les coordonnées cartésiennes
 - Plusieurs formes primitives sont disponibles dans Processing
     - Point, ligne
     - Rectangle, quadrilatère
@@ -95,12 +84,12 @@ cartésiennes
 - Il est possible de tracer des arcs de cercle avec Processing
 - La méthode pour dessiner un arc de cercle est `arc` et ses paramètres sont x, y, largeur, hauteur, début, fin et le type qui est optionnel
 - La syntaxe est la suivante :
-  - `arc (x, y, largeur, hauteur, début, fin [, type]);`
-  - `Type` peut être `OPEN`, `CHORD` ou `PIE`
+    - `arc (x, y, largeur, hauteur, début, fin [, type]);`
+    - `Type` peut être `OPEN`, `CHORD` ou `PIE`
 - Exemple :
-- `arc (75, 125, 50, 50, PI, PI + HALF_PI);`
+    - `arc (75, 125, 50, 50, PI, PI + HALF_PI);`
 - `PI` représente la constante mathématique 3,1415…
-  - Il y a `QUARTER_PI`, `HALF_PI`, `PI`, `TWO_PI`
+    - Il y a `QUARTER_PI`, `HALF_PI`, `PI`, `TWO_PI`
 - Un cercle complet équivaut à 2 PI
 
 ![alt text](assets/Image7.png)
@@ -113,8 +102,7 @@ cartésiennes
 |--------------------------------|-----------------------------------------------|-----------------------------------------------------------|
 | **`point (x, y)`**               | x, y ← position du point                      |                                                           |
 | **`line (x1, y1, x2, y2)`**      |                                               |                                                           |
-| **`ellipse (x, y, w, h)`**       | w ← width = largeur                           | x, y représentent le centre                                  |
-|                                | h ← height = hauteur                          |                                                           |
+| **`ellipse (x, y, w, h)`**       | w ← width = largeur<br>h ← height = hauteur   | x, y représentent le centre                                  |
 | **`rect (x, y, w, h)`**          |                                               | x, y représentent le coin supérieur gauche                  |
 | **`triangle (x1, y1, x2, y2, x3, y3)`** |                                         | Dessine un triangle                                        |
 | **`quad (x1, y1, …, x4, y4)`**   |                                               | Dessine un quadrilatère                                    |
@@ -127,13 +115,12 @@ cartésiennes
 ## Couleurs
 - Par défaut, les couleurs de Processing sont noires pour le contour, blanc pour le remplissage et gris pour l’arrière-plan
 - Chaque caractéristique est programmable
-- La méthode `background()` permet de changer la couleur de l’arrière-
-plan
-  - Exemple : `background (0);`
+- La méthode `background()` permet de changer la couleur de l’arrière-plan
+    - Exemple : `background (0);`
 - La méthode `stroke()` permet de changer la couleur du contour des objets subséquents à l’instruction
-  - Exemple : `stroke (204, 50, 50);`
+    - Exemple : `stroke (204, 50, 50);`
 - La méthode `fill()` permet de changer la couleur de remplissage des objets subséquents à l’instruction
-  - Exemple : `fill (0, 200, 0, 127);`
+    - Exemple : `fill (0, 200, 0, 127);`
   
 > **Question :** Pour chaque exemple, quelle sera la couleur?
 
@@ -142,21 +129,21 @@ plan
 - En informatique, les couleurs fonctionnent sous le même principe qu’en art plastique
 - Il y a trois couleurs primaires et le mélange de celles-ci permettent d’aller chercher d’autres couleurs
 - Les couleurs primaires sont ROUGE, VERT, BLEU (RGB)
-  - En art, c’est rouge, jaune, bleu
+    - En art, c’est rouge, jaune, bleu
 - Chaque couleur est un canal pouvant avoir **une valeur entre 0 et 255**
-- Dans l’exemple `fill (204, 50, 50)`, le rouge a une valeur de 204, le bleu de 50 et le vert de 50
-  - Le mélange des trois donne un rouge comme la figure ci-contre
+- Dans l’exemple `fill (204, 50, 50)`, le rouge a une valeur de 204, le vert de 50 et le bleu de 50
+    - Le mélange des trois donne un rouge comme la figure ci-contre
 
 ![alt text](assets/Image8.png)
 
 ---
 
-- Il est ainsi possible d’avoir 16.7 millions de couleurs distinctes!
-  - L’œil humain ne peut en distinguer à peine 7 millions*
+- Il est ainsi possible d’avoir 16,7 millions de couleurs distinctes!
+    - L’œil humain ne peut en distinguer à peine 7 millions*
 - Dans Processing, il y a 3 méthodes pour déterminer une couleur
-  - 1 canal = Niveau de gris (Noir et blanc)
-  - 3 canaux = 16.7 millions de couleurs
-  - 4 canaux = 3 canaux + couche de transparence (alpha)
+    - 1 canal = Niveau de gris (Noir et blanc)
+    - 3 canaux = 16,7 millions de couleurs
+    - 4 canaux = 3 canaux + couche de transparence (alpha)
 - Exemple
 
 <table style="border: none;">
@@ -203,10 +190,10 @@ ellipse (width / 2 + 25, height/2, 90, 90);
 ## Exercices courts
 - Dans un nouveau projet
 - Ajoutez les formes suivantes
-  - Un rectangle rouge
-  - Un cercle vert
-  - Un triangle bleu
-  - Une tarte jaune
+    - Un rectangle rouge
+    - Un cercle vert
+    - Un triangle bleu
+    - Une tarte jaune
 - Modifiez la couleur du fond pour l’avoir en blanc
 
 ---
@@ -215,7 +202,7 @@ ellipse (width / 2 + 25, height/2, 90, 90);
 - Un programme Processing est au moins divisé en deux sections soit  `setup` et `draw`
 - La méthode `setup` est la partie où l’on configure le programme avant l’exécution principale 
 - La partie `draw` est la partie qui est répétée indéfiniment du projet
-  - C’est ce que l’on appelle la « **game loop** »
+    - C’est ce que l’on appelle la « **game loop** »
 
 Voici le cycle de vie d’un programme Processing
 
@@ -239,7 +226,7 @@ void setup () {
 ---
 
 ### draw()
-- La méthode draw() est la boucle infinie du programme
+- La méthode `draw()` est la boucle infinie du programme
 - Exemple :
 
 ```java
@@ -248,7 +235,7 @@ void draw () {
     fill (0, 0, 204);
     rect (50, 200, 100, 25);
     fill (204, 0, 0, 200);
-    arc (75, 175, 75, 75, HALF_PI + QUARTER_PI, PIE);
+    arc (75, 175, 75, 75, HALF_PI + QUARTER_PI, TWO_PI, PIE);
 }
 ```
 

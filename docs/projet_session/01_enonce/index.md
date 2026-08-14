@@ -11,27 +11,27 @@ Le projet devra avoir les éléments ci-dessous. Chacun de ces points sera déve
 
 - Menu initial
 - Démarrage
-  - Instruction
-  - Configuration
-    - Ajustement indépendants des niveaux sonores de la musique et des effets sonores
+    - Instruction
+    - Configuration
+        - Ajustement indépendants des niveaux sonores de la musique et des effets sonores
 - Cœur : Jeu, simulation ou démonstration
-  - Interaction avec l’utilisateur
-  - Graphisme et animation
-  - Son
-    - Touches raccourcies pour mute
-    - Son d’ambiance pour la musique
-    - Sons réactifs (effets sonores)
-  - Algorithmes ou mécanismes de jeu
-  - Données pour les geeks
-    - Touche F12 pour afficher la RAM et les images par seconde à l’écran
+    - Interaction avec l’utilisateur
+    - Graphisme et animation
+    - Son
+        - Touches raccourcies pour mute
+        - Son d’ambiance pour la musique
+        - Sons réactifs (effets sonores)
+    - Algorithmes ou mécanismes de jeu
+    - Données pour les geeks
+        - Touche F12 pour afficher la RAM et les images par seconde à l’écran
 - Scène de fin
-  - Une scène indiquant la fin du projet
-    - Il doit y avoir une fin perdante et une fin gagnante
-  - L'utilisateur pourra faire les choix suivants : quitter, revenir au menu principal et redémarrer le jeu
+    - Une scène indiquant la fin du projet
+        - Il doit y avoir une fin perdante et une fin gagnante
+    - L'utilisateur pourra faire les choix suivants : quitter, revenir au menu principal et redémarrer le jeu
 - Sauvegarde du meilleur score
 - Mise en pause
 - Exécutable sur la borne arcade
-  - Linux
+    - Linux
 
 ---
 
@@ -41,7 +41,7 @@ Votre dossier de projet sur GitHub devra avoir les éléments suivants :
 
 - Dossier `src` pour le projet Godot.
 - Fichier `readme.md` à la racine pour la présentation et documentation de votre projet.
-  - Les informations à ce sujet sont à venir.
+    - Les informations à ce sujet sont à venir.
 
 ---
 
@@ -124,51 +124,51 @@ Votre projet doit permettre à l’utilisateur de mettre en pause via une touche
 
 ### Génération procédurale
 - **Génération procédurale**  
-  - Création dynamique de contenu (niveaux, objets, etc.) basée sur des algorithmes.  
+    - Création dynamique de contenu (niveaux, objets, etc.) basée sur des algorithmes.  
 - **Générateur de labyrinthe/donjon**  
-  - Génère automatiquement des labyrinthes ou des donjons, souvent utilisé dans les jeux roguelike.  
+    - Génère automatiquement des labyrinthes ou des donjons, souvent utilisé dans les jeux roguelike.  
 - **Générateur de piste de course**  
-  - Produit des circuits ou parcours dynamiques adaptés à des paramètres définis.  
+    - Produit des circuits ou parcours dynamiques adaptés à des paramètres définis.  
 - **Système L-Tree**  
-  - Génération d’arbres ou structures fractales à partir de règles itératives.
+    - Génération d’arbres ou structures fractales à partir de règles itératives.
 - **Wave Function Collapse (WFC)**
-  - Algorithme permettant de générer des niveaux ou structures basés sur des motifs compatibles.
+    - Algorithme permettant de générer des niveaux ou structures basés sur des motifs compatibles.
 
 ### Pathfinding et navigation
 - **A***  
-  - Algorithme de recherche de chemin optimal prenant en compte les obstacles.  
+    - Algorithme de recherche de chemin optimal prenant en compte les obstacles.  
 - **Path following (recherche de chemin)**  
-  - Permet à un objet ou un personnage de suivre un chemin prédéfini tout en évitant les obstacles.  
+    - Permet à un objet ou un personnage de suivre un chemin prédéfini tout en évitant les obstacles.  
 - **Raycasting**  
-  - Utilisé pour tracer des lignes de vue ou détecter des collisions sur un chemin.
+    - Utilisé pour tracer des lignes de vue ou détecter des collisions sur un chemin.
 
 ### Intelligence artificielle et comportement
 - **Réseau de neurones**  
-  - Modèle d’apprentissage complexe, utilisé pour prendre des décisions ou apprendre des modèles.  
+    - Modèle d’apprentissage complexe, utilisé pour prendre des décisions ou apprendre des modèles.  
 - **Agent autonome**  
-  - Entité avec des comportements indépendants comme poursuivre, esquiver, ou explorer.  
+    - Entité avec des comportements indépendants comme poursuivre, esquiver, ou explorer.  
 - **Essaimage (comportement d’agrégation)**  
-  - Simule des comportements collectifs (ex. : bancs de poissons ou essaims).  
+    - Simule des comportements collectifs (ex. : bancs de poissons ou essaims).  
 - **Fog of war**  
-  - Technique masquant certaines parties de la carte jusqu'à ce qu’elles soient explorées.  
+    - Technique masquant certaines parties de la carte jusqu'à ce qu’elles soient explorées.  
 - **Champ de vision**  
-  - Calcule ce qu'un personnage ou une caméra peut voir selon son orientation ou sa position.
+    - Calcule ce qu'un personnage ou une caméra peut voir selon son orientation ou sa position.
 
 ### Simulation et physique
 - **Cinématique inverse**  
-  - Technique calculant les mouvements des articulations pour atteindre un point spécifique.  
+    - Technique calculant les mouvements des articulations pour atteindre un point spécifique.  
 - **Automate cellulaire**  
-  - Grille où chaque cellule évolue selon des règles simples, utilisé pour des simulations comme le jeu de la vie.  
+    - Grille où chaque cellule évolue selon des règles simples, utilisé pour des simulations comme le jeu de la vie.  
 - **Système de Voxel**  
-  - Représentation d’objets volumétriques en cubes 3D, idéale pour des mondes voxelisés comme Minecraft.
+    - Représentation d’objets volumétriques en cubes 3D, idéale pour des mondes voxelisés comme Minecraft.
 
 ### Algorithmes structurels
 - **Algorithme de Prim**  
-  - Génère un arbre couvrant minimum, souvent utilisé pour créer des labyrinthes connectés.  
+    - Génère un arbre couvrant minimum, souvent utilisé pour créer des labyrinthes connectés.  
 - **Patron de conception – Object pool**  
-  - Réutilisation d’objets instanciés pour économiser les ressources.  
+    - Réutilisation d’objets instanciés pour économiser les ressources.  
 - **Patron de conception – State**  
-  - Modèle pour gérer les états d’un objet ou système, par exemple les différentes phases d’un ennemi.
+    - Modèle pour gérer les états d’un objet ou système, par exemple les différentes phases d’un ennemi.
 
 ---
 
@@ -213,12 +213,12 @@ La remise doit se faire via le formulaire Git.
 
 ### Notes pour les évaluateurs
 - Dans tous les cas, les notes seront graduelles en fonction de la qualité de l’implémentation. Par exemple, 0 point pour une fonctionnalité manquante, 1 point pour une implémentation partielle, 2 points pour une implémentation correcte, etc.
-  - Exemple : Un menu initial de base qui répond aux exigences sans plus pourrait valoir 2 points.
+    - Exemple : Un menu initial de base qui répond aux exigences sans plus pourrait valoir 2 points.
 - **Bonus**
-  - Les points bonus sont attribués pour des éléments innovants et bien réalisés qui dépassent les exigences minimales.
+    - Les points bonus sont attribués pour des éléments innovants et bien réalisés qui dépassent les exigences minimales.
 - **Malus**
-  - Manque de cohérence dans l'interface tel que du franglais ou des fautes de français.
-  - Attitude négative envers le projet (ex. : attitude non collaborative, etc.).
+    - Manque de cohérence dans l'interface tel que du franglais ou des fautes de français.
+    - Attitude négative envers le projet (ex. : attitude non collaborative, etc.).
 
 ---
 

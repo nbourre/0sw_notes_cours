@@ -5,14 +5,14 @@
 - Introduction aux spritesheets et leur importance
 - Ajouter une feuille de sprites dans Godot
 - Animation avec `AnimatedSprite2D`
-  - Configuration des `SpriteFrames`
-  - Ajouter des images d'animation
-  - Contrôle par script
+    - Configuration des `SpriteFrames`
+    - Ajouter des images d'animation
+    - Contrôle par script
 - Animation avec `AnimationPlayer`
-  - Configuration de la scène avec `Sprite2D`
-  - Ajuster les cadres (Hframes/Vframes)
-  - Créer et configurer les animations
-  - Contrôle par script
+    - Configuration de la scène avec `Sprite2D`
+    - Ajuster les cadres (Hframes/Vframes)
+    - Créer et configurer les animations
+    - Contrôle par script
 - Comparaison entre `AnimatedSprite2D` et `AnimationPlayer`
 
 ---
@@ -63,9 +63,9 @@
 - Dans cette partie, nous allons voir comment utiliser une façon simple pour animer un sprite dans Godot
 - Utilisez un `AnimatedSprite` pour animer un sprite dans Godot
 - Voici une structure typique pour un personnage 2D qui inclut un `AnimatedSprite`:
-  - CharacterBody2D
-    - AnimatedSprite2D
-    - CollisionShape2D
+    - CharacterBody2D
+        - AnimatedSprite2D
+        - CollisionShape2D
 - Lien vers la documentation officielle: [AnimatedSprite](https://docs.godotengine.org/fr/stable/tutorials/2d/2d_sprite_animation.html)
 
 
@@ -74,10 +74,10 @@
 ### SpriteFrames
 - Une fois que l’objet `AnimatedSprite` est dans la structure, il faudra lui assigner un `SpriteFrames` dans la propriété `Frames`
 - Voici une méthode simple
-  - Sélectionner l’AnimatedSprite, aller dans la propriété `Sprite Frames` et sélectionner `New SpriteFrames`
-  - Dans le volet inférieur, on verra `SpriteFrames` apparaître
-    - Si le volet n’apparaît pas, cliquer sur SpriteFrames
-  - Ce volet sert à définir les animations
+    - Sélectionner l’AnimatedSprite, aller dans la propriété `Sprite Frames` et sélectionner `New SpriteFrames`
+    - Dans le volet inférieur, on verra `SpriteFrames` apparaître
+        - Si le volet n’apparaît pas, cliquer sur SpriteFrames
+    - Ce volet sert à définir les animations
 
 ![alt text](assets/spriteframe_new.gif)
 
@@ -85,7 +85,7 @@
 
 ### Ajouter des images
 - Dans la partie gauche du volet `SpriteFrames`, on y retrouve la liste des animations
-  - Par défaut, on voit *default*
+    - Par défaut, on voit *default*
 - Plusieurs façons existent pour ajouter des images dans l’animation
 - Si on a plusieurs fichiers d’images pour l’animation dans le système de fichier, il suffit de les sélectionner et de les glisser dans la zone **Trames d’animation** (*Animation Frames*)
 
@@ -152,7 +152,7 @@ func _process(delta: float) -> void:
 ### Ajuster le nombre de cadres
 
 - En ayant le nœud `Sprite2D` sélectionné, configurez les cadres en modifiant `Hframes` à 6.
-  - C'est dans la section `Animation` de la propriété `Sprite2D`.
+    - C'est dans la section `Animation` de la propriété `Sprite2D`.
 
 ![alt text](assets/godot_set_hframes.gif)
 
@@ -187,7 +187,7 @@ func _process(delta: float) -> void:
 
 #### Ajouter des cadres dans la timeline
 - Dans la ligne du temps, cliquez sur le 0 pour ajuster le point de départ de l'animation.
-  - Il s'agit de la petite ligne bleue sur la ligne du temps.
+    - Il s'agit de la petite ligne bleue sur la ligne du temps.
 - Sélectionnez le noeud `Sprite2D` dans l'arbre de scène.
 - Dans l'inspecteur, sélectionnez l'onglet `Animation`.
 - Dans la propriété `Frames`, cliquez sur le bouton `+`

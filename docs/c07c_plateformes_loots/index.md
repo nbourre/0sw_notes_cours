@@ -35,7 +35,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 4. Exécutez le jeu et testez la collecte des pièces.
 5. Mettez une pièce devant une plateforme mobile et remarquez le problème.
-  - En effet, la pièce disparaît lorsque la plateforme touche la pièce. Pour éviter cela, on peut utiliser les masques de collision.
+    - En effet, la pièce disparaît lorsque la plateforme touche la pièce. Pour éviter cela, on peut utiliser les masques de collision.
 6. Dans la scène du joueur, sélectionnez le nœud "CharacterBody2D" et dans l'inspecteur, sous "Collision", définissez le `Collision Layer` à `2` (Player).
 7. Dans la scène de la pièce, sélectionnez le nœud "Area2D" et dans l'inspecteur, sous "Collision", définissez le collision `Mask` à `2` (Player).
 

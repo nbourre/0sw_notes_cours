@@ -15,9 +15,9 @@ Il est relavivement simple à utiliser. Pour la configuration, il suffit d'avoir
 Quelques propriétés d'intérêt:
 
 - `Nine Patch Stretch` : Permet de définir si l'image de fond peut être étirée ou non.
-  - [Courte vidéo explicative](https://www.youtube.com/watch?v=1u4817DKvb8)
-  - Important, l'image de fond doit être rectangulaire, les lignes horizontales et verticales seront étirées, mais les coins resteront intacts.
-  - L'option `Stretch Margin` apparait lorsqu'on coche cette option. Elle permet de définir les marges qui ne seront pas étirées.
+    - [Courte vidéo explicative](https://www.youtube.com/watch?v=1u4817DKvb8)
+    - Important, l'image de fond doit être rectangulaire, les lignes horizontales et verticales seront étirées, mais les coins resteront intacts.
+    - L'option `Stretch Margin` apparait lorsqu'on coche cette option. Elle permet de définir les marges qui ne seront pas étirées.
 
 
 ![alt text](assets/progress_bar_no_text.png)

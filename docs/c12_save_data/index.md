@@ -30,14 +30,14 @@ Nous allons juste créer un projet avec des contrôles de base pour illustrer le
 
 La structure de la scène est la suivante :
 - `Node2D` (Main) : racine de la scène.
-  - `HBoxContainer` : conteneur horizontal.
-    - `VBoxContainer` : conteneur vertical.
-      - `Button` (LoadButton) : bouton pour charger les données.
-      - `Button` (SaveButton) : bouton pour sauvegarder les données.
-      - `Button` (ChangeButton) : bouton pour modifier la santé du joueur.
-      - `Button` (AddButton) : bouton pour ajouter un item à l’inventaire.
-  - `Panel` : panneau pour afficher les informations.
-    - `Label` : étiquette pour afficher la santé du joueur.
+    - `HBoxContainer` : conteneur horizontal.
+        - `VBoxContainer` : conteneur vertical.
+            - `Button` (LoadButton) : bouton pour charger les données.
+            - `Button` (SaveButton) : bouton pour sauvegarder les données.
+            - `Button` (ChangeButton) : bouton pour modifier la santé du joueur.
+            - `Button` (AddButton) : bouton pour ajouter un item à l’inventaire.
+    - `Panel` : panneau pour afficher les informations.
+        - `Label` : étiquette pour afficher la santé du joueur.
 
 - Création d'un script `main.gd` pour gérer les interactions avec les boutons
 - Ajout des signaux pour les boutons `pressed` pour appeler les fonctions correspondantes.
@@ -52,9 +52,9 @@ La structure de la scène est la suivante :
 Pour gérer les données du joueur, comme sa santé, nous allons créer une ressource `PlayerData` :
 
 1. **Définir la ressource de joueur :**
-   - Dans un nouveau dossier nommé `resources`, créez un script nommé `playerdata.gd`.
-   - Ce script va hériter de la classe `Resource` pour être reconnu comme une ressource dans Godot.
-   - Utilisez `class_name PlayerData` pour que la ressource soit facilement accessible dans l'éditeur.
+    - Dans un nouveau dossier nommé `resources`, créez un script nommé `playerdata.gd`.
+    - Ce script va hériter de la classe `Resource` pour être reconnu comme une ressource dans Godot.
+    - Utilisez `class_name PlayerData` pour que la ressource soit facilement accessible dans l'éditeur.
 
    ```gd
    extends Resource
@@ -67,8 +67,8 @@ Pour gérer les données du joueur, comme sa santé, nous allons créer une ress
    ```
 
 2. **Explication :**
-   - `health` est une propriété exportée qui stocke la santé du joueur.
-   - La méthode `change_health` permet de modifier la santé du joueur en fonction d’une valeur passée en paramètre, ce qui simplifie les opérations de gain ou de perte de santé.
+    - `health` est une propriété exportée qui stocke la santé du joueur.
+    - La méthode `change_health` permet de modifier la santé du joueur en fonction d’une valeur passée en paramètre, ce qui simplifie les opérations de gain ou de perte de santé.
 
 ---
 
@@ -82,12 +82,12 @@ Pour enregistrer les données du joueur sur le disque, nous devons configurer un
    var save_file_name = "player_save.tres"
    ```
 
-   - La sauvegarde est placée dans le répertoire `user://`, accessible à toutes les plateformes.
-   - Le fichier sera nommé `player_save.tres`.
+    - La sauvegarde est placée dans le répertoire `user://`, accessible à toutes les plateformes.
+    - Le fichier sera nommé `player_save.tres`.
 
 2. **Initialiser les données du joueur :**
-   - Instanciez `PlayerData` et assignez-la à une variable `player_data`.
-   - Créez une fonction pour vérifier et, si besoin, créer le dossier de sauvegarde en utilisant `DirectoryAccess`.
+    - Instanciez `PlayerData` et assignez-la à une variable `player_data`.
+    - Créez une fonction pour vérifier et, si besoin, créer le dossier de sauvegarde en utilisant `DirectoryAccess`.
   
    ```gd
    var player_data = PlayerData.new()
@@ -97,7 +97,7 @@ Pour enregistrer les données du joueur sur le disque, nous devons configurer un
    ```
 
 3. **Sauvegarder et charger les données :**
-   - Utilisez `ResourceSaver` pour sauvegarder et `ResourceLoader` pour charger.
+    - Utilisez `ResourceSaver` pour sauvegarder et `ResourceLoader` pour charger.
 
    ```gd
    func save_game() -> void:
@@ -109,7 +109,7 @@ Pour enregistrer les données du joueur sur le disque, nous devons configurer un
    ```
 
 4. **Mise à jour de la santé :**
-   - Créez une fonction qui modifie la santé du joueur, puis sauvegardez l'état après chaque changement.
+    - Créez une fonction qui modifie la santé du joueur, puis sauvegardez l'état après chaque changement.
    
     ```gd
     func change_health() -> void:
@@ -125,7 +125,7 @@ Lors de la première exécution, cliquez sur le bouton `Save` pour enregistrer l
 ### Observations
 - Dans votre explorateur de fichiers, vous devriez voir un dossier `save` contenant le fichier `player_save.tres`.
 - Ouvrez le fichier `player_save.tres` avec un éditeur de texte pour voir les données sauvegardées.
-  - On y constate les différentes propriétés de `PlayerData`, comme la santé du joueur ainsi que les identifiants des ressources générées par Godot.
+    - On y constate les différentes propriétés de `PlayerData`, comme la santé du joueur ainsi que les identifiants des ressources générées par Godot.
 
 ---
 
@@ -135,7 +135,7 @@ En ajoutant un inventaire comme sous-ressource dans `PlayerData`, chaque item se
 
 
 1. **Créer une ressource d’Item :**
-   - Créez `item.gd` pour définir un objet `Item` avec une propriété `item_name`.
+    - Créez `item.gd` pour définir un objet `Item` avec une propriété `item_name`.
 
    ```gd
    extends Resource
@@ -148,7 +148,7 @@ En ajoutant un inventaire comme sous-ressource dans `PlayerData`, chaque item se
    ```
 
 2. **Ajouter une propriété d’inventaire à `PlayerData` :**
-   - Dans `playerdata.gd`, ajoutez une propriété exportée `inventory` comme un tableau d'objets `Item`.
+    - Dans `playerdata.gd`, ajoutez une propriété exportée `inventory` comme un tableau d'objets `Item`.
 
    ```gd
    @export var inventory := []
@@ -159,7 +159,7 @@ En ajoutant un inventaire comme sous-ressource dans `PlayerData`, chaque item se
    ```
 
 3. **Ajouter des objets via le script principal :**
-   - Dans `main.gd`, créez une méthode pour ajouter des éléments à l’inventaire, comme des pommes.
+    - Dans `main.gd`, créez une méthode pour ajouter des éléments à l’inventaire, comme des pommes.
 
    ```gd
    func _on_add_button_pressed() -> void:
@@ -167,9 +167,9 @@ En ajoutant un inventaire comme sous-ressource dans `PlayerData`, chaque item se
    ```
 
 4. **Sauvegarde et restauration de l’inventaire :**
-   - Lors de la sauvegarde, les sous-ressources contenues dans `inventory` seront automatiquement sauvegardées dans le fichier principal.
+    - Lors de la sauvegarde, les sous-ressources contenues dans `inventory` seront automatiquement sauvegardées dans le fichier principal.
 
-   En utilisant cette approche, chaque item est enregistré avec toutes ses propriétés, et lors du chargement, l’inventaire est recréé sans manipulation supplémentaire.
+    En utilisant cette approche, chaque item est enregistré avec toutes ses propriétés, et lors du chargement, l’inventaire est recréé sans manipulation supplémentaire.
 
 ### Observations
 - Après avoir ajouté des items à l’inventaire, sauvegardez et chargez les données pour voir comment les items sont stockés et restaurés.
@@ -198,9 +198,9 @@ inventory = [SubResource("Resource_21lwd")]
 ## Avantages des ressources personnalisées par rapport aux fichiers JSON
 
 Les ressources personnalisées sont parfaitement intégrées dans Godot et permettent de simplifier considérablement le travail de sauvegarde et de chargement. Contrairement aux fichiers JSON qui nécessitent souvent une conversion et une gestion des erreurs pour être chargés correctement, les ressources personnalisées :
-   - Simplifient le processus de chargement grâce à une structure native dans Godot.
-   - Permettent d'utiliser des sous-ressources, idéales pour des données imbriquées comme un inventaire.
-   - Supportent des types complexes et permettent une interaction directe avec les scripts et méthodes de Godot.
+    - Simplifient le processus de chargement grâce à une structure native dans Godot.
+    - Permettent d'utiliser des sous-ressources, idéales pour des données imbriquées comme un inventaire.
+    - Supportent des types complexes et permettent une interaction directe avec les scripts et méthodes de Godot.
 
 ---
 
@@ -209,8 +209,8 @@ Les ressources personnalisées sont parfaitement intégrées dans Godot et perme
 Les fichiers JSON restent utiles pour stocker des données de référence ou des bases de données. Par exemple, un fichier JSON peut contenir la liste de tous les items du jeu. Lors de l’ajout d’un nouvel item dans l’inventaire, seul l’ID de l'item est utilisé pour récupérer les détails dans le fichier JSON.
 
 Exemple d'utilisation :
-   - **JSON** : stocke les données de base des items.
-   - **Ressources personnalisées** : gèrent les sauvegardes de chaque instance d’item et ses modifications.
+    - **JSON** : stocke les données de base des items.
+    - **Ressources personnalisées** : gèrent les sauvegardes de chaque instance d’item et ses modifications.
 
 Cette approche hybride permet de conserver des données par défaut tout en offrant la flexibilité d’ajuster chaque item individuellement dans le jeu.
 

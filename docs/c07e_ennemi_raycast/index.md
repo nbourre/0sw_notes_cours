@@ -81,8 +81,8 @@ Les paramètres du `RayCast2D` qui nous intéressent sont les suivants:
 - `Target Position`: La position de la cible du rayon. C'est la direction dans laquelle le rayon est envoyé.
 - `Collision Mask`: Le masque de collision. Les objets qui sont sur le même masque de collision que le rayon peuvent être détectés.
 - `Collide with ...`: Les types d'objets avec lesquels le rayon peut entrer en collision.
-  -  `Areas`: Les noeuds `Area2D`
-  -  `Bodies`: Les noeuds `PhysicsBody2D`
+    -  `Areas`: Les noeuds `Area2D`
+    -  `Bodies`: Les noeuds `PhysicsBody2D`
 - `Position`: La position du noeud `RayCast2D`. C'est le point de départ du rayon.
 
 ![alt text](assets/raycast_properties.png)

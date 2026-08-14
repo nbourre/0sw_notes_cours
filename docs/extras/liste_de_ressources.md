@@ -20,7 +20,7 @@ Create A Platformer Game in 20 SECONDS! (Godot 4)
 
 ---
 
- [Creating a 2D Platform Shooter | Godot | Part 1: Movement & Shooting Mechanics](https://www.youtube.com/watch?v=hJaZag6A44o)
+[Creating a 2D Platform Shooter | Godot | Part 1: Movement & Shooting Mechanics](https://www.youtube.com/watch?v=hJaZag6A44o)
 
 [![Creating a 2D Platform Shooter | Godot | Part 1: Movement & Shooting Mechanics](https://markdown-videos-api.jorgenkh.no/url?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DhJaZag6A44o)](https://www.youtube.com/watch?v=hJaZag6A44o)
 

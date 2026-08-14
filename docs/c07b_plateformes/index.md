@@ -9,7 +9,7 @@ Dans bien des jeux de type plateforme, les plateformes mobiles sont un élément
 Il y a plusieurs façons de créer des plateformes mobiles dans Godot.
 
 - Utiliser un `AnimationPlayer` pour animer les déplacements
-  - Désavantage : Les animations sont fixes et ne peuvent pas être facilement modifiées.
+    - Désavantage : Les animations sont fixes et ne peuvent pas être facilement modifiées.
 - Utiliser un `Tween` pour créer des transitions entre les positions
 - Calculer les déplacements en fonction du temps.
 - Utiliser les noeuds `Path2D` pour définir des trajectoires de déplacement.
@@ -62,9 +62,9 @@ Les **Tweens** (diminutif de "in-betweens") trouvent leur origine dans l'animati
 - **Définition** : Un Tween est un objet ou une technique utilisée pour créer une transition fluide entre deux valeurs de propriétés (position, rotation, échelle, opacité, etc.).
 - **Interpolation** : Les Tweens interpolent progressivement entre des valeurs initiales et finales sur une période définie.
 - **Utilité** :
-  - **Animation d'objets** : Déplacement ou rotation d'objets de manière fluide.
-  - **Transitions de propriétés** : Modifier des propriétés visuelles telles que la couleur ou l’opacité.
-  - **Facilite l'animation** : Simplifie la gestion des animations sans créer de multiples étapes manuelles.
+    - **Animation d'objets** : Déplacement ou rotation d'objets de manière fluide.
+    - **Transitions de propriétés** : Modifier des propriétés visuelles telles que la couleur ou l’opacité.
+    - **Facilite l'animation** : Simplifie la gestion des animations sans créer de multiples étapes manuelles.
 - **Modes de traitement** : Peut être utilisé dans les processus physiques ou indépendamment du temps de simulation.
 
 On peut utiliser les tweens avec le concept `fire-and-forget` : on crée un tween, on le lance, et on n'a plus besoin de s'en soucier. Le tween s'occupe de lui-même et s'arrête automatiquement une fois qu'il a terminé.
@@ -94,14 +94,14 @@ func start_tween():
 ##### Explication des Principales Lignes
 
 - **Ligne 1-2** :
-  - `offset` détermine la distance de déplacement de la plateforme à partir de la position initiale, et 
-  - `duration` contrôle la durée de l’animation.
+    - `offset` détermine la distance de déplacement de la plateforme à partir de la position initiale, et 
+    - `duration` contrôle la durée de l’animation.
 - Fonction **`start_tween`** :
-  - Crée une `Tween` dans la racine de l'arbre de scène et active le mode de traitement physique
-  - `set_loops().set_parallel(false)` : Indique que doit être exécuté en boucle et en série. En effet, on peut avoir plusieurs animations en parallèle.
-  - Deux déplacements sont définis :
-    - **Déplacement vers `offset`** pendant la première moitié de la durée.
-    - **Retour à la position initiale** pendant la durée entière.
+    - Crée une `Tween` dans la racine de l'arbre de scène et active le mode de traitement physique
+    - `set_loops().set_parallel(false)` : Indique que doit être exécuté en boucle et en série. En effet, on peut avoir plusieurs animations en parallèle.
+    - Deux déplacements sont définis :
+        - **Déplacement vers `offset`** pendant la première moitié de la durée.
+        - **Retour à la position initiale** pendant la durée entière.
 
 Cette structure permet de créer une plateforme mobile avec des transitions fluides entre les positions définies.
 

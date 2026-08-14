@@ -279,7 +279,7 @@ L'objet accélère vers le bas car l'accélération est positive sur Y : cela 
 
 ### Exercices
 - Reproduisez l'exemple de cette section en modifiant l'accélération de l'objet.
-  - Inversez l'accélération sur l'axe des Y.
+    - Inversez l'accélération sur l'axe des Y.
 
 ### Exercices optionnels
 - Change la valeur de l'accélération pour simuler une gravité plus forte ou plus faible.

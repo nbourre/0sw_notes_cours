@@ -55,14 +55,14 @@ Le document devra comporter les éléments suivants :
 - Titre du jeu en H1
 - Créateur du jeu (Votre nom)
 - Petite introduction expliquant le concept du jeu
-  - Deux ou trois phrases
+    - Deux ou trois phrases
 - Section **Concepts utilisés**
-  - Liste des concepts utilisés
-  - Pour chaque concept
-    - Sous titre avec le nom du concept
-    - Description du concept
-    - Source de l’information
-    - Capture d’écran ou image ou diagramme illustrant le concept à l'intérieur du projet
+    - Liste des concepts utilisés
+    - Pour chaque concept
+        - Sous titre avec le nom du concept
+        - Description du concept
+        - Source de l’information
+        - Capture d’écran ou image ou diagramme illustrant le concept à l'intérieur du projet
 
 ## Grille de correction
 | Critère | Points |
@@ -74,7 +74,7 @@ Le document devra comporter les éléments suivants :
 
 ## Travail à remettre
 - Le document MarkDown appelé `readme.md` à la racine de votre projet.
-  - Si le document est déjà existant, vous devez le modifier pour y ajouter les informations demandées.
+    - Si le document est déjà existant, vous devez le modifier pour y ajouter les informations demandées.
 - L’aide intégrée au projet dans un menu **Options** ou équivalent.
 - Le document MarkDown remis sur Léa
 - Présenter la documentation intégrée au projet au professeur.
