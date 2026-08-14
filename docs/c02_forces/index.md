@@ -6,7 +6,7 @@
 ---
 
 
-# Motivation
+## Motivation
 Pour développer des jeux, il est essentiel de comprendre comment les forces agissent sur les objets. Cela nous permet de créer des mouvements réalistes et d'interagir avec l'environnement de manière convaincante.
 
 <table>
@@ -26,12 +26,12 @@ Pour développer des jeux, il est essentiel de comprendre comment les forces agi
 
 ---
 
-# Introduction
+## Introduction
 Dans ce chapitre, on verra comment appliquer différents types de forces à un objet ou plusieurs
 
 ![alt text](assets/forces_example.gif)
 
-## Clone et branchage du projet
+### Clone et branchage du projet
 
 Si ce n'est déjà fait, clonez le projet du cours :
 
@@ -47,7 +47,7 @@ git checkout -b c02_forces
 
 ---
 
-# Force 
+## Force 
 
 - En physique, une force est une interaction qui tend à modifier la vitesse d’un objet.
   - **Lorsque la vitesse est modifiée, il y a obligatoirement une accélération.**
@@ -58,7 +58,7 @@ git checkout -b c02_forces
 
 ---
 
-# Première loi de Newton
+## Première loi de Newton
 
 - Un objet au repos reste au repos, un objet en déplacement reste en déplacement.
   - Plus en détail : Un objet au repos reste au repos, un objet en déplacement reste en déplacement à une vitesse et direction constantes à moins d’une force non équilibrée. Par exemple dans l’espace.
@@ -76,7 +76,7 @@ git checkout -b c02_forces
 
 ---
 
-# Troisième loi de Newton
+## Troisième loi de Newton
 
 - Pour toute action, il y a une réaction égale et contraire.
   - En d’autres termes, les forces sont toujours en paire. Les deux forces sont égales mais dans une direction contraire.
@@ -90,7 +90,7 @@ git checkout -b c02_forces
 
 ---
 
-# Deuxième loi de Newton
+## Deuxième loi de Newton
 - C'est la loi la plus importante pour nous.
 - **La force est égale à la masse multipliée par l’accélération.**
 - L’accélération est directement proportionnelle à la force et inversement proportionnelle à la masse.
@@ -107,7 +107,7 @@ C'est cette formule que l'on va utiliser pour simuler les forces.
 
 ---
 
-## Poids vs masse
+### Poids vs masse
 
 - La masse d’un objet est une mesure de la quantité de matière dans un objet qui est exprimée en kilogramme.
 - Le poids, souvent mal interprété comme étant la masse, est techniquement la force de gravité sur un objet, soit le poids est la masse multipliée par la gravité, ce qui donne des **Newtons**.
@@ -116,7 +116,7 @@ C'est cette formule que l'on va utiliser pour simuler les forces.
 
 ---
 
-## Exemple
+### Exemple
 
 - Pour simplifier la compréhension, nous allons utiliser une masse ($m$) de 1 dans les premiers exemples.
 - Ainsi $F=ma$ à $F = a$.
@@ -151,7 +151,7 @@ void update(int delta) {
 
 ---
 
-# Accumulation des forces
+## Accumulation des forces
 
 - Disons que l’on désire appliquer du vent et de la gravité en simultané.
 
@@ -200,7 +200,7 @@ void update() {
 }
 ```
 
-# Travailler avec la masse
+## Travailler avec la masse
 
 - L’ajout de la masse est relativement simple.
 - En premier lieu, il faudra ajouter une propriété `mass` à notre objet qui sera un `float`.
@@ -234,12 +234,12 @@ void applyForce(PVector force) {
 }
 ```
 
-## Exercice
+### Exercice
 - Améliorez la fonction en utilisant la méthode startique `div` de la classe `PVector` au lieu de créer une copie.
 
 ---
 
-# Autres forces
+## Autres forces
 
 - Le vent et la gravité sont des forces qui sont simples à simuler.
 - Au secondaire, nous avons vu la friction, la tension, l’élasticité, et plus.
@@ -249,14 +249,14 @@ void applyForce(PVector force) {
 
 ---
 
-## Travailler avec les formules de forces
+### Travailler avec les formules de forces
 - Il faut comprendre le concept derrière une force pour pouvoir la simuler.
 - On déconstruit une force en deux parties
   - Comment calculons-nous la direction d’une force?
   - Comment calculons-nous la magnitude d’une force?
 - Traduire la formule en code pour un vecteur.
 
-## Friction
+### Friction
 
 ![alt text](assets/Image2.png)
 
@@ -284,7 +284,7 @@ friction.mult(mu); // mu < 1 coefficient de friction
 
 ---
 
-## Résistance des fluides
+### Résistance des fluides
 
 $$\vec{F}_{\text{d}} = -\frac{1}{2} \rho \|v\|^2 A C_d \hat{v}$$
 
@@ -319,7 +319,7 @@ Voici le résultat de la résistance des fluides :
 
 ---
 
-# Résumé
+## Résumé
 
 - Les forces sont cumulatives.
 
@@ -347,7 +347,7 @@ void applyForce(PVector force) {
 
 ---
 
-# Exercices
+## Exercices
 
 Avec le projet inclus (s02_forces_01) avec ce cours :
 - Corriger les bogues du projet.
@@ -361,6 +361,6 @@ Avec le projet inclus (s02_forces_01) avec ce cours :
 
 ---
 
-# Références
+## Références
 
 - [http://natureofcode.com/book/chapter-2-forces/](http://natureofcode.com/book/chapter-2-forces/)

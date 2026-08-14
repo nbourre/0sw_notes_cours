@@ -3,7 +3,7 @@
 
 ![alt text](assets/example_01.gif)
 
-# Introduction
+## Introduction
 Dans ce chapitre, nous allons voir comment ajouter un ennemi rapidement et ensuite ajouter du ray casting pour qu'il puisse détecter le joueur et les obstacles.
 
 Le ray casting est une technique dans laquelle on émet un rayon depuis un point donné dans une direction donnée, et on regarde ce que ce rayon touche. C'est une technique très utilisée dans les jeux vidéos pour simuler la lumière, les ombres et la détection d'objets.
@@ -14,7 +14,7 @@ La première étape sera d'ajouter un ennemi qui se déplace de gauche à droite
 
 ---
 
-# Ajouter un ennemi - Recette rapide
+## Ajouter un ennemi - Recette rapide
 Dans notre cas, nous allons ajouter un ennemi qui se déplace entre deux murs. Pour cela, nous allons créer une nouvelle scène avec un `Node2D` comme noeud racine. On aurait pu prendre un `CharacterBody2D`, mais dans notre cas, l'ennemi n'a pas besoin de sauter, donc un `Node2D` suffit.
 
 Nous allons ensuite ajouter un `AnimatedSprite2D` pour animer l'ennemi.
@@ -36,7 +36,7 @@ Pour l'`AnimatedSprite2D`, j'ai utilisé un sprite dans les assets du cours. Vou
 
 - Placez l'ennemi sur la scène principale.
 
-## Script de déplacement de base
+### Script de déplacement de base
 Dans sa première version, je veux que l'ennemi se déplace.
 
 Je vais avoir besoin d'un script où dans le `_process(delta)` je vais déplacer l'ennemi.
@@ -50,7 +50,7 @@ Si on lance la scène, on remarque que l'ennemi sort de l'écran. Pour éviter c
 
 ---
 
-# RayCasting
+## RayCasting
 Observez le gif ci-dessous. L'ennemi (Golem) est capable de détecter le bout de la plateforme et de changer de direction. Cela est possible grâce au ray casting.
 
 ![alt text](assets/enemi_switch.gif)
@@ -61,12 +61,12 @@ Voici ce à quoi ressemble le ray casting avec le debug activé.
 
 ![alt text](assets/ennemi_collision.gif)
 
-## Comment ça marche
+### Comment ça marche
 Dans les gifs précédents, on remarque qu'il y a deux flèches qui partent de l'ennemi. Ces flèches représentent les rayons. On envoie un rayon dans chaque direction, et on regarde ce que le rayon touche. Si le rayon ne touche plus le sol, alors on change de direction.
 
 ---
 
-# Noeud RayCast2D
+## Noeud RayCast2D
 Godot propose un noeud `RayCast2D` qui permet de faire du ray casting en 2D. Ce noeud permet de détecter les collisions entre objets, et de déterminer ce que le rayon touche.
 
 Son utilisation est relativement simple. Il suffit de placer un noeud `RayCast2D` dans la scène, et de le configurer pour qu'il détecte les collisions.
@@ -91,7 +91,7 @@ Les paramètres du `RayCast2D` qui nous intéressent sont les suivants:
 
 ---
 
-# Dans le code
+## Dans le code
 Pour détecter les collisions avec un `RayCast2D`, il suffit de vérifier si la méthode `is_colliding()` retourne `true`. Si c'est le cas, alors le rayon touche un objet.
 
 ```gd
@@ -144,7 +144,7 @@ func _process(delta: float) -> void:
 
 ---
 
-# Fonctions utiles
+## Fonctions utiles
 - `is_colliding()`: Retourne `true` si le rayon touche un objet.
 - `get_collider()`: Retourne la référence avec laquelle le rayon entre en collision.
 - `get_collision_point()`: Retourne le point de collision.
@@ -152,7 +152,7 @@ func _process(delta: float) -> void:
 
 ---
 
-# Conclusion
+## Conclusion
 - Le ray casting est une technique très utilisée dans les jeux vidéos pour détecter les collisions entre objets.
 - Godot propose un noeud `RayCast2D` qui permet de faire du ray casting en 2D.
 - Il suffit de vérifier si la méthode `is_colliding()` retourne `true` pour savoir si le rayon touche un objet.
@@ -161,7 +161,7 @@ func _process(delta: float) -> void:
 
 ---
 
-# Extra - Améliorer la mort
+## Extra - Améliorer la mort
 Un petit *side track*, on aimerait améliorer la mort de l'ennemi. Actuellement, lorsqu'on le touche, la scène est rechargée. On aimerait plutôt que le joueur tombe lorsqu'il touche l'ennemi et aussi ajouter un effet de ralentissement.
 
 Pour ce faire, nous allons débuter par modifier le script de la `Killzone`. Si vous remarquez, on a accès au joueur qui entre en collision avec la `Killzone`. En effet, le paramètre `body` de la fonction `_on_body_entered(body: Node)` est le noeud du joueur. Ce que l'on va faire est de retirer la `CollisionShape2D` du joueur pour qu'il puisse tomber.
@@ -199,7 +199,7 @@ Il faudra faire attention de remettre la vitesse du jeu à 1 avant de recharger 
 
 ---
 
-# Références
+## Références
 - [RayCast In Godot Tutorial: How To Create Smarter Enemies (Enemy AI)](https://www.youtube.com/watch?v=_AheThiIiyg)
 - [KidsCanCode - Godot Recipes - RayCast2D](https://kidscancode.org/godot_recipes/4.x/kyn/raycast2d/index.html)
 - [How to use RayCast2D in Godot]([https](https://youtu.be/VqyxnKuAUH8?si=yhb4MgAw16hCczqK)

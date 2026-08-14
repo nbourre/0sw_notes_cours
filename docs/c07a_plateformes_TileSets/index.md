@@ -8,14 +8,14 @@ prj : everthing -> jackie-codes
 
 -->
 
-# Pré-requis
+## Pré-requis
 - Utilisez le projet `c07_plateforme` comme base.
 
 ![alt text](assets/c07_plateforme_start.gif)
 
 ---
 
-# Introduction
+## Introduction
 
 ![alt text](assets/super_mario.webp)
 
@@ -31,9 +31,9 @@ Pour suivre ce guide, vous aurez besoin d'une image contenant vos tuiles, où ch
 
 ---
 
-# Création d’un nouveau TileSet
+## Création d’un nouveau TileSet
 
-## Utilisation d'un tilesheet
+### Utilisation d'un tilesheet
 
 Cette démonstration utilise les tuiles suivantes tirées du pack ["Abstract Platformer" de Kenney](https://kenney.nl/assets/abstract-platformer). Nous utiliserons cette *tilesheet* particulière du set :
 
@@ -49,7 +49,7 @@ Cette démonstration utilise les tuiles suivantes tirées du pack ["Abstract Pla
 
 ---
 
-## Ajout de tuiles au TileSet
+### Ajout de tuiles au TileSet
 
 Une fois que vous avez créé un **TileSet**, vous devez y ajouter des tuiles. Vous pouvez le faire dans l'éditeur de **TileSet**.
 
@@ -81,7 +81,7 @@ Les propriétés suivantes peuvent être ajustées dans l'atlas selon vos besoin
 - **Taille de la région de texture** (*Texture Region Size*) : La taille de chaque tuile sur l'atlas en pixels. Dans la plupart des cas, cela devrait correspondre à la taille de la tuile définie dans la propriété `TileMapLayer` (bien que ce ne soit pas strictement nécessaire).
 - **Utiliser le rembourrage de texture** : Si coché, ajoute un bord transparent de 1 pixel autour de chaque tuile pour éviter les saignements de texture lorsque le filtrage est activé. Il est recommandé de laisser cette option activée sauf si vous rencontrez des problèmes de rendu dus au rembourrage de texture.
 
-# Ajouter la collision, navigation et l'occlusion aux jeux de tuiles
+## Ajouter la collision, navigation et l'occlusion aux jeux de tuiles
 
 Nous avons maintenant créé un `TileSet` de base. Nous pourrions commencer à l'utiliser dans le nœud TileMapLayer maintenant, mais il manque actuellement toute forme de détection de collision. Cela signifie que le joueur et d'autres objets pourraient traverser directement le sol ou les murs.
 
@@ -101,7 +101,7 @@ Pour ce faire,
 
 ---
 
-## Définir des collisions pour les tuiles
+### Définir des collisions pour les tuiles
 
 Une fois que la couche de physique est ajoutée, vous devriez être en mesure de définir des formes de collision pour chaque tuile.
 
@@ -126,12 +126,12 @@ On peut aussi utiliser le rectangle de base pour créer des formes plus complexe
 
 ---
 
-## Exercices
+### Exercices
 - Attribuez des formes de collision à toutes les tuiles rouges qui ont une surface pour marcher.
 
 ---
 
-## Sauvegarder le TileSet
+### Sauvegarder le TileSet
 Dans bien des cas lorsque l'on crée un jeu, on réutilise les mêmes tuiles pour plusieurs niveaux. Il est donc important de sauvegarder le `TileSet` pour pouvoir le réutiliser dans d'autres scènes.
 
 Pour sauvegarder un `TileSet`, il suffit de cliquer sur le bouton `Enregistrer` sur la propriété `TileSet`.
@@ -140,12 +140,12 @@ Pour sauvegarder un `TileSet`, il suffit de cliquer sur le bouton `Enregistrer` 
 
 ---
 
-# Utilisation des TileMaps
+## Utilisation des TileMaps
 Un TileMap est une grille de tuiles utilisée pour créer la disposition d’un jeu. Il y a plusieurs avantages à utiliser des nœuds `TileMapLayer` pour concevoir vos niveaux. Tout d'abord, ils vous permettent de dessiner une mise en page en "peignant" des tuiles sur une grille, ce qui est beaucoup plus rapide que de placer des nœuds `Sprite2D` individuellement un par un. Ensuite, ils permettent des niveaux plus grands car ils sont optimisés pour dessiner un grand nombre de tuiles. Enfin, ils vous permettent d'ajouter des fonctionnalités supplémentaires à vos tuiles avec des formes de collision, d'occlusion et de navigation.
 
 ---
 
-## Créer un jeu de terrain (`Terrain Sets`)
+### Créer un jeu de terrain (`Terrain Sets`)
 Dans les versions précédentes de Godot, il y avait un mécanisme nommé `AutoTiling` qui permettait de créer des terrains de manière automatique. Depuis la version 4, ce mécanisme a été remplacé par les `Terrain Sets`.
 
 Les terrains permettent de créer des connexions entre les tuiles de manière automatique. Cela permet de créer des terrains de manière plus rapide et plus efficace.
@@ -196,7 +196,7 @@ Une fois que vous avez configuré les connexions entre les tuiles, il sera possi
 
 ---
 
-### Méthode alternative pour créer un jeu de terrain
+#### Méthode alternative pour créer un jeu de terrain
 Il est possible d'accelérer la création d'un jeu de terrain en utilisant l'onglet `Paint` dans l'éditeur de `TileSet`.
 
 1. Sélectionnez le jeu de terrain que vous souhaitez modifier.
@@ -217,7 +217,7 @@ Voici le résultat final de mon jeu de terrain :
 
 ---
 
-## Propriétés importantes `TileMapLayer`
+### Propriétés importantes `TileMapLayer`
 
 Les propriétés suivantes sont importantes pour configurer votre `TileMapLayer` :
 - `TileSet` : Le `TileSet` à utiliser pour la `TileMap`.
@@ -233,7 +233,7 @@ Si vous n'avez créé de couche de physique, de navigation ou d'occlusion pour v
 
 ---
 
-## Placer les tuiles dans la TileMap
+### Placer les tuiles dans la TileMap
 
 Une fois que vos tuiles et leurs propriétés sont configurées, vous pouvez les placer dans la **TileMap** :
 
@@ -245,7 +245,7 @@ Une fois que vos tuiles et leurs propriétés sont configurées, vous pouvez les
 
 ---
 
-## Peinture de tuiles automatiques
+### Peinture de tuiles automatiques
 
 > **Note :** Officiellemeent, la peinture de tuiles automatiques ne fonctionne qu'avec des tuiles carrées sans pentes. Il faudra ajouter une couche pour les terrains avec des pentes.
 
@@ -276,7 +276,7 @@ Sur le site itch.io, il y a plusieurs *tilesheets* qui sont disponibles pour les
 
 ---
 
-# Conclusion
+## Conclusion
 
 Les outils de `TileSet` et de `TileMap` sont des outils puissants pour créer des jeux 2D. Ils permettent de créer des niveaux de manière plus rapide et plus efficace. Ils permettent aussi de créer des niveaux plus grands et plus complexes.
 
@@ -284,7 +284,7 @@ Cependant, l'outil `Terrain` n'est pas prêt à la production. Il est recommand�
 
 ---
 
-# Exercices
+## Exercices
 - Trouvez vous un *tilesheet* sur le site itch.io qui serait compatible avec votre projet de session.
 - Créez un `TileSet` avec le *tilesheet* que vous avez trouvé.
 - Créez un `TileMap` et peignez les tuiles dans la scène.
@@ -292,6 +292,6 @@ Cependant, l'outil `Terrain` n'est pas prêt à la production. Il est recommand�
 
 ---
 
-# Références
+## Références
 - [Guide to TileSet Terrains](https://github.com/dandeliondino/godot-4-tileset-terrains-docs)
 - [TileSet Explorer](https://donitz.itch.io/tileset-explorer)

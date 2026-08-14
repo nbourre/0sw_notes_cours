@@ -1,7 +1,7 @@
 # La parallaxe <!-- omit in toc -->
 
 
-# Introduction
+## Introduction
 - La **parallaxe** donne une impression de profondeur en faisant défiler plusieurs couches d’images à différentes vitesses, ce qui permet de simuler un monde 3D en 2D.
 - On simule la parallaxe avec des images qui défilent à des vitesses variées.
 - Pour simplifier la compréhension, prenons un décor à deux couches :
@@ -14,7 +14,7 @@
 
 ---
 
-# Parallax2D avec Godot 4
+## Parallax2D avec Godot 4
 
 ![Alt text](assets/Example.gif)
 
@@ -24,7 +24,7 @@
 
 ---
 
-## Propriétés importantes
+### Propriétés importantes
 
 | Propriété                   | Description                                                                                                  |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -41,7 +41,7 @@
 
 ---
 
-## Structure typique
+### Structure typique
 
 Voici un exemple d’arbre de scène avec plusieurs couches parallaxes :
 
@@ -59,7 +59,7 @@ Chaque `Parallax2D` possède ses propres paramètres `scroll_scale` et `repeat_s
 
 ---
 
-# Défilement automatique
+## Défilement automatique
 
 Le nœud `Parallax2D` offre directement une **propriété `autoscroll`**, qui permet de faire défiler le décor automatiquement sans avoir à écrire de code.
 C’est idéal pour créer un ciel animé, des nuages, ou un fond qui bouge légèrement pour donner vie à la scène.
@@ -68,7 +68,7 @@ C’est idéal pour créer un ciel animé, des nuages, ou un fond qui bouge lég
 
 ---
 
-# Bonnes pratiques sur les images
+## Bonnes pratiques sur les images
 
 Pour éviter des problèmes d’échelle et de performance :
 
@@ -81,13 +81,13 @@ Pour éviter des problèmes d’échelle et de performance :
 
 ---
 
-# Contourner certains problèmes
+## Contourner certains problèmes
 - Parfois les images ne sont pas tout à fait adaptées pour le jeu, par exemple elles ne sont pas assez hautes. On peut remédier à cela en utilisant un `ColorRect` de la même couleur que les extrémités de l’image pour combler le vide.
 
 
 ---
 
-# Exercice
+## Exercice
 À partir du projet [c07d_pateforme_ennemi](https://github.com/nbourre/0sw_projets_cours/tree/master/c07_plateforme_ennemi).
 - Ajouter un décor avec les images fournies dans le dossier `Legacy-Fantasy-PurpleBay/Background`.
   - La dimension des images est de 336x192

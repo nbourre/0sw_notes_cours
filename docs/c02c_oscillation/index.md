@@ -3,7 +3,7 @@ De la trigonométrie!... Oh boboy!
 ---
 
 
-# Plan de leçon
+## Plan de leçon
 
 - Rappel très rapide sur la trigonométrie de base
 - Trigonométrie en programmation
@@ -14,7 +14,7 @@ De la trigonométrie!... Oh boboy!
 
 ---
 
-# Trigo de base
+## Trigo de base
 
 - Dans notre contexte, on se limitera aux fonctions de base, soit sinus, cosinus et tangente.
 - Le Sinus est le côté opposé de l’angle sur l’hypoténuse.
@@ -26,7 +26,7 @@ De la trigonométrie!... Oh boboy!
 
 ---
 
-# Cercle trigonométrique : Ce qu’il faut retenir
+## Cercle trigonométrique : Ce qu’il faut retenir
 
 <table>
   <tr>
@@ -52,7 +52,7 @@ De la trigonométrie!... Oh boboy!
 
 ---
 
-# Trigonométrie en programmation
+## Trigonométrie en programmation
 
 - C’est bien beau la théorie, mais à quoi ça peut servir en programmation?
 - Exemple : Pointer un vaisseau vers un vaisseau ennemi devient simple avec la trigonométrie.
@@ -85,9 +85,9 @@ popMatrix();
 
 ---
 
-# `pushMatrix()` et `popMatrix()`
+## `pushMatrix()` et `popMatrix()`
 
-## Scénario
+### Scénario
 
 - On veut faire un système solaire où les planètes tournent autour de l’étoile, et les lunes autour de leur planète.
   - Certains astres dépendent de la position de l’astre parent par exemple la lune autour de la Terre
@@ -98,7 +98,7 @@ popMatrix();
 
 ---
 
-## Les fonctions `pushMatrix()` et `popMatrix()`
+### Les fonctions `pushMatrix()` et `popMatrix()`
 - La compréhension intrinsèque de ceux-ci nécessite de comprendre le concept de pile de matrices ce qui sort des compétences de ce cours.
 
 Pour simplifier :
@@ -107,7 +107,7 @@ Pour simplifier :
 
 ---
 
-## Analogie `pushMatrix()` et `popMatrix()`
+### Analogie `pushMatrix()` et `popMatrix()`
 
 - Imaginez une matrice comme une feuille de papier quadrillée.
 - `pushMatrix()` met la feuille de côté dans sa position actuelle sur une pile.
@@ -146,7 +146,7 @@ En résumé, ces deux fonctions sont essentielles pour isoler les transformation
     
 ---
 
-# Exemple d’imbrication
+## Exemple d’imbrication
 
 <table>
   <tr>
@@ -187,7 +187,7 @@ popMatrix();
 
 ---
 
-## Exemples visuels
+### Exemples visuels
 
 <table>
   <tr>
@@ -213,7 +213,7 @@ Projet : [s04_syst_solaire](pde://github.com/nbourre/0sw_processing_exemples/raw
 
 ---
 
-# Mouvement angulaire
+## Mouvement angulaire
 
 
 <table>
@@ -264,7 +264,7 @@ void display() {
 
 ---
 
-# Trouver l’angle de direction
+## Trouver l’angle de direction
 
 - La fonction arctangente (`atan2`) permet de trouver l’angle de la vélocité.
 - **Pourquoi `atan2` et non `atan` ?**
@@ -288,7 +288,7 @@ void display() {
 
 ---
 
-# Coordonnées polaires
+## Coordonnées polaires
 
 - Les coordonnées polaires sont une représentation angulaire des données cartésiennes.
 - Elles facilitent les calculs de rotation en utilisant uniquement la valeur de $\theta$ (thêta) et $r$ (rayon).
@@ -316,7 +316,7 @@ void display() {
 
 ---
 
-# Exercice
+## Exercice
 
 Réalisez un petit vaisseau simple qui pivote à l’aide des flèches gauche et droite et qui accélère en appuyant sur espace.
 
@@ -324,9 +324,9 @@ Réalisez un petit vaisseau simple qui pivote à l’aide des flèches gauche et
 
 ---
 
-# Les collisions circulaires
+## Les collisions circulaires
 
-## Plan de leçon
+### Plan de leçon
 
 - Détecter une collision circulaire
 - Trouver le point de contact
@@ -334,7 +334,7 @@ Réalisez un petit vaisseau simple qui pivote à l’aide des flèches gauche et
 
 ---
 
-## Collision entre cercles
+### Collision entre cercles
 
 - La collision entre cercles se base sur la distance entre les centres des cercles.
 - Si la distance est plus petite que la somme des deux rayons, il y a collision.
@@ -345,7 +345,7 @@ Réalisez un petit vaisseau simple qui pivote à l’aide des flèches gauche et
 
 ---
 
-## Trouver le point de contact
+### Trouver le point de contact
 
 - Pour trouver le point de contact, il suffit de faire un peu de trigo! 👩‍🎓👨‍🎓🧑‍🎓
 
@@ -361,7 +361,7 @@ float collisionPointY = ((this.position.y * autre.radius) + (autre.position.y * 
 
 ---
 
-## Réponse à la collision
+### Réponse à la collision
 
 - Simuler une réponse suite à l’impact entre deux cercles permet de rendre l’animation plus réaliste.
 - Ce type de collision entre deux corps est appelé une "collision élastique".
@@ -373,7 +373,7 @@ float collisionPointY = ((this.position.y * autre.radius) + (autre.position.y * 
 
 ---
 
-## Étape : Vecteur unitaire du point de contact
+### Étape : Vecteur unitaire du point de contact
 
 - Trouver le vecteur unitaire entre le point de collision et le centre du cercle.
 
@@ -390,7 +390,7 @@ PVector ut = new PVector(-un.y, un.x);
 
 ---
 
-## Étape : Projection de vecteur
+### Étape : Projection de vecteur
 
 - Pour simuler la direction que prendront les balles après la collision, on calcule les projections des vecteurs de vélocité résultants.
 - Cela nécessite d’utiliser des produits croisés pour séparer les composantes normales et tangentielles de la vitesse.
@@ -424,7 +424,7 @@ un.add(ut);
 PVector tempVel = un.get();
 ```
 
-## Exemple de résultat
+### Exemple de résultat
 ![alt text](assets/collision_balles.webp)
 
 
@@ -432,7 +432,7 @@ PVector tempVel = un.get();
 
 ---
 
-# Références
+## Références
 - [Collision circulaire](https://code.tutsplus.com/when-worlds-collide-simulating-circle-circle-collisions--gamedev-769t)
 
 <!-- Tableau html à 2 colonnes pour copier coller

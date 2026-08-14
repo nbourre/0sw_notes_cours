@@ -1,9 +1,9 @@
 # Projet de session <!-- omit in toc -->
 
-# Table des matières <!-- omit in toc -->
+## Table des matières <!-- omit in toc -->
 <!-- Générer table des matières avec Markdown All-in-One -->
 
-# Énoncé
+## Énoncé
 
 Dans le cadre de ce travail, vous allez devoir développer un projet multimédia qui peut être un jeu, une simulation multimédia ou une démonstration multimédia. En autant que le projet soit interactif et qu’il utilise les éléments multimédias (son, image, vidéo, etc.), il pourra être accepté.
 
@@ -35,7 +35,7 @@ Le projet devra avoir les éléments ci-dessous. Chacun de ces points sera déve
 
 ---
 
-# Structure du projet
+## Structure du projet
 
 Votre dossier de projet sur GitHub devra avoir les éléments suivants :
 
@@ -45,9 +45,9 @@ Votre dossier de projet sur GitHub devra avoir les éléments suivants :
 
 ---
 
-# Détails des points
+## Détails des points
 
-## Le menu initial
+### Le menu initial
 
 Le menu initial est l’introduction au jeu. Il permet, par exemple, au joueur de :
 
@@ -59,44 +59,44 @@ Ainsi, il s’agit de la fenêtre d’introduction pour votre projet.
 
 ---
 
-## Le cœur du jeu, simulation ou démonstration
+### Le cœur du jeu, simulation ou démonstration
 
 Cette partie est l’équivalent au développement d’un texte : le « met principal » d’un repas. Tout le projet tournera autour de cet aspect.
 
-### Interaction
+#### Interaction
 - Minimum d’interaction avec l’utilisateur (clavier, souris ou manette).
 - Compatibilité avec la borne arcade sous Linux.
 
-### Graphisme et animation
+#### Graphisme et animation
 - Éléments animés visibles dans le jeu.
 - Réactions observables suite à des actions spécifiques (ex. : collision, victoire, etc.).
 - Overlay pour afficher des informations comme le score, les vies restantes, etc.
 
-### Son
+#### Son
 - Minimum requis : musique de fond et effets sonores.
 - Possibilité de mettre en sourdine via le menu de configuration et une touche raccourcie.
 
-### Algorithmes et mécanismes de jeux
+#### Algorithmes et mécanismes de jeux
 
 Dans le cadre du projet, on devra retrouver au moins **deux algorithmes développés à partir des principes de base**, c’est-à-dire sans utiliser de librairie quelconque. Dans le cours, vous avez vu l’algorithme d’essaimage et les algorithmes de forces. Cependant, vous n’êtes pas obligés d’utiliser ces algorithmes. Vous pouvez prendre des algorithmes qui sont mieux adaptés à votre projet, par exemple : la génération de terrain, la génération de labyrinthe, la cinématique inverse, l’intelligence artificielle, etc.
 
 Les éléments de base nécessaires à la construction du projet **ne seront pas comptabilisés comme des algorithmes**. Par exemple, dans un jeu de plateforme, le déplacement du personnage, les collisions ou le saut sont des fonctionnalités fondamentales et ne seront donc pas évalués comme des algorithmes. Cependant, si vous intégrez des fonctionnalités avancées, comme un ennemi qui pourchasse le personnage et attaque de manière stratégique, cela sera considéré comme un algorithme.
 
-#### Pointage des algorithmes
+##### Pointage des algorithmes
 J’ai défini un pointage pour différents algorithmes en fonction de leur complexité. La difficulté de ces algorithmes étant variable, le pointage attribué reflètera leur niveau d’exigence.
 
 Si vous choisissez d’utiliser des **mécanismes intégrés dans la plateforme de création** (ex. : Godot), tels que le raycasting, le pathfollowing, ou le parallaxe, il faudra le **double des mécanismes intégrés** pour obtenir les mêmes points qu’un algorithme développé à partir de zéro.
 
 ---
 
-#### Conseils pour les algorithmes
+##### Conseils pour les algorithmes
 - Un algorithme sera évalué sur sa **fonctionnalité**, son **efficacité**, et sa **pertinence** par rapport à votre projet.
 - Les projets qui intègrent des solutions innovantes ou particulièrement optimisées peuvent recevoir un bonus.
 - Si vous avez des doutes sur un mécanisme ou un algorithme, demandez conseil avant de l’implémenter.
 
 ---
 
-# Données pour les geeks
+## Données pour les geeks
 
 Les données de débogage doivent inclure des informations comme :
 - Les boîtes de collision.
@@ -105,7 +105,7 @@ Les données de débogage doivent inclure des informations comme :
 
 ---
 
-# Scène de fin
+## Scène de fin
 
 Une scène de fin doit :
 - Afficher une fin gagnante et une fin perdante.
@@ -114,15 +114,15 @@ Une scène de fin doit :
 
 ---
 
-# Mise en pause
+## Mise en pause
 
 Votre projet doit permettre à l’utilisateur de mettre en pause via une touche spécifique.
 
 ---
 
-# Liste des algorithmes et mécanismes suggérés
+## Liste des algorithmes et mécanismes suggérés
 
-## Génération procédurale
+### Génération procédurale
 - **Génération procédurale**  
   - Création dynamique de contenu (niveaux, objets, etc.) basée sur des algorithmes.  
 - **Générateur de labyrinthe/donjon**  
@@ -134,7 +134,7 @@ Votre projet doit permettre à l’utilisateur de mettre en pause via une touche
 - **Wave Function Collapse (WFC)**
   - Algorithme permettant de générer des niveaux ou structures basés sur des motifs compatibles.
 
-## Pathfinding et navigation
+### Pathfinding et navigation
 - **A***  
   - Algorithme de recherche de chemin optimal prenant en compte les obstacles.  
 - **Path following (recherche de chemin)**  
@@ -142,7 +142,7 @@ Votre projet doit permettre à l’utilisateur de mettre en pause via une touche
 - **Raycasting**  
   - Utilisé pour tracer des lignes de vue ou détecter des collisions sur un chemin.
 
-## Intelligence artificielle et comportement
+### Intelligence artificielle et comportement
 - **Réseau de neurones**  
   - Modèle d’apprentissage complexe, utilisé pour prendre des décisions ou apprendre des modèles.  
 - **Agent autonome**  
@@ -154,7 +154,7 @@ Votre projet doit permettre à l’utilisateur de mettre en pause via une touche
 - **Champ de vision**  
   - Calcule ce qu'un personnage ou une caméra peut voir selon son orientation ou sa position.
 
-## Simulation et physique
+### Simulation et physique
 - **Cinématique inverse**  
   - Technique calculant les mouvements des articulations pour atteindre un point spécifique.  
 - **Automate cellulaire**  
@@ -162,7 +162,7 @@ Votre projet doit permettre à l’utilisateur de mettre en pause via une touche
 - **Système de Voxel**  
   - Représentation d’objets volumétriques en cubes 3D, idéale pour des mondes voxelisés comme Minecraft.
 
-## Algorithmes structurels
+### Algorithmes structurels
 - **Algorithme de Prim**  
   - Génère un arbre couvrant minimum, souvent utilisé pour créer des labyrinthes connectés.  
 - **Patron de conception – Object pool**  
@@ -172,14 +172,14 @@ Votre projet doit permettre à l’utilisateur de mettre en pause via une touche
 
 ---
 
-## Relation entre catégories
+### Relation entre catégories
 Certains algorithmes peuvent se retrouver dans plusieurs catégories en fonction de leur usage. Par exemple :
 - **Raycasting** peut être utilisé pour la navigation (Pathfinding) ou la détection de collisions (Simulation).
 - **Automate cellulaire** peut servir à la génération procédurale ou à simuler des comportements dynamiques.
 
 ---
 
-# Remise
+## Remise
 
 La date de remise du projet est fixée à la dernière semaine de novembre. Les cours suivants seront dédiés à la finalisation, au montage de la présentation et au débogage.
 
@@ -187,7 +187,7 @@ La remise doit se faire via le formulaire Git.
 
 ---
 
-# Grille d'évaluation détaillée
+## Grille d'évaluation détaillée
 
 | Critère                     | Points | Description détaillée                                                                 |
 |-----------------------------|--------|--------------------------------------------------------------------------------------|
@@ -211,7 +211,7 @@ La remise doit se faire via le formulaire Git.
 
 ---
 
-## Notes pour les évaluateurs
+### Notes pour les évaluateurs
 - Dans tous les cas, les notes seront graduelles en fonction de la qualité de l’implémentation. Par exemple, 0 point pour une fonctionnalité manquante, 1 point pour une implémentation partielle, 2 points pour une implémentation correcte, etc.
   - Exemple : Un menu initial de base qui répond aux exigences sans plus pourrait valoir 2 points.
 - **Bonus**
@@ -222,6 +222,6 @@ La remise doit se faire via le formulaire Git.
 
 ---
 
-# Note pour Processing ou Monogame
+## Note pour Processing ou Monogame
 
 Si le projet est réalisé avec Processing ou MonoGame, l’implémentation des nœuds de mécanisme de Godot (ex. : collision, animations, tuiles) peut être comptée comme les algorithmes 1 et 2.

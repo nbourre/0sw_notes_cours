@@ -1,11 +1,11 @@
 # Systèmes de Particules <!-- omit in toc -->
 
 
-# Introduction
+## Introduction
 
 Les systèmes de particules sont une technique largement utilisée en informatique graphique pour simuler des phénomènes naturels tels que le feu, la fumée, les cascades, et bien plus encore.
 
-# Histoire et Concept
+## Histoire et Concept
 
 Le concept de système de particules a été introduit par William T. Reeves en 1982, lors de son travail sur le film *Star Trek II: The Wrath of Khan*. Pour créer l'effet de la "Genesis Device", une technique a été développée où de nombreux petits éléments, ou particules, interagissent pour former un effet visuel complexe, comme une onde de feu qui se propage.
 
@@ -23,7 +23,7 @@ Les systèmes de particules permettent de modéliser des phénomènes complexes 
 
 ---
 
-## Exemple de Code en Processing
+### Exemple de Code en Processing
 
 Voici un exemple simple de mise en place d'un système de particules en Processing :
 
@@ -45,7 +45,7 @@ Dans cet exemple, un système de particules est créé et géré dans la fonctio
 
 ---
 
-# Principe de fonctionnement
+## Principe de fonctionnement
 Un système de particules se compose de trois éléments principaux :
 
 1. **Les Particules** : Ce sont les unités de base qui composent le système. Elles sont souvent représentées par des formes simples (cercles, carrés).
@@ -54,7 +54,7 @@ Un système de particules se compose de trois éléments principaux :
 
 ---
 
-# Particule unique
+## Particule unique
 Avant d'élaborer un système de particules, il est important de comprendre comment une particule individuelle fonctionne. Une particule peut avoir les propriétés suivantes :
 
 - **Position** : La position de la particule dans l'espace.
@@ -140,7 +140,7 @@ void display() {
 
 ---
 
-## Durée de vie et disparition de la particule
+### Durée de vie et disparition de la particule
 
 Le résultat physique de la particule fonctionne. Maintenant attaquons-nous à l'effet de disparition de la particule.
 
@@ -202,7 +202,7 @@ Voici le résultat.
 
 ![alt text](assets/lifespan.gif)
 
-## Performance
+### Performance
 
 Remarquez qu'au lieu de recréer une nouvelle particule à chaque fois qu'elle meurt, nous réinitialisons simplement la particule existante. Cela permet d'économiser des ressources et d'améliorer les performances.
 
@@ -210,7 +210,7 @@ Dans le monde du jeux vidéo, où des milliers de particules peuvent être gén�
 
 ---
 
-# Tableau de particules
+## Tableau de particules
 
 Maintenant que nous avons une particule fonctionnelle, nous pouvons créer un tableau de particules pour gérer plusieurs particules à la fois.
 
@@ -249,7 +249,7 @@ On dirait un générateur de particules de Wish... En effet, les particules appa
 
 ---
 
-## Génération séquentielle de particules
+### Génération séquentielle de particules
 Dans le code précédent, le problème est que toutes les particules sont créées en même temps, ce qui donne un effet peu réaliste. Pour simuler un système de particules plus naturel, nous devons émettre les particules progressivement.
 
 ---
@@ -335,7 +335,7 @@ void update(int deltaTime) {
 
 ---
 
-# L'émetteur de particules
+## L'émetteur de particules
 Nous avons maintenant un système de particules qui génère des particules. Nous allons maintenant modifier le code pour ajouter un émetteur de particules qui émet des particules à partir d'une position donnée.
 
 Il faudra créer une classe `Emitter` qui gère la génération de particules à partir d'une position donnée.
@@ -409,13 +409,13 @@ void display() {
 
 ---
 
-# Conclusion
+## Conclusion
 
 Les systèmes de particules sont un outil puissant pour simuler des phénomènes naturels et créer des effets visuels complexes. En comprenant les principes de base des particules individuelles, des tableaux de particules et des émetteurs de particules, vous pouvez créer une grande variété d'effets visuels, des explosions aux feux d'artifice en passant par les nuages de fumée.
 
 ---
 
-# Exercice
+## Exercice
 
 ![alt text](assets/smoke.gif)
 
@@ -425,5 +425,5 @@ Explorez l'exemple du cours [`s03e_smoke`](https://github.com/nbourre/0sw_proces
 
 ---
 
-# Références
+## Références
 - [The Nature of Code - Chapter 4 : Particle Systems](https://natureofcode.com/particles/)

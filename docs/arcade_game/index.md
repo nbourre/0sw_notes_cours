@@ -2,10 +2,10 @@
 Dans cette leçon, nous allons voir comment porter un jeu Godot sur l'arcade du département.
 
 
-# Modification au code
+## Modification au code
 Pour adapter le jeu à l'arcade, il faudra apporter quelques modifications au code.
 
-## Les contrôles
+### Les contrôles
 L'arcade est équipée de deux joysticks et de 6 boutons. Il faudra adapter les contrôles du jeu en conséquence.
 
 Voici un tableau du mapping des contrôles de l'arcade
@@ -27,7 +27,7 @@ Voici un tableau du mapping des contrôles de l'arcade
 
 **Attention!** Au moment d'écrire ces lignes, le joystick de droite est le principal.
 
-## Quitter le jeu
+### Quitter le jeu
 Il faudra ajouter un moyen de quitter le jeu. L'arcade n'a pas de clavier, il faudra donc ajouter un mapping de bouton pour quitter le jeu.
 
 - Ajouter un bouton `Hotkey` et attribuer la valeur `joy_button_9` à ce bouton.
@@ -52,7 +52,7 @@ func _process(delta: float) -> void:
     # ...
 ```
 
-## Simuler la souris
+### Simuler la souris
 Si votre projet utilise la souris, il faudra simuler la souris avec les axes du joystick. Voici un exemple de code pour simuler la souris avec le joystick.
 
 ```gd
@@ -75,9 +75,9 @@ func _process(delta: float) -> void:
     get_viewport().warp_mouse_position(mouse_pos)
 ```
 
-# Exporter le jeu
+## Exporter le jeu
 
-## Télécharger le modèle d'exportation
+### Télécharger le modèle d'exportation
 L'arcade fonctionne avec Linux. Il faudra exporter le jeu pour cette plateforme. La première étape est de télécharger le modèle d'exportation pour Linux.
 
 1. Ouvrir le menu "Editor"
@@ -86,7 +86,7 @@ L'arcade fonctionne avec Linux. Il faudra exporter le jeu pour cette plateforme.
 4. Attendre la fin du téléchargement
 5. Fermer la fenêtre
 
-## Exporter le jeu
+### Exporter le jeu
 Une fois que le modèle d'exportation est installé, vous pouvez exporter le jeu.
 
 1. Ouvrir le menu "Project"
@@ -97,7 +97,7 @@ Une fois que le modèle d'exportation est installé, vous pouvez exporter le jeu
    - Ajouter un préfixe au nom du fichier pour indiquer votre année et la session (ex: `A25_`).
 6. Donner l'extension `.pck` au fichier
 
-## Copier le jeu sur l'arcade
+### Copier le jeu sur l'arcade
 Vous pouvez maintenant envoyer le fichier `.pck` sur l'arcade. Pour cela, vous pouvez utiliser un logiciel de transfert de fichier comme FileZilla ou autres client FTP.
 
 - Utiliser le protocole `SFTP`.
@@ -109,5 +109,5 @@ Vous pouvez maintenant envoyer le fichier `.pck` sur l'arcade. Pour cela, vous p
 
 À toutes les minutes, un script s'exécute pour vérifier la présence de nouveaux fichiers `.pck` dans le répertoire `/home/etd/ftp/upload`. Si un fichier est trouvé, il est automatiquement déplacé dans le répertoire des roms de Godot.
 
-### Redémarrer l'arcade
+#### Redémarrer l'arcade
 Avec le SFTP, si vous téléversez un fichier nommé `restart.txt`, le script redémarrera `emulationstation` lorsqu'il le trouvera.

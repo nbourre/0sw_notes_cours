@@ -64,7 +64,7 @@ Le document devra comporter les éléments suivants :
     - Source de l’information
     - Capture d’écran ou image ou diagramme illustrant le concept à l'intérieur du projet
 
-# Grille de correction
+## Grille de correction
 | Critère | Points |
 | --- | --- |
 | Document d’une page en MarkDown expliquant le concept du projet et aux moins deux points saillants du développement | 65 |
@@ -72,7 +72,7 @@ Le document devra comporter les éléments suivants :
 | Structure du document | 10 |
 
 
-# Travail à remettre
+## Travail à remettre
 - Le document MarkDown appelé `readme.md` à la racine de votre projet.
   - Si le document est déjà existant, vous devez le modifier pour y ajouter les informations demandées.
 - L’aide intégrée au projet dans un menu **Options** ou équivalent.

@@ -1,11 +1,11 @@
 # Attraction gravitationnelle <!-- omit in toc -->
 
-# Table des matières <!-- omit in toc -->
+## Table des matières <!-- omit in toc -->
 
 
 ---
 
-# Attraction gravitationnelle
+## Attraction gravitationnelle
 
 ![alt text](assets/02_forces_7.webp)
 
@@ -27,7 +27,7 @@ Dans le cadre d'une simulation pour un jeu vidéo, voici ce que chaque élément
 
 Si on regarde le numérateur de la formule ($G \cdot m_1 \cdot m_2$), plus les objets sont massifs, plus la force gravitationnelle est grande. Cependante, si on regarde le dénominateur ($r^2$), plus les objets sont éloignés, plus la force gravitationnelle est faible. Mathématiquement, on peut dire que la force gravitationnelle est **inversement proportionnelle** au carré de la distance.
 
-## Code de base
+### Code de base
 
 Le code de la formule pourra alors ressembler à ceci :
 
@@ -40,7 +40,7 @@ float magnitude = (G * this.mass * other.mass) / (distance * distance);
 force.setMag(magnitude);
 ```
 
-# Classe `Attractor`
+## Classe `Attractor`
 
 Pour simplifier la gestion de l'attraction gravitationnelle, nous allons créer une classe `Attractor` qui contiendra les méthodes suivantes :
 
@@ -96,13 +96,13 @@ Dépendant des initiales, on pourrait obtenir un résultat similaire à ceci :
 
 ![alt text](assets/attractor_mover.gif)
 
-## Exercice
+### Exercice
 - Créez la classe `Attractor` avec les méthodes `display` et `attract`.
 - Reproduisez l'animation montrée dans l'exemple.
 
 ---
 
-# Plusieurs corps
+## Plusieurs corps
 
 Avec la section précédente, nous pouvons maintenant attirer un objet avec un autre. Cependant, il serait intéressant de pouvoir attirer plusieurs objets en même temps. Pour ce faire, nous allons créer un tableau de `Mover` et les faire interagir entre eux. Ainsi, il faudra modifier la classe `Mover` pour qu'elle puisse calculer la force d'attraction entre elle et un autre objet.
 
@@ -110,5 +110,5 @@ Le résultat pourrait ressembler à ceci :
 
 ![alt text](assets/attractor_multiple.gif)
 
-## Exercice
+### Exercice
 - Faites les modifications requises pour obtenir un résultat similaire à l'exemple.

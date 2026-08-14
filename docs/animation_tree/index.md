@@ -1,19 +1,19 @@
 # AnimationTree <!-- omit in toc -->
 
 
-# Problématique
+## Problématique
 Une situation courante : vous avez un grand nombre d'animations, et il devient difficile de gérer les transitions entre elles. Votre code est devenu plein d'instructions `if`, et chaque fois que vous changez quelque chose, tout se casse.
 
-# Solution
+## Solution
 Utilisez un `AnimationTree` pour créer une machine à états d'animation. Cela nous permettra d'organiser nos animations et, surtout, de contrôler les transitions entre elles.
 
-# Préparation
+## Préparation
 
 > **Attention!** Ce document a été partiellement mis à jour. La partie `Créer l'animation` a été développé à l'aide de Godot 3 et n'a pas été mis à jour. Cependant, il y a très peu de changement pour Godot 4.
 > 
 > La partie `AnimationTree` a été mis à jour pour Godot 4.
 
-## Godot 3.5
+### Godot 3.5
 Dans le cadre de ce document, j'utiliserai mon dépôt de code [yt](https://github.com/nbourre/yt) et plus précisément la version [vBase_done](https://github.com/nbourre/yt/releases/tag/vBase_done).
 
 Ce dernier contient le projet de base pour pour mes [vidéos YouTube](https://www.youtube.com/playlist?list=PLxPgLp3aTOhcEs_Rv0nXWXDHrxr83MVOB) sur la création d'un jeu de plateforme.
@@ -22,7 +22,7 @@ Voici à quoi ressemble le projet de base.
 
 ![](assets/platformer_demo.gif)
 
-## Godot 4.x
+### Godot 4.x
 Pour la partie `AnimationTree`, j'utiliserai le projet [`c08_parallax`](https://github.com/nbourre/0sw_projets_cours/tree/master/c08_parallax) et plus spécifiquement la branche `cours_animTree`.
 
 ```bash	
@@ -34,23 +34,23 @@ git checkout cours_animTree
 Voici à quoi ressemblera le projet à la fin du document.
 ![Alt text](assets/AnimationTree_done.gif)
 
-# Créer l'animation
+## Créer l'animation
 
 Pour utiliser l'`AnimationTree`, il faut avoir un noeud `AnimationPlayer` et ce dernier nécessite un noeud `Sprite`.
 
-## Étape 1 : Convertir le noeud `Player` en scène.
+### Étape 1 : Convertir le noeud `Player` en scène.
 Cliquer avec le bouton de droit sur le noeud `Player` et sélectionner "Sauvegarder la branche en tant que Scène".
 
 Travailler sur une scène sera plus facile pour le futur.
 
-## Étape 2 : Ajouter un noeud `Camera2D`
+### Étape 2 : Ajouter un noeud `Camera2D`
 Ajouter à la scène `Player` un noeud `Camera2D` pour permettre le suivi du personnage.
 
 - Configurer la propriété `Current` à "On" pour activer le suivi.
 - Activer la propriété `Smoothing` à `Enabled` pour activer un suivi fluide.
 - Tester le projet
 
-## Étape 3 : Ajouter un noeud `Sprite`
+### Étape 3 : Ajouter un noeud `Sprite`
 Le noeud `Sprite` permettra d'ajouter facilement les images au noeud `AnimationPlayer`.
 
 1. Ajouter un noeud `Sprite`.
@@ -62,7 +62,7 @@ Le noeud `Sprite` permettra d'ajouter facilement les images au noeud `AnimationP
 3. Il faudra configurer le nombre d'images à l'horizontal et à la vertical qui sont respectivement 9 et 6.
    - Il s'agit des propriétés `Hframes` et `Vframes` de la section `Animation`
 
-## Étape 4 : Ajouter un noeud `AnimationPlayer`
+### Étape 4 : Ajouter un noeud `AnimationPlayer`
 Le noeud `AnimationPlayer` permet, entre autres, de gérer les animations.
 
 1. Ajouter un noeud `AnimationPlayer`.
@@ -110,7 +110,7 @@ L'action complète.
 
 ---
 
-# Ajouter un noeud `AnimationTree`
+## Ajouter un noeud `AnimationTree`
 
 Une fois que les configurations des animations est réalisées, on peut passer à l'étape de l'[`AnimationTree`](https://docs.godotengine.org/en/stable/tutorials/animation/animation_tree.html).
 
@@ -186,13 +186,13 @@ La configuration de l'`AnimationTree` est terminée. Il est maintenant temps de 
 
 ---
 
-# Programmer les transitions entre les états
+## Programmer les transitions entre les états
 
 Comme indiquer précédement, il faudra gérer les transitions entre les états dans le code.
 
 Godot possède une mécanisme géniale qui permet de simplifier la gestion des transitions. En effet, il y a une classe nommée `AnimationNodeStateMachinePlayback` qui permet de "voyager" d'un état à un autre automatiquement.
 
-## Étape 1 : Objets pour la gestion de l'animation
+### Étape 1 : Objets pour la gestion de l'animation
 Dans la classe `Player.cs`, créer les deux membres suivants :
 
 ```csharp
@@ -217,7 +217,7 @@ Pour connaître la chaîne du paramètre, il suffit de sélectionner le noeud da
 
 ![Alt text](assets/copy_property_path.gif)
 
-## Étape 2 : Ajouter les méthodes pour gérer les transitions
+### Étape 2 : Ajouter les méthodes pour gérer les transitions
 Pour passer d'un état à l'autre, on utilise la méthode `AnimationNodeStateMachinePlayback.Travel` qui prend en paramètre le nom de l'état de destination.
 
 Cette méthode trouve le chemin le plus court pour passer de l'état actuel à l'état de destination.
@@ -252,6 +252,6 @@ Si tout fonctionne bien, on devrait avoir un résultat similaire à celui-ci.
 
 ---
 
-# Référence
+## Référence
 - [KidsCanCode.org : Controlling animation states](https://kidscancode.org/godot_recipes/4.x/animation/using_animation_sm/index.html)
 - [GDQuest - Finite state machine](https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/)

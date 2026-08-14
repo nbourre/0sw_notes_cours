@@ -1,10 +1,10 @@
 # Utiliser le débogueur distant
 Godot permet de déboguer un jeu en cours d'exécution sur un appareil distant. Cela permet de déboguer un jeu sur un appareil mobile, par exemple. Dans le cas qui nous intéresse dans l'immédiat, le jeu sera local.
 
-# Prérequis
+## Prérequis
 - Avoir un projet Godot fonctionnel
 
-# Étapes
+## Étapes
 1. Le projet doit être en exécution
 2. Sous le volet `Scène`, sélectionner `Distant`
 3. Sélectionner le noeud à observer

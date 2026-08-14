@@ -1,7 +1,7 @@
 # Godot – Bases du jeux 2D <!-- omit in toc -->
 
 
-# Plan de leçon
+## Plan de leçon
 - Introduction aux spritesheets et leur importance
 - Ajouter une feuille de sprites dans Godot
 - Animation avec `AnimatedSprite2D`
@@ -17,14 +17,14 @@
 
 ---
 
-# Notes
+## Notes
 - Plusieurs des images que j'aie prises dans ces diapositives proviennent du site itch.io
 - Il y a plusieurs artistes qui offrent des ressources gratuites pour les jeux
 - Plusieurs ensembles d'images sont à vendre à des prix très abordables (moins dispendieux qu'un repas à la cafétéria! 😅)
 
 ---
 
-# Avant de débuter
+## Avant de débuter
 - Avec le dépôt `0sw_projets_cours`
 - Faites un `git pull` pour mettre à jour le code
 - Créez une nouvelle branche `c06_spritesheet`
@@ -32,14 +32,14 @@
 
 ---
 
-# Les spritesheets et textures
+## Les spritesheets et textures
 - Charger une texture dans un jeu est très demandant pour le système
 - Si le jeu devait charger 50 images pour la même animation, le jeu prendrait plus de mémoire et de temps de chargement
 - Pour optimiser le chargement des images, on utilise une feuille d’images (*spritesheet*) que le système instancie
 
 ---
 
-# Les sprites animés
+## Les sprites animés
 - Les sprites animés représentent des dessins qui s’animent dans un jeu 2D
 - Généralement, un *spritesheet* est une feuille avec plusieurs dessins (*sprites*) de la même animation dont chacun est une pose différente
 
@@ -51,7 +51,7 @@
 
 ---
 
-# Ajouter une feuille dans Godot
+## Ajouter une feuille dans Godot
 - Glissez le fichier d'image dans le volet *FileSystem*
 - Ensuite, vous aurez accès à ce fichier dans les ressources du projet
 
@@ -59,7 +59,7 @@
 
 ---
 
-# AnimatedSprite
+## AnimatedSprite
 - Dans cette partie, nous allons voir comment utiliser une façon simple pour animer un sprite dans Godot
 - Utilisez un `AnimatedSprite` pour animer un sprite dans Godot
 - Voici une structure typique pour un personnage 2D qui inclut un `AnimatedSprite`:
@@ -71,7 +71,7 @@
 
 ---
 
-## SpriteFrames
+### SpriteFrames
 - Une fois que l’objet `AnimatedSprite` est dans la structure, il faudra lui assigner un `SpriteFrames` dans la propriété `Frames`
 - Voici une méthode simple
   - Sélectionner l’AnimatedSprite, aller dans la propriété `Sprite Frames` et sélectionner `New SpriteFrames`
@@ -83,7 +83,7 @@
 
 ---
 
-## Ajouter des images
+### Ajouter des images
 - Dans la partie gauche du volet `SpriteFrames`, on y retrouve la liste des animations
   - Par défaut, on voit *default*
 - Plusieurs façons existent pour ajouter des images dans l’animation
@@ -102,14 +102,14 @@
 
 ---
 
-## Animer l’image
+### Animer l’image
 - Vous pouvez prévisualiser l’animation en cliquant sur le bouton Play dans SpriteFrames
 
 ![alt text](assets/godot_preview_animation.gif)
 
 ---
 
-## Contrôler l’animation
+### Contrôler l’animation
 Une fois que l'animation est prête, il est possible de contrôler l'animation à l'aide d'un script. Ajouter un script au noeud parent de l'AnimatedSprite2d et coller ce script simple en GDScript:
 
 ```gd
@@ -130,14 +130,14 @@ func _process(delta: float) -> void:
 
 ---
 
-# Animer avec AnimationPlayer
+## Animer avec AnimationPlayer
 - L'`AnimatedSprite` est une façon simple d'animer un sprite lorsqu'il y a peu d'animations
 - Pour des animations plus complexes, il est préférable d'utiliser l'`AnimationPlayer`
 - Il faudra un nœud `Sprite2D` pour afficher la texture, puis d'animer les changements de texture avec `AnimationPlayer`.
 
 ---
 
-## Configuration de la scène
+### Configuration de la scène
 
 - Téléchargez la feuille de sprite ci-dessous et configurez votre scène.
 
@@ -149,7 +149,7 @@ func _process(delta: float) -> void:
 
 ---
 
-## Ajuster le nombre de cadres
+### Ajuster le nombre de cadres
 
 - En ayant le nœud `Sprite2D` sélectionné, configurez les cadres en modifiant `Hframes` à 6.
   - C'est dans la section `Animation` de la propriété `Sprite2D`.
@@ -161,14 +161,14 @@ func _process(delta: float) -> void:
 
 ---
 
-## Le volet `Animation`
+### Le volet `Animation`
 
 - Vous devriez apercevoir un volet `Animation` dans le bas de la fenêtre de Godot. Cliquez sur le bouton `Animation` pour ouvrir le volet.
 - C'est dans ce volet que vous pouvez ajouter des animations et des cadres.
 
 ---
 
-## Ajouter une animation dans `AnimationPlayer`
+### Ajouter une animation dans `AnimationPlayer`
 - Cliquez sur le bouton `Animation` pour afficher le menu déroulant.
 - Sélectionner `Nouveau...` pour ajouter une nouvelle animation.
 - Dans la fenêtre qui apparaît, nommez l'animation "walk" et confirmez.
@@ -177,7 +177,7 @@ func _process(delta: float) -> void:
 
 ---
 
-### Ajuster le temps de l'animation
+#### Ajuster le temps de l'animation
 - Dans le volet `Animation`, sélectionnez l'animation "walk".
 - Au bout de la ligne de temps, cliquez où il est écrit 1.
 - Inscrivez 0.6 pour ajuster la longueur de l'animation à 0.6 secondes.
@@ -185,7 +185,7 @@ func _process(delta: float) -> void:
 
 ![alt text](assets/godot_timeline_zoom.gif)
 
-### Ajouter des cadres dans la timeline
+#### Ajouter des cadres dans la timeline
 - Dans la ligne du temps, cliquez sur le 0 pour ajuster le point de départ de l'animation.
   - Il s'agit de la petite ligne bleue sur la ligne du temps.
 - Sélectionnez le noeud `Sprite2D` dans l'arbre de scène.
@@ -202,13 +202,13 @@ func _process(delta: float) -> void:
 
 ![alt text](assets/godot_timeline_add_frames.gif)
 
-### Ajuster les cadres de l'animation
+#### Ajuster les cadres de l'animation
 - Pour ajuster les cadres de l'animation, sélectionnez un cadre dans le volet `Animation`.
 - Glissez le cadre pour ajuster l'ordre des cadres ainsi que l'emplacement dans la ligne du temps.
 
 ![alt text](assets/godot_timeline_adjust_img.gif)
 
-### Visualiser l'animation
+#### Visualiser l'animation
 - Pour visualiser l'animation, cliquez sur le bouton `Play` dans le volet `Animation`.
 - On remarque que l'animation ne joue pas en boucle.
 - Pour ajuster cela, sélectionnez l'animation dans le volet `Animation` et cochez le bouton `Loop`.
@@ -218,7 +218,7 @@ func _process(delta: float) -> void:
 
 ---
 
-## Contrôler une animation avec `AnimationPlayer`
+### Contrôler une animation avec `AnimationPlayer`
 
 Tout comme avec `AnimatedSprite2D`, vous pouvez contrôler l'animation via code avec les méthodes `play()` et `stop()`. Voici un exemple similaire pour jouer l'animation pendant que la touche droite est enfoncée.
 
@@ -237,7 +237,7 @@ func _process(_delta):
 
 ---
 
-# Détail sur l'`AnimationPlayer`
+## Détail sur l'`AnimationPlayer`
 - L'`AnimationPlayer` est un nœud qui permet, **entre autres**, de contrôler les animations dans Godot
 - En fait l'`AnimationPlayer` est un contrôleur de valeurs
 - Lorsque l'on a ajouté une animation, l'`AnimationPlayer` a contrôlé la propriété `frame` du `Sprite2D` pour changer l'image affichée
@@ -246,7 +246,7 @@ func _process(_delta):
 
 ---
 
-# Résumé
+## Résumé
 - Les sprites animés sont des images qui changent pour donner l'impression de mouvement
 - Les sprites animés sont généralement des feuilles de sprites
 - Les feuilles de sprites sont des images qui contiennent plusieurs images
@@ -256,7 +256,7 @@ func _process(_delta):
 
 ---
 
-# Références
+## Références
 - [Godot Docs – 2D Sprite Animation](https://docs.godotengine.org/fr/stable/tutorials/2d/2d_sprite_animation.html)
 - [Godot Docs – AnimationPlayer](https://docs.godotengine.org/fr/stable/classes/class_animationplayer.html)
 - [Godot Docs - Animation](https://docs.godotengine.org/fr/stable/tutorials/animation/index.html)

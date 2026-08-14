@@ -4,12 +4,12 @@ Pour suivre le projet, vous allez devoir créer un projet sur GitHub. On utilise
 
 ![alt text](assets/kanban_exemple.png)
 
-# Nouveau projet sur GitHub
+## Nouveau projet sur GitHub
 Pour accéder au projet sur GitHub, vous devez être connecté et atteindre l'onglet `Projects`.
 
 ![alt text](assets/github_my_projects.png)
 
-## Méthode 1 : À partir d'un dépôt
+### Méthode 1 : À partir d'un dépôt
 Vous pouvez créer un projet à partir d'un dépôt existant.
 
 ![alt text](assets/github_new_project_from_repo.png)
@@ -19,7 +19,7 @@ Pour ce faire,
 2. Cliquez sur l'onglet `Projects`
 3. Cliquez sur le bouton `New project`
 
-## Méthode 2 : À partir de l'onglet `Projects`
+### Méthode 2 : À partir de l'onglet `Projects`
 Vous pouvez créer un nouveau projet en cliquant sur le bouton `New project`.
 
 Sélectionnez le modèle `Board`, donnez un nom significatif et cliquez sur `Next`.
@@ -28,7 +28,7 @@ Sélectionnez le modèle `Board`, donnez un nom significatif et cliquez sur `Nex
 
 Vous devrez associer le projet à un dépôt. Sélectionnez le dépôt et cliquez sur `Link a project`.
 
-# Configuration du projet
+## Configuration du projet
 
 ![alt text](assets/github_new_project.png)
 
@@ -36,7 +36,7 @@ Configuration du projet :
 - Nom du projet : Donnez un nom significatif
 - Description : Ajoutez une description pour expliquer le projet
 
-# Les colonnes
+## Les colonnes
 Un Kanban est composé de colonnes. Chaque colonne représente un état de la tâche. Par exemple, une tâche peut être `À faire`, `En cours` ou `Terminée`.
 
 > **Note :** Le nombre de colonnes variera en fonction des besoins du projet et des standards de l'équipe ou de l'entreprise.
@@ -45,7 +45,7 @@ Pour ajouter une colonne, cliquez sur le bouton `+` à l'extrémité droite du t
 
 **Pour les besoins du suivi du projet, vous devez ajouter la colonne `Backlog` qui sera la première colonne.** Cette colonne contiendra toutes les tâches à faire éventuellement.
 
-# Ajouter un collaborateur
+## Ajouter un collaborateur
 Pour ajouter un collaborateur :
 
 1. Cliquez sur le bouton `...` en dessous de votre logo
@@ -53,13 +53,13 @@ Pour ajouter un collaborateur :
 3. Cliquez sur `Manage access`
 4. Invitez un collaborateur en cliquant sur `Invite collaborators`
 
-## Description des colonnes
+### Description des colonnes
 - `Backlog`: Tâches à faire éventuellement
 - `To do`: Tâches à faire prochainement
 - `In progress`: Tâches en cours
 - `Done`: Tâches terminées
 
-# Ajouter des tâches
+## Ajouter des tâches
 Les tâches sont représentées par des cartes. Chaque carte contient des informations sur la tâche.
 
 - On peut ajouter des étiquettes, des assignés, des dates d'échéance, des descriptions, etc.
@@ -77,7 +77,7 @@ Pour ajouter une tâche :
 
 ---
 
-# Exercice
+## Exercice
 1. Créez un projet sur GitHub pour votre projet de session.
    1. Prenez la méthode de création qui vous convient.
 2. Assurez-vous que le dépôt est associé au projet.
@@ -86,7 +86,7 @@ Pour ajouter une tâche :
 5. Ajoutez les tâches à faire dans la colonne `Backlog`.
    1. Voir ci-bas pour le tableau des critères que vous devrez convertir en tâches.
 
-## Tableau des critères
+### Tableau des critères
 Les critères ne sont pas nécessairement des tâches. Vous devrez les convertir en tâches. Il peut y avoir plusieurs tâches pour le même critère. Par exemple, le critère `Animation` pourrait être converti en plusieurs tâches tel que `Trouver un sprite sheet`, `Créer les animations`, `Intégrer les animations`, etc.
 
 > **Note :** Dans tous les cas, il peut y avoir une équivalence pour être adapté à votre projet. Il faudra me faire approuver. Il faudra marquer l'équivalence dans la carte.

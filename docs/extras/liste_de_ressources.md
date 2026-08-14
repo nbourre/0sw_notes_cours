@@ -1,9 +1,9 @@
 # Ressource Tutoriel pour Jeux de plateforme <!-- omit in toc -->
 
 
-# Sujets précis
+## Sujets précis
 
-## Personnage rapidement
+### Personnage rapidement
 
 
 [Dominate Godot Platformer Movement! - The Ultimate Beginner Tutorial](https://www.youtube.com/watch?v=aQazVHDztsg)
@@ -26,7 +26,7 @@ Create A Platformer Game in 20 SECONDS! (Godot 4)
 
 ---
 
-# Jeux complets
+## Jeux complets
 
 [Godot 4 Tutorial - Beginner Platformer](https://www.youtube.com/watch?v=vGY2rUlTzWM&list=PLrIQ1Pnht4mLpggIYQftRtgT_GjaWKA6W)
 
@@ -38,9 +38,9 @@ Create A Platformer Game in 20 SECONDS! (Godot 4)
 
 [![Heartbeast - Pixel Platformer Tutorial / Code Along](https://markdown-videos-api.jorgenkh.no/url?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Df3WGFwCduY0%26list%3DPL9FzW-m48fn16W1Sz5bhTd1ArQQv4f-Cm)](https://www.youtube.com/watch?v=f3WGFwCduY0&list=PL9FzW-m48fn16W1Sz5bhTd1ArQQv4f-Cm)
 
-# Ressources
+## Ressources
 
-## Sprites et visuels
+### Sprites et visuels
 
 [Generic RUN n' GUN pack](https://bakudas.itch.io/generic-run-n-gun)
 
@@ -70,6 +70,6 @@ Create A Platformer Game in 20 SECONDS! (Godot 4)
 
 ![alt text](assets/UBnG88.png)
 
-## Sons et musiques
+### Sons et musiques
 
 - Générateur de son 8 bit [jsfxr](https://sfxr.me/)

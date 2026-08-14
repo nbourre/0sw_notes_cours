@@ -1,12 +1,12 @@
 # Processing Crash Course <!-- omit in toc -->
 
 
-# Introduction
+## Introduction
 Avant de nous lancer en grand dans le développement de jeux vidéo avec Godot, nous allons retourner aux sources pour nous réapproprier les notions de base de mathématiques et de géométrie du secondaire. Nous allons utiliser un outil très simple qui permet de se familiariser avec la programmation créative : Processing.
 
 ---
 
-# Processing
+## Processing
 - Processing est un environnement de développement spécialisé dans
 la programmation créative
 - Il permet de programmer principalement en Java
@@ -15,7 +15,7 @@ la programmation créative
 
 ---
 
-## Qu’est-ce que Processing?
+### Qu’est-ce que Processing?
 
 <table style="border: none;">
 
@@ -35,13 +35,13 @@ la programmation créative
 
 ---
 
-## Processing : Interface
+### Processing : Interface
 
 ![alt text](assets/Image3.png)
 
 ---
 
-# Premier jet
+## Premier jet
 - Ouvrez l’application Processing
 - Tapez le code suivant :
   - `point (50, 50);`
@@ -78,21 +78,20 @@ la programmation créative
 
 ---
 
-# Les formes primitives 2D
+## Les formes primitives 2D
 - Ce que nous avons expérimenté dans les diapos précédentes sont ce que l’on appelle des formes primitives
 - Les formes primitives sont des objets graphiques de base
 - Elles sont faciles à dessiner lorsque l’on comprend les coordonnées
 cartésiennes
-  - Plusieurs formes primitives sont disponibles dans Processing
-  - Point, ligne
-  - Rectangle, quadrilatère
-  - Ellipse, arc
-  - Triangle
-- Nous verrons dans les prochaines diapositives comment utiliser les plus complexes
+- Plusieurs formes primitives sont disponibles dans Processing
+    - Point, ligne
+    - Rectangle, quadrilatère
+    - Ellipse, arc
+    - Triangle
 
 ---
 
-## Arc de cercle
+### Arc de cercle
 - Il est possible de tracer des arcs de cercle avec Processing
 - La méthode pour dessiner un arc de cercle est `arc` et ses paramètres sont x, y, largeur, hauteur, début, fin et le type qui est optionnel
 - La syntaxe est la suivante :
@@ -108,7 +107,7 @@ cartésiennes
 
 ---
 
-## Liste de formes primitives
+### Liste de formes primitives
 
 | Commande                       | Paramètres                                    | Remarque                                                  |
 |--------------------------------|-----------------------------------------------|-----------------------------------------------------------|
@@ -125,7 +124,7 @@ cartésiennes
 
 ---
 
-# Couleurs
+## Couleurs
 - Par défaut, les couleurs de Processing sont noires pour le contour, blanc pour le remplissage et gris pour l’arrière-plan
 - Chaque caractéristique est programmable
 - La méthode `background()` permet de changer la couleur de l’arrière-
@@ -187,7 +186,7 @@ ellipse (width / 2 + 25, height/2, 90, 90);
 
 ---
 
-## Récapitulatif
+### Récapitulatif
 
 | Méthode       | Description courte                                    | Exemple                       |
 |---------------|-------------------------------------------------------|-------------------------------|
@@ -201,7 +200,7 @@ ellipse (width / 2 + 25, height/2, 90, 90);
 
 - Note : Lorsque l’on change la couleur, celle-ci est persistante jusqu’à ce quelle soit attribuée une nouvelle valeur
 
-# Exercices courts
+## Exercices courts
 - Dans un nouveau projet
 - Ajoutez les formes suivantes
   - Un rectangle rouge
@@ -212,7 +211,7 @@ ellipse (width / 2 + 25, height/2, 90, 90);
 
 ---
 
-# Programme Processing
+## Programme Processing
 - Un programme Processing est au moins divisé en deux sections soit  `setup` et `draw`
 - La méthode `setup` est la partie où l’on configure le programme avant l’exécution principale 
 - La partie `draw` est la partie qui est répétée indéfiniment du projet
@@ -224,7 +223,7 @@ Voici le cycle de vie d’un programme Processing
 
 ---
 
-## setup()
+### setup()
 - Comme indiqué précédemment, `setup()` permet de configurer le programme avant le lancement de la boucle `draw()`
 - C’est dans cette méthode que l’on initialise, entre autres, la dimension de la fenêtre avec la méthode `size()`
 - C’est aussi dans cette méthode que l’on chargera les ressources tels que les images ou les fichiers de son
@@ -239,7 +238,7 @@ void setup () {
 
 ---
 
-## draw()
+### draw()
 - La méthode draw() est la boucle infinie du programme
 - Exemple :
 
@@ -254,7 +253,7 @@ void draw () {
 ```
 
 
-# Les variables systèmes
+## Les variables systèmes
 Processing offre plusieurs variables système qui permettent de récupérer des valeurs qui sont disponibles au niveau du système :
 
 | Variable      | Description                                                                 |
@@ -272,7 +271,7 @@ Processing offre plusieurs variables système qui permettent de récupérer des 
 - Les variables systèmes permettent de récupérer des valeurs qui sont disponibles au niveau du système
 - Les principaux types de valeur que l’on retrouve sont ceux de l’écran, de la souris et du clavier
 
-# Exercice #1
+## Exercice #1
 - Dans un nouveau projet, faites déplacer une ellipse qui rebondit sur les bords de la fenêtre
 - Dans un nouveau projet, lorsque l’utilisateur clique, une ellipse doit apparaître
 - Défi

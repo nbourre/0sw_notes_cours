@@ -88,13 +88,13 @@ nav:
   - Le Tilemap Terrain: tilemap_terrain/index.md
   - Utiliser le débogueur distant: remote_debugger/index.md
   - Déployer le jeu sur l'arcade: arcade_game/index.md
-  - Projet de session:
-    - Énoncé: projet_session/01_enonce/index.md
-    - Documentation et suivis:
-      - Aperçu: projet_session/02_documentation_suivis/index.md
-      - Suivi du projet: projet_session/02_documentation_suivis/suivis.md
-      - Documentation du projet: projet_session/02_documentation_suivis/documentation_projet.md
-    - Critères d'évaluation - Présentations: projet_session/03_presentation/index.md
+#  - Projet de session:
+#    - Énoncé: projet_session/01_enonce/index.md
+#    - Documentation et suivis:
+#      - Aperçu: projet_session/02_documentation_suivis/index.md
+#      - Suivi du projet: projet_session/02_documentation_suivis/suivis.md
+#      - Documentation du projet: projet_session/02_documentation_suivis/documentation_projet.md
+#    - Critères d'évaluation - Présentations: projet_session/03_presentation/index.md
   - Extras:
     - Liste de ressources: extras/liste_de_ressources.md
 

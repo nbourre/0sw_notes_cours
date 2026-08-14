@@ -1,9 +1,9 @@
 # Sauvegarder les données avec des ressources personnalisées dans Godot  <!-- omit in toc -->
 
-# Table des matières <!-- omit in toc -->
+## Table des matières <!-- omit in toc -->
 <!-- Générer table des matières avec Markdown All-in-One -->
 
-# Introduction
+## Introduction
 Dans Godot, une **ressource personnalisée** permet de structurer et de sauvegarder facilement des informations complexes, comme l'état du joueur ou l'inventaire d'objets, sans les complications associées à l'utilisation de fichiers JSON ou d'autres formats de stockage brut. Cette approche rend les sauvegardes plus simples à gérer et à charger.
 
 Dans cette leçon, nous allons :
@@ -13,7 +13,7 @@ Dans cette leçon, nous allons :
 
 ---
 
-# Qu’est-ce qu’une ressource personnalisée ?
+## Qu’est-ce qu’une ressource personnalisée ?
 Une **ressource personnalisée** est un composant de Godot que vous pouvez créer pour stocker des données spécifiques. Par exemple, une texture est une ressource assignable à un Sprite. En utilisant des ressources personnalisées, vous pouvez créer des structures de données propres à votre jeu, avec toutes les propriétés et méthodes dont vous avez besoin, tout en profitant de l'intégration avec l'éditeur Godot.
 
 Les ressources personnalisées se prêtent particulièrement bien aux fichiers de sauvegarde car :
@@ -23,7 +23,7 @@ Les ressources personnalisées se prêtent particulièrement bien aux fichiers d
 
 ---
 
-# Préparation du projet
+## Préparation du projet
 Nous allons juste créer un projet avec des contrôles de base pour illustrer les concepts de sauvegarde et de chargement. Vous pouvez suivre ces étapes dans un nouveau projet ou ajouter ces fonctionnalités à un projet existant.
 
 ![alt text](assets/screenshot.png)
@@ -47,7 +47,7 @@ La structure de la scène est la suivante :
 
 ---
 
-# Création d’une ressource de données pour le joueur
+## Création d’une ressource de données pour le joueur
 
 Pour gérer les données du joueur, comme sa santé, nous allons créer une ressource `PlayerData` :
 
@@ -72,7 +72,7 @@ Pour gérer les données du joueur, comme sa santé, nous allons créer une ress
 
 ---
 
-# Configurer le fichier de sauvegarde
+## Configurer le fichier de sauvegarde
 
 Pour enregistrer les données du joueur sur le disque, nous devons configurer un fichier de sauvegarde dans `main.gd`.
 
@@ -119,17 +119,17 @@ Pour enregistrer les données du joueur sur le disque, nous devons configurer un
 
 ---
 
-# Test de la sauvegarde et du chargement
+## Test de la sauvegarde et du chargement
 Lors de la première exécution, cliquez sur le bouton `Save` pour enregistrer les données du joueur. Ensuite, cliquez sur le bouton `Change` pour modifier la santé du joueur. Enfin, cliquez sur le bouton `Load` pour charger les données sauvegardées.
 
-## Observations
+### Observations
 - Dans votre explorateur de fichiers, vous devriez voir un dossier `save` contenant le fichier `player_save.tres`.
 - Ouvrez le fichier `player_save.tres` avec un éditeur de texte pour voir les données sauvegardées.
   - On y constate les différentes propriétés de `PlayerData`, comme la santé du joueur ainsi que les identifiants des ressources générées par Godot.
 
 ---
 
-# Ajouter un inventaire en tant que sous-ressource
+## Ajouter un inventaire en tant que sous-ressource
 
 En ajoutant un inventaire comme sous-ressource dans `PlayerData`, chaque item sera sauvegardé automatiquement avec les données du joueur.
 
@@ -171,7 +171,7 @@ En ajoutant un inventaire comme sous-ressource dans `PlayerData`, chaque item se
 
    En utilisant cette approche, chaque item est enregistré avec toutes ses propriétés, et lors du chargement, l’inventaire est recréé sans manipulation supplémentaire.
 
-## Observations
+### Observations
 - Après avoir ajouté des items à l’inventaire, sauvegardez et chargez les données pour voir comment les items sont stockés et restaurés.
 - Ouvrez le fichier `player_save.tres` pour voir comment les items sont sauvegardés en tant que sous-ressources.
 
@@ -195,7 +195,7 @@ inventory = [SubResource("Resource_21lwd")]
 
 ---
 
-# Avantages des ressources personnalisées par rapport aux fichiers JSON
+## Avantages des ressources personnalisées par rapport aux fichiers JSON
 
 Les ressources personnalisées sont parfaitement intégrées dans Godot et permettent de simplifier considérablement le travail de sauvegarde et de chargement. Contrairement aux fichiers JSON qui nécessitent souvent une conversion et une gestion des erreurs pour être chargés correctement, les ressources personnalisées :
    - Simplifient le processus de chargement grâce à une structure native dans Godot.
@@ -204,7 +204,7 @@ Les ressources personnalisées sont parfaitement intégrées dans Godot et perme
 
 ---
 
-# Combinaison avec les fichiers JSON
+## Combinaison avec les fichiers JSON
 
 Les fichiers JSON restent utiles pour stocker des données de référence ou des bases de données. Par exemple, un fichier JSON peut contenir la liste de tous les items du jeu. Lors de l’ajout d’un nouvel item dans l’inventaire, seul l’ID de l'item est utilisé pour récupérer les détails dans le fichier JSON.
 
@@ -216,7 +216,7 @@ Cette approche hybride permet de conserver des données par défaut tout en offr
 
 ---
 
-# Conclusion
+## Conclusion
 
 Les ressources personnalisées sont un outil puissant pour gérer les données sauvegardées dans Godot. Grâce à elles, vous pouvez facilement créer des fichiers de sauvegarde complexes et structurés. En les combinant avec des fichiers JSON pour la gestion des données par défaut, vous obtenez un système de sauvegarde et de gestion des données extrêmement flexible et efficace.
 
@@ -224,7 +224,7 @@ Ce guide vous a introduit aux ressources personnalisées et vous a montré comme
 
 ---
 
-# Annexe
+## Annexe
 
 `item.gd` :
 
@@ -297,7 +297,7 @@ func _on_add_button_pressed() -> void:
 
 ---
 
-# Références
+## Références
 - [Documentation de Godot sur les ressources](https://docs.godotengine.org/en/stable/tutorials/scripting/resources.html)
 - [Save Files in Godot! (Custom Resource Tutorial)](https://www.youtube.com/watch?v=VGxYtJ3rXdE)
 - [SECURE saving with Encryption in Godot 4!](https://www.youtube.com/watch?v=mI4HfyBdV-k)

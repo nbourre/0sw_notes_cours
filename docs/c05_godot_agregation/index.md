@@ -4,7 +4,7 @@ Programmation créative - L’agrégation et les collisions
 ![alt text](assets/flocking.webp)
 
 
-# Plan de leçon
+## Plan de leçon
 - Récupération du projet
 - Chercher une cible
 - L’agrégation
@@ -16,25 +16,25 @@ Programmation créative - L’agrégation et les collisions
 
 ---
 
-# Récupération du projet
+## Récupération du projet
 - Pour cette leçon, nous allons utiliser le projet `c05_godot_agregation`
 - Testez l’application
 - Il s'agit seulement d'objets (boids) qui se déplacent dans une direction aléatoire.
 - Parcourez le code pour comprendre les grandes lignes (5 min)
 
-## Projet sans agrégation
+### Projet sans agrégation
 Les boids ne se déplace qu’avec une vitesse initiale
 ![alt text](assets/flock_nothing.gif)
 
 ---
 
-# Calculer le vecteur de braquage
+## Calculer le vecteur de braquage
 - Avant de débuter avec l’agrégation, il est important de comprendre comment calculer un vecteur de braquage
 - Dans certaine situation, on voudrait qu’un objet atteigne une cible tout en ayant une vitesse de rotation limitée
   - Exemple : Véhicule qui se braque dans une direction
 - C'est le cas avec la force de cohésion
 
-## Algo
+### Algo
 - Trouver le vecteur de différence entre la cible et l’objet
 - Limiter le vecteur de différence (vitesse max)
 - Trouver la différence entre le vecteur de différence en la vitesse de l’objet (vitesse de braquage)
@@ -43,7 +43,7 @@ Les boids ne se déplace qu’avec une vitesse initiale
 
 ![alt text](assets/steering.gif)
 
-## Exemple
+### Exemple
 ```gdscript
 # Dans un node2D
 func steering(target: Vector2) -> Vector2:
@@ -55,7 +55,7 @@ func steering(target: Vector2) -> Vector2:
 
 ---
 
-# Qu’est-ce qu’une agrégation?
+## Qu’est-ce qu’une agrégation?
 - Une agrégation est un groupe d’agents dans lequel chaque individu est indépendant et dépendant des autres individus
 - Dans la littérature, on va lire sur le *swarm* ou *flocking behaviour*
 - Chaque individu se nomme un *boid*
@@ -63,7 +63,7 @@ func steering(target: Vector2) -> Vector2:
 
 ---
 
-## Exemples d’agrégation
+### Exemples d’agrégation
 
 ![alt text](assets/Média1.webp)
 Volée d'étourneaux
@@ -73,7 +73,7 @@ Banc de thons
 
 ---
 
-## Notions scientifiques
+### Notions scientifiques
 - Le principe de volée nécessite 3 forces
   - La cohésion
   - La séparation
@@ -93,7 +93,7 @@ Banc de thons
 
 ---
 
-## La séparation ou répulsion
+### La séparation ou répulsion
 - La force de séparation ou de répulsion est celle qui permet à l’agent de d’éloigner des voisins trop près
 - On pourrait la définir comme la bulle personnelle
 - On calcule en effectuant la ${\color{blue}moyenne\ de\ la\ différence\ des\ distances}$ divisé par la ${\color{blue}distance}$
@@ -101,7 +101,7 @@ Banc de thons
 
 ---
 
-### Algorithme
+#### Algorithme
 - Pour chaque agents qui sont dans la bulle de répulsion
   - Diff <-- agent.position – autre.position
   - Normalise diff
@@ -139,7 +139,7 @@ func separation(boids: Array) -> Vector2:
 
 ---
 
-### Visualisation
+#### Visualisation
 - Avec le projet `c05_godot_agregation` ouvert
 - Exécutez le projet
 - Pendant que le projet s'exécute dans Godot, sélectionnez la scène `World`
@@ -152,12 +152,12 @@ Voici ce que vous devriez voir
 
 ---
 
-## L’alignement
+### L’alignement
 - L’alignement est la force qui permet à l’agent de suivre le groupe
 - Elle se calcule en effectuant la moyenne de la vitesse des agents qui sont dans le voisinage établi
 
 
-### Algo	
+#### Algo	
 - Calculer la moyenne des vitesses du voisinage
 - Calculer la force de braquage avec la moyenne trouvée
 
@@ -183,23 +183,23 @@ func alignment(boids: Array) -> Vector2:
 	return Vector2()
 ```
 
-### Visualisation
+#### Visualisation
 - Dans l'inspecteur, activez la propriété `Alignment`
 - Observez le comportement des boids. Que voyez-vous?
 
 Voici ce que vous devriez voir
 ![alt text](assets/flock_alignment.gif)
 
-## La cohésion
+### La cohésion
 - La cohésion est la force à laquelle un agent s’attache à d’autres agents
 - Généralement, c’est la force dont le voisinage est le plus grand
 
-### Calcul
+#### Calcul
 - On calcule la cohésion en effectuant la moyenne de la position de chacun des agents
 - Ce calcul donne la cible à atteindre pour l’agent
 - Ensuite, on calcule la force de braquage pour atteindre cette cible
  
-### Algo
+#### Algo
 - Cible <- Calculer la moyenne des positions des voisins
 - Calculer le vecteur de braquage pour atteindre la cible
 
@@ -224,7 +224,7 @@ func cohesion(boids: Array) -> Vector2:
 
 ---
 
-### Visualisation
+#### Visualisation
 - Dans l'inspecteur, activez la propriété `Cohesion`
 - Observez le comportement des boids. Que voyez-vous?
 
@@ -234,7 +234,7 @@ Voici ce que vous devriez voir.
 
 ---
 
-## Sommation des forces
+### Sommation des forces
 - Après avoir calculé les trois forces, on applique une pondération pour chacune d’elle
 - Par la suite, on les applique à l’agent
 - Le résultat final dépendra des facteurs suivants
@@ -244,12 +244,12 @@ Voici ce que vous devriez voir.
 
 ![alt text](assets/flock_sep_ali_coh.gif)
 
-## Jouer avec les forces
+### Jouer avec les forces
 ![alt text](assets/flock_mixing_forces.gif)
 
 ---
 
-# Références
+## Références
 - [En 5 niveaux de difficulté : Comment fonctionne un banc de poissons?](https://www.youtube.com/watch?v=Ch7VxxTBe1c)
 - http://en.wikipedia.org/wiki/Swarm_behaviour
 - http://processing.org/examples/flocking.html

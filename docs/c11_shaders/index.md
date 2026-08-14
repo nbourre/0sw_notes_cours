@@ -1,7 +1,7 @@
 # Les shaders en Godot <!-- omit in toc -->
 
 
-# Introduction
+## Introduction
 - Les shaders sont des programmes qui permettent de dessiner des objets dans un moteur de jeu.
 - Ils sont utilisés pour les effets de lumière, les ombres, les textures, les effets de particules, etc.
 - Les shaders sont écrits en GLSL (OpenGL Shading Language), un langage de programmation bas niveau.
@@ -14,10 +14,10 @@
 > 
 > Étant donné que les shaders sont écrits en GLSL, il est possible, avec quelques conversions, d'utiliser des shaders dans d'autres moteurs de jeu. Par exemple, les shaders peuvent être utilisés dans Unity, Unreal Engine, etc.
 
-# Les shaders dans Godot
+## Les shaders dans Godot
 Dans cet article, nous allons voir comment créer et utiliser un shader 2D dans Godot. On va faire clignoter une texture. Ce shader pourra être réutilisé, par exemple pour faire clignoter un ennemi ou un joueur qui se fait toucher ou encore pour d'autres effets.
 
-## Projet de base
+### Projet de base
 Étant donné que le code GLSL est identique pour tous les projets, vous pouvez prendre le projet de votre choix ou encore démarrer un projet vide pour suivre la démonstration.
 
 **Note :** L'exemple pourra s'appliquer à facilement à votre projet de session. 
@@ -26,7 +26,7 @@ Dans le projet, vous devez avoir un sprite avec une texture. Comme indiquer pré
 
 ![](assets/shader_tutorial_01.gif)
 
-## Créer un shader
+### Créer un shader
 Pour créer un nouveau shader, vous pouvez suivre les étapes suivantes:
 
 1. Sélectionnez le noeud `Sprite`
@@ -42,16 +42,16 @@ Pour créer un nouveau shader, vous pouvez suivre les étapes suivantes:
 6. Cliquez sur le nouveau fichier pour développer l'éditeur de shader
     ![Alt text](assets/shader_tutorial_03b.gif)
 
-### La classe `Material`
+#### La classe `Material`
 Un `Material` (matériau?) est un ensemble de propriétés qui définissent comment un objet est rendu. Il contient des informations sur la couleur, la texture, la brillance, la transparence, etc. Il peut aussi contenir un shader qui permet de définir comment l'objet est rendu. Il s'agit d'un type de ressource.
 
 Pour tracer différent objet avec le même shader, le matériau doit être attaché à chaque objet.
 
 Tous les objets qui héritent de `CanvasItem` ont une propriété `Material`. Cela inclut les `Sprite`, les `TextureRect`, les `Control`, etc. Il y a aussi l'option d'hériter du matériau du parent.
 
-# Fragment Shader
+## Fragment Shader
 
-## Écrire le code GLSL
+### Écrire le code GLSL
 Le langage GLSL est basé sur le C. Il est donc possible d'utiliser des variables, des fonctions, des boucles, des conditions, etc.
 
 Comme j'en ai fait part, nous allons programmer un *shader* relativement simple. Nous allons travailler sur les pixels directement.
@@ -87,7 +87,7 @@ void fragment() {
 >
 > Si le sprite a une dimension de 1920x1080, la fonction `fragment` sera appelée 124 416 000 fois et ce à chaque seconde!
 
-## Exemple simple
+### Exemple simple
 
 La variable `COLOR` contient la couleur du pixel et est de type `vec4` soit un vecteur de 4 valeurs qui représente la valeur des couches RGBA. Chaque valeur des composants est comprise **entre 0 et 1**.
 
@@ -109,7 +109,7 @@ Sauvegardez et observez le résultat en direct dans la scène.
 
 ![](assets/shader_tutorial_05.gif)
 
-## Utiliser des variables
+### Utiliser des variables
 Pour être un peu plus efficace, on peut sauvegarder la valeur dans une variable.
 
 ![](assets/shader_tutorial_06.gif)
@@ -123,10 +123,10 @@ void fragment() {
 }
 ```
 
-## Pixel avec une texture
+### Pixel avec une texture
 On remarque que la couleur change pour l'ensemble des pixels. Ce n'est généralement pas ce que l'on désire. On peut donc utiliser une texture pour déterminer la couleur du pixel. Pour ce faire, on va utiliser les variables `COLOR`, `UV` et `TEXTURE`.
 
-### Variable `UV`
+#### Variable `UV`
 La variable `UV` contient les coordonnées du pixel (*fragment*). Il s'agit donc d'une paire de valeurs. Ainsi, elle est représenté par un type `vec2`. La première valeur est la coordonnée horizontale et la deuxième la coordonnée verticale. Les valeurs sont comprises **entre 0 et 1**.
 
 ![](assets/shader_iconuv.webp)
@@ -142,7 +142,7 @@ void fragment() {
 ```
 ![](assets/shader_tutorial_07.gif)
 
-### Variable `TEXTURE`
+#### Variable `TEXTURE`
 La variable `TEXTURE` contient la texture du sprite. On peut donc utiliser la fonction `texture` pour obtenir la couleur du pixel à partir de la texture.
 
 Exemple
@@ -156,7 +156,7 @@ void fragment() {
 
 Vous remarquez que l'on peut modifier la couleur du pixel en utilisant les composantes de `COLOR`. Les composantes sont les valeurs suivantes: `r` pour le rouge, `g` pour le vert, `b` pour le bleu et `a` pour l'alpha. Il y a aussi la composante `rgb` qui contient les trois composantes précédentes.
 
-### Exemple
+#### Exemple
 Nous allons maintenant utiliser une texture pour déterminer la couleur du pixel. Pour ce faire, nous allons utiliser la fonction `texture` et la variable `TEXTURE`.
 
 ```glsl
@@ -171,7 +171,7 @@ Vous avez remarqué la fonction `mix()`? Cette fonction permet de mélanger deux
 
 ![](assets/shader_tutorial_08.gif)
 
-## Révision des mots-clés
+### Révision des mots-clés
 
 Nous avons vu les mots-clés suivantes:
 - `COLOR` : Couleur du pixel
@@ -188,10 +188,10 @@ Les fonctions suivantes ont été utilisées:
   - `y` : Valeur d'arrivée.
   - `a` : Pourcentage de la valeur d'arrivée.
 
-# Rendre public des paramètres du shader
+## Rendre public des paramètres du shader
 Maintenant que l'on connaît les bases du shader, il est temps de rendre public des paramètres du shader. Cela permettra de modifier les paramètres du shader dans Godot (ou tout autre moteur de jeu).
 
-## Le mot clé `uniform`
+### Le mot clé `uniform`
 Le mot-clé `uniform` en GLSL est utilisé pour déclarer une variable dont la valeur est fixée par le programme principal (comme Godot ou un moteur graphique), et commune à tous les fragments ou vertex pendant un rendu. Les variables uniformes sont utiles pour transmettre des informations globales aux shaders, comme la couleur de la lumière, le temps, les textures, ou des transformations, sans les recalculer pour chaque pixel ou sommet.
 
 C'est un peu comme un `@export` en GDScript.
@@ -250,10 +250,10 @@ void fragment() {
 }
 ```
 
-# Utiliser le shader dans un jeu
+## Utiliser le shader dans un jeu
 Pour exploiter un shader à son plein potentiel, il faut l'utiliser dans un jeu.
 
-## Appliquer le shader sur un objet
+### Appliquer le shader sur un objet
 Pour appliquer le shader sur un objet, il faut sélectionner l'objet et dans l'inspecteur, sélectionner le shader dans la propriété `Shader` et cliquer sur `Load`.
 
 > **Important**
@@ -262,7 +262,7 @@ Pour appliquer le shader sur un objet, il faut sélectionner l'objet et dans l'i
 
 ![](assets/shader_tutorial_11_localToScene.gif)
 
-## Utiliser le shader dans un script
+### Utiliser le shader dans un script
 Dans la scène où j'utilise le shader, j'ai ajouté un noeud `Timer` qui dure 0.1 seconde.
 
 La première étape consiste à se créer des références pour utiliser le `Sprite`, le `Timer` et le `Shader`.
@@ -388,7 +388,7 @@ func _process(delta: float) -> void:
 
 </details>
 
-### Autres exemples
+#### Autres exemples
 ![](assets/shader_tutorial_13_exA.gif)
 
 ![](assets/shader_tutorial_13_exB.gif)
@@ -397,11 +397,11 @@ func _process(delta: float) -> void:
 
 ---
 
-# Vertex Shaders dans Godot
+## Vertex Shaders dans Godot
 
 Contrairement aux *fragment shaders* qui agissent sur chaque pixel de l'objet, les *vertex shaders* agissent sur chaque sommet (ou *vertex*) de la géométrie de l'objet. Les vertex shaders sont donc utiles pour modifier la forme ou la position d'un objet, pour des effets tels que les déformations, les vagues, les ondulations, ou les animations basées sur les sommets.
 
-## Pourquoi utiliser un Vertex Shader?
+### Pourquoi utiliser un Vertex Shader?
 
 Le vertex shader permet de :
 - Déplacer des sommets pour créer des animations dynamiques ou des effets de distorsion.
@@ -410,7 +410,7 @@ Le vertex shader permet de :
 
 Par exemple, dans un jeu, on peut utiliser un vertex shader pour faire onduler de l'herbe ou pour simuler un effet de vague sur un plan d'eau.
 
-## Création d’un Vertex Shader
+### Création d’un Vertex Shader
 
 Pour activer un *vertex shader*, on commence par indiquer le type de shader et la fonction `vertex`. Voici un exemple de base qui utilise le type de shader `canvas_item` (pour les objets 2D) et la fonction `vertex` :
 
@@ -424,7 +424,7 @@ void vertex() {
 
 La fonction `vertex()` sera appelée pour chaque sommet de l'objet.
 
-### Exemple : Faire onduler un objet
+#### Exemple : Faire onduler un objet
 
 Voyons un exemple où nous faisons bouger les sommets de l'objet pour créer un effet d’ondulation. Nous allons utiliser la position de chaque sommet (`VERTEX`) et le temps (`TIME`) pour créer un déplacement en forme d'onde.
 
@@ -506,7 +506,7 @@ Cependant, on veut que l'ondulation ne soit appliquer que si la position `y` est
 
 ![alt text](assets/grass_done.gif)
 
-#### Explications de l'exemple :
+##### Explications de l'exemple :
 
 1. **Variables `amplitude` et `frequency`** :
    - `amplitude` contrôle l'intensité de l'onde, ou à quel point les sommets se déplacent horizontalement.
@@ -521,7 +521,7 @@ Cependant, on veut que l'ondulation ne soit appliquer que si la position `y` est
 
 > **Note** : Ce shader est assez performant car il agit uniquement sur les sommets, ce qui demande moins de calculs qu’un effet appliqué aux pixels.
 
-### Variables Utilisées dans les Vertex Shaders
+#### Variables Utilisées dans les Vertex Shaders
 
 Quelques variables importantes dans les *vertex shaders* :
 - **`VERTEX`** : Position du sommet actuel. Cette variable peut être modifiée pour déplacer les sommets.
@@ -529,7 +529,7 @@ Quelques variables importantes dans les *vertex shaders* :
 - **`TIME`** : Temps écoulé, souvent utilisé pour créer des animations.
 - **`COLOR`** : Couleur du sommet, qui peut être utilisée pour des effets de couleur par sommet (particulièrement utile en 3D).
 
-### Exemple : Déformation aléatoire basée sur le temps
+#### Exemple : Déformation aléatoire basée sur le temps
 
 Voici un autre exemple où chaque sommet est décalé verticalement de façon aléatoire au fil du temps pour créer un effet de distorsion fluide.
 
@@ -548,25 +548,25 @@ Dans cet exemple :
 
 Ces shaders permettent de transformer et d'animer des objets sans avoir à changer la géométrie de base, et peuvent être combinés avec des *fragment shaders* pour des effets visuels plus complexes.
 
-# Ressources
+## Ressources
 
-## Godot Shaders
+### Godot Shaders
 Il y a un site web qui regroupe plusieurs shaders pour Godot. Vous pouvez les utiliser dans vos projets. [GodotShaders.com](https://godotshaders.com/)
 
 Cependant, c'est bien beau copier le travail des autres, mais c'est toujours important de comprendre comment la mécanique fonctionnent pour les adapter à vos besoins.
 
-## Shader-Lib
+### Shader-Lib
 `Shader-Lib` est un plugin pour Godot qui permet de créer des shaders à l'aide d'un outil visuel. Il est possible de créer des shaders sans écrire une seule ligne de code. Dans `AssetLib`, il suffit de chercher `Shader-Lib` pour l'installer.
 
  [Shader-Lib](https://github.com/DigvijaysinhGohil/Godot-Shader-Lib/) est disponible sur GitHub. La documentation est disponible sur [GitBook](https://github.com/DigvijaysinhGohil/Godot-Shader-Lib/blob/main/documentation/Documentation.md).
 
-# Conclusion
+## Conclusion
 Une fois que les bases sont apprises, les `shaders` ne sont pas si compliqué. Il faut juste prendre le temps de comprendre comment ils fonctionnent et de les tester.
 
 Il y a plusieurs ressources gratuites de disponibles sur [GodotShaders.com](https://godotshaders.com/) que vous pouvez réutiliser dans vos jeux.
 
 
-# Références
+## Références
 - [Godot Shading Language](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shading_language.html) - Godot Documentation
 - [Your first 2D shader](https://docs.godotengine.org/en/stable/tutorials/shaders/your_first_shader/your_first_2d_shader.html)
 - [Shading Language](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shading_language.html) (GLSL) - OpenGL Wiki

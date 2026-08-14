@@ -41,6 +41,6 @@ func _on_body_entered(body: Node2D) -> void:
 
 ---
 
-# Exercices
+## Exercices
 - Ajoutez des pièces dans les endroits stratégiques de votre niveau.
 - Ajoutez d'autres types d'objets à ramasser (ex : gemmes, power-ups).

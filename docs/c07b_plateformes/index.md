@@ -3,7 +3,7 @@
 ![alt text](assets/example.gif)
 
 
-# Introduction
+## Introduction
 Dans bien des jeux de type plateforme, les plateformes mobiles sont un élément essentiel pour créer des niveaux intéressants et stimulants. Dans cette leçon, nous allons apprendre à créer une plateforme mobile qui se déplace de manière fluide entre deux positions.
 
 Il y a plusieurs façons de créer des plateformes mobiles dans Godot.
@@ -18,7 +18,7 @@ Dans cette leçon, nous allons utiliser une `Tween` pour créer une plateforme m
 
 ---
 
-# Noeud AnimatableBody2D
+## Noeud AnimatableBody2D
 
 Un noeud qui facilite la création de plateformes mobiles est `AnimatableBody2D`. Ce nœud est similaire à `CharacterBody2D`, mais avec des fonctionnalités de mouvement animables. Il permet de gérer des objets mobiles avec des interactions physiques, tels que des plateformes ou des personnages, tout en conservant des mouvements interpolés.
 
@@ -26,19 +26,19 @@ Il nécessite un `CollisionShape2D` pour détecter les collisions et idéalement
 
 ![alt text](assets/moving_platform_nodes.png)
 
-## Ajouter une plateforme
+### Ajouter une plateforme
 1. Dans la scène principale, ajoutez la scène de la plateforme que vous avez créée.
 2. Exécutez la scène principale.
 
 ![alt text](Godot_v4.5-stable_win64_gpzVnJIncN.gif)
 
-## Corriger l'ordre de rendu
+### Corriger l'ordre de rendu
 Si le joueur apparaît derrière la plateforme, vous pouvez ajuster l'ordre de rendu en modifiant la propriété `Z Index` du noeud joueur. Il suffit de mettre une valeur plus élevée que celle de la plateforme. Dans mon cas, j'ai mis `5` pour le joueur.
 
-## Collision à sens unique
+### Collision à sens unique
 Pour permettre au joueur de sauter à travers la plateforme mobile, vous pouvez activer la propriété `One Way Collision` du `CollisionShape2D` de la plateforme. Cela permet au joueur de monter sur la plateforme depuis le bas, mais empêche de tomber à travers lorsqu'il est dessus.
 
-# Ajouter le déplacement avec un AnimationPlayer
+## Ajouter le déplacement avec un AnimationPlayer
 Pour animer la plateforme, vous pouvez utiliser un `AnimationPlayer` pour créer une animation qui déplace la plateforme entre deux positions. Voici comment faire :
 
 1. Ajoutez un noeud `AnimationPlayer` en tant qu'enfant de votre plateforme.
@@ -55,8 +55,8 @@ Pour animer la plateforme, vous pouvez utiliser un `AnimationPlayer` pour créer
 ---
 
 
-# Matière optionnelle
-## Qu'est-ce qu'un Tween ?
+## Matière optionnelle
+### Qu'est-ce qu'un Tween ?
 Les **Tweens** (diminutif de "in-betweens") trouvent leur origine dans l'animation traditionnelle, où ils désignent les images créées entre des images clés pour produire un mouvement fluide. Ce concept est devenu populaire avec des outils numériques comme **Adobe Flash**, où le **tweening** permettait aux animateurs de créer facilement des transitions douces pour des propriétés comme la position, la rotation, l’échelle ou la couleur. Flash a introduit différents types de tweens (tels que les **shape tweens** et **motion tweens**) pour simplifier l'animation des objets au fil du temps.
 
 - **Définition** : Un Tween est un objet ou une technique utilisée pour créer une transition fluide entre deux valeurs de propriétés (position, rotation, échelle, opacité, etc.).
@@ -69,7 +69,7 @@ Les **Tweens** (diminutif de "in-betweens") trouvent leur origine dans l'animati
 
 On peut utiliser les tweens avec le concept `fire-and-forget` : on crée un tween, on le lance, et on n'a plus besoin de s'en soucier. Le tween s'occupe de lui-même et s'arrête automatiquement une fois qu'il a terminé.
 
-### Exemple de code
+#### Exemple de code
 Voici le code qui est derrière la plateforme mobile dans l'animation initiale.
 
 ```gdscript
@@ -91,7 +91,7 @@ func start_tween():
 
 ```
 
-#### Explication des Principales Lignes
+##### Explication des Principales Lignes
 
 - **Ligne 1-2** :
   - `offset` détermine la distance de déplacement de la plateforme à partir de la position initiale, et 
@@ -105,7 +105,7 @@ func start_tween():
 
 Cette structure permet de créer une plateforme mobile avec des transitions fluides entre les positions définies.
 
-### Les méthodes d'intérêt de la classe `Tween`
+#### Les méthodes d'intérêt de la classe `Tween`
 Plusieurs méthodes de la classe `Tween` peuvent être utilisées pour créer des animations plus complexes :
 
 | Méthode | Description | Exemple |
@@ -122,10 +122,10 @@ Plusieurs méthodes de la classe `Tween` peuvent être utilisées pour créer de
 Il y a plusieurs autres méthodes qui peuvent être intéressantes pour votre projet. Je vous suggère d'aller voir la [documentation officielle](https://docs.godotengine.org/en/stable/classes/class_tween.html) pour plus d'informations.
 
 
-### Conclusion
+#### Conclusion
 Les `Tween` peuvent être utilisés pour créer des effets intéressants pour votre projet. Je vous encourage à explorer les différentes méthodes et options disponibles adaptées à vos besoins.
 
 ---
 
-# Références
+## Références
 - [Godot Engine : Tween](https://docs.godotengine.org/en/stable/classes/class_tween.html)

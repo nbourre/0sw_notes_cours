@@ -95,7 +95,7 @@ class Mover extends GraphicObject {
 ```
 
 
-# 1. La vitesse
+## 1. La vitesse
 ![alt text](assets/ludicrous_speed.webp)
 
 La vitesse est un vecteur : elle a une direction et une grandeur (magnitude). Elle indique à quelle vitesse et dans quelle direction l'objet se déplace.
@@ -153,15 +153,15 @@ Résultat :
 - La vitesse est un vecteur (direction + magnitude)
 - Pour déplacer un objet, on ajoute la vitesse à la position
 
-## Exercices
+### Exercices
 - Reproduisez l'exemple de cette section en modifiant la vitesse de l'objet.
 
-## Exercices optionnels
+### Exercices optionnels
 - Modifie la vitesse de l'objet pour qu'il se déplace dans une autre direction.
 - Ajoute un deuxième objet avec une vitesse différente.
 - Affiche la magnitude et la direction du vecteur vitesse à l'écran.
 
-# 2. L'accélération
+## 2. L'accélération
 ![alt text](assets/acceleration.webp)
 
 L'accélération est aussi un vecteur : elle indique comment la vitesse change au fil du temps (variation de la vitesse).
@@ -277,16 +277,16 @@ L'objet accélère vers le bas car l'accélération est positive sur Y : cela 
 - L'accélération est un vecteur (variation de la vitesse)
 - Pour accélérer un objet, on ajoute l'accélération à la vitesse
 
-## Exercices
+### Exercices
 - Reproduisez l'exemple de cette section en modifiant l'accélération de l'objet.
   - Inversez l'accélération sur l'axe des Y.
 
-## Exercices optionnels
+### Exercices optionnels
 - Change la valeur de l'accélération pour simuler une gravité plus forte ou plus faible.
 - Inverse l'accélération sur l'axe Y pour voir l'objet accélérer vers le haut.
 - Ajoute une accélération sur l'axe X pour un mouvement diagonal.
 
-# 3. Aller vers une cible
+## 3. Aller vers une cible
 ![alt text](assets/cible.gif)
 
 Pour déplacer un objet vers une destination, on utilise la soustraction de vecteurs (`PVector.sub`).
@@ -406,7 +406,7 @@ void timeManagement (){
 
 ---
 
-# Synthèse
+## Synthèse
 
 Ce chapitre t'a permis de comprendre comment utiliser les vecteurs pour déplacer un objet dans Processing :
 - La vitesse détermine la direction et la rapidité du déplacement.
@@ -418,7 +418,7 @@ Pour aller plus loin, expérimente avec les exemples et les exercices proposés,
 ---
 
 
-# Références
+## Références
 - [Nature of Code - Chapitre 1](https://natureofcode.com/book/chapter-1-vectors/)
 
 ---

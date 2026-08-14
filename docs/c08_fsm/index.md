@@ -2,14 +2,14 @@
 Améliorons nos personnages!
 
 
-# Introduction : Une approche par l'absurde
+## Introduction : Une approche par l'absurde
 
 Aujourd'hui, nous allons introduire un concept clé dans le développement de jeux vidéo : la **machine à états finis** (FSM). Pour bien comprendre pourquoi la FSM est une solution puissante, nous allons d'abord explorer une approche alternative... qui ne fonctionne pas très bien.
 
-## Pourquoi par l'absurde?
+### Pourquoi par l'absurde?
 Plutôt que de plonger directement dans le concept de la FSM, nous allons commencer par examiner du code qui, à première vue, peut sembler correct, mais qui comporte de nombreux problèmes de conception. Ce code va nous servir de point de départ pour découvrir les difficultés d'une approche simple (et erronée) à la gestion des comportements complexes de notre personnage.
 
-## Ce que vous apprendrez
+### Ce que vous apprendrez
 - Vous verrez comment une implémentation naïve de la gestion des états d'un personnage peut rapidement devenir ingérable.
 - Vous découvrirez les pièges classiques, comme les bogues qui apparaissent lorsqu'on ajoute de nouvelles fonctionnalités, les difficultés de maintenir du code avec de multiples conditions, et la complexité croissante des transitions entre les comportements.
 - Vous comprendrez, étape par étape, comment une FSM peut simplifier la gestion des états de votre personnage et pourquoi il s'agit d'un design pattern essentiel dans la création de jeux vidéo.
@@ -18,7 +18,7 @@ Plutôt que de plonger directement dans le concept de la FSM, nous allons commen
 
 ---
 
-# Applicabilité dans le développement de logiciels standards
+## Applicabilité dans le développement de logiciels standards
 
 Bien que notre point de départ soit le développement de jeux vidéo, la **machine à états finis** (FSM) est un concept largement utilisé dans de nombreux domaines de l'ingénierie logicielle. Comprendre comment implémenter et utiliser une FSM vous servira également dans le développement de logiciels "standards". Voici quelques exemples concrets :
 
@@ -35,7 +35,7 @@ En résumé, bien que nous utilisions le contexte des jeux vidéo pour introduir
 
 ---
 
-# Étude de cas
+## Étude de cas
 Dans un premier jet, nous allons voir comment une approche naïve de la gestion des états d'un personnage d'un jeu de type plateforme peut rapidement devenir un cauchemar de maintenance et de bugs. Nous allons examiner un exemple de code qui tente de gérer les états d'un personnage (debout, en mouvement, en saut, etc.) de manière simple, mais qui finit par devenir complexe et fragile à mesure que de nouvelles fonctionnalités sont ajoutées.
 
 Évaluons le code suivant :
@@ -151,7 +151,7 @@ Chasse aux bogues encore…
 
 ---
 
-# Machine à état fini
+## Machine à état fini
 - [La machine à état fini](https://fr.wikipedia.org/wiki/Automate_fini) (FSM) fait partie de la famille de la [Théorie des automates](https://fr.wikipedia.org/wiki/Th%C3%A9orie_des_automates)
 - Il s’agit de la structure la plus simple
 - Ce qu’il faut savoir :
@@ -165,7 +165,7 @@ Vous aurez deviné que la machine est représentée par le personnage et les tra
 
 ---
 
-## Principe de Single Responsibility (Responsabilité Unique)
+### Principe de Single Responsibility (Responsabilité Unique)
 
 Dans le contexte d'une machine à états finis (FSM), chaque état devrait avoir une seule responsabilité : gérer un comportement spécifique du personnage et les transitions associées. Cela signifie que chaque état (comme "Idle", "Running", "Jumping") doit :
 - Définir ce que le personnage fait pendant cet état (animation, mouvement, etc.).
@@ -176,28 +176,28 @@ En adoptant ce principe de responsabilité unique, chaque état devient indépen
 - **Facile à maintenir** : Si tu dois modifier le comportement d'un état, tu n'as qu'à changer le code de cet état sans affecter les autres.
 - **Facile à étendre** : Ajouter de nouveaux états (par exemple, "Dashing" ou "Wall Slide") devient plus simple, car chaque état est isolé dans son propre script ou section de code.
 
-### Exemple
+#### Exemple
 Prenons deux états : `Idle` (immobile) et "Running" (course). Le script de l'état `Idle` ne doit gérer que ce qui est pertinent pour être immobile (comme jouer l'animation `Idle` et détecter quand passer à l'état `Running` si une touche directionnelle est pressée). Il ne devrait pas avoir de logique pour ce que le personnage doit faire en courant ou en sautant.
 
 En respectant ce principe, chaque état devient une "**boîte noire**" : un module isolé qui gère ses propres règles, transitions et comportements, sans se soucier des détails internes des autres états.
 
 ---
 
-## Résumé
+### Résumé
 - Chaque état a une responsabilité unique
 - Les éléments clés à retenir : **états**, **entrées**, **sorties** et **transitions**
 - Il y a un design pattern (DP) nommé **État** qui permet de constuire une FSM
 
 ---
 
-# Projet Godot
+## Projet Godot
 - Pour suivre, je vous suggère de partir avec le projet de plateforme [`c08a_platformer_base_completed`](https://github.com/nbourre/0sw_projets_cours/tree/master/c08a_platformer_base_completed) dans le dépôt `0sw_projets_cours`
 
 ![alt text](assets/platform_without_fsm.gif)
 
 ---
 
-## Modification au code
+### Modification au code
 - Avant toute chose, nous allons améliorer le code de base
 - À la première ligne de la méthode `_PhysicsProcess`, ajoutez le code pour connaître la direction appuyée
 
@@ -246,7 +246,7 @@ else:
 
 ---
 
-## Solution intermédiaire
+### Solution intermédiaire
 Avant d’implanter le DP État, on fera une solution intermédiaire pour mieux comprendre la mécanique.
 
 **Énumérations et switch** 
@@ -254,7 +254,7 @@ Avant d’implanter le DP État, on fera une solution intermédiaire pour mieux 
 - On aurait pu utiliser des booléens isJumping et isRunning, mais il ne faudrait pas qu’ils soient à vrai en simultané.
 - Si on a besoin d’avoir plusieurs booléens et qu’un seul doit être vrai dans tous les cas, c’est un indice indiquant que l’on devrait utiliser des énumérations.
 
-### Diagramme d'états
+#### Diagramme d'états
 La première étape est de tracer le diagramme d’états. Tracer le diagramme facilite grandement la programmation.
 - Alors sortez vos crayons! :)
 
@@ -267,7 +267,7 @@ L'ordre pour tracer le diagramme est relativement simple :
 3. Créer l'énumération qui contiendra les états.
 
 ---
-## Solution intermédiaire : Modification du code
+### Solution intermédiaire : Modification du code
 
 Dans la classe `Player`, ajoutez l’énumération ci-bas ainsi qu’un attribut pour sauvegarder l’état.
 
@@ -452,7 +452,7 @@ func run() -> void:
 
 ---
 
-## Résumé de la solution temporaire
+### Résumé de la solution temporaire
 Pour les petits jeux, cette solution peut convenir. Toutefois, si le jeux prend de l'ampleur, ça peut être un peu compliqué.
 
 En effet, la solution présentée peut ne pas convenir à nos besoins lorsque les états deviennent trop nombreux.
@@ -490,7 +490,7 @@ Avec cette solution, nous avons eu besoin de modifier deux méthodes.
 
 ---
 
-# Design pattern : L'état
+## Design pattern : L'état
 - Anglais : State
 - Patron de conception comportementale
 - Objectif : Permettre à un objet de modifier son comportement après un changement d’état interne
@@ -517,10 +517,10 @@ Principe :
 
 ---
 
-# Implémentation dans Godot
+## Implémentation dans Godot
 - Pour implémenter ce DP, il faudra tricher à quelques endroits pour optimiser les caractéristiques de Godot
 
-## `BaseState`
+### `BaseState`
 - La première étape sera de créer une classe générique qui aura les méthodes de base pour l’ensemble des états
 - Nous appellerons cette classe `BaseState`
   - Celle-ci héritera de la classe Node pour avoir les fonctionnalités de Godot
@@ -574,7 +574,7 @@ func exit() -> void:
 
 ---
 
-## `StateMachine`
+### `StateMachine`
 
 - La classe `StateMachine` sera la classe qui gérera les états
 - Elle aure l'état initial, l'état courant et les états disponibles
@@ -719,12 +719,12 @@ func exit() -> void:
 
 ```
 
-## Ajouter la machine à état au joueur
+### Ajouter la machine à état au joueur
 - Pour ajouter la machine à état au joueur, il suffit d'ajouter un nœud enfant de type `StateMachine` au nœud `Player`.
 - Ensuite, il faut ajouter les états comme enfants de la machine à état.
 - Il faudra aussi assigner la variable `player` de chaque état avec le nœud `Player`.
 
-## Solutions complètes
+### Solutions complètes
 
 Vous avez accès aux projets ayant les solutions complètes soit `c08_platformer_fsm` (en C#) et `c08_fsm_done` respectivement.
 
@@ -733,12 +733,12 @@ Le projet platformer est fait à l'aide de C# et le projet RPG est fait à l'aid
 ![alt text](assets/fsm_demo.gif)
 
 
-# Conclusion
+## Conclusion
 - La machine à état fini est un outil puissant pour gérer les états d’un objet
 - Le design pattern État permet de structurer les états de manière modulaire
 - On pourrait améliorer le projet en utilisant un `PlayerBaseState` ou `EnemyBaseState` pour éviter de répéter le code commun.
 
 ---
-# Références
+## Références
 - [Design Pattern Guru : State pattern](https://refactoring.guru/design-patterns/state)
 - [Machine à état fini et animation d’attaque](https://www.youtube.com/watch?v=ow_Lum-Agbs)

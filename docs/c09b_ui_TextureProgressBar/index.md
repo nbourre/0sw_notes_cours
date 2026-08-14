@@ -1,17 +1,17 @@
 # Le `TextureProgressBar` <!-- omit in toc -->
 
-# Introduction
+## Introduction
 Le `TextureProgressBar` est un contrôle qui permet d'afficher une barre de progression avec une texture. En plus d'être une barre de progression, il peut aussi être utilisé pour afficher des jauges, des compteurs, etc.
 
-# Configuration
+## Configuration
 Il est relavivement simple à utiliser. Pour la configuration, il suffit d'avoir deux images. Une pour le fond et une pour la barre de progression. Ensuite, il suffit de les assigner aux propriétés `Under` et `Progress` du contrôle.
 
-## Image de fond et de progression
+### Image de fond et de progression
 À partir du système de fichiers, on peut simplement glisser-déposer les images dans les propriétés correspondantes ou encore directement sur le noeud dans la scène.
 
 ![alt text](assets/drag_n_drop.gif)
 
-## Les propriétés
+### Les propriétés
 Quelques propriétés d'intérêt:
 
 - `Nine Patch Stretch` : Permet de définir si l'image de fond peut être étirée ou non.
@@ -25,7 +25,7 @@ Quelques propriétés d'intérêt:
 - `Min Value` et `Max Value` : Permet de définir les valeurs minimales et maximales de la barre de progression.
 - `Value` : Permet de définir la valeur actuelle de la barre de progression.
 
-# Le script
+## Le script
 
 Étant donné que la barre de progression pourrait être utilisée pour plusieurs choses, je fais une classe de base générale qui pourrait être utilisée pour plusieurs choses.
 
@@ -40,12 +40,12 @@ func update_value (new_value : int, max : int):
 	value = new_value
 ```
 
-# Ajout de texte
+## Ajout de texte
 Pour ajouter du texte à la barre de progression, il suffit d'ajouter un `Label` comme enfant du `TextureProgressBar`. Ensuite, il suffit de le configurer comme on le ferait pour un `Label` normal.
 
 ![alt text](assets/progress_bar_with_text.png)
 
-## Le script avec le texte
+### Le script avec le texte
 Étant donné que l'on a du texte, il faut maintenant le mettre à jour.
 
 ```gd
@@ -61,7 +61,7 @@ func update_value (new_value : int, max : int):
 	text.text = str(bar_name, " : ", int(value), " / ", int (max))
 ```
 
-# Utilisation
+## Utilisation
 Disons que l'on désire afficher une barre de progression pour la vie d'un personnage sur le HUD principal, il suffit de mettre un noeud `CanvasLayer` et d'y ajouter le `GenericProgressBar`.
 
 On pourrait utiliser la composition pour contrôler la barre de progression au jeu ou au personnage.
@@ -87,7 +87,7 @@ Voici le résultat actuel:
 
 ![alt text](assets/screenshot_with_bar.png)
 
-## Mise à jour de la barre de progression
+### Mise à jour de la barre de progression
 Dans cette partie, on va mettre à jour la barre de progression en fonction de la vie du joueur. Cependant, je ne vais que la simuler avec un `Timer`. L'adaptation se fera facilement selon votre jeu.
 
 Nous allons mettre à jour le script du joueur pour qu'il émette un signal lorsque sa vie change.
@@ -145,5 +145,5 @@ Voici le résultat final:
 ![alt text](assets/progress_bar_working.gif)
 
 ---
-# Références
+## Références
 - [Godot documentation : TextureProgressBar](https://docs.godotengine.org/en/stable/classes/class_textureprogressbar.html)

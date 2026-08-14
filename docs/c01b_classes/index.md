@@ -1,5 +1,5 @@
 # Les classes dans - Pour créer un
-# Classes internes vs classes génériques
+## Classes internes vs classes génériques
 
 - Les classes de base en Processing ont la particularité d'être des **classes internes**
 - En effet, Processing fusionne toutes les classes à l'intérieur d'une grande classe principale lors de la compilation
@@ -11,11 +11,11 @@
 - Par la suite, il suffit de coder comme dans pratiquement n'importe quel langage orienté objetcessing <!-- omit in toc -->
 
 
-# Introduction
+## Introduction
 
 Dans Processing, la programmation orientée objet est possible grâce aux classes. Les classes permettent d'organiser le code de manière modulaire et de créer des objets réutilisables.
 
-# Création d'une classe
+## Création d'une classe
 
 <table style="border: none;">
 

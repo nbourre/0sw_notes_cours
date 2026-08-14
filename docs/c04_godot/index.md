@@ -4,13 +4,13 @@ Apprendre les rudiments de l’environnement de développement Godot.
 
 ---
 
-# Préambule
+## Préambule
 
 Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub [0sw_projets_cours](https://github.com/nbourre/0sw_projets_cours) qui contient les projets de cours. Vous pouvez aussi fourcher le dépôt si vous préférez.
 
 ---
 
-# Plan de leçon
+## Plan de leçon
 
 - Notes préliminaires
 - Gestionnaire de projets
@@ -18,7 +18,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-# Notes préliminaires
+## Notes préliminaires
 
 - Godot est un moteur de jeux vidéo 2D et 3D à code source ouvert.
 - Le langage de base est le `GDScript` qui est un pseudo-python mais pour alléger la charge cognitive nous allons utiliser le langage C# pour les premiers cours.
@@ -30,7 +30,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-# Gestionnaire de projets
+## Gestionnaire de projets
 
 - Premier démarrage : le gestionnaire de projets est vide.
 
@@ -46,7 +46,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-# Création d’un nouveau projet
+## Création d’un nouveau projet
 
 - Pour créer un nouveau projet, il faut le placer dans un dossier vide.
   - Je suggère de regrouper vos projets au même endroit, il y a un bouton pour créer le dossier du projet.
@@ -55,7 +55,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-# L’environnement de travail
+## L’environnement de travail
 
 - L’environnement de travail de Godot peut sembler intimidant au début, mais si vous avez de l’expérience avec Visual Studio ou un autre environnement similaire, celui-ci s’y ressemble.
 - À l’instar de VS, l’interface est très modulable; ainsi, on peut déplacer les panneaux aux endroits qui nous conviennent.
@@ -64,7 +64,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-## Système de fichiers
+### Système de fichiers
 
 - La barre de menus contient le menu principal, les workspaces, et les boutons de test.
 - Le volet `FileSystem` contient la structure du dossier du projet.
@@ -75,7 +75,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-## Volet Scène
+### Volet Scène
 
 - Le volet "Scene" permet d’effectuer la gestion des scènes dans le projet.
 
@@ -83,7 +83,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-## Volet Inspector
+### Volet Inspector
 
 - Il y a aussi le concept de nœud que l’on verra sous peu.
 - Le volet `Inspector` permet de gérer les propriétés de la scène active.
@@ -92,7 +92,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-## La zone de travail (workspace)
+### La zone de travail (workspace)
 
 - Lorsque l’on sélectionne une zone de travail, la barre d’outils s’adapte selon le contexte.
 - La barre d’outils se retrouve dans la partie supérieure de la zone de travail.
@@ -103,7 +103,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-## Volet inférieur
+### Volet inférieur
 
 - Comme plusieurs IDE, le volet inférieur contient plusieurs outils de débogage ainsi que d’édition d’animations.
 
@@ -111,7 +111,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-## Les types d’environnement de travail
+### Les types d’environnement de travail
 
 - Dans la partie supérieure de la fenêtre de Godot, il y a quatre boutons qui permettent de changer l’environnement de travail.
 - Il y a quatre environnements de travail (*workspaces*) :
@@ -125,7 +125,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-# Scènes et nœuds
+## Scènes et nœuds
 
 - [Documentation officielle](https://docs.godotengine.org/fr/4.x/getting_started/step_by_step/nodes_and_scenes.html)
 - Ma vidéo [Débuter avec Godot 4](https://www.youtube.com/watch?v=D89lwa1TZ5c)
@@ -133,7 +133,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-## Les nœuds
+### Les nœuds
 
 ![alt text](assets/scene_and_nodes.png)
 
@@ -152,7 +152,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-## Les scènes
+### Les scènes
 
 
 - Une scène est composée d’un groupe de nœuds organisés de façon hiérarchique.
@@ -169,16 +169,16 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-# Exercice : Bonjour le monde
+## Exercice : Bonjour le monde
 
-## Lancer Godot et créer un nouveau projet
+### Lancer Godot et créer un nouveau projet
 - Ouvrez Godot.
 - Créez un nouveau projet.
 - Nommez-le `HelloWorld`.
 - Choisissez le dossier dans lequel vous allez le sauvegarder.
 - Cliquez sur `Create`.
 
-## Ajout d’un nœud Label
+### Ajout d’un nœud Label
 - Comme tout bon premier exemple, nous allons créer un projet `Bonjour le monde`.
 - Nous allons ajouter un nœud `Label` via le bouton "+" dans le coin supérieur gauche du volet Scene.
 - Le bouton "Other node" revient à la même action.
@@ -198,7 +198,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-## Exécution de la scène
+### Exécution de la scène
 
 - Exécutez le code en cliquant sur le bouton Exécuter la scène dans le coin supérieur droit ou [F6].
 - La première fois, Godot demandera à sauvegarder la scène.
@@ -210,7 +210,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-## Configurer le projet
+### Configurer le projet
 
 - Comme indiqué plus tôt, un projet peut avoir plusieurs scènes.
 - Il faut configurer le projet pour sélectionner la scène principale.
@@ -223,13 +223,13 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-# Script
+## Script
 
 ![alt text](assets/coding_dance.webp)
 
 ---
 
-## Introduction
+### Introduction
 
 - Dans cette partie, nous allons faire un projet dans lequel un bouton changera le texte d’une étiquette à l’aide du code.
 - Sans extension, Godot accepte 2 langages :
@@ -240,7 +240,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-## Objectifs
+### Objectifs
 
 - On verra les éléments suivants :
   - Attacher un script à un nœud
@@ -250,7 +250,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-## Monter la scène
+### Monter la scène
 
 <table>
   <tr>
@@ -279,13 +279,13 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-## Signification des éléments d'ajustement
+### Signification des éléments d'ajustement
 
 ![alt text](assets/container_elements.png)
 
 ---
 
-## Ajouter un script
+### Ajouter un script
 
 - Dans le volet `Scene`, renommez le `Node2D` pour `World`.
   - Il s'agit d'une convention que l'on utilisera pour désigner le monde du jeu.
@@ -307,7 +307,7 @@ Pour la suite du cours, je vous suggère fortement de cloner mon dépôt GitHub 
 
 ---
 
-## Le script
+### Le script
 
 ![alt text](assets/Brainslug.png)
 
@@ -347,7 +347,7 @@ Dans `_Ready`, on retrouve :
 
 ---
 
-## Signal et GetNode
+### Signal et GetNode
 
 - Godot utilise le terme **`signal`** qui est un synonyme d’**événement**.
 - La convention Godot pour le nom des méthodes de signaux est celle-ci : On *[NomNoeud]* *[NomSignal]*.
@@ -357,13 +357,13 @@ Dans `_Ready`, on retrouve :
 
 ---
 
-## Exécution du script
+### Exécution du script
 
 - Vous pouvez exécuter la scène pour tester le script.
 
 ---
 
-# `GetNode()`
+## `GetNode()`
 
 - La méthode `GetNode()` est fréquemment utilisée pour retrouver un nœud.
 - Le chemin donné en paramètre est une string relative au nœud possédant le script.
@@ -384,7 +384,7 @@ Dans `_Ready`, on retrouve :
 
 ---
 
-# Autres informations sur le script
+## Autres informations sur le script
 
 - Remarquez que le script précédent hérite du nœud.
   - Par exemple : `public class XYZ : Node2D`.
@@ -396,7 +396,7 @@ Dans `_Ready`, on retrouve :
 
 ---
 
-# Les fonctions de rappel
+## Les fonctions de rappel
 
 - Godot fonctionne beaucoup avec des *callbacks* (fonctions de rappel) ou des fonctions virtuelles.
   - Cela évite de créer plusieurs `if` qui sont vérifiés à chaque fois dans une boucle.
@@ -405,7 +405,7 @@ Dans `_Ready`, on retrouve :
 
 ---
 
-# \_Process(double delta)
+## \_Process(double delta)
 
 - La méthode `_Process` est appelée à chaque début de frame.
 - Elle n’est pas synchronisée à aucune fréquence.
@@ -420,7 +420,7 @@ Dans `_Ready`, on retrouve :
 
 ---
 
-# \_PhysicsProcess(double delta)
+## \_PhysicsProcess(double delta)
 
 - Similaire à `_Process`, cette méthode diffère car elle est synchronisée au FPS par défaut, qui est de 60 FPS.
 - Elle est dépendante du FPS de l’application.
@@ -430,7 +430,7 @@ Dans `_Ready`, on retrouve :
 
 ---
 
-# Comparaison entre _Process et _PhysicsProcess
+## Comparaison entre _Process et _PhysicsProcess
 
 Voici une animation pour comparer les deux méthodes ainsi qu'une version avec delta. :
 
@@ -438,7 +438,7 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
 
 ---
 
-# Les groupes
+## Les groupes
 
 - On se rappelle que Godot fonctionne avec un système de graphe (arbre hiérarchique).
 - Il est possible d’associer les nœuds à des groupes pour exécuter des instructions à l’ensemble du groupe.
@@ -451,7 +451,7 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
 
 ---
 
-# Les méthodes surchargeables
+## Les méthodes surchargeables
 
 - `_EnterTree()` : Appelée lorsque le nœud s’intègre au graphe.
   - Pour chaque nœud enfant, cette méthode est appelée.
@@ -467,7 +467,7 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
 
 ---
 
-# Créer et détruire un nœud
+## Créer et détruire un nœud
 
 - Il est important de disposer des objets lorsqu’ils ne sont plus utilisés pour optimiser l’utilisation de la mémoire.
 - Exemple de création d'un nœud :
@@ -478,7 +478,7 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
 
 ---
 
-# Exercice
+## Exercice
 
 - Avec le projet `c01_godot` qui contient `Panel`, `Label` et `Button` :
   - Modifiez le script `TestPanel.cs` en y ajoutant les méthodes ci-contre dans chacun des nœuds.
@@ -507,7 +507,7 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
 
 ---
 
-# Les signaux
+## Les signaux
 - Les signaux sont les événements de Godot
 - Godot fonctionne avec le **patron de conception de l’observateur**.
 - Ce patron permet à un nœud d’envoyer un message que certains nœuds peuvent écouter et réagir en conséquence.
@@ -521,7 +521,7 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
 
 ---
 
-# Les signaux : Exercice
+## Les signaux : Exercice
 
 - Dans un premier temps, nous allons faire un exemple en utilisant l’interface.
 - Nous allons utiliser les nœuds `Timer` et `Sprite` pour faire clignoter une image.
@@ -534,7 +534,7 @@ Voici une animation pour comparer les deux méthodes ainsi qu'une version avec d
 
 ---
 
-# Les signaux : Exercice (suite)
+## Les signaux : Exercice (suite)
 
 - Attachez un script à `ExempleTimer`.
 - Sélectionnez `Timer`.
@@ -574,7 +574,7 @@ public void _on_timer_timeout() {
 
 ---
 
-# Les signaux en code
+## Les signaux en code
 
 - Il est possible de connecter des signaux via le code au lieu de l’éditeur.
 - C’est surtout utilisé lorsque l’on crée des instances via le code et que l’on doit y attacher des signaux.
@@ -596,7 +596,7 @@ monObjet.eventName += eventFunctionB;
 
 ---
 
-## Exercice
+### Exercice
 
 - Avec le projet `ExempleTimer` :
 - Dans l’éditeur, déconnectez le signal `timeout()` à l’aide du bouton `Disconnect`.
@@ -610,7 +610,7 @@ GetNode<Timer>("Timer").Timeout += _on_timer_timeout;
 
 ---
 
-## Signaux personnalisés
+### Signaux personnalisés
 
 - Il est possible de créer des signaux personnalisés ([Source](https://docs.godotengine.org/fr/stable/getting_started/step_by_step/signals.html#custom-signals)).
 - Exemples d’utilité :
@@ -636,7 +636,7 @@ public class Player : CharacterBody2D
 
 ---
 
-# Instanciation
+## Instanciation
 
 - Dans les petits projets l’utilisation d’une seule scène avec quelques nœuds peut fonctionner mais dans les projets plus grands le nombre de nœuds peut devenir ingérable
 - L’instanciation permet d’intégrer des scènes sauvegardées à l’intérieur d’une autre scène
@@ -645,7 +645,7 @@ public class Player : CharacterBody2D
 
 ---
 
-## Exercice : Instanciation
+### Exercice : Instanciation
 
 - À l’aide du fichier [`instancing_starter.zip`](https://github.com/godotengine/godot-docs-project-starters/releases/download/latest-4.x/instancing_starter.zip), décompressez le fichier à l’endroit désiré.
 - À partir du gestionnaire de projet, importez ce dernier dans Godot.
@@ -658,7 +658,7 @@ public class Player : CharacterBody2D
 - La scène `Ball` utilise un `RigidBody2D` pour la gestion de la physique.
 - La scène principale utilise `StaticBody2D` pour les obstacles que la balle peut rencontrer.
 
-### Objectifs de l'exercice
+#### Objectifs de l'exercice
 
 - Instancier la scène `Ball` dans la scène `Main`.
 - Permettre à la balle d'interagir avec les obstacles.
@@ -666,9 +666,9 @@ public class Player : CharacterBody2D
 
 ---
 
-## Exercice : Instanciation simple
+### Exercice : Instanciation simple
 
-### Étapes :
+#### Étapes :
 
 1. Pour ajouter une instance de la balle dans la scène, sélectionnez le nœud racine.
 2. Cliquez sur le bouton d’instance (icône de maillon de chaîne).
@@ -678,7 +678,7 @@ public class Player : CharacterBody2D
 
 ---
 
-## Exercice : Instanciation multiple
+### Exercice : Instanciation multiple
 
 1. Sélectionnez l’instance de la balle dans la scène.
 2. Dupliquez l’instance en utilisant le raccourci `[Ctrl] + D` pour ajouter plusieurs balles à la scène.
@@ -688,7 +688,7 @@ public class Player : CharacterBody2D
 
 ---
 
-## Exercice : Modification des instances
+### Exercice : Modification des instances
 
 1. Pour modifier le comportement des balles, ajustez la propriété `Bounce` dans le `PhysicsMaterial` de la balle pour la rendre plus rebondissante.
 2. Modifiez la scène `Ball.tscn` pour que toutes les instances héritent des changements.
@@ -696,12 +696,12 @@ public class Player : CharacterBody2D
 
 ---
 
-# Conception de jeux avec des scènes
+## Conception de jeux avec des scènes
 
 - Le concept de **scènes** est au cœur du fonctionnement de Godot.
 - Cela permet de structurer efficacement les projets de manière hiérarchique.
 
-## Exemple de structure de jeu
+### Exemple de structure de jeu
 
 - Chaque rectangle représente une scène (ou un groupe de scènes) que vous pouvez instancier dans une scène parent. Ce système modulaire facilite le développement et l'organisation des ressources dans des projets complexes.
 
@@ -709,10 +709,10 @@ public class Player : CharacterBody2D
 ![alt text](assets/game_with_scenes.png)
 ---
 
-# Conclusion : Premiers pas avec Godot
+## Conclusion : Premiers pas avec Godot
 
 
-## Bilan des apprentissages
+### Bilan des apprentissages
 
 Au terme de cette introduction, vous avez découvert :
 - L’interface de Godot et ses principaux volets (Scene, Inspector, FileSystem, etc.)
@@ -726,13 +726,13 @@ Au terme de cette introduction, vous avez découvert :
 - L’instanciation de scènes et la gestion de plusieurs instances
 - La structuration d’un projet de jeu avec une approche modulaire
 
-## Conseils pour progresser
+### Conseils pour progresser
 - N’hésitez pas à explorer l’interface et à tester les différents types de nœuds
 - Consultez la documentation officielle et les vidéos recommandées pour approfondir
 - Essayez de modifier les exemples pour mieux comprendre leur fonctionnement
 - Travaillez sur de petits projets pour vous familiariser avec la logique de Godot
 
-## Pour aller plus loin
+### Pour aller plus loin
 - Expérimentez avec les signaux personnalisés et la gestion des groupes
 - Explorez les méthodes surchargeables pour personnaliser le comportement des nœuds
 - Testez l’instanciation dynamique de scènes pour des jeux plus complexes
@@ -742,14 +742,14 @@ Ne vous inquiétez pas si tout n’est pas encore clair : la pratique et l’e
 
 ---
 
-# Note importante
+## Note importante
 
-## Attention :
+### Attention :
 Il existe encore de nombreux tutoriels et projets utilisant Godot 3.x. Assurez-vous d’adapter les tutoriels pour la version 4.x de Godot lorsque nécessaire.
 
 ---
 
-## Exercice
+### Exercice
 
 - Veuillez effectuer le didacticiel complet que l’on retrouve ici [Lien vers le didacticiel](https://docs.godotengine.org/fr/4.x/getting_started/first_2d_game/index.html).
 - Apportez des modifications à votre jeu pour le personnaliser.

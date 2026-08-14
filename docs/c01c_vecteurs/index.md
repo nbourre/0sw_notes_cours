@@ -3,7 +3,7 @@
 [Liste de vidéos de support](https://www.youtube.com/watch?v=mWJkvxQXIa8&list=PLRqwX-V7Uu6ZwSmtE13iJBcoI-r4y7iEc)
 
 
-# Vecteur : définition
+## Vecteur : définition
 - Le terme **vecteur** peut signifier plusieurs choses dépendant du contexte.
   - En biologie : Décrit un organisme qui transmet une infection d'un hôte à un autre.
   - En programmation : Décrit une structure de tableau de données.
@@ -12,7 +12,7 @@
 
 ![alt text](assets/Image1.png)
 
-# Vecteur : utilité
+## Vecteur : utilité
 - Dans le monde des jeux vidéo, réalité virtuelle ou autre simulation, les vecteurs sont utilisés partout.
 - **C'est une connaissance fondamentale à la programmation de jeux et d'applications multimédia.**
 - C'est un bloc de construction nécessaire pour toute application ayant des implications mathématiques.
@@ -24,7 +24,7 @@
 
 ---
 
-# Vecteur : exemple de problème sans vecteurs
+## Vecteur : exemple de problème sans vecteurs
 
 - Voici du code représentant une balle qui rebondit aux limites de l'écran
 - [Fichier pour l'exécuter sur votre poste](https://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s01_no_vectors.pdez)
@@ -43,7 +43,7 @@
 
 ---
 
-## Simplification avec les vecteurs
+### Simplification avec les vecteurs
 
 <table style="border: none;">
 
@@ -84,7 +84,7 @@ PVector target;
 
 ---
 
-# Vecteur : la classe PVector
+## Vecteur : la classe PVector
 - Processing offre la classe `PVector` qui représente un vecteur.
 - **Propriétés principales** :
   - `x` : Composante horizontale
@@ -110,7 +110,7 @@ position.y = 100;
 
 ---
 
-## Vecteur : déplacement et mouvement
+### Vecteur : déplacement et mouvement
 
 **Concepts clés** :
 - **Mouvement** = déplacement dans le temps
@@ -179,7 +179,7 @@ if (posY > height - 15 || posY < 15) vitY *= -1;
 
 ---
 
-# Exercice 1 : Balle qui rebondit avec vecteurs
+## Exercice 1 : Balle qui rebondit avec vecteurs
 
 **Objectif** : Créer une animation de balle qui rebondit en utilisant des vecteurs.
 
@@ -225,9 +225,9 @@ void draw() {
 
 ---
 
-# Opérations mathématiques avec les vecteurs
+## Opérations mathématiques avec les vecteurs
 
-## Addition et soustraction
+### Addition et soustraction
 ```java
 PVector a = new PVector(5, 4);
 PVector b = new PVector(1, 2);
@@ -246,7 +246,7 @@ https://github.com/user-attachments/assets/11c4a151-d5f9-4dfe-ac7f-f20e9ef7bac3
 
 
 
-## Multiplication et division par un scalaire
+### Multiplication et division par un scalaire
 ```java
 PVector v = new PVector(2, 1);
 
@@ -262,7 +262,7 @@ https://github.com/user-attachments/assets/708984b6-d1a7-404b-b227-afb59d83f2d6
 
 **Utilité** : Changer la vitesse sans changer la direction.
 
-## Distance entre deux points
+### Distance entre deux points
 ```java
 PVector point1 = new PVector(1, 2);
 PVector point2 = new PVector(4, 2);
@@ -278,7 +278,7 @@ https://github.com/user-attachments/assets/4a196351-de20-4260-ad83-98dc7b44a483
 
 
 
-## Rotation d'un vecteur
+### Rotation d'un vecteur
 ```java
 PVector v = new PVector(1, 0);
 float angle = PI/2;  // 90 degrés
@@ -293,14 +293,14 @@ v.set(x, y);
 
 ```
 
-## Angle entre deux vecteurs
+### Angle entre deux vecteurs
 ```java
 PVector v1 = new PVector(1, 0);
 PVector v2 = new PVector(0, 1);
 float angle = PVector.angleBetween(v1, v2); // Résultat : PI/2 (90°)
 ```
 
-## Applications pratiques
+### Applications pratiques
 - **Jeux de tir** : Calculer la trajectoire des projectiles
 - **Animation** : Mouvements fluides et naturels
 - **Intelligence artificielle** : Comportements de groupe (boids)
@@ -309,12 +309,12 @@ float angle = PVector.angleBetween(v1, v2); // Résultat : PI/2 (90°)
 
 ---
 
-# Références
+## Références
 - À lire pour le prochain cours
 - https://natureofcode.com/book/introduction/
 - https://natureofcode.com/book/chapter-1-vectors/
 
-## Ressources supplémentaires
+### Ressources supplémentaires
 - [Documentation officielle PVector](https://processing.org/reference/PVector.html)
 - [The Nature of Code - Vectors (vidéo)](https://www.youtube.com/watch?v=mWJkvxQXIa8)
 - [The Nature of Code - Vectors (chapitre)](https://natureofcode.com/vectors/)

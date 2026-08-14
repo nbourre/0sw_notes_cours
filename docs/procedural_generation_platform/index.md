@@ -1,11 +1,11 @@
 # Génération procédurale <!-- omit in toc -->
 
-# Introduction
+## Introduction
 Dans ce court article, nous allons voir comment générer des plateformes de manière procédurale. Ainsi, je vais vous montrer une méthode que j'ai utilisé pour réaliser une démonstration.
 
 La méthode ne répondra pas à toutes les solutions, mais elle peut vous donner une idée de comment procéder ou encore d'extrapoler pour d'autres cas.
 
-# OpenSimplex Noise
+## OpenSimplex Noise
 Avant de commencer, je vais vous présenter le bruit que j'ai utilisé pour générer les plateformes. Il s'agit d'un bruit de Perlin, mais avec une fonction de transition plus lisse. Cela permet d'avoir un bruit plus naturel.
 
 Le bruit de Perlin permet de générer des valeurs aléatoires, mais avec une certaine cohérence. J'utilise ce bruit pour générer des plateformes de manière procédurale.
@@ -51,7 +51,7 @@ Exemple avoir un saut de `0.005`
 
 Pour plus d'informations, je vous invite à lire l'article de [Khan Academy](https://www.khanacademy.org/computing/computer-programming/programming-natural-simulations/programming-noise/a/perlin-noise).
 
-# Génération procédurale
+## Génération procédurale
 Ainsi en utilisant les propriétés du bruit de Perlin, je génère des plateformes de manière procédurale. J'utilise une manière relativement simple pour générer les plateformes.
 
 En gros, je créé un tableau de valeurs dans lequel j'enregistre les valeurs générées par le bruit. Chacune de ses valeurs me serviront pour déterminer la hauteur de la plateforme.
@@ -173,5 +173,5 @@ Voici un exemple de résultat de la génération procédurale.
 
 Il ne s'agit pas de la meilleure méthode, mais c'est une manière simple de générer des plateformes.
 
-# Résumé
+## Résumé
 Dans cet article, nous avons vu comment une manière simple de générer des plateformes de manière procédurale. On peut facilement améliorer cette méthode en retirant les dépendances au TileMap et TileSet. On peut générer les tuiles au fil de l'avancement du personnage. On peut aussi ajouter des obstacles, des ennemis, etc. Dans tous les cas, ce sera à vous de jouer!

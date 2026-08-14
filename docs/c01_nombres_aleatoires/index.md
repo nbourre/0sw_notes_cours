@@ -1,19 +1,19 @@
 # Les nombres aléatoires <!-- omit in toc -->
 
 
-# Objectifs
+## Objectifs
 - Comprendre les bases des nombres aléatoires
 - Comprendre la distribution uniforme
 - Comprendre la distribution normale
 
-# Introduction
+## Introduction
 Un ordinateur est une machine déterministe. Cela signifie que si vous lui donnez les mêmes données d'entrée, il donnera toujours la même sortie. Ainsi, il ne peut pas générer de vrais nombres aléatoires. Cela peut être un problème si vous voulez simuler des phénomènes aléatoires. Pour cela, on utilise des générateurs de nombres pseudo-aléatoires.
 
 Ces nombres sont générés à partir d'une graine (**seed**) qui est un nombre initial. Si vous utilisez la même graine, vous obtiendrez les mêmes nombres aléatoires. Cela peut être utile pour déboguer un programme.
 
 > **Note :** Je sais que vous avez hâte d'avoir les pieds dans `Godot`. Cependant, il est important de comprendre les bases mathématiques et algorithmiques qui se cachent derrière les jeux vidéo. `Processing` permet de simplifier la programmation graphique. C'est pourquoi je vous propose de commencer par ce langage. 
 
-# Le marcheur aléatoire
+## Le marcheur aléatoire
 Un exemple classique de simulation aléatoire est le marcheur aléatoire. Un marcheur aléatoire est un objet qui se déplace aléatoirement dans un espace. Il peut se déplacer dans n'importe quelle direction avec une probabilité égale.
 
 Voici un exemple Processing pour simuler un marcheur aléatoire.
@@ -59,7 +59,7 @@ Ce code donnera un résultat similaire à celui-ci :
 </details>
 
 
-# Nombre aléatoire
+## Nombre aléatoire
 Un nombre aléatoire est un nombre que l'on ne peut généralement pas prédire. Dans la plupart des langages de programmation, une fonction `random` est utilisée pour générer des nombres aléatoires entre 0 et 1. Par exemple, en Processing, la fonction `random()` génère un nombre aléatoire entre 0 et 1 exclusivement.
 
 À partir de la valeur retournée par `random()`, on peut générer des nombres aléatoires dans un intervalle donné. Par exemple, pour générer un nombre aléatoire entre 0 et 9, on peut utiliser la formule suivante :
@@ -79,7 +79,7 @@ Remarquez l'animation ci-dessous. Elle montre comment les nombres aléatoires so
 
 Ainsi, c'est comme si l'on avait un dé à 20 faces. Chaque face a la même probabilité d'apparaître. On appellera cette distribution une **distribution uniforme**.
 
-## Marcheur aléatoire guidé
+### Marcheur aléatoire guidé
 
 Si on veut que le marcheur tende vers l'ouest, comme dans l'exemple ci-contre, comment pourrait-on faire?
 
@@ -94,12 +94,12 @@ On peut utiliser une distribution uniforme pour guider le marcheur. Par exemple,
 </details>
 
 
-## Dans les jeux
+### Dans les jeux
 On retrouve la distribution uniforme dans plusieurs types de jeux. Par exemple, dans un jeu de cartes, chaque carte a la même probabilité d'apparaître. Dans un jeu de dés, chaque face a la même probabilité d'apparaître. Certains jeux utilisent la distribution uniforme pour générer des caractéristiques physiques de personnages aléatoires.
 
 ![alt text](assets/ark_random_char.jpg)
 
-# Distribution normale
+## Distribution normale
 Disons que l'on désire générer une population de zombies. Chaque zombie a une taille donnée en mètres. Dans une population réelle, la taille des zombies ne suit pas une distribution uniforme, c'est-à-dire qu'il y a plus de chances que l'on tombe sur un zombie de 1,72 mètre qu'un zombie de 2 mètres. Dans ma population, j'ai plus de zombies qui ont des tailles variant entre 1,65 et 1,75 mètre que des individus de 2 mètres et plus. La même chose pour des zombies de moins de 1,50 mètre. La taille des populations animales suit généralement une distribution normale. Ainsi, il y a une concentration des tailles plus fréquentes autour de la moyenne qu'aux extrêmes.
 
 ---
@@ -161,7 +161,7 @@ void draw() {
 
 
 
-## Comment faire pour gérer la distribution normale?
+### Comment faire pour gérer la distribution normale?
 Pour générer une distribution normale, on fait ce que l'on appelle un changement d'échelle :
 - On prend une valeur aléatoire générée par `randomGaussian()`
 - On la multiplie par l'écart-type désiré
@@ -179,7 +179,7 @@ int value = int(sd * num + mean);
 
 Voici [un exemple de code](pde://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s01_distribution_comparaison.pdez) qui compare les deux types de distribution où l'on peut voir comment on peut contrôler les valeurs.
 
-## Exemple de cas d'utilisation
+### Exemple de cas d'utilisation
 Dans un jeu de tir, on peut utiliser une distribution normale pour gérer la précision des tirs. Lorsque le joueur tire, on génère une valeur aléatoire avec une distribution normale selon son niveau de fatigue, la distance de la cible, etc. Par exemple, après un sprint, le joueur sera plus fatigué et sa précision sera moins bonne. Ainsi, en augmentant l'écart-type, on augmente la dispersion des tirs.
 
 Dans les logiciels de dessin, on peut utiliser une distribution normale pour simuler l'aérographe. Plus l'écart-type est grand, plus la zone de peinture sera grande et dispersée.
@@ -257,7 +257,7 @@ Ce code donnera un résultat similaire à celui-ci :
 
 ---
 
-# Distribution uniforme vs normale
+## Distribution uniforme vs normale
 
 <table style="border: none;">
 
@@ -277,7 +277,7 @@ Ce code donnera un résultat similaire à celui-ci :
 
 ---
 
-## Question
+### Question
 
 <table style="border: none;">
 
@@ -297,14 +297,14 @@ De quel côté est la distribution uniforme et pourquoi?
 
 ---
 
-# Exercices
+## Exercices
 - Modifiez l'exemple avec la distribution normale pour qu'il affiche une distribution normale avec une moyenne de 175 et un écart-type de 10.
 
 ---
 
-# Le bruit de Perlin
+## Le bruit de Perlin
 Voici le lien vers mes notes sur le [bruit de Perlin](https://moodle.cshawi.ca/mod/page/view.php?id=10607&forceview=1)
 
 
-## Exemple
+### Exemple
 Voici un [exemple](pde://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s01_simulation_fatigue.pdez) combinant le bruit de Perlin et la distribution normale.

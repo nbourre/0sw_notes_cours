@@ -1,6 +1,6 @@
 # Les patrons de projet <!-- omit in toc -->
 
-# Les templates
+## Les templates
 
 - Depuis la version 3.x, il y a un dossier « templates » dans « Documents/Processing ».
 - On peut modifier le dossier dans les préférences.
@@ -13,7 +13,7 @@
 
 ---
 
-# Exemple
+## Exemple
 
 <table style="border: none;">
 
@@ -62,7 +62,7 @@ void timeManagement() {
 
 ---
 
-# Exercices
+## Exercices
 - Dans notre cas, nous utiliserons Java, ainsi, créez un dossier « Java » dans « templates ».
 - Ajoutez un fichier `sketch.pde`.
 - Dans le fichier `sketch.pde`, collez le code qui est dans la section commentaire de cette diapo.

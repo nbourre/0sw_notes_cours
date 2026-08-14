@@ -237,5 +237,5 @@ Il restera à ajouer le monde dans lequel le joueur évoluera. Ce sujet sera vu 
 
 ---
 
-# Références
+## Références
 - [Everything to Know About the Camera2d in Godot 4 (Full Guide) - Anglais - 25 min](https://www.youtube.com/watch?v=RlSpjIb7TLo)
