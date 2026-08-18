@@ -16,6 +16,7 @@ theme:
 plugins:
   - search
   - print-site
+  - mkdocs-video
 
 markdown_extensions:
   - admonition

@@ -114,6 +114,9 @@ Ainsi, à ±1 écart-type, on retrouve 68 % de la population. À ±2 écart-type
 
 > **Note :** La distribution normale est également appelée distribution gaussienne, courbe normale ou cloche de Gauss.
 
+
+![alt text](assets/gaussiennes_ecart_type_1.svg)
+
 ---
 
 
@@ -184,19 +187,12 @@ Dans un jeu de tir, on peut utiliser une distribution normale pour gérer la pr�
 
 Dans les logiciels de dessin, on peut utiliser une distribution normale pour simuler l'aérographe. Plus l'écart-type est grand, plus la zone de peinture sera grande et dispersée.
 
-<table>
-<tr>
-<td>
+<div class="grid cards" markdown>
 
-![alt text](assets/GaussianFn4.jpg)
+- ![alt text](assets/GaussianFn4.jpg)
+- Dans l'exemple ci-contre, la zone rouge est chaude et la zone bleue est froide. Ainsi, la dimension de la zone rouge est proportionnelle à l'écart-type en X et Y.
 
-</td>
-
-<td>
-Dans l'exemple ci-contre, la zone rouge est chaude et la zone bleue est froide. Ainsi, la dimension de la zone rouge est proportionnelle à l'écart-type en X et Y.
-</td>
-</tr>
-</table>
+</div>
 
 Voici un exemple de code pour gérer la précision des tirs à l'aide de la souris.
 
@@ -246,54 +242,35 @@ void drawBullet() {
 
 ```
 
-<details>
-<summary>Résultat</summary>
+!!! note "Résultat"
 
-Ce code donnera un résultat similaire à celui-ci :
+    Ce code donnera un résultat similaire à celui-ci :
 
-![alt text](assets/bullets.gif)
+    ![alt text](assets/bullets.gif)
 
-</details>
+
 
 ---
 
 ## Distribution uniforme vs normale
 
-<table style="border: none;">
+<div class="grid cards" markdown>
 
-<tr>
-<td>
+- ![alt text](assets/random_distribution.gif)
+- ![alt text](assets/normal_distribution.gif)
 
-![alt text](assets/random_distribution.gif)
-
-</td>
-<td>
-
-![alt text](assets/normal_distribution.gif)
-
-</td>
-</tr>
-</table>
+</div>
 
 ---
 
 ### Question
 
-<table style="border: none;">
+<div class="grid cards" markdown>
 
-<tr>
-<td>
+- Dans l'image ci-contre, de quel côté est la distribution uniforme et pourquoi?
+- ![alt text](assets/Image12.gif)
 
-De quel côté est la distribution uniforme et pourquoi?
-
-</td>
-<td>
-
-![alt text](assets/Image12.gif)
-
-</td>
-</tr>
-</table>
+</div>
 
 ---
 
@@ -303,7 +280,7 @@ De quel côté est la distribution uniforme et pourquoi?
 ---
 
 ## Le bruit de Perlin
-Voici le lien vers mes notes sur le [bruit de Perlin](https://moodle.cshawi.ca/mod/page/view.php?id=10607&forceview=1)
+Voici le lien vers mes notes sur la [génération procédurale](../procedural_generation_platform/)
 
 
 ### Exemple

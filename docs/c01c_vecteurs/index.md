@@ -32,6 +32,7 @@
 ![alt text](assets/Image2.png)
 
 **Problèmes identifiés** :
+
 - Utilisation de plusieurs variables X et Y similaires :
     - Position X et Y
     - Vitesse X et Y
@@ -85,6 +86,7 @@ PVector target;
 ---
 
 ## Vecteur : la classe PVector
+
 - Processing offre la classe `PVector` qui représente un vecteur.
 - **Propriétés principales** :
     - `x` : Composante horizontale
@@ -113,6 +115,7 @@ position.y = 100;
 ### Vecteur : déplacement et mouvement
 
 **Concepts clés** :
+
 - **Mouvement** = déplacement dans le temps
 - **Vitesse** = vecteur représentant un déplacement par unité de temps
 - **Translation** = addition de la vitesse à la position
@@ -184,6 +187,7 @@ if (posY > height - 15 || posY < 15) vitY *= -1;
 **Objectif** : Créer une animation de balle qui rebondit en utilisant des vecteurs.
 
 **Instructions** :
+
 1. Créez deux variables globales de type `PVector` :
     - `position` : pour la position de la balle
     - `vitesse` : pour la vitesse de déplacement
@@ -199,6 +203,7 @@ if (posY > height - 15 || posY < 15) vitY *= -1;
     - Gérez les rebonds en inversant les composantes appropriées
 
 **Code de base** :
+
 ```java
 PVector position;
 PVector vitesse;
@@ -219,6 +224,7 @@ void draw() {
 ```
 
 **Bonus** : 
+
 - Ajoutez de la couleur qui change selon la direction
 - Laissez une traînée en utilisant `background(240, 20)` au lieu de `background(240)`
 - Ajoutez plusieurs balles avec des vitesses différentes
@@ -242,8 +248,7 @@ a.sub(b);          // a devient (5, 4)
 PVector resultat = PVector.add(a, b);  // a et b restent inchangés
 ```
 
-https://github.com/user-attachments/assets/11c4a151-d5f9-4dfe-ac7f-f20e9ef7bac3
-
+![type:video](https://github.com/user-attachments/assets/11c4a151-d5f9-4dfe-ac7f-f20e9ef7bac3)
 
 
 ### Multiplication et division par un scalaire
@@ -258,7 +263,7 @@ PVector resultatB = PVector.mult(v, -1.5);  // Multiplie v par -1.5
 PVector resultatC = PVector.div(v, 2);          // v devient (1.5, 0.75)
 ```
 
-https://github.com/user-attachments/assets/708984b6-d1a7-404b-b227-afb59d83f2d6
+![type:video](https://github.com/user-attachments/assets/708984b6-d1a7-404b-b227-afb59d83f2d6)
 
 **Utilité** : Changer la vitesse sans changer la direction.
 
@@ -274,7 +279,7 @@ float distance = PVector.dist(point1, point2);
 
 
 
-https://github.com/user-attachments/assets/4a196351-de20-4260-ad83-98dc7b44a483
+![type:video](https://github.com/user-attachments/assets/4a196351-de20-4260-ad83-98dc7b44a483)
 
 
 

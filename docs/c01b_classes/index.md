@@ -46,7 +46,7 @@ Voici un exemple de classe de base que j'utilise fréquemment lorsque je fais du
 ```java
 
 /// Classe abstraite pour les éléments graphique
-abstract class Actor {
+abstract class Actor { // ou GraphicObject
   PVector location;
   PVector velocity;
   PVector acceleration;
