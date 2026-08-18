@@ -60,12 +60,12 @@ Ce code donnera un résultat similaire à celui-ci :
 
 
 ## Nombre aléatoire
-Un nombre aléatoire est un nombre que l'on ne peut généralement pas prédire. Dans la plupart des langages de programmation, une fonction `random` est utilisée pour générer des nombres aléatoires entre 0 et 1. Par exemple, en Processing, la fonction `random()` génère un nombre aléatoire entre 0 et 1 exclusivement.
+Un nombre aléatoire est un nombre que l'on ne peut généralement pas prédire. Dans la plupart des langages de programmation, une fonction `random` est utilisée pour générer des nombres aléatoires entre 0 et 1. Par exemple, en Processing, la fonction `random(float)` génère un nombre aléatoire entre 0 (inclu) et `high` (exclu).
 
 À partir de la valeur retournée par `random()`, on peut générer des nombres aléatoires dans un intervalle donné. Par exemple, pour générer un nombre aléatoire entre 0 et 9, on peut utiliser la formule suivante :
 
 ```java
-int r = int (random() * 10);
+int r = int (random(1f) * 10);
 ```
 
 > **Question :**
@@ -75,7 +75,17 @@ int r = int (random() * 10);
 
 Remarquez l'animation ci-dessous. Elle montre comment les nombres aléatoires sont distribués de manière uniforme entre 0 et 20.
 
-![alt text](assets/random_distribution.gif)
+<div class="p5-embed">
+  <div id="sketch-uniform-distribution"></div>
+  <script src="assets/sketch.js"></script>
+  <script>
+    (() => {
+      const holder = document.getElementById("sketch-uniform-distribution");
+      if (holder._p5Instance) holder._p5Instance.remove();
+      holder._p5Instance = new p5(window.sketchUniformDistribution, holder);
+    })();
+  </script>
+</div>
 
 Ainsi, c'est comme si l'on avait un dé à 20 faces. Chaque face a la même probabilité d'apparaître. On appellera cette distribution une **distribution uniforme**.
 
@@ -97,7 +107,7 @@ On peut utiliser une distribution uniforme pour guider le marcheur. Par exemple,
 ### Dans les jeux
 On retrouve la distribution uniforme dans plusieurs types de jeux. Par exemple, dans un jeu de cartes, chaque carte a la même probabilité d'apparaître. Dans un jeu de dés, chaque face a la même probabilité d'apparaître. Certains jeux utilisent la distribution uniforme pour générer des caractéristiques physiques de personnages aléatoires.
 
-![alt text](assets/ark_random_char.jpg)
+![alt text](assets/ark_random_char.jpg){width="50%"}
 
 ## Distribution normale
 Disons que l'on désire générer une population de zombies. Chaque zombie a une taille donnée en mètres. Dans une population réelle, la taille des zombies ne suit pas une distribution uniforme, c'est-à-dire qu'il y a plus de chances que l'on tombe sur un zombie de 1,72 mètre qu'un zombie de 2 mètres. Dans ma population, j'ai plus de zombies qui ont des tailles variant entre 1,65 et 1,75 mètre que des individus de 2 mètres et plus. La même chose pour des zombies de moins de 1,50 mètre. La taille des populations animales suit généralement une distribution normale. Ainsi, il y a une concentration des tailles plus fréquentes autour de la moyenne qu'aux extrêmes.
@@ -120,9 +130,20 @@ Ainsi, à ±1 écart-type, on retrouve 68 % de la population. À ±2 écart-type
 ---
 
 
-Dans l'exemple qui suit, nous avons une distribution normale avec une moyenne de 24 et un écart-type de 5.
+Dans l'exemple qui suit, nous avons une distribution normale avec une moyenne de 25 et un écart-type de 5.
 
-![alt text](assets/normal_distribution.gif)
+<div class="p5-embed">
+  <div id="sketch-gaussian-distribution"></div>
+  <script src="assets/sketch.js"></script>
+  <script>
+    (() => {
+      const holder = document.getElementById("sketch-gaussian-distribution");
+      if (holder._p5Instance) holder._p5Instance.remove();
+      holder._p5Instance = new p5(window.sketchGaussianDistribution, holder);
+    })();
+  </script>
+</div>
+
 
 La fonction que l'on retrouvera dans Processing sera `randomGaussian()` qui retourne une valeur avec une moyenne de 0 et un écart-type de 1.
 

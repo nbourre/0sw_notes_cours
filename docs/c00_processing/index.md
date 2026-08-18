@@ -146,10 +146,7 @@ Avant de nous lancer en grand dans le développement de jeux vidéo avec Godot, 
     - 4 canaux = 3 canaux + couche de transparence (alpha)
 - Exemple
 
-<table style="border: none;">
-
-<tr>
-<td>
+<div class="grid" markdown>
 
 ```java
 size (150, 150);
@@ -160,14 +157,9 @@ fill (0, 200, 22, 50);
 ellipse (width / 2 + 25, height/2, 90, 90);
 ```
 
-</td>
-<td>
-
 ![alt text](assets/Image9.png)
 
-</td>
-</tr>
-</table>
+</div>
 
 > **\*** : Selon les sources, entre 7 et 10 millions de couleurs… Il faudrait que je révise ma palette de 8 couleurs quand je peins !
 
@@ -188,7 +180,8 @@ ellipse (width / 2 + 25, height/2, 90, 90);
 - Note : Lorsque l’on change la couleur, celle-ci est persistante jusqu’à ce quelle soit attribuée une nouvelle valeur
 
 ## Exercices courts
-- Dans un nouveau projet
+Dans un nouveau projet :
+
 - Ajoutez les formes suivantes
     - Un rectangle rouge
     - Un cercle vert
@@ -206,28 +199,32 @@ ellipse (width / 2 + 25, height/2, 90, 90);
 
 Voici le cycle de vie d’un programme Processing
 
-![alt text](assets/Image10.png)
+![alt text](assets/Image10.png){width="25%"}
 
 ---
 
 ### setup()
+
 - Comme indiqué précédemment, `setup()` permet de configurer le programme avant le lancement de la boucle `draw()`
+    - Elle ne s'exécute qu'une seule fois au démarrage de l'application
 - C’est dans cette méthode que l’on initialise, entre autres, la dimension de la fenêtre avec la méthode `size()`
 - C’est aussi dans cette méthode que l’on chargera les ressources tels que les images ou les fichiers de son
-- Exemple
 
 ```java
 void setup () {
     // Code de configuration                          
-    size (640, 480); // ou size(640, 480, P2D) 
+    size (640, 480, P2D); // ou size(640, 480) 
 }
 ```
+
+!!! note
+    Le troisième paramètre `P2D` dans `size()` est *optionnel* et permet d'exécuter le code sur le GPU via OpenGL. C'est utile pour les créations qui ont beaucoup d'objets. 
 
 ---
 
 ### draw()
+
 - La méthode `draw()` est la boucle infinie du programme
-- Exemple :
 
 ```java
 void draw () {
@@ -259,11 +256,14 @@ Processing offre plusieurs variables système qui permettent de récupérer des 
 - Les principaux types de valeur que l’on retrouve sont ceux de l’écran, de la souris et du clavier
 
 ## Exercice #1
+
 - Dans un nouveau projet, faites déplacer une ellipse qui rebondit sur les bords de la fenêtre
 - Dans un nouveau projet, lorsque l’utilisateur clique, une ellipse doit apparaître
-- Défi
+
+**Défi**
+
 - Dans un nouveau projet, lorsque l’utilisateur maintient le bouton gauche de la souris appuyé, le programme fait un tracer avec une ellipse
 
-Résultat du défi
+    Résultat du défi
 
-![alt text](assets/Image11.gif)
+    ![alt text](assets/Image11.gif)
