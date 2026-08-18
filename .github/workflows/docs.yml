@@ -33,8 +33,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install mkdocs-material pymdown-extensions mkdocs-print-site-plugin
-
+          pip install -r requirements.txt
       - name: Build site
         run: mkdocs build
 
