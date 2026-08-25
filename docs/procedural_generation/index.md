@@ -77,6 +77,33 @@ Avant de passer à l'exemple des plateformes, voici un petit bac à sable pour e
   </script>
 </div>
 
+## Retour sur le marcheur aléatoire
+Rappelez-vous le [marcheur aléatoire](../c01_nombres_aleatoires/#le-marcheur-aleatoire) du cours sur les nombres aléatoires : à chaque image, il choisissait une direction avec `random()`, ce qui donnait un déplacement saccadé, sans lien entre un pas et le suivant.
+
+En remplaçant `random()` par `noise()`, on obtient un déplacement beaucoup plus fluide. L'idée est d'utiliser deux « pistes » de bruit indépendantes, une pour `x` et une pour `y`, que l'on fait avancer légèrement à chaque image :
+
+```java
+tx += 0.01;
+x = map(noise(tx), 0, 1, 0, width);
+
+ty += 0.01;
+y = map(noise(ty), 0, 1, 0, height);
+```
+
+Le décalage de départ entre `tx` et `ty` (10 000 dans l'exemple ci-dessous) sert uniquement à éviter que les deux pistes ne se ressemblent trop, puisqu'elles utilisent le même bruit.
+
+<div class="p5-embed">
+  <div id="sketch-walker-noise"></div>
+  <script src="assets/walker_noise_playground.js"></script>
+  <script>
+    (() => {
+      const holder = document.getElementById("sketch-walker-noise");
+      if (holder._p5Instance) holder._p5Instance.remove();
+      holder._p5Instance = new p5(window.sketchWalkerNoise, holder);
+    })();
+  </script>
+</div>
+
 ## Exemple : générer des plateformes
 Voyons maintenant comment appliquer le bruit de Perlin à un cas concret. Ce n'est qu'un exemple parmi d'autres : le même principe pourrait tout aussi bien servir à générer un terrain, une grotte ou le tracé d'une rivière.
 
@@ -245,3 +272,10 @@ Le résultat : on avance sur l'axe des `x` par petits pas (`xIncrement`) et on l
 Dans cet article, nous avons vu la base de la génération procédurale : un bruit cohérent, comme le bruit de Perlin, permet de générer du contenu qui a l'air naturel tout en restant contrôlable grâce à une graine. Nous avons illustré ce principe avec un exemple concret — la génération de plateformes — mais les mêmes idées s'appliquent à bien d'autres contextes : terrains, donjons, obstacles, ennemis, textures, etc.
 
 Vous pouvez aussi améliorer cette méthode en générant les plateformes au fil de l'avancement de la caméra (ou du personnage), plutôt que toutes d'un coup. Dans tous les cas, ce sera à vous de jouer!
+
+---
+
+## Référence
+
+- [RedBlobGames - Noise](https://www.redblobgames.com/articles/noise/introduction.html)
+- [RedBlobGames - Terrain from noise](https://www.redblobgames.com/maps/terrain-from-noise/)

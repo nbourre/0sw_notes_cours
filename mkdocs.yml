@@ -92,10 +92,13 @@ nav:
   - Cours 12:
     - Sauvegarder les données avec des ressources personnalisées: c12_save_data/index.md
   - AnimationTree: animation_tree/index.md
-  - Génération procédurale: procedural_generation/index.md
   - Le Tilemap Terrain: tilemap_terrain/index.md
   - Utiliser le débogueur distant: remote_debugger/index.md
   - Déployer le jeu sur l'arcade: arcade_game/index.md
+  - Science:
+    - Génération Procédurale:
+      - A - Introduction au bruit de Perlin: procedural_generation/index.md
+      - B - Génération de terrain: terrain_generation/index.md
 #  - Projet de session:
 #    - Énoncé: projet_session/01_enonce/index.md
 #    - Documentation et suivis:
