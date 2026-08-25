@@ -92,7 +92,7 @@ nav:
   - Cours 12:
     - Sauvegarder les données avec des ressources personnalisées: c12_save_data/index.md
   - AnimationTree: animation_tree/index.md
-  - Génération procédurale - Plateforme: procedural_generation_platform/index.md
+  - Génération procédurale: procedural_generation/index.md
   - Le Tilemap Terrain: tilemap_terrain/index.md
   - Utiliser le débogueur distant: remote_debugger/index.md
   - Déployer le jeu sur l'arcade: arcade_game/index.md

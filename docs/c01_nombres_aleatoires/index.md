@@ -49,15 +49,50 @@ void draw() {
 }
 ```
 
-<details>
-<summary>Résultat</summary>
+!!! note "Résultat"
 
-Ce code donnera un résultat similaire à celui-ci :
+    Ce code donnera un résultat similaire à celui-ci :
 
-<img src="assets/01_random_walker.gif" border=1 />
+    ![alt text](assets/01_random_walker.gif)
 
-</details>
+## La graine aléatoire (seed)
 
+Un générateur de nombres pseudo-aléatoires fonctionne comme une formule mathématique : à partir d'une valeur de départ (la graine), il produit une longue suite de nombres qui *semblent* aléatoires, mais qui sont en réalité entièrement déterminés par cette graine de départ.
+
+Par défaut, la plupart des langages (dont Processing) choisissent automatiquement une graine différente à chaque exécution du programme, souvent basée sur l'horloge de l'ordinateur. C'est pourquoi, normalement, chaque fois que vous lancez votre sketch, vous obtenez une suite de nombres aléatoires différente de la précédente — le marcheur aléatoire vu plus haut ne trace jamais deux fois le même chemin.
+
+On peut toutefois fixer la graine manuellement avec la fonction `randomSeed()`. En lui donnant toujours la même valeur, on force le générateur à toujours produire exactement la même suite de nombres, dans le même ordre.
+
+!!! tip "Minecraft"
+    Vous avez probablement déjà croisé ce concept sans le savoir : dans **Minecraft**, chaque monde est généré à partir d'une graine (le fameux *seed* qu'on peut entrer à la création d'un monde). Deux joueurs qui utilisent la même graine obtiennent exactement le même terrain, les mêmes villages, les mêmes grottes — même si le monde semble « généré aléatoirement ». C'est exactement le même principe que `randomSeed()` en Processing : la graine détermine entièrement la suite de valeurs « aléatoires » utilisées pour placer les blocs, les biomes, les structures, etc.
+
+### Cas où la graine n'est pas régénérée
+
+Que se passe-t-il si on fixe la graine une seule fois et qu'on ne la change jamais? Reprenons l'exemple du marcheur aléatoire ci-dessus, en ajoutant une seule ligne dans `setup()` :
+
+```java
+void setup() {
+  size(400, 400);
+  background(255);
+
+  randomSeed(42); // La graine est fixée une seule fois, ici
+
+  x = width / 2;
+  y = height / 2;
+}
+```
+
+Résultat : à chaque fois que vous exécutez ce sketch, le marcheur trace **exactement le même chemin**, pixel pour pixel. Visuellement, la trajectoire a toujours l'air aléatoire (on ne peut pas la prédire à l'œil nu), mais elle est parfaitement reproductible d'une exécution à l'autre, puisque la graine ne change jamais.
+
+C'est très utile pour :
+
+- **Déboguer** un programme : si un bogue apparaît seulement après un certain nombre d'itérations « aléatoires », fixer la graine permet de reproduire le bogue à volonté plutôt que d'espérer qu'il se reproduise par hasard.
+- **Partager un résultat** : comme dans Minecraft, donner la même graine à quelqu'un d'autre lui permet d'obtenir exactement le même résultat que vous.
+- **Tester** un système qui dépend du hasard (par exemple, vérifier qu'une distribution normale produit bien les valeurs attendues).
+
+À l'inverse, si vous **retirez** la ligne `randomSeed(42)` (ou si vous appelez `randomSeed(millis())`, qui change à chaque exécution), le marcheur empruntera un chemin différent chaque fois que vous lancerez le programme, car la graine de départ change d'une exécution à l'autre.
+
+> **Attention :** Un piège classique consiste à appeler `randomSeed()` avec la **même valeur à chaque frame**, à l'intérieur de `draw()` plutôt que dans `setup()`. Dans ce cas, le générateur est réinitialisé continuellement avec la même graine, et `random()` retournera alors **le même nombre à chaque frame** — le mouvement semblera figé plutôt qu'aléatoire. La graine doit normalement être fixée une seule fois, au démarrage du programme.
 
 ## Nombre aléatoire
 Un nombre aléatoire est un nombre que l'on ne peut généralement pas prédire. Dans la plupart des langages de programmation, une fonction `random` est utilisée pour générer des nombres aléatoires entre 0 et 1. Par exemple, en Processing, la fonction `random(float)` génère un nombre aléatoire entre 0 (inclu) et `high` (exclu).
@@ -210,8 +245,8 @@ Dans les logiciels de dessin, on peut utiliser une distribution normale pour sim
 
 <div class="grid cards" markdown>
 
-- ![alt text](assets/GaussianFn4.jpg)
-- Dans l'exemple ci-contre, la zone rouge est chaude et la zone bleue est froide. Ainsi, la dimension de la zone rouge est proportionnelle à l'écart-type en X et Y.
+- ![type:video](assets/GaussienneCloche.mp4)
+- Dans l'exemple ci-contre, les tranches représentes une multiplication de l'écart-type soit 1, 2 et 3.
 
 </div>
 
@@ -286,10 +321,11 @@ void drawBullet() {
 
 ### Question
 
-<div class="grid cards" markdown>
+<div class="grid" markdown>
 
-- Dans l'image ci-contre, de quel côté est la distribution uniforme et pourquoi?
-- ![alt text](assets/Image12.gif)
+Dans l'image ci-contre, de quel côté est la distribution uniforme et pourquoi?
+
+![alt text](assets/Image12.gif)
 
 </div>
 
@@ -301,7 +337,7 @@ void drawBullet() {
 ---
 
 ## Le bruit de Perlin
-Voici le lien vers mes notes sur la [génération procédurale](../procedural_generation_platform/)
+Voici le lien vers mes notes sur la [génération procédurale](../procedural_generation/)
 
 
 ### Exemple

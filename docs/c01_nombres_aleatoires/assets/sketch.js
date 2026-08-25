@@ -26,13 +26,21 @@ window.sketchUniformDistribution = (p) => {
         }
 
     p.draw = () => {
-    
+
         let x = p.int(p.random (0, binNb));
-        
+
         conteneurs[x]++;
-        
+
         p.fill(170);
         p.rect (x * binWidth, height - conteneurs[x], binWidth - 1, conteneurs[x]);
+
+        if (height - conteneurs[x] <= 0) {
+            p.background (255);
+
+            for (var i = 0; i < binNb; i++) {
+                conteneurs[i] = 0;
+            }
+        }
 
     }
 }
@@ -75,6 +83,12 @@ window.sketchGaussianDistribution = (p) => {
 
         for (let x = 0; x < randomCounts.length; x++) {
             p.rect (x * w, height - randomCounts[x], w - 1, randomCounts[x]);
+        }
+
+        if (height - randomCounts[index] <= 0) {
+            for (let i = 0; i < randomCounts.length; i++) {
+                randomCounts[i] = 0;
+            }
         }
     }
 }

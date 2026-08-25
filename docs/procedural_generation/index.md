@@ -1,22 +1,22 @@
 # Génération procédurale
 
 ## Introduction
-Dans ce court article, nous allons voir comment générer des plateformes de manière procédurale. Ainsi, je vais vous montrer une méthode que j'ai utilisé pour réaliser une démonstration.
+La génération procédurale consiste à créer du contenu — un terrain, un niveau, une texture, une musique — à l'aide d'un algorithme plutôt qu'en le dessinant ou en l'écrivant à la main. L'idée n'est pas de générer n'importe quoi au hasard, mais de produire un résultat qui reste cohérent et « naturel » à l'œil, tout en étant différent à chaque exécution (ou identique, si on le souhaite, grâce à une graine).
 
-La méthode ne répondra pas à toutes les solutions, mais elle peut vous donner une idée de comment procéder ou encore d'extrapoler pour d'autres cas.
+Dans cet article, nous allons voir l'outil de base qui rend cela possible : le **bruit de Perlin**. Nous verrons ensuite comment l'appliquer à un cas concret — la génération de plateformes — à titre d'exemple. La méthode présentée ne couvre pas tous les cas d'usage, mais elle donne une base que vous pourrez adapter à d'autres contextes (terrains, donjons, obstacles, etc.).
 
-## OpenSimplex Noise
-Avant de commencer, je vais vous présenter le bruit que j'ai utilisé pour générer les plateformes. Il s'agit d'un bruit de Perlin, mais avec une fonction de transition plus lisse. Cela permet d'avoir un bruit plus naturel.
+## Le bruit de Perlin
+Avant d'aborder l'exemple, voyons ce qu'est le bruit de Perlin, l'outil qui rend la génération procédurale cohérente plutôt que complètement chaotique.
 
-Le bruit de Perlin permet de générer des valeurs aléatoires, mais avec une certaine cohérence. J'utilise ce bruit pour générer des plateformes de manière procédurale.
+Contrairement à `random()`, qui retourne une valeur totalement indépendante à chaque appel, le bruit de Perlin retourne des valeurs qui varient graduellement en fonction de la position qu'on lui donne. Deux positions rapprochées produiront des valeurs similaires, alors que deux positions éloignées produiront des valeurs très différentes. C'est cette continuité qui donne un aspect naturel aux terrains, textures ou trajectoires générés.
 
-En utilisant une graine aléatoire, on génère des valeurs différentes à chaque fois. À l'inverse, on peut utiliser une graine fixe pour générer toujours les mêmes valeurs.
+Comme pour `random()`, le bruit dépend d'une graine (voir la section sur les [nombres aléatoires](../c01_nombres_aleatoires/)) : avec la même graine, on obtient toujours le même bruit, donc les mêmes résultats. Une graine différente produira un tout autre paysage.
 
-Le bruit a une valeur déterminée par une position et une graine. Ainsi, on peut varié la position pour générer des valeurs plus ou moins lisses. Plus les positions seront proches, plus les valeurs seront similaires et vice versa. Vous pouvez vous reférer à l'image ci-dessous pour mieux comprendre.	
+Vous pouvez vous référer à l'image ci-dessous pour mieux comprendre : plus les positions sont proches, plus les valeurs du bruit sont similaires.
 
 ![](assets/perlin_noise.png)
 
-Voici un exemple de bruit de Perlin généré avec Processing.
+Voici un exemple de bruit de Perlin généré avec Processing. On avance progressivement sur l'axe des `y` (`yoff`) et on trace une ligne entre la valeur précédente et la nouvelle valeur du bruit.
 
 ```java
 float yoff = 0.0;
@@ -43,24 +43,24 @@ void draw() {
 }
 ```
 
-Exemple avoir un saut de `0.02`
+Voici le résultat avec un pas de `0.02` :
 
 ![](assets/perlin_noise_exemple.gif)
 
-Exemple avoir un saut de `0.005`
+Et voici le résultat avec un pas plus petit, de `0.005`. On remarque que la courbe est beaucoup plus lisse : plus le pas est petit, plus les positions successives sont rapprochées, donc plus les valeurs se ressemblent.
 
 ![](assets/perlin_noise_0_005.gif)
 
 Pour plus d'informations, je vous invite à lire l'article de [Khan Academy](https://www.khanacademy.org/computing/computer-programming/programming-natural-simulations/programming-noise/a/perlin-noise).
 
-## Génération des plateformes
-En utilisant les propriétés du bruit de Perlin, on peut générer des plateformes de manière procédurale. L'idée est relativement simple.
+## Exemple : générer des plateformes
+Voyons maintenant comment appliquer le bruit de Perlin à un cas concret. Ce n'est qu'un exemple parmi d'autres : le même principe pourrait tout aussi bien servir à générer un terrain, une grotte ou le tracé d'une rivière.
 
-On avance sur l'axe des `x` par petits pas et, à chaque pas, on lit la valeur du bruit à cette position pour déterminer de combien la prochaine plateforme doit monter ou descendre par rapport à la précédente.
+L'idée est relativement simple : on avance sur l'axe des `x` par petits pas et, à chaque pas, on lit la valeur du bruit à cette position pour déterminer de combien la prochaine plateforme doit monter ou descendre par rapport à la précédente.
 
-Ensuite, pour chaque plateforme, on génère une valeur aléatoire qui déterminera sa longueur. À chaque fin de plateforme, on génère un autre nombre aléatoire qui déterminera la distance (l'écart) avant la prochaine plateforme.
+Ensuite, pour chaque plateforme, on génère une valeur aléatoire qui détermine sa longueur. À la fin de chaque plateforme, on génère un autre nombre aléatoire qui détermine la distance (l'écart) avant la prochaine plateforme.
 
-Voici une implémentation en Processing. Plutôt que d'utiliser un `TileMap`, chaque plateforme est représentée par un simple rectangle. On utilise la fonction `noise()` de Processing, qui repose sur un bruit de Perlin, pour déterminer la hauteur de chaque plateforme.
+Voici une implémentation en Processing. Plutôt que d'utiliser un `TileMap`, chaque plateforme est représentée par un simple rectangle. On utilise la fonction `noise()` de Processing, basée sur un bruit de Perlin, pour déterminer la hauteur de chaque plateforme.
 
 On y utilise également la classe abstraite `Actor` (fournie plus haut) dont hérite une classe `Rectangle`, qui se charge d'afficher chaque plateforme.
 
@@ -218,4 +218,6 @@ void generateMap() {
 Le résultat : on avance sur l'axe des `x` par petits pas (`xIncrement`) et on lit la valeur du bruit à cette position pour déterminer de combien la prochaine plateforme doit monter ou descendre par rapport à la précédente. La longueur des plateformes et la distance entre elles restent aléatoires.
 
 ## Résumé
-Dans cet article, nous avons vu comment une manière simple de générer des plateformes de manière procédurale. On peut facilement améliorer cette méthode en générant les plateformes au fil de l'avancement de la caméra (ou du personnage), plutôt que toutes d'un coup. On peut aussi ajouter des obstacles, des ennemis, etc. Dans tous les cas, ce sera à vous de jouer!
+Dans cet article, nous avons vu la base de la génération procédurale : un bruit cohérent, comme le bruit de Perlin, permet de générer du contenu qui a l'air naturel tout en restant contrôlable grâce à une graine. Nous avons illustré ce principe avec un exemple concret — la génération de plateformes — mais les mêmes idées s'appliquent à bien d'autres contextes : terrains, donjons, obstacles, ennemis, textures, etc.
+
+Vous pouvez aussi améliorer cette méthode en générant les plateformes au fil de l'avancement de la caméra (ou du personnage), plutôt que toutes d'un coup. Dans tous les cas, ce sera à vous de jouer!
