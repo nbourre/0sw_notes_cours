@@ -6,15 +6,19 @@ La génération procédurale consiste à créer du contenu — un terrain, un ni
 Dans cet article, nous allons voir l'outil de base qui rend cela possible : le **bruit de Perlin**. Nous verrons ensuite comment l'appliquer à un cas concret — la génération de plateformes — à titre d'exemple. La méthode présentée ne couvre pas tous les cas d'usage, mais elle donne une base que vous pourrez adapter à d'autres contextes (terrains, donjons, obstacles, etc.).
 
 ## Le bruit de Perlin
-Avant d'aborder l'exemple, voyons ce qu'est le bruit de Perlin, l'outil qui rend la génération procédurale cohérente plutôt que complètement chaotique.
 
-Contrairement à `random()`, qui retourne une valeur totalement indépendante à chaque appel, le bruit de Perlin retourne des valeurs qui varient graduellement en fonction de la position qu'on lui donne. Deux positions rapprochées produiront des valeurs similaires, alors que deux positions éloignées produiront des valeurs très différentes. C'est cette continuité qui donne un aspect naturel aux terrains, textures ou trajectoires générés.
+!!! info "C'est quoi, du bruit?"
+    En dehors de l'informatique, un « bruit » est un signal parasite qui varie de façon aléatoire : la neige sur un vieil écran de télé, le grésillement dans un enregistrement audio, la statique entre deux stations de radio. Dans tous ces cas, ce sont des valeurs qui changent sans aucune logique d'un instant à l'autre.
+
+    En traitement de données, on garde ce mot pour désigner n'importe quelle suite de valeurs aléatoires — pas seulement un signal audio ou vidéo. Le bruit de Perlin en est un exemple, mais avec une particularité importante : au lieu d'être complètement chaotique comme la neige TV, il est *cohérent* (on dit aussi qu'il est corrélé dans l'espace) — deux valeurs prises à des positions rapprochées se ressemblent. C'est cette cohérence qui permet de l'utiliser pour dessiner un terrain ou une texture qui a l'air naturel, plutôt qu'un résultat complètement chaotique comme le ferait `random()`.
+
+Concrètement, le bruit de Perlin retourne une valeur en fonction d'une position qu'on lui donne — un peu comme une fonction mathématique. Deux positions rapprochées produiront des valeurs similaires, alors que deux positions éloignées produiront des valeurs très différentes. C'est cette continuité qui donne un aspect naturel aux terrains, textures ou trajectoires générés.
 
 Comme pour `random()`, le bruit dépend d'une graine (voir la section sur les [nombres aléatoires](../c01_nombres_aleatoires/)) : avec la même graine, on obtient toujours le même bruit, donc les mêmes résultats. Une graine différente produira un tout autre paysage.
 
 Vous pouvez vous référer à l'image ci-dessous pour mieux comprendre : plus les positions sont proches, plus les valeurs du bruit sont similaires.
 
-![](assets/perlin_noise.png)
+![](assets/perlin_noise_fr.png)
 
 Voici un exemple de bruit de Perlin généré avec Processing. On avance progressivement sur l'axe des `y` (`yoff`) et on trace une ligne entre la valeur précédente et la nouvelle valeur du bruit.
 
@@ -52,6 +56,26 @@ Et voici le résultat avec un pas plus petit, de `0.005`. On remarque que la cou
 ![](assets/perlin_noise_0_005.gif)
 
 Pour plus d'informations, je vous invite à lire l'article de [Khan Academy](https://www.khanacademy.org/computing/computer-programming/programming-natural-simulations/programming-noise/a/perlin-noise).
+
+## Bac à sable : le bruit de Perlin
+Avant de passer à l'exemple des plateformes, voici un petit bac à sable pour expérimenter par vous-même avec le bruit de Perlin.
+
+- Le curseur **Pas** contrôle l'incrément utilisé pour échantillonner le bruit à chaque pixel : un petit pas donne une courbe lisse, un grand pas donne une courbe qui varie beaucoup plus vite (voir les deux animations ci-dessus).
+- Le bouton **Générer** choisit une nouvelle graine (`noiseSeed()`) au hasard et redessine une toute nouvelle courbe.
+- Le champ **Graine** peut aussi être modifié directement : entrez-y n'importe quel nombre pour obtenir toujours la même courbe, comme avec `randomSeed()` (voir la section sur les [nombres aléatoires](../c01_nombres_aleatoires/)). Essayez d'entrer deux fois la même valeur : la courbe sera identique.
+- Le bouton **Réinitialiser** remet le pas et la graine à leur valeur de départ.
+
+<div class="p5-embed">
+  <div id="sketch-perlin-playground"></div>
+  <script src="assets/perlin_playground.js"></script>
+  <script>
+    (() => {
+      const holder = document.getElementById("sketch-perlin-playground");
+      if (holder._p5Instance) holder._p5Instance.remove();
+      holder._p5Instance = new p5(window.sketchPerlinPlayground, holder);
+    })();
+  </script>
+</div>
 
 ## Exemple : générer des plateformes
 Voyons maintenant comment appliquer le bruit de Perlin à un cas concret. Ce n'est qu'un exemple parmi d'autres : le même principe pourrait tout aussi bien servir à générer un terrain, une grotte ou le tracé d'une rivière.
