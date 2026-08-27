@@ -28,9 +28,7 @@ De la trigonométrie!... Oh boboy!
 
 ## Cercle trigonométrique : Ce qu’il faut retenir
 
-<table>
-    <tr>
-        <td>
+<div class="grid" markdown>
 
 - $2\pi\ rad = 360°$
 - $\pi\ rad = 180°$
@@ -40,14 +38,9 @@ De la trigonométrie!... Oh boboy!
 - $\frac{\pi}{180}\ rad = 1°$
 - Si l'on veut incrémenter de 1°, on peut se faire une constante `DEG_TO_RAD` égale à $\frac{\pi}{180}$.
 
-    </td>
-    <td>
-    
-    <img src="assets/cercle_trigo.png" />
+![alt text](assets/cercle_trigo.png)
 
-    </td>
-    </tr>
-</table>
+</div>
 
 
 ---
@@ -99,9 +92,11 @@ popMatrix();
 ---
 
 ### Les fonctions `pushMatrix()` et `popMatrix()`
+
 - La compréhension intrinsèque de ceux-ci nécessite de comprendre le concept de pile de matrices ce qui sort des compétences de ce cours.
 
 Pour simplifier :
+
 - `pushMatrix()` permet de sauvegarder la matrice d’affichage actuelle.
 - `popMatrix()` permet de remettre la dernière matrice d’affichage sauvegardée.
 
@@ -126,9 +121,7 @@ En résumé, ces deux fonctions sont essentielles pour isoler les transformation
 
 ---
 
-<table>
-    <tr>
-        <td>
+<div class="grid" markdown>
 
 - **Il s'utilise toujours en pair push-pop.**
 - **On peut les imbriquer.**
@@ -136,26 +129,18 @@ En résumé, ces deux fonctions sont essentielles pour isoler les transformation
 - Voici une [vidéo explicative](https://www.youtube.com/watch?v=o9sgjuh-CBM&ab_channel=TheCodingTrain) de Daniel Shiffman
 - Question : Comment pourrait-on animer le robot ci-contre?
 
-    </td>
-<td>
-
 ![alt text](assets/robot.webp)
-    </td>
-    </tr>
-</table>
-    
+
+</div>
+
 ---
 
 ## Exemple d’imbrication
 
-<table>
-    <tr>
-        <td>
-    
+<div class="grid" markdown>
+
 ![alt text](assets/solar_system.png)
-</td>
-<td>
-    
+
 ```java
 pushMatrix();
   soleil.draw();
@@ -181,29 +166,21 @@ popMatrix();
 
 ```
 
-</td>
-</tr>
-</table>
+</div>
 
 ---
 
 ### Exemples visuels
 
-<table>
-    <tr>
-        <td>
-    
+<div class="grid" markdown>
+
 ![alt text](assets/rectangle_moving.gif)
 Projet : [s04_push_pop](https://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s04_push_pop.pdez)
 
-</td>
-<td>
-
 ![alt text](assets/solar_system.gif)
 Projet : [s04_syst_solaire](pde://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s04_syst_solaire.pdez)
-</td>
-</tr>
-</table>
+
+</div>
 
 ---
 
@@ -216,9 +193,7 @@ Projet : [s04_syst_solaire](pde://github.com/nbourre/0sw_processing_exemples/raw
 ## Mouvement angulaire
 
 
-<table>
-    <tr>
-        <td>
+<div class="grid" markdown>
 
 - On se rappelle de :
     - $$vitesse = vitesse + acceleration$$
@@ -228,9 +203,6 @@ Projet : [s04_syst_solaire](pde://github.com/nbourre/0sw_processing_exemples/raw
     - $$\theta = \theta + \theta_{vitesse}$$
 
     ![alt text](assets/angular_motion_Image.webp)
-
-</td>
-    <td>
 
 ```java
 void update(float deltaTime) {
@@ -257,10 +229,8 @@ void display() {
   popMatrix();
 }
 ```
-    </td>
-    </tr>
-</table>
 
+</div>
 
 ---
 
@@ -271,20 +241,12 @@ void display() {
     - `atan` retourne un angle basé uniquement sur le rapport entre les côtés opposé et adjacent, sans savoir dans quel quadrant se trouve le point.
     - `atan2`, en revanche, prend en compte à la fois l'opposé et l'adjacent, ainsi que leurs signes, ce qui permet de déterminer correctement le quadrant et d'obtenir un angle précis entre -π et π radians.
 
-<table>
-    <tr>
-    <td>
+<div class="grid cards" markdown>
 
-<img src="assets/motion_detection.webp"/>
+- <img src="assets/motion_detection.webp"/>
+- <img src="assets/velocity_triangle.png" width="400"/>
 
-    </td>
-    <td>
-
-<img src="assets/velocity_triangle.png" width="400"/>
-
-    </td>
-    </tr>
-</table>
+</div>
 
 ---
 
@@ -297,20 +259,12 @@ void display() {
     - $x = r \cos(\theta)$
     - $y = r \sin(\theta)$
 
-<table>
-    <tr>
-    <td>
+<div class="grid cards" markdown>
 
-![alt text](assets/coord_polaire.webp)
+- ![alt text](assets/coord_polaire.webp)
+- ![alt text](assets/triangle_polar.png)
 
-    </td>
-    <td>
-
-![alt text](assets/triangle_polar.png)
-
-    </td>
-    </tr>
-</table>
+</div>
 
 
 
@@ -433,19 +387,15 @@ PVector tempVel = un.get();
 ---
 
 ## Références
+
 - [Collision circulaire](https://code.tutsplus.com/when-worlds-collide-simulating-circle-circle-collisions--gamedev-769t)
 
-<!-- Tableau html à 2 colonnes pour copier coller
+<!-- Grid à 2 colonnes pour copier coller
 
-<table>
-    <tr>
-        <td>
-    
+<div class="grid" markdown>
 
-        </td>
-        <td>
-        </td>
-    </tr>
-</table>
+
+
+</div>
 
 -->

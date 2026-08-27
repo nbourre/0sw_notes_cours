@@ -14,11 +14,13 @@ La loi gravitationnelle de Newton est une loi physique classique qui décrit l'a
 $$F_g = G \frac{m_1 m_2}{r^2}\hat{r}$$
 
 où :
+
 - $G$ est la constante gravitationnelle universelle,
 - $m_1$ et $m_2$ sont les masses des deux objets,
 - $r$ est la distance entre les deux objets.
 
 Dans le cadre d'une simulation pour un jeu vidéo, voici ce que chaque élément de cette formule représente :
+
 - $F_g$ est le vecteur de force que l'on passera à la méthode `applyForce`;
 - $G$ est une constante qui vaut $6.674 \times 10^{-11}$ m$^3$ kg$^{-1}$ s$^{-2}$. Dans notre cas, nous prendrons $G = 1$ pour simplifier les calculs;
 - $m_1$ et $m_2$ sont les masses des deux objets. On pourrait définir la taille des objets en fonction de leur masse;
@@ -97,6 +99,7 @@ Dépendant des initiales, on pourrait obtenir un résultat similaire à ceci :
 ![alt text](assets/attractor_mover.gif)
 
 ### Exercice
+
 - Créez la classe `Attractor` avec les méthodes `display` et `attract`.
 - Reproduisez l'animation montrée dans l'exemple.
 
@@ -111,4 +114,5 @@ Le résultat pourrait ressembler à ceci :
 ![alt text](assets/attractor_multiple.gif)
 
 ### Exercice
+
 - Faites les modifications requises pour obtenir un résultat similaire à l'exemple.

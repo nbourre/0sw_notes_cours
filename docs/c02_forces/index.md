@@ -9,20 +9,19 @@
 ## Motivation
 Pour développer des jeux, il est essentiel de comprendre comment les forces agissent sur les objets. Cela nous permet de créer des mouvements réalistes et d'interagir avec l'environnement de manière convaincante.
 
-<table>
-    <tr>
-        <td><img src="assets/n4s_physics.gif" alt="alt text"></td>
-        <td><img src="assets/ragdoll_physics.gif" alt="alt text"></td>
-    </tr>
+<div class="grid cards" markdown>
 
-</table>
+- ![alt text](assets/n4s_physics.gif)
+- ![alt text](assets/ragdoll_physics.gif)
 
-<table>
-    <tr>
-        <td><img src="assets/physics_bug.webp" alt="alt text"></td>
-        <td><img src="assets/boop.gif" alt="alt text"></td>
-    </tr>
-</table>
+</div>
+
+<div class="grid cards" markdown>
+
+- ![alt text](assets/physics_bug.webp)
+- ![alt text](assets/boop.gif)
+
+</div>
 
 ---
 
@@ -33,10 +32,10 @@ Dans ce chapitre, on verra comment appliquer différents types de forces à un o
 
 ### Clone et branchage du projet
 
-Si ce n'est déjà fait, clonez le projet du cours :
+Si ce n'est déjà fait, clonez les projets du cours :
 
 ```bash
-git clone https://github.com/nbourre/0sw_processing_exemples
+git clone https://github.com/nbourre/0sw_projets_cours
 ```
 
 Créez une branche pour ce chapitre :
@@ -86,21 +85,25 @@ git checkout -b c02_forces
         - Il y a le système du train et le mien.
     - Si je pousse mon bureau, le bureau applique la même force sur ma main.
         - On peut le sentir car le bureau compressera ma main et le bureau se déplacera à un moment donné.
-- [Autres exemples](https://www.khanacademy.org/science/physics/forces-newtons-laws/newtons-laws-of-motion/a/what-is-newtons-third-law)
+- [Autres exemples](https://www.khanacademy.org/science/physics/forces-newtons-laws/newtons-laws-of-motion/a/what-is-newtons-third-law){target="_blank"}
 
 ---
 
 ## Deuxième loi de Newton
+
 - C'est la loi la plus importante pour nous.
 - **La force est égale à la masse multipliée par l’accélération.**
 - L’accélération est directement proportionnelle à la force et inversement proportionnelle à la masse.
     - Ainsi, si vous êtes sur un chariot, le plus fort que l’on vous pousse, le plus rapide que vous vous déplacerez. Toutefois, plus lourd vous êtes, plus lentement vous vous déplacerez. <br />
+
     ![alt text](assets/mario-kart-world-bowser-toad-drift.jpg)
 
 Ainsi la formule est :
+
 - $F = ma$
 
-On peut la réécrite en fonction de l’accélération :
+On peut la réécrire en fonction de l’accélération :
+
 - $a = \frac{F}{m}$
 
 C'est cette formule que l'on va utiliser pour simuler les forces.
@@ -119,8 +122,8 @@ C'est cette formule que l'on va utiliser pour simuler les forces.
 ### Exemple
 
 - Pour simplifier la compréhension, nous allons utiliser une masse ($m$) de 1 dans les premiers exemples.
-- Ainsi $F=ma$ à $F = a$.
-- Disons que l’on reprend la classe `Mover` avec les propriétés `location`, `vélocité`, et `accélération`.
+- Ainsi $F=ma$ devient $F = a$.
+- Disons que l’on reprend la classe `Mover` avec les propriétés `location`, `velocity`, et `acceleration`.
 - La classe `Mover` est disponible dans le projet [`s02_forces_01`](https://github.com/nbourre/0sw_processing_exemples/raw/master/bin/s02_forces_01.pdez) dans les exemples Processing.
     - **Cliquez sur le lien pour télécharger et ouvrir le fichier directement.**
 - Notre but est d’appliquer une force.
@@ -235,6 +238,7 @@ void applyForce(PVector force) {
 ```
 
 ### Exercice
+
 - Améliorez la fonction en utilisant la méthode startique `div` de la classe `PVector` au lieu de créer une copie.
 
 ---
@@ -250,6 +254,7 @@ void applyForce(PVector force) {
 ---
 
 ### Travailler avec les formules de forces
+
 - Il faut comprendre le concept derrière une force pour pouvoir la simuler.
 - On déconstruit une force en deux parties
     - Comment calculons-nous la direction d’une force?
@@ -261,6 +266,7 @@ void applyForce(PVector force) {
 ![alt text](assets/Image2.png)
 
 Voici un exemple où on trouve converti la formule de la friction en code :
+
 - La formule de la friction est
     $\vec{F}_{\text{friction}} = -\mu N \hat{v}$
 
@@ -350,6 +356,7 @@ void applyForce(PVector force) {
 ## Exercices
 
 Avec le projet inclus (s02_forces_01) avec ce cours :
+
 - Corriger les bogues du projet.
 - En utilisant les forces, simuler un ballon rempli d’hélium qui flotte vers le haut et qui rebondit lorsqu’il atteint le plafond.
     - Ajouter du vent qui change au fil du temps avec un bruit de Perlin.
@@ -357,7 +364,7 @@ Avec le projet inclus (s02_forces_01) avec ce cours :
     - Exemple : Cinquante objets auxquels on applique du vent.
 - Créez une application où des objets tombent dans un liquide quelconque et dont l’on peut constater le ralentissement.
 - Défi! Simuler un objet qui a un parachute qui ouvre.
-    - [Lien vers la formule de la Nasa](https://www.grc.nasa.gov/WWW/k-12/VirtualAero/BottleRocket/airplane/rktvrecv.html)
+    - [Lien vers la formule de la Nasa](https://www.grc.nasa.gov/WWW/k-12/VirtualAero/BottleRocket/airplane/rktvrecv.html){target="_blank"}
 
 ---
 

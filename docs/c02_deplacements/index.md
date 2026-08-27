@@ -2,6 +2,7 @@
 
 
 ## Objectifs
+
 - Comprendre le rôle du vecteur vitesse
 - Comprendre le rôle du vecteur accélération
 - Découvrir comment les forces déplacent un objet
@@ -12,6 +13,7 @@ Pour t'aider à mieux comprendre le mouvement, tu peux utiliser la fonction suiv
 
 ```java
 // Affiche une flèche représentant le vecteur v à partir du point (x, y)
+// Dessiner une flèche de vecteur (Draw vector arrow)
 void drawVectorArrow(PVector v, float x, float y, color arrowColor) {
   pushMatrix();
     translate(x, y);
@@ -23,7 +25,7 @@ void drawVectorArrow(PVector v, float x, float y, color arrowColor) {
     line(0, 0, v.x, v.y);
 
     // Dessine la tête de flèche
-    float arrowSize = 7;
+    float arrowSize = 7; // Taille de la flèche (Arrow size)
     float angle = atan2(v.y, v.x);
 
     pushMatrix();
@@ -42,21 +44,24 @@ Dans ce chapitre, tu vas apprendre à utiliser les vecteurs pour déplacer un ob
 ## Structure de base
 
 On utilise une classe abstraite `GraphicObject` pour représenter un objet graphique. Elle possède deux méthodes principales :
+
 - `display` : affiche l'objet
 - `update` : met à jour sa position
 
 ```java
 abstract class GraphicObject {
-  PVector location;
-  PVector velocity;
-  PVector acceleration;
+  PVector location;                // Position (Location)
+  PVector velocity;                // Vitesse (Velocity)
+  PVector acceleration;            // Accélération (Acceleration)
   
-  color fillColor = color (200);
-  color strokeColor = color (255);
-  float strokeWeight = 1;
+  color fillColor = color (200);   // Couleur de remplissage (Fill color)
+  color strokeColor = color (255); // Couleur du contour (Stroke color)
+  float strokeWeight = 1;          // Épaisseur du contour (Stroke weight)
   
+  // Mettre à jour (Update)
   abstract void update(int deltaTime);
   
+  // Afficher (Display)
   abstract void display();
   
 }
@@ -117,9 +122,9 @@ Exemple : déplacement en ligne droite
 
 ```java
 Mover mover;
-int currentTime = 0;
-int lastTime = 0;
-int deltaTime = 0;
+int currentTime = 0; // Temps actuel (Current time)
+int lastTime = 0;    // Dernier temps enregistré (Last time)
+int deltaTime = 0;   // Temps écoulé (Delta time)
 
 void setup() {
   size(800, 800);
@@ -146,17 +151,21 @@ void display() {
 
 
 Résultat :
+
 ![alt text](assets/moving_example.gif)
 
 
 **À retenir**
+
 - La vitesse est un vecteur (direction + magnitude)
 - Pour déplacer un objet, on ajoute la vitesse à la position
 
 ### Exercices
+
 - Reproduisez l'exemple de cette section en modifiant la vitesse de l'objet.
 
 ### Exercices optionnels
+
 - Modifie la vitesse de l'objet pour qu'il se déplace dans une autre direction.
 - Ajoute un deuxième objet avec une vitesse différente.
 - Affiche la magnitude et la direction du vecteur vitesse à l'écran.
@@ -177,12 +186,14 @@ $$ \text{vitesse} = \text{vitesse} + \text{accélération} $$
 Donc, pour déplacer un objet avec accélération :
 
 $$ \text{vitesse} = \text{vitesse} + \text{accélération} $$
+
 $$ \text{position} = \text{position} + \text{vitesse} $$
 
 Le code de la méthode `update` de la classe `Mover` devient donc :
 
 ```java
-
+  // Fonction servant à valider les bordures.
+  // Vérifier les bordures (Check edge)
   void checkEdge() {
     var tempLoc = location.copy().add(velocity);
     
@@ -205,6 +216,7 @@ Le code de la méthode `update` de la classe `Mover` devient donc :
 
 
 Remarque :
+
 - On remet l'accélération à zéro à chaque frame pour éviter qu'elle ne s'accumule.
 - La méthode `checkEdge` inverse la vitesse si l'objet touche un bord.
 
@@ -214,9 +226,9 @@ Remarque :
 Exemple : accélération sur l'axe Y (effet de gravité)
 
 ```java
-long currentTime;
-long previousTime;
-long deltaTime;
+long currentTime;  // Temps actuel (Current time)
+long previousTime; // Temps précédent (Previous time)
+long deltaTime;    // Temps écoulé (Delta time)
 
 Mover m;
 
@@ -236,6 +248,7 @@ void draw () {
   display();
 }
 
+// Accélérer (Accelerate)
 void accelerate() {
   m.acceleration.x = 0;
   m.acceleration.y = 0.5;
@@ -253,6 +266,7 @@ void display () {
   m.display();
 }
 
+// Gérer le temps (Time management)
 void timeManagement (){
   currentTime = millis();
   deltaTime = currentTime - previousTime;
@@ -265,6 +279,7 @@ void timeManagement (){
 
 
 Résultat :
+
 ![alt text](assets/example_acceleration.gif)
 
 ---
@@ -274,14 +289,17 @@ L'objet accélère vers le bas car l'accélération est positive sur Y : cela 
 
 
 **À retenir**
+
 - L'accélération est un vecteur (variation de la vitesse)
 - Pour accélérer un objet, on ajoute l'accélération à la vitesse
 
 ### Exercices
+
 - Reproduisez l'exemple de cette section en modifiant l'accélération de l'objet.
     - Inversez l'accélération sur l'axe des Y.
 
 ### Exercices optionnels
+
 - Change la valeur de l'accélération pour simuler une gravité plus forte ou plus faible.
 - Inverse l'accélération sur l'axe Y pour voir l'objet accélérer vers le haut.
 - Ajoute une accélération sur l'axe X pour un mouvement diagonal.
@@ -297,15 +315,17 @@ Exemple : la classe `Mover` modifiée pour viser une cible
 class Mover extends GraphicObject {
   
   int diameter = 20;
-  PVector target;
-  float topSpeed = 10;
+  PVector target;      // Cible (Target)
+  float topSpeed = 10; // Vitesse maximale (Top speed)
 
   // -- Méthodes ajoutées --
   
+  // Définir la cible (Set target)
   void setTarget (PVector _target) {
     target = _target;
   }
   
+  // Mettre à jour la cible (Update target)
   void updateTarget (float x, float y) {
     if (target == null) {
       target = new PVector();
@@ -315,6 +335,7 @@ class Mover extends GraphicObject {
     target.y = y;
   }
   
+  // Rechercher la cible (Seek the target)
   void seekTarget() {
     
     var dir = PVector.sub(target, location);
@@ -324,6 +345,7 @@ class Mover extends GraphicObject {
     acceleration = dir;
   }
   
+  // Vérifier si la cible est atteinte (Is target reached)
   boolean isTargetReached() {
     if (target == null) {
       return true;
@@ -397,6 +419,7 @@ void display () {
   ellipse (mouseX, mouseY, 10, 10);
 }
 
+// Gérer le temps (Time management)
 void timeManagement (){
   currentTime = millis();
   deltaTime = currentTime - previousTime;
@@ -409,6 +432,7 @@ void timeManagement (){
 ## Synthèse
 
 Ce chapitre t'a permis de comprendre comment utiliser les vecteurs pour déplacer un objet dans Processing :
+
 - La vitesse détermine la direction et la rapidité du déplacement.
 - L'accélération permet de faire varier la vitesse, simulant des effets comme la gravité.
 - En combinant ces notions, on peut déplacer un objet vers une cible ou simuler des mouvements réalistes.
@@ -419,6 +443,7 @@ Pour aller plus loin, expérimente avec les exemples et les exercices proposés,
 
 
 ## Références
+
 - [Nature of Code - Chapitre 1](https://natureofcode.com/book/chapter-1-vectors/)
 
 ---

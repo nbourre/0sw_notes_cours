@@ -15,16 +15,10 @@
 
 ## Exemple
 
-<table style="border: none;">
-
-<tr>
-<td>
+<div class="grid" markdown>
 
 - Ci-contre est un exemple de patron que j’utilise pour mes projets.
 - Sauvegardez ce fichier sous `documents/processing/templates/java/sketch.pde`.
-
-</td>
-<td>
 
 ```java
 int currentTime;
@@ -56,13 +50,12 @@ void timeManagement() {
 }
 ```
 
-</td>
-</tr>
-</table>
+</div>
 
 ---
 
 ## Exercices
+
 - Dans notre cas, nous utiliserons Java, ainsi, créez un dossier « Java » dans « templates ».
 - Ajoutez un fichier `sketch.pde`.
 - Dans le fichier `sketch.pde`, collez le code qui est dans la section commentaire de cette diapo.
