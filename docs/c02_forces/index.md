@@ -150,7 +150,20 @@ void update(int delta) {
 }
 ```
 
-![alt text](assets/force_wind_02.gif)
+Essayez-le vous-même : le curseur contrôle la force du vent appliquée à chaque image (comme dans `mover.applyForce(wind)` ci-dessus). Le Mover rebondit sur les bords du canevas, exactement comme dans le projet `s02_forces_01`.
+
+<div class="p5-embed">
+  <div id="sketch-forces-wind"></div>
+  <script src="assets/forces_lib.js"></script>
+  <script src="assets/sandbox_wind.js"></script>
+  <script>
+    (() => {
+      const holder = document.getElementById("sketch-forces-wind");
+      if (holder._p5Instance) holder._p5Instance.remove();
+      holder._p5Instance = new p5(window.sketchForcesWind, holder);
+    })();
+  </script>
+</div>
 
 ---
 
@@ -203,6 +216,21 @@ void update() {
 }
 ```
 
+Le bac à sable ci-dessous combine les deux notions de cette section : le vent et la gravité s'additionnent (au lieu de s'écraser l'un l'autre), et maintenir le clic ajoute une poussée continue vers la droite. Cochez « Reproduire le bug » pour voir ce qui arrive quand on oublie de remettre l'accélération à zéro : l'objet se met à accélérer indéfiniment, même sans toucher à rien.
+
+<div class="p5-embed">
+  <div id="sketch-forces-accumulation"></div>
+  <script src="assets/forces_lib.js"></script>
+  <script src="assets/sandbox_accumulation.js"></script>
+  <script>
+    (() => {
+      const holder = document.getElementById("sketch-forces-accumulation");
+      if (holder._p5Instance) holder._p5Instance.remove();
+      holder._p5Instance = new p5(window.sketchForcesAccumulation, holder);
+    })();
+  </script>
+</div>
+
 ## Travailler avec la masse
 
 - L’ajout de la masse est relativement simple.
@@ -236,6 +264,21 @@ void applyForce(PVector force) {
     acceleration.add(f);
 }
 ```
+
+Le bac à sable ci-dessous illustre exactement ce problème : le **même** objet `PVector` (le vent) est transmis à trois Mover de masses différentes, chaque frame. En mode correct, chacun reçoit la pleine force du vent, simplement divisée par sa propre masse. Cochez « Reproduire le bug » pour voir ce qui se passe sans copie : le vecteur est divisé en place par le premier Mover, puis transmis déjà amoindri au suivant — la troisième balle (masse = 4) devient presque immobile, bien plus que ce que sa masse devrait justifier.
+
+<div class="p5-embed">
+  <div id="sketch-forces-mass"></div>
+  <script src="assets/forces_lib.js"></script>
+  <script src="assets/sandbox_mass.js"></script>
+  <script>
+    (() => {
+      const holder = document.getElementById("sketch-forces-mass");
+      if (holder._p5Instance) holder._p5Instance.remove();
+      holder._p5Instance = new p5(window.sketchForcesMass, holder);
+    })();
+  </script>
+</div>
 
 ### Exercice
 
@@ -286,7 +329,20 @@ friction.mult(-1); // Inverser la direction
 friction.mult(mu); // mu < 1 coefficient de friction
 ```
 
-![alt text](assets/force_friction.gif)
+Le bac à sable ci-dessous reprend exactement ce code : à chaque frame, une friction proportionnelle à μ s'oppose à la vélocité. Cliquez sur **Lancer** pour donner une impulsion à l'objet et observez comment il ralentit tout seul jusqu'à s'arrêter — sans friction, il continuerait indéfiniment (première loi de Newton). Maintenez le clic pour le pousser pendant qu'il ralentit, et essayez différentes valeurs de μ pour voir l'effet sur la distance parcourue.
+
+<div class="p5-embed">
+  <div id="sketch-forces-friction"></div>
+  <script src="assets/forces_lib.js"></script>
+  <script src="assets/sandbox_friction.js"></script>
+  <script>
+    (() => {
+      const holder = document.getElementById("sketch-forces-friction");
+      if (holder._p5Instance) holder._p5Instance.remove();
+      holder._p5Instance = new p5(window.sketchForcesFriction, holder);
+    })();
+  </script>
+</div>
 
 ---
 
@@ -319,9 +375,20 @@ Ainsi en appliquant cette force lors du contact avec le "liquide", on aura l’i
 
 Attention! Ceci n'est pas la force de flottaison. Il s'agit d'une autre formule.
 
-Voici le résultat de la résistance des fluides :
+Le bac à sable ci-dessous est adapté de `s02_forces_fluidDrag` : dix balles de masse aléatoire tombent (la gravité est proportionnelle à la masse, donc toutes chutent à la même vitesse — comme dans la réalité), avec une légère friction de l'air en tout temps. En traversant une des deux bandes colorées, elles subissent en plus la formule de résistance ci-dessus, avec la masse de la balle qui joue le rôle de l'aire frontale $A$. Remarquez que les balles ralentissent nettement plus dans la bande du milieu (densité plus élevée) que dans celle du bas :
 
-![alt text](assets/fluid_drag.gif)
+<div class="p5-embed">
+  <div id="sketch-forces-fluid-drag"></div>
+  <script src="assets/forces_lib.js"></script>
+  <script src="assets/sandbox_fluid_drag.js"></script>
+  <script>
+    (() => {
+      const holder = document.getElementById("sketch-forces-fluid-drag");
+      if (holder._p5Instance) holder._p5Instance.remove();
+      holder._p5Instance = new p5(window.sketchForcesFluidDrag, holder);
+    })();
+  </script>
+</div>
 
 ---
 
