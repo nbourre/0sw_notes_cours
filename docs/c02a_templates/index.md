@@ -2,8 +2,8 @@
 
 ## Les templates
 
-- Depuis la version 3.x, il y a un dossier « templates » dans « Documents/Processing ».
-- On peut modifier le dossier dans les préférences.
+- Depuis Processing 3.2, il y a un dossier « templates » dans le carnet de croquis (*sketchbook*), habituellement `Documents/Processing`. Cette fonctionnalité est toujours présente en Processing 4.x.
+- On peut modifier l'emplacement du carnet de croquis (et donc du dossier `templates`) dans les préférences.
 - Ce dossier permet de créer un patron pour chaque mode de programmation de Processing.
 - Lors de la création d’un nouveau projet, le contenu du projet sera déjà rempli avec du code par défaut ainsi que les classes qui y sont présentes.
 - Chaque patron doit être dans un dossier nommé avec le nom du langage.
@@ -18,7 +18,7 @@
 <div class="grid" markdown>
 
 - Ci-contre est un exemple de patron que j’utilise pour mes projets.
-- Sauvegardez ce fichier sous `documents/processing/templates/java/sketch.pde`.
+- Sauvegardez ce fichier sous `Documents/Processing/templates/Java/sketch.pde`.
 
 ```java
 int currentTime;
@@ -58,7 +58,7 @@ void timeManagement() {
 
 - Dans notre cas, nous utiliserons Java, ainsi, créez un dossier « Java » dans « templates ».
 - Ajoutez un fichier `sketch.pde`.
-- Dans le fichier `sketch.pde`, collez le code qui est dans la section commentaire de cette diapo.
+- Dans le fichier `sketch.pde`, collez le code de la section [Exemple](#exemple) ci-dessus.
 - Testez le patron en créant un nouveau projet Java.
 - Ajoutez un objet abstrait nommé `GraphicObject` avec les propriétés et méthodes suivantes :
     - `PVector location`, `velocity` et `acceleration`.
@@ -66,3 +66,9 @@ void timeManagement() {
     - Méthode abstraite `void update (float deltaTime)` et `display()`.
     - Cette classe servira à accélérer le développement d’objet graphique.
     - Sauvegardez `GraphicObject` dans le patron.
+
+---
+
+## Références
+
+- [Templates - Processing Wiki](https://github.com/processing/processing/wiki/Templates)
