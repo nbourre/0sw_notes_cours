@@ -56,7 +56,10 @@ De la trigonométrie!... Oh boboy!
 float angle = atan2(enemy.y - player.y, enemy.x - player.x);
 ```
 
-> **Note** : On utilise la fonction `atan2` pour obtenir l’angle en radians entre deux points. Elle est plus précise que `atan` et prend en compte les quadrants.
+!!! note "Pourquoi `atan2` et non `atan` ?"
+    `atan` calcule un angle uniquement à partir du rapport opposé/adjacent ($\frac{dy}{dx}$) : il ne sait donc pas dans quel quadrant se trouve le point — deux directions opposées peuvent donner le même résultat — et sa portée est limitée à $-90°$ à $90°$.
+
+    `atan2(dy, dx)` reçoit $dy$ et $dx$ séparément et utilise leurs signes pour déterminer le bon quadrant, retournant un angle précis entre $-\pi$ et $\pi$ radians (soit $-180°$ à $180°$) — n'importe quelle direction sur 360°. C'est pour ça qu'on l'utilise pour obtenir l'angle en radians entre deux points.
 
 ---
 
@@ -246,6 +249,20 @@ void display() {
 - <img src="assets/motion_detection.webp"/>
 - <img src="assets/velocity_triangle.png" width="400"/>
 
+</div>
+
+Ci-bas : le vaisseau bleu (joueur) suit la souris mais garde toujours un cap fixe vers le nord, alors que le vaisseau rouge (ennemi, immobile) recalcule son cap à chaque image avec `atan2(dy, dx)` pour pointer vers vous. Cochez la case pour superposer le triangle (dx, dy, angle) utilisé dans ce calcul.
+
+<div class="p5-embed">
+  <div id="sketch-oscillation-angle-direction"></div>
+  <script src="assets/sandbox_angle.js"></script>
+  <script>
+    (() => {
+      const holder = document.getElementById("sketch-oscillation-angle-direction");
+      if (holder._p5Instance) holder._p5Instance.remove();
+      holder._p5Instance = new p5(window.sketchOscillationAngle, holder);
+    })();
+  </script>
 </div>
 
 ---
