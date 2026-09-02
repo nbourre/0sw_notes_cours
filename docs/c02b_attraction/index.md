@@ -98,6 +98,23 @@ Dépendant des initiales, on pourrait obtenir un résultat similaire à ceci :
 
 ![alt text](assets/attractor_mover.gif)
 
+---
+
+Voici un bac à sable reprenant exactement cette formule (distance limitée entre 5 et 25, sans G). Avec un seul corps mobile et l'attracteur central activé, vous devriez obtenir une trajectoire semblable au GIF ci-dessus. **Ce même bac à sable sert aussi à la section « Plusieurs corps » plus bas** — augmentez le nombre de corps mobiles et désactivez l'attracteur central pour reproduire cet autre exemple.
+
+<div class="p5-embed">
+  <div id="sketch-attraction"></div>
+  <script src="assets/forces_lib.js"></script>
+  <script src="assets/sandbox_attraction.js"></script>
+  <script>
+    (() => {
+      const holder = document.getElementById("sketch-attraction");
+      if (holder._p5Instance) holder._p5Instance.remove();
+      holder._p5Instance = new p5(window.sketchAttraction, holder);
+    })();
+  </script>
+</div>
+
 ### Exercice
 
 - Créez la classe `Attractor` avec les méthodes `display` et `attract`.
@@ -112,6 +129,8 @@ Avec la section précédente, nous pouvons maintenant attirer un objet avec un a
 Le résultat pourrait ressembler à ceci :
 
 ![alt text](assets/attractor_multiple.gif)
+
+Remontez au bac à sable de la section précédente : mettez le curseur **Nombre de corps mobiles** à plusieurs, puis décochez **Attracteur central fixe**. Chaque corps applique alors la même formule d'attraction à tous les autres — aucun objet n'est fixe, ils s'attirent tous mutuellement, exactement comme demandé dans l'exercice ci-dessous.
 
 ### Exercice
 
