@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  {#
+    p5.js chargée ici (dans <head>, script synchrone, sans defer/async) plutôt
+    que dans extra_javascript : mkdocs place les entrées de extra_javascript à
+    la toute fin du <body>, après le contenu de la page. Les esquisses p5.js
+    encodées dans le Markdown (voir docs/javascripts/p5-embed.js) s'exécutent
+    en tant que scripts synchrones normaux dès que le navigateur les rencontre
+    pendant le parsing — donc AVANT extra_javascript si p5.js y était chargée,
+    provoquant `p5 is not defined` au tout premier chargement d'une page.
+    En chargeant p5.js ici, elle est garantie disponible avant tout contenu du
+    <body>, peu importe l'ordre.
+  #}
+  <script src="https://cdn.jsdelivr.net/npm/p5@1/lib/p5.min.js"></script>
+{% endblock %}

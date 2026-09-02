@@ -12,7 +12,7 @@
 
 Convention détaillée dans [workflow/readme.md](../workflow/readme.md) — à lire avant d'ajouter une esquisse p5.js. Résumé :
 
-- `mkdocs.yml` charge p5.js en CDN + `docs/javascripts/p5-embed.js` (force les `<script>` à se réexécuter à la navigation instantanée).
+- `mkdocs.yml` charge p5.js en CDN dans `<head>` via `overrides/main.html` (`theme.custom_dir: overrides`), pas via `extra_javascript` — sinon elle chargerait après le contenu de page (fin de `<body>`), après les scripts des esquisses. `docs/javascripts/p5-embed.js` (chargé via `extra_javascript`) force les `<script>` d'un bloc `.p5-embed` à se réexécuter à la navigation instantanée.
 - Toujours écrire les sketches en **mode instance** (`(p) => { p.setup = ...; p.draw = ...; }`), jamais en mode global.
 - Sketch court → inline dans le markdown. Sketch long → fichier séparé `docs/<page>/assets/nom.js` exportant `window.sketchXyz = (p) => {...}`, puis un petit bloc d'instanciation dans le markdown (`new p5(window.sketchXyz, holder)`).
 - Id de conteneur unique **sur tout le site**, pas juste la page.

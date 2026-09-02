@@ -2,6 +2,7 @@ site_name: Programmation jeux et multimédias (420-0SW - Cégep de Shawinigan)
 site_url: https://nbourre.github.io/0sw_notes_cours/
 theme:
   name: material
+  custom_dir: overrides
   language: fr
   features:
     - search.suggest
@@ -45,7 +46,8 @@ extra_javascript:
   - javascripts/mathjax.js
   #- javascripts/tex-mml-chtml.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - https://cdn.jsdelivr.net/npm/p5@1/lib/p5.min.js
+  # p5.js elle-même est chargée dans <head> (voir overrides/main.html) pour
+  # être disponible avant les scripts des esquisses embarquées dans le contenu.
   - javascripts/p5-embed.js
 
 extra_css:

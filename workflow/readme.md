@@ -2,7 +2,10 @@
 
 ## Ajouter une animation p5.js dans une page MkDocs
 
-Le site est déjà configuré pour supporter des esquisses p5.js (voir [mkdocs.yml](../mkdocs.yml) : librairie p5.js en CDN + [docs/javascripts/p5-embed.js](../docs/javascripts/p5-embed.js)). Ce dernier fichier force les `<script>` à se réexécuter lors d'une navigation instantanée (`navigation.instant`), sinon l'esquisse ne s'afficherait qu'au tout premier chargement du site.
+Le site est déjà configuré pour supporter des esquisses p5.js :
+
+- **p5.js elle-même** est chargée dans `<head>` via [overrides/main.html](../overrides/main.html) (`theme.custom_dir: overrides` dans [mkdocs.yml](../mkdocs.yml)), et non via `extra_javascript`. Raison : `extra_javascript` place ses scripts à la toute fin du `<body>`, *après* le contenu de la page — donc après les scripts des esquisses. En chargeant p5.js dans `<head>`, elle est garantie disponible avant que le navigateur n'atteigne le moindre script d'esquisse dans le contenu, y compris au tout premier chargement d'une page.
+- **[docs/javascripts/p5-embed.js](../docs/javascripts/p5-embed.js)** force les `<script>` d'un bloc `.p5-embed` à se réexécuter à chaque navigation instantanée (`navigation.instant`) — sinon l'esquisse ne s'afficherait qu'au tout premier chargement du site (les scripts insérés par le remplacement de contenu de la navigation instantanée ne s'exécutent pas automatiquement).
 
 ### Étapes
 
