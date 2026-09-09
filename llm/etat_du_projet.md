@@ -1,9 +1,14 @@
 # État du projet
 
-*Dernière mise à jour : 2026-09-02. À tenir à jour après chaque session de travail significative — pas besoin de détail, juste assez pour repartir sans relire tout l'historique.*
+*Dernière mise à jour : 2026-09-09. À tenir à jour après chaque session de travail significative — pas besoin de détail, juste assez pour repartir sans relire tout l'historique.*
 
 ## Fait récemment
 
+- **`docs/c04_godot/index.md`** : révision complète du contenu, converti brut d'un export PPT (bullets fragmentés, séparateurs `---` après chaque « diapo », `alt text` générique sur toutes les images, artefacts `&nbsp;`). Réécrit en prose fluide (façon `c01_nombres_aleatoires`), garde les listes à puces seulement là où c'est légitime (étapes d'exercice, objectifs, références). Alt text réécrit pour chaque image après les avoir regardées une à une. Deux corrections de contenu :
+  - Contradiction « quatre environnements de travail » vs 5 listés (2D, 3D, Script, Game, AssetLib) — retiré le décompte erroné, gardé la liste des 5.
+  - Un exercice utilisait une syntaxe Godot 3.x obsolète (`Connect("pressed", this, nameof(...))`, `_Process(float delta)`) alors que le reste de la page enseigne la syntaxe C# moderne (`+=`, `double delta`) — corrigé pour rester cohérent.
+  - Blocs `!!! tip`/`!!! warning` utilisés à la place des `>` blockquote et mentions ad hoc ("Bug alert!"), cohérent avec la convention du site.
+  - Validé avec `mkdocs build --strict` (aucun avertissement propre à ce fichier) + inspection du HTML généré (tables, admonitions, headings).
 - **Bug des bacs à sable au premier chargement** (signalé : « je dois rafraîchir la page pour que les sandbox apparaissent »), corrigé site large. Cause : p5.js était chargée en tout dernier dans le `<body>` (`extra_javascript`), après le contenu de page — un `<script>` de bac à sable exécutable natif tentait `new p5(...)` avant que `p5` n'existe, échec silencieux.
   - **Premier essai (raté, causait une régression totale — plus aucun bac à sable ne s'affichait)** : neutraliser les `<script>` d'un bloc `.p5-embed` avec `type="text/plain"` et les activer via `document$` uniquement. Abandonné et revenu en arrière (6 fichiers markdown + `p5-embed.js` restaurés à l'identique).
   - **Fix retenu** : charger p5.js dans `<head>` via un override de thème (`overrides/main.html`, `theme.custom_dir: overrides` dans `mkdocs.yml`), plutôt que via `extra_javascript`. Elle est ainsi garantie disponible avant le moindre script de contenu, peu importe l'ordre dans `extra_javascript`. `docs/javascripts/p5-embed.js` (toujours via `extra_javascript`) garde son rôle : réexécuter les scripts à la navigation instantanée ; il a aussi été amélioré pour copier correctement `src` (et forcer `async = false`) lors du clonage d'un `<script src>`, ce qui n'était pas fait avant (bug préexistant, invisible tant qu'aucune page n'était testée après une navigation instantanée entre deux pages à bacs à sable).
