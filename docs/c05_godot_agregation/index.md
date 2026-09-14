@@ -41,9 +41,10 @@ Les boids ne se déplace qu’avec une vitesse initiale
 - Limiter le vecteur de braquage
 - Retourner le vecteur de braquage
 
-![alt text](assets/steering.gif)
+![type:video](assets/AgentSeek.mp4)
 
-### Exemple
+### Exemple de code
+
 ```gdscript
 # Dans un node2D
 func steering(target: Vector2) -> Vector2:
@@ -94,6 +95,7 @@ Banc de thons
 ---
 
 ### La séparation ou répulsion
+
 - La force de séparation ou de répulsion est celle qui permet à l’agent de d’éloigner des voisins trop près
 - On pourrait la définir comme la bulle personnelle
 - On calcule en effectuant la ${\color{blue}moyenne\ de\ la\ différence\ des\ distances}$ divisé par la ${\color{blue}distance}$
@@ -102,6 +104,7 @@ Banc de thons
 ---
 
 #### Algorithme
+
 - Pour chaque agents qui sont dans la bulle de répulsion
     - Diff <-- agent.position – autre.position
     - Normalise diff
@@ -114,6 +117,8 @@ Banc de thons
 - Multiplier par la vitesse max
 - Soustraire la vitesse de l’agent
 - Limiter par la vitesse de braquage max
+
+#### Exemple de code
 
 ```gdscript
 func separation(boids: Array) -> Vector2:
@@ -137,10 +142,11 @@ func separation(boids: Array) -> Vector2:
 	return steer
 ```
 
----
+![type:video](assets/AgentSeparation.mp4)
+
 
 #### Visualisation
-- Avec le projet `c05_godot_agregation` ouvert
+- Avec le projet `c05_autonomous_agents` ouvert
 - Exécutez le projet
 - Pendant que le projet s'exécute dans Godot, sélectionnez la scène `World`
 - Dans l'inspecteur, activez la propriété `Separation`
@@ -150,16 +156,22 @@ Voici ce que vous devriez voir
 
 ![alt text](assets/flock_separation.gif)
 
----
 
 ### L’alignement
 - L’alignement est la force qui permet à l’agent de suivre le groupe
 - Elle se calcule en effectuant la moyenne de la vitesse des agents qui sont dans le voisinage établi
 
+![type:video](assets/AgentAlignment.mp4)
 
-#### Algo	
-- Calculer la moyenne des vitesses du voisinage
+#### Algo
+
+- Pour chaque agent dans le voisinage
+    - Ajouter la vitesse de l'agent à la somme des vitesses
+    - Incrémenter le compteur
+- Diviser la somme par le nombre d'agents
 - Calculer la force de braquage avec la moyenne trouvée
+
+#### Exemple de code
 
 ```gdscript
 # Calcul de la force d'alignement (se déplacer dans la même direction que les boids voisins)
@@ -183,6 +195,8 @@ func alignment(boids: Array) -> Vector2:
 	return Vector2()
 ```
 
+
+
 #### Visualisation
 - Dans l'inspecteur, activez la propriété `Alignment`
 - Observez le comportement des boids. Que voyez-vous?
@@ -200,8 +214,14 @@ Voici ce que vous devriez voir
 - Ensuite, on calcule la force de braquage pour atteindre cette cible
  
 #### Algo
+
 - Cible <- Calculer la moyenne des positions des voisins
 - Calculer le vecteur de braquage pour atteindre la cible
+
+
+![type:video](assets/AgentCohesion.mp4)
+
+#### Exemple de code
 
 ```gdscript
 # Calcul de la force de cohésion (se rapprocher des autres boids)
@@ -235,6 +255,7 @@ Voici ce que vous devriez voir.
 ---
 
 ### Sommation des forces
+
 - Après avoir calculé les trois forces, on applique une pondération pour chacune d’elle
 - Par la suite, on les applique à l’agent
 - Le résultat final dépendra des facteurs suivants
@@ -242,9 +263,13 @@ Voici ce que vous devriez voir.
     - La pondération de chaque force
     - Le nombre de voisins à considérer
 
+Exemple en appliquant les trois forces avec des agents immobiles
+![type:video](assets/AgentFlocking.mp4)
+
 ![alt text](assets/flock_sep_ali_coh.gif)
 
 ### Jouer avec les forces
+
 ![alt text](assets/flock_mixing_forces.gif)
 
 ---
