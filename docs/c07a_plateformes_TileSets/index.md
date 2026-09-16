@@ -9,6 +9,7 @@ prj : everthing -> jackie-codes
 -->
 
 ## Pré-requis
+
 - Utilisez le projet `c07_plateforme` comme base.
 
 ![alt text](assets/c07_plateforme_start.gif)
@@ -62,7 +63,8 @@ Une fois que vous avez créé un **TileSet**, vous devez y ajouter des tuiles. V
 
 ---
 
-> **Note** : Lorsque l'on désire utiliser la fonctionnalité de création de tuiles automatiques, il est important de bien définir la taille des tuiles **avant** de créer l'atlas. Cela permettra à Godot de découper correctement les tuiles de votre *tilesheet*.
+!!! note
+    Lorsque l'on désire utiliser la fonctionnalité de création de tuiles automatiques, il est important de bien définir la taille des tuiles **avant** de créer l'atlas. Cela permettra à Godot de découper correctement les tuiles de votre *tilesheet*.
 
 5. Avec l'éditeur de TileSet ouvert, glissez et déposez la texture de tuiles dans la zone de l'éditeur pour créer un atlas de tuiles.
 6. Cliquez sur "Oui" pour confirmer la création de l'atlas.
@@ -74,6 +76,7 @@ Une fois que vous avez créé un **TileSet**, vous devez y ajouter des tuiles. V
 Il est possible d'ajouter plusieurs feuilles de tuiles à un **TileSet** pour créer des jeux plus complexes. Pour ajouter une autre feuille de tuiles, répétez les étapes 3 à 6.
 
 Les propriétés suivantes peuvent être ajustées dans l'atlas selon vos besoins :
+
 - **ID** : L'identifiant (unique dans ce TileSet), utilisé pour le tri.
 - **Nom** : Le nom lisible de l'atlas. Utilisez un nom descriptif ici à des fins organisationnelles (comme "terrain", "décoration", etc).
 - **Marges** : Les marges sur les bords de l'image qui ne doivent pas être sélectionnées comme tuiles (en pixels). Augmenter cela peut être utile si vous téléchargez une image de feuille de tuiles qui a des marges sur les bords (par exemple pour l'attribution).
@@ -92,12 +95,14 @@ Enfin, si vous utilisez des lumières et des ombres 2D ou des particules GPUPart
 Pour pouvoir définir des formes de collision, de navigation et d'occlusion pour chaque tuile, vous devrez d'abord créer une **couche de physique**, de **navigation** ou d'**occlusion** pour la ressource `TileSet`.
 
 Pour ce faire,
+
 1. Sélectionnez le nœud `TileMapLayer` dans la scène.
 2. Cliquez sur la valeur de la propriété `TileSet` dans l'inspecteur pour l'éditer, puis dépliez les `couches de physique (Physics Layers)` et choisissez `Ajouter un élément (Add Element)`.
 
 ![alt text](assets/add_physics_layer.gif)
 
-> **Note :** On peut aussi ajouter des couches de navigation et d'occlusion de la même manière.
+!!! note
+    On peut aussi ajouter des couches de navigation et d'occlusion de la même manière.
 
 ---
 
@@ -127,6 +132,7 @@ On peut aussi utiliser le rectangle de base pour créer des formes plus complexe
 ---
 
 ### Exercices
+
 - Attribuez des formes de collision à toutes les tuiles rouges qui ont une surface pour marcher.
 
 ---
@@ -177,6 +183,7 @@ Pour créer un jeu de terrain, suivez les étapes suivantes :
 ![alt text](assets/using_tilesets_configure_terrain_peering_bits.webp)
 
 Le fonctionnement va ainsi :
+
 - Si tous les bits sont à 0, la tuile ne s'affichera que s'il y a 8 tuiles autour d'elle avec le même `terrain ID`.
 - Si un tuile n'a que les bits de gauche et droite à 0, il faudra seulement que les tuiles de gauche ET de droite aient le même `terrain ID`.
 - La valeur `-1` signifie une tuile vide.
@@ -184,6 +191,7 @@ Le fonctionnement va ainsi :
 ![alt text](assets/Terrain_peering_bit_explained.png)
 
 Dans l'exemple ci-haut, il y a trois tuiles configurées :
+
 - La tuile de gauche doit avoir le même `terrain ID` que la tuile de droite.
 - La tuile du centre doit avoir le même `terrain ID` que la tuile de gauche et de droite.
 - La tuile de droite doit avoir le même `terrain ID` que la tuile de gauche.
@@ -220,6 +228,7 @@ Voici le résultat final de mon jeu de terrain :
 ### Propriétés importantes `TileMapLayer`
 
 Les propriétés suivantes sont importantes pour configurer votre `TileMapLayer` :
+
 - `TileSet` : Le `TileSet` à utiliser pour la `TileMap`.
 - **Rendering**
     - **Y Sort Origin** : L'origine de l'ordonnancement Y. Cela détermine comment les tuiles sont ordonnées en fonction de leur position Y. Cette propriété ne fonctionne que si la propriété `Y Sort Enabled` est à vrai sur les paramètres de `CanvasItem`.
@@ -247,7 +256,8 @@ Une fois que vos tuiles et leurs propriétés sont configurées, vous pouvez les
 
 ### Peinture de tuiles automatiques
 
-> **Note :** Officiellemeent, la peinture de tuiles automatiques ne fonctionne qu'avec des tuiles carrées sans pentes. Il faudra ajouter une couche pour les terrains avec des pentes.
+!!! note
+    Officiellement, la peinture de tuiles automatiques ne fonctionne qu'avec des tuiles carrées sans pentes. Il faudra ajouter une couche pour les terrains avec des pentes.
 
 Si vous avez configuré un jeu de terrain, vous pouvez peindre des tuiles automatiquement en utilisant l'outil `Pinceau` :
 
@@ -264,9 +274,11 @@ Exemple d'un jeu top-down
 
 Dépendamment de la configuration de votre jeu de terrain, les tuiles se connecteront automatiquement.
 
-> **Note** : La configuration des terrains demande un peu de pratique pour bien comprendre comment les tuiles se connectent. Il est recommandé de faire des tests pour bien comprendre le fonctionnement.
+!!! note
+    La configuration des terrains demande un peu de pratique pour bien comprendre comment les tuiles se connectent. Il est recommandé de faire des tests pour bien comprendre le fonctionnement.
 
-> **Note** : L'outil semble plus adapté pour les terrains avec vue de dessus.
+!!! note
+    L'outil semble plus adapté pour les terrains avec vue de dessus.
 
 Il y a un modèle de base pour les terrains avec le mode "Corners and Sides" qui est disponible dans la référence qui est disponible à la fin de ce document.
 
@@ -285,6 +297,7 @@ Cependant, l'outil `Terrain` n'est pas prêt à la production. Il est recommand�
 ---
 
 ## Exercices
+
 - Trouvez vous un *tilesheet* sur le site itch.io qui serait compatible avec votre projet de session.
 - Créez un `TileSet` avec le *tilesheet* que vous avez trouvé.
 - Créez un `TileMap` et peignez les tuiles dans la scène.
@@ -293,5 +306,6 @@ Cependant, l'outil `Terrain` n'est pas prêt à la production. Il est recommand�
 ---
 
 ## Références
+
 - [Guide to TileSet Terrains](https://github.com/dandeliondino/godot-4-tileset-terrains-docs)
 - [TileSet Explorer](https://donitz.itch.io/tileset-explorer)

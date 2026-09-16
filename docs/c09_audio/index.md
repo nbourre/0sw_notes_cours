@@ -128,6 +128,7 @@ Dans cet article, je ne fais que montrer les bases de la gestion du son et de la
 
 ## Exercices
 À partir du projet `c07_plateforme_background` ou de votre projet de session, ajoutez des effets sonores pour les actions suivantes :
+
 - Musique de fond qui joue en boucle (time_for_adventure.mp3)
 - Ramassage d'une pièce (coin.wav) ou d'un objet
 - Saut (jump.wav)
@@ -135,5 +136,6 @@ Dans cet article, je ne fais que montrer les bases de la gestion du son et de la
 ---
 
 ## Références
+
 - [Playing sounds effects and music in Godot 4](https://www.youtube.com/watch?v=N6-2Iwb8xoU)
 - [Godot Engine - Audio](https://docs.godotengine.org/en/stable/tutorials/audio/index.html)

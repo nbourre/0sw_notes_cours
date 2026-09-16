@@ -27,6 +27,7 @@ Il nécessite un `CollisionShape2D` pour détecter les collisions et idéalement
 ![alt text](assets/moving_platform_nodes.png)
 
 ### Ajouter une plateforme
+
 1. Dans la scène principale, ajoutez la scène de la plateforme que vous avez créée.
 2. Exécutez la scène principale.
 
@@ -128,4 +129,5 @@ Les `Tween` peuvent être utilisés pour créer des effets intéressants pour vo
 ---
 
 ## Références
+
 - [Godot Engine : Tween](https://docs.godotengine.org/en/stable/classes/class_tween.html)

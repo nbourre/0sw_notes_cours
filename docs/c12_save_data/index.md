@@ -7,6 +7,7 @@
 Dans Godot, une **ressource personnalisée** permet de structurer et de sauvegarder facilement des informations complexes, comme l'état du joueur ou l'inventaire d'objets, sans les complications associées à l'utilisation de fichiers JSON ou d'autres formats de stockage brut. Cette approche rend les sauvegardes plus simples à gérer et à charger.
 
 Dans cette leçon, nous allons :
+
 - Créer une ressource de sauvegarde pour un joueur
 - Comprendre comment ajouter des sous-ressources (comme un inventaire)
 - Voir les avantages de l'utilisation des ressources personnalisées par rapport aux fichiers JSON.
@@ -17,6 +18,7 @@ Dans cette leçon, nous allons :
 Une **ressource personnalisée** est un composant de Godot que vous pouvez créer pour stocker des données spécifiques. Par exemple, une texture est une ressource assignable à un Sprite. En utilisant des ressources personnalisées, vous pouvez créer des structures de données propres à votre jeu, avec toutes les propriétés et méthodes dont vous avez besoin, tout en profitant de l'intégration avec l'éditeur Godot.
 
 Les ressources personnalisées se prêtent particulièrement bien aux fichiers de sauvegarde car :
+
 - Elles permettent de sauvegarder des structures de données complexes.
 - Elles facilitent le chargement sans conversion ni traitement supplémentaire.
 - Elles permettent d'utiliser des sous-ressources, idéales pour un inventaire d'objets ou des statistiques complexes.
@@ -29,6 +31,7 @@ Nous allons juste créer un projet avec des contrôles de base pour illustrer le
 ![alt text](assets/screenshot.png)
 
 La structure de la scène est la suivante :
+
 - `Node2D` (Main) : racine de la scène.
     - `HBoxContainer` : conteneur horizontal.
         - `VBoxContainer` : conteneur vertical.
@@ -123,6 +126,7 @@ Pour enregistrer les données du joueur sur le disque, nous devons configurer un
 Lors de la première exécution, cliquez sur le bouton `Save` pour enregistrer les données du joueur. Ensuite, cliquez sur le bouton `Change` pour modifier la santé du joueur. Enfin, cliquez sur le bouton `Load` pour charger les données sauvegardées.
 
 ### Observations
+
 - Dans votre explorateur de fichiers, vous devriez voir un dossier `save` contenant le fichier `player_save.tres`.
 - Ouvrez le fichier `player_save.tres` avec un éditeur de texte pour voir les données sauvegardées.
     - On y constate les différentes propriétés de `PlayerData`, comme la santé du joueur ainsi que les identifiants des ressources générées par Godot.
@@ -172,6 +176,7 @@ En ajoutant un inventaire comme sous-ressource dans `PlayerData`, chaque item se
     En utilisant cette approche, chaque item est enregistré avec toutes ses propriétés, et lors du chargement, l’inventaire est recréé sans manipulation supplémentaire.
 
 ### Observations
+
 - Après avoir ajouté des items à l’inventaire, sauvegardez et chargez les données pour voir comment les items sont stockés et restaurés.
 - Ouvrez le fichier `player_save.tres` pour voir comment les items sont sauvegardés en tant que sous-ressources.
 
@@ -198,6 +203,7 @@ inventory = [SubResource("Resource_21lwd")]
 ## Avantages des ressources personnalisées par rapport aux fichiers JSON
 
 Les ressources personnalisées sont parfaitement intégrées dans Godot et permettent de simplifier considérablement le travail de sauvegarde et de chargement. Contrairement aux fichiers JSON qui nécessitent souvent une conversion et une gestion des erreurs pour être chargés correctement, les ressources personnalisées :
+
     - Simplifient le processus de chargement grâce à une structure native dans Godot.
     - Permettent d'utiliser des sous-ressources, idéales pour des données imbriquées comme un inventaire.
     - Supportent des types complexes et permettent une interaction directe avec les scripts et méthodes de Godot.
@@ -209,6 +215,7 @@ Les ressources personnalisées sont parfaitement intégrées dans Godot et perme
 Les fichiers JSON restent utiles pour stocker des données de référence ou des bases de données. Par exemple, un fichier JSON peut contenir la liste de tous les items du jeu. Lors de l’ajout d’un nouvel item dans l’inventaire, seul l’ID de l'item est utilisé pour récupérer les détails dans le fichier JSON.
 
 Exemple d'utilisation :
+
     - **JSON** : stocke les données de base des items.
     - **Ressources personnalisées** : gèrent les sauvegardes de chaque instance d’item et ses modifications.
 
@@ -298,6 +305,7 @@ func _on_add_button_pressed() -> void:
 ---
 
 ## Références
+
 - [Documentation de Godot sur les ressources](https://docs.godotengine.org/en/stable/tutorials/scripting/resources.html)
 - [Save Files in Godot! (Custom Resource Tutorial)](https://www.youtube.com/watch?v=VGxYtJ3rXdE)
 - [SECURE saving with Encryption in Godot 4!](https://www.youtube.com/watch?v=mI4HfyBdV-k)

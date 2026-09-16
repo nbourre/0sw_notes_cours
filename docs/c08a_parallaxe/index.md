@@ -2,6 +2,7 @@
 
 
 ## Introduction
+
 - La **parallaxe** donne une impression de profondeur en faisant défiler plusieurs couches d’images à différentes vitesses, ce qui permet de simuler un monde 3D en 2D.
 - On simule la parallaxe avec des images qui défilent à des vitesses variées.
 - Pour simplifier la compréhension, prenons un décor à deux couches :
@@ -37,7 +38,8 @@
 
 ![Alt text](assets/parallax2d_props.png)
 
-> *Note :* Si vous faites un jeu à défilement horizontal uniquement, vous pouvez laisser `scroll_scale.y` à `0` pour éviter tout mouvement vertical du décor.
+!!! note
+    Si vous faites un jeu à défilement horizontal uniquement, vous pouvez laisser `scroll_scale.y` à `0` pour éviter tout mouvement vertical du décor.
 
 ---
 
@@ -82,6 +84,7 @@ Pour éviter des problèmes d’échelle et de performance :
 ---
 
 ## Contourner certains problèmes
+
 - Parfois les images ne sont pas tout à fait adaptées pour le jeu, par exemple elles ne sont pas assez hautes. On peut remédier à cela en utilisant un `ColorRect` de la même couleur que les extrémités de l’image pour combler le vide.
 
 
@@ -89,6 +92,7 @@ Pour éviter des problèmes d’échelle et de performance :
 
 ## Exercice
 À partir du projet [c07d_pateforme_ennemi](https://github.com/nbourre/0sw_projets_cours/tree/master/c07_plateforme_ennemi).
+
 - Ajouter un décor avec les images fournies dans le dossier `Legacy-Fantasy-PurpleBay/Background`.
     - La dimension des images est de 336x192
     - Faites défiler les nuages automatiquements

@@ -146,4 +146,5 @@ Voici le résultat final:
 
 ---
 ## Références
+
 - [Godot documentation : TextureProgressBar](https://docs.godotengine.org/en/stable/classes/class_textureprogressbar.html)

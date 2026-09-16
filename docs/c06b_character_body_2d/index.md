@@ -1,6 +1,7 @@
 # Créer un joueur avec le CharacterBody2D
 
 ## Objectif
+
 - Le noeud `CharacterBody2D`
 - Les noeuds `CollisionShape2D` et `CollisionPolygon2D`
 - Le noeud `Camera2D`
@@ -11,7 +12,8 @@ Le noeud [`CharacterBody2D`](https://docs.godotengine.org/en/stable/classes/clas
 
 Il s'agit d'une classe spécialisée de `PhysicsBody2D` qui est destinés à être contrôlés par l'utilisateur.  Ils ne sont pas du tout affectés par la physique, mais ils affectent d'autres corps physiques sur leur trajectoire. Ils sont principalement utilisés pour fournir une API de haut niveau permettant de déplacer des objets avec une détection de murs et de pentes (méthode [`move_and_slide()`](https://docs.godotengine.org/en/stable/classes/class_characterbody2d.html#class-characterbody2d-method-move-and-slide)) en plus de la détection générale des collisions fournie par [`PhysicsBody2D.move_and_collide()`](https://docs.godotengine.org/en/stable/classes/class_physicsbody2d.html#class-physicsbody2d-method-move-and-collide). Cela le rend utile pour les corps physiques hautement configurables qui doivent se déplacer de manière spécifique et entrer en collision avec le monde, comme c'est souvent le cas avec les personnages contrôlés par l'utilisateur.
 
-> **Note** : Pour les objets de jeu qui n'ont pas besoin d'un mouvement complexe ou d'une détection de collision, tels que les plates-formes mobiles, [AnimatableBody2D](https://docs.godotengine.org/en/stable/classes/class_animatablebody2d.html#class-animatablebody2d) est plus simple à configurer.
+!!! note
+    Pour les objets de jeu qui n'ont pas besoin d'un mouvement complexe ou d'une détection de collision, tels que les plates-formes mobiles, [AnimatableBody2D](https://docs.godotengine.org/en/stable/classes/class_animatablebody2d.html#class-animatablebody2d) est plus simple à configurer.
 
 CharacterBody2D requiert un noeud `CollisionShape2D` ou `CollisionPolygon2D` pour fonctionner. Il est possible d'en ajouter plusieurs pour gérer les collisions avec différents types de formes.
 
@@ -210,6 +212,7 @@ Vous avez maintenant les ingrédients pour créer un joueur de base dans un jeu 
 Il restera à ajouer le monde dans lequel le joueur évoluera. Ce sujet sera vu dans un autre tutoriel.
 
 ### Exercice
+
 1. Dans votre projet, créez une nouvelle scène avec un noeud `CharacterBody2D` à sa racine.
     - Si vous n'avez pas de projet, créez un nouveau projet avec une scène principale ayant un noeud 2D à sa racine. Nommez la scène `World`.
 
@@ -238,4 +241,5 @@ Il restera à ajouer le monde dans lequel le joueur évoluera. Ce sujet sera vu 
 ---
 
 ## Références
+
 - [Everything to Know About the Camera2d in Godot 4 (Full Guide) - Anglais - 25 min](https://www.youtube.com/watch?v=RlSpjIb7TLo)

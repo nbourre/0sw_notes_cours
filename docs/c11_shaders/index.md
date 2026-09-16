@@ -2,6 +2,7 @@
 
 
 ## Introduction
+
 - Les shaders sont des programmes qui permettent de dessiner des objets dans un moteur de jeu.
 - Ils sont utilisés pour les effets de lumière, les ombres, les textures, les effets de particules, etc.
 - Les shaders sont écrits en GLSL (OpenGL Shading Language), un langage de programmation bas niveau.
@@ -10,9 +11,8 @@
     - Godot sauvegarde avec l'extension `.gdshader` pour les shaders écrits dans l'éditeur de code.
 - Les shaders sont utilisés dans Godot pour les matériaux, les post-process, les effets de particules, etc.
 
-> **Note**
-> 
-> Étant donné que les shaders sont écrits en GLSL, il est possible, avec quelques conversions, d'utiliser des shaders dans d'autres moteurs de jeu. Par exemple, les shaders peuvent être utilisés dans Unity, Unreal Engine, etc.
+!!! note
+    Étant donné que les shaders sont écrits en GLSL, il est possible, avec quelques conversions, d'utiliser des shaders dans d'autres moteurs de jeu. Par exemple, les shaders peuvent être utilisés dans Unity, Unreal Engine, etc.
 
 ## Les shaders dans Godot
 Dans cet article, nous allons voir comment créer et utiliser un shader 2D dans Godot. On va faire clignoter une texture. Ce shader pourra être réutilisé, par exemple pour faire clignoter un ennemi ou un joueur qui se fait toucher ou encore pour d'autres effets.
@@ -20,7 +20,8 @@ Dans cet article, nous allons voir comment créer et utiliser un shader 2D dans 
 ### Projet de base
 Étant donné que le code GLSL est identique pour tous les projets, vous pouvez prendre le projet de votre choix ou encore démarrer un projet vide pour suivre la démonstration.
 
-**Note :** L'exemple pourra s'appliquer à facilement à votre projet de session. 
+!!! note
+    L'exemple pourra s'appliquer facilement à votre projet de session.
 
 Dans le projet, vous devez avoir un sprite avec une texture. Comme indiquer précédemment, j'utilise le projet vide de Godot, j'ai pris le sprite `Icon` que j'ai mis directement dans la scène.
 
@@ -63,6 +64,7 @@ shader_type <type>;
 ```
 
 Les types valides sont les suivants:
+
 - `spatial` : pour le rendu 3D
 - `canvas_item` : pour le rendu 2D
 - `particles` : pour les systèmes de particules
@@ -83,9 +85,8 @@ void fragment() {
 }
 ```
 
-> **Note**
->
-> Si le sprite a une dimension de 1920x1080, la fonction `fragment` sera appelée 124 416 000 fois et ce à chaque seconde!
+!!! note
+    Si le sprite a une dimension de 1920x1080, la fonction `fragment` sera appelée 124 416 000 fois et ce à chaque seconde!
 
 ### Exemple simple
 
@@ -174,6 +175,7 @@ Vous avez remarqué la fonction `mix()`? Cette fonction permet de mélanger deux
 ### Révision des mots-clés
 
 Nous avons vu les mots-clés suivantes:
+
 - `COLOR` : Couleur du pixel
     - Chaque composante est accessible par `r`, `g`, `b` et `a`
 - `UV` : Coordonnées du pixel
@@ -181,6 +183,7 @@ Nous avons vu les mots-clés suivantes:
 - `TEXTURE` : Texture du sprite
 
 Les fonctions suivantes ont été utilisées:
+
 - `vecX()` : Créer un vecteur de X valeurs
 - `texture(sample2D sampler, vec2 coord)` : Obtenir la couleur d'une texture à une position donnée
 - `mix(x, y, a)` : Interpoler entre deux valeurs
@@ -206,6 +209,7 @@ Le `<nom>` est le nom qui sera affiché dans Godot. Le `<type>` est le type de l
 Le `:indice` est optionnel et permet d'indiquer à l'inspecteur Godot quel sera l'utilisation du paramètre. Il peut s'agir d'un indice de texture, de couleur, de vecteur, etc.
 
 Voici quelques valeurs l'indice :
+
 - `source_color` : Utilisé comme sélecteur de couleur
 - `hint_range(min,max [,step] )` : Utilisé comme sélecteur de nombre
 
@@ -256,9 +260,8 @@ Pour exploiter un shader à son plein potentiel, il faut l'utiliser dans un jeu.
 ### Appliquer le shader sur un objet
 Pour appliquer le shader sur un objet, il faut sélectionner l'objet et dans l'inspecteur, sélectionner le shader dans la propriété `Shader` et cliquer sur `Load`.
 
-> **Important**
-> 
-> Dans le bloc `Resource`, il faut cocher `Local to Scene` pour que le shader ne soit appliquer qu'à l'objet actuel. Autrement, aussitôt que l'on activera le shader, il sera appliqué à tous les objets qui utilisent le même shader en simultané.
+!!! warning "Important"
+    Dans le bloc `Resource`, il faut cocher `Local to Scene` pour que le shader ne soit appliquer qu'à l'objet actuel. Autrement, aussitôt que l'on activera le shader, il sera appliqué à tous les objets qui utilisent le même shader en simultané.
 
 ![](assets/shader_tutorial_11_localToScene.gif)
 
@@ -404,6 +407,7 @@ Contrairement aux *fragment shaders* qui agissent sur chaque pixel de l'objet, l
 ### Pourquoi utiliser un Vertex Shader?
 
 Le vertex shader permet de :
+
 - Déplacer des sommets pour créer des animations dynamiques ou des effets de distorsion.
 - Modifier la géométrie sans avoir besoin de créer de nouveaux modèles.
 - Optimiser certains effets visuels qui seraient coûteux à réaliser avec des calculs basés sur les pixels.
@@ -519,11 +523,13 @@ Cependant, on veut que l'ondulation ne soit appliquer que si la position `y` est
 3. **Application du déplacement** :
     - Le calcul de l'onde est appliqué à la coordonnée `x` de `VERTEX`, ce qui entraîne une ondulation horizontale.
 
-> **Note** : Ce shader est assez performant car il agit uniquement sur les sommets, ce qui demande moins de calculs qu’un effet appliqué aux pixels.
+!!! note
+    Ce shader est assez performant car il agit uniquement sur les sommets, ce qui demande moins de calculs qu’un effet appliqué aux pixels.
 
 #### Variables Utilisées dans les Vertex Shaders
 
 Quelques variables importantes dans les *vertex shaders* :
+
 - **`VERTEX`** : Position du sommet actuel. Cette variable peut être modifiée pour déplacer les sommets.
 - **`UV`** : Coordonnées UV du sommet, permettant d'appliquer des textures.
 - **`TIME`** : Temps écoulé, souvent utilisé pour créer des animations.
@@ -543,6 +549,7 @@ void vertex() {
 ```
 
 Dans cet exemple :
+
 - Le facteur de bruit `noise_factor` est calculé en fonction de la position en `x` et du `TIME` pour que chaque sommet ait un décalage unique et évolutif.
 - Ce décalage est appliqué à `VERTEX.y`, produisant une distorsion verticale qui change avec le temps.
 
@@ -567,6 +574,7 @@ Il y a plusieurs ressources gratuites de disponibles sur [GodotShaders.com](http
 
 
 ## Références
+
 - [Godot Shading Language](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shading_language.html) - Godot Documentation
 - [Your first 2D shader](https://docs.godotengine.org/en/stable/tutorials/shaders/your_first_shader/your_first_2d_shader.html)
 - [Shading Language](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shading_language.html) (GLSL) - OpenGL Wiki

@@ -3,6 +3,7 @@
 Pour rendre le jeu plus amusant, on peut ajouter des pièces (ou objets) à ramasser.
 
 ## Étape 1 : Créer une scène "Pièce"
+
 1. Créez une nouvelle scène.
 2. Ajoutez un nœud "Area2D" (pour détecter la collision avec le joueur).
 3. Ajoutez un nœud "Sprite2D" pour l'image de la pièce.
@@ -42,5 +43,6 @@ func _on_body_entered(body: Node2D) -> void:
 ---
 
 ## Exercices
+
 - Ajoutez des pièces dans les endroits stratégiques de votre niveau.
 - Ajoutez d'autres types d'objets à ramasser (ex : gemmes, power-ups).

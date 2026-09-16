@@ -10,6 +10,7 @@ Aujourd'hui, nous allons introduire un concept clé dans le développement de je
 Plutôt que de plonger directement dans le concept de la FSM, nous allons commencer par examiner du code qui, à première vue, peut sembler correct, mais qui comporte de nombreux problèmes de conception. Ce code va nous servir de point de départ pour découvrir les difficultés d'une approche simple (et erronée) à la gestion des comportements complexes de notre personnage.
 
 ### Ce que vous apprendrez
+
 - Vous verrez comment une implémentation naïve de la gestion des états d'un personnage peut rapidement devenir ingérable.
 - Vous découvrirez les pièges classiques, comme les bogues qui apparaissent lorsqu'on ajoute de nouvelles fonctionnalités, les difficultés de maintenir du code avec de multiples conditions, et la complexité croissante des transitions entre les comportements.
 - Vous comprendrez, étape par étape, comment une FSM peut simplifier la gestion des états de votre personnage et pourquoi il s'agit d'un design pattern essentiel dans la création de jeux vidéo.
@@ -51,7 +52,9 @@ func handle_input() -> void:
 Question : Quels problèmes peut-on déceler?
 
 <details><summary>Réponse</summary>
+
 - Parmi ceux que je vois rapidement, rien ne l'empêche de faire du air jumping
+
 </details>
 
 ---
@@ -152,6 +155,7 @@ Chasse aux bogues encore…
 ---
 
 ## Machine à état fini
+
 - [La machine à état fini](https://fr.wikipedia.org/wiki/Automate_fini) (FSM) fait partie de la famille de la [Théorie des automates](https://fr.wikipedia.org/wiki/Th%C3%A9orie_des_automates)
 - Il s’agit de la structure la plus simple
 - Ce qu’il faut savoir :
@@ -168,10 +172,12 @@ Vous aurez deviné que la machine est représentée par le personnage et les tra
 ### Principe de Single Responsibility (Responsabilité Unique)
 
 Dans le contexte d'une machine à états finis (FSM), chaque état devrait avoir une seule responsabilité : gérer un comportement spécifique du personnage et les transitions associées. Cela signifie que chaque état (comme "Idle", "Running", "Jumping") doit :
+
 - Définir ce que le personnage fait pendant cet état (animation, mouvement, etc.).
 - Gérer les transitions qui mènent vers d'autres états.
 
 En adoptant ce principe de responsabilité unique, chaque état devient indépendant et modulaire. Cela rend le code :
+
 - **Facile à comprendre** : Chaque état est clairement défini et gère uniquement ses propres comportements et transitions.
 - **Facile à maintenir** : Si tu dois modifier le comportement d'un état, tu n'as qu'à changer le code de cet état sans affecter les autres.
 - **Facile à étendre** : Ajouter de nouveaux états (par exemple, "Dashing" ou "Wall Slide") devient plus simple, car chaque état est isolé dans son propre script ou section de code.
@@ -184,6 +190,7 @@ En respectant ce principe, chaque état devient une "**boîte noire**" : un modu
 ---
 
 ### Résumé
+
 - Chaque état a une responsabilité unique
 - Les éléments clés à retenir : **états**, **entrées**, **sorties** et **transitions**
 - Il y a un design pattern (DP) nommé **État** qui permet de constuire une FSM
@@ -191,6 +198,7 @@ En respectant ce principe, chaque état devient une "**boîte noire**" : un modu
 ---
 
 ## Projet Godot
+
 - Pour suivre, je vous suggère de partir avec le projet de plateforme [`c08a_platformer_base_completed`](https://github.com/nbourre/0sw_projets_cours/tree/master/c08a_platformer_base_completed) dans le dépôt `0sw_projets_cours`
 
 ![alt text](assets/platform_without_fsm.gif)
@@ -198,6 +206,7 @@ En respectant ce principe, chaque état devient une "**boîte noire**" : un modu
 ---
 
 ### Modification au code
+
 - Avant toute chose, nous allons améliorer le code de base
 - À la première ligne de la méthode `_PhysicsProcess`, ajoutez le code pour connaître la direction appuyée
 
@@ -250,15 +259,18 @@ else:
 Avant d’implanter le DP État, on fera une solution intermédiaire pour mieux comprendre la mécanique.
 
 **Énumérations et switch** 
+
 - Pour indiquer les états, on regardait si le personnage était au sol ou dans les airs ainsi que les touches appuyées.
 - On aurait pu utiliser des booléens isJumping et isRunning, mais il ne faudrait pas qu’ils soient à vrai en simultané.
 - Si on a besoin d’avoir plusieurs booléens et qu’un seul doit être vrai dans tous les cas, c’est un indice indiquant que l’on devrait utiliser des énumérations.
 
 #### Diagramme d'états
 La première étape est de tracer le diagramme d’états. Tracer le diagramme facilite grandement la programmation.
+
 - Alors sortez vos crayons! :)
 
 L'ordre pour tracer le diagramme est relativement simple :
+
 1. Identifier les états
 2. Tracer les transitions et écrire les conditions de transition
 
@@ -364,6 +376,7 @@ func _physics_process(delta : float) -> void :
 *Code 09*
 
 **Points saillants**
+
 - Toutes la gestions est dans un `switch-case` (`match-case` en Godot)
 - Chaque état est indépendant
 
@@ -393,6 +406,7 @@ if dir != 0:
 
 ```
 *Code 10*
+
 - Cette solution ci-haut est beaucoup plus propre que celle d’avant.
 - Une seule propriété pour gérer les états
 - Un peu de structure conditionnelle pour chaque état, mais c’est utilisable pour bien des cas.
@@ -458,6 +472,7 @@ Pour les petits jeux, cette solution peut convenir. Toutefois, si le jeux prend 
 En effet, la solution présentée peut ne pas convenir à nos besoins lorsque les états deviennent trop nombreux.
 
 Exemple :
+
 - Disons que l’on désire que le personnage puisse voler, mais il devra courir pendant un certain temps avant de pouvoir s’exécuter.
 - Dans le code, il faudra faire un suivi du temps pendant l'état de la course.
 
@@ -485,12 +500,14 @@ func run() -> void:
 *Code 12*
 
 Avec cette solution, nous avons eu besoin de modifier deux méthodes.
+
 - On doit ajouter une propriété pour garder le temps de recharge qui n’est utilisé que lorsque le personnage court
 - Le **patron de conception (*design pattern*) de l'État** permet de remédier à cette situation
 
 ---
 
 ## Design pattern : L'état
+
 - Anglais : State
 - Patron de conception comportementale
 - Objectif : Permettre à un objet de modifier son comportement après un changement d’état interne
@@ -501,6 +518,7 @@ Avec cette solution, nous avons eu besoin de modifier deux méthodes.
 ---
 
 Principe :
+
 - Définir une classe « contexte » qui présente une interface unique pour le monde
 - Définir une classe abstraite « état »
 - Représenter les différents états comme étant des classes héritantes de la classe abstraite
@@ -518,9 +536,11 @@ Principe :
 ---
 
 ## Implémentation dans Godot
+
 - Pour implémenter ce DP, il faudra tricher à quelques endroits pour optimiser les caractéristiques de Godot
 
 ### `BaseState`
+
 - La première étape sera de créer une classe générique qui aura les méthodes de base pour l’ensemble des états
 - Nous appellerons cette classe `BaseState`
     - Celle-ci héritera de la classe Node pour avoir les fonctionnalités de Godot
@@ -629,6 +649,7 @@ func on_child_transition(state, new_state_name):
 ---
 
 Une fois que nous avons nos classes de base, nous pouvons créer nos états. Nous allons créer un état pour chaque action que le personnage peut faire. Nous allons donc créer les états suivants :
+
 - Idle
 - Run
 
@@ -720,6 +741,7 @@ func exit() -> void:
 ```
 
 ### Ajouter la machine à état au joueur
+
 - Pour ajouter la machine à état au joueur, il suffit d'ajouter un nœud enfant de type `StateMachine` au nœud `Player`.
 - Ensuite, il faut ajouter les états comme enfants de la machine à état.
 - Il faudra aussi assigner la variable `player` de chaque état avec le nœud `Player`.
@@ -734,11 +756,13 @@ Le projet platformer est fait à l'aide de C# et le projet RPG est fait à l'aid
 
 
 ## Conclusion
+
 - La machine à état fini est un outil puissant pour gérer les états d’un objet
 - Le design pattern État permet de structurer les états de manière modulaire
 - On pourrait améliorer le projet en utilisant un `PlayerBaseState` ou `EnemyBaseState` pour éviter de répéter le code commun.
 
 ---
 ## Références
+
 - [Design Pattern Guru : State pattern](https://refactoring.guru/design-patterns/state)
 - [Machine à état fini et animation d’attaque](https://www.youtube.com/watch?v=ow_Lum-Agbs)
