@@ -1,5 +1,4 @@
-# Mécanique des Projectiles en Godot <!-- omit in toc -->
-
+# Mécanique des Projectiles en Godot
 
 ## Introduction
 
@@ -13,8 +12,8 @@ La mécanique des projectiles est une partie importante dans la création de jeu
 - Gérer le tir des projectiles dans un intervalle de temps.
 - Optimiser les performances en utilisant le pooling d'objets pour les projectiles.
 
-> Note : J'utiliserai les ressources "Top-down shooter" de Kenney pour les graphismes des projectiles. Vous pouvez les trouver sur [Kenney.nl](https://kenney.nl/assets/top-down-shooter).
-
+!!! note
+    J'utiliserai les ressources "Top-down shooter" de Kenney pour les graphismes des projectiles. Vous pouvez les trouver sur [Kenney.nl](https://kenney.nl/assets/top-down-shooter).
 
 ## Création d’un projectile simple
 Pour commencer, nous allons créer un projectile basique qui se déplace en ligne droite. Le projectile sera instancié et ajouté à la scène lorsqu'un bouton est pressé.
@@ -24,6 +23,7 @@ Pour créer un projectile, nous pouvons utiliser un `Node2D` ou un `RigidBody2D`
 Dans cette leçon, nous allons utiliser un `Node2D` pour un projectile simple qui se déplace horizontalement.
 
 Voici la hiérarchie de noeud que l'on aura :
+
 - `Node2D` (Projectile)
     - `Sprite2D` (Apparence du projectile)
     - `Area2D` (Zone de collision)
@@ -57,9 +57,23 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 Il faudra connecter le signal `body_entered` de l'`Area2D` à la méthode `_on_area_2d_body_entered` pour gérer les collisions.
 
-> **Note** : La propriété `transform` est celle que l'on retrouve dans l'inspecteur pour les noeuds 2D. Elle représente la transformation du noeud (position, rotation, échelle) par rapport à son parent. `transform.x` est un vecteur unitaire qui pointe dans la direction locale "droite" du noeud, en tenant compte de sa rotation.
+### Comprendre `transform.x`
+
+Le `transform` est la propriété qu'on retrouve dans l'inspecteur pour les noeuds 2D : elle regroupe la position, la rotation et l'échelle du noeud par rapport à son parent.
+
+Imagine que ton projectile a une flèche invisible collée dessus, qui pointe toujours « vers l'avant » (comme le nez d'une fusée). Quand le projectile tourne, la flèche tourne avec lui et continue de pointer dans la même direction que lui.
+
+`transform.x`, c'est exactement cette flèche : la direction « vers l'avant » du noeud. Elle mesure toujours 1 (une flèche « unitaire »), donc elle sert seulement à indiquer *où* le noeud regarde, pas à quelle distance.
+
+Par exemple :
+
+- Si le projectile n'est pas tourné du tout (rotation à 0°), `transform.x` pointe vers la droite de l'écran.
+- Si on le tourne de 90° vers le bas, `transform.x` pointe maintenant vers le bas — la flèche a suivi la rotation.
+
+C'est pour ça qu'on peut écrire `position += transform.x * speed * delta` : à chaque image, on avance le projectile d'un petit pas dans la direction où il pointe actuellement, peu importe son orientation.
 
 #### Explication
+
 - On retire le projectile lorsqu'il entre en collision avec un autre corps.
 - On retire également le corps représentant l'ennemi lorsqu'il est touché par le projectile.
 
@@ -70,9 +84,11 @@ Il faudra connecter le signal `body_entered` de l'`Area2D` à la méthode `_on_a
 Pour le tireur de projectiles, nous allons utiliser un `CharacterBody2D` qui peut se déplacer et tirer des projectiles.
 
 Voici l'image qui sera utilisé pour le tireur :
+
 ![alt text](assets/manBlue_gun.png)
 
 Voici la hiérarchie de noeud que l'on aura :
+
 - `CharacterBody2D` (Tireur de projectiles)
     - `Sprite` (Apparence du tireur)
     - `CollisionShape2D` (Forme de collision)
@@ -102,6 +118,7 @@ func get_input():
 
 func _physics_process(delta: float) -> void:
 	get_input()
+	move_and_slide()
 
 func shoot() -> void :
 	var b : Projectile = bullet_scene.instantiate()
@@ -112,6 +129,7 @@ func shoot() -> void :
 ```
 
 #### Explication
+
 - `get_input()` : Gère les entrées du joueur pour déplacer le tireur et tirer.
 - `look_at()` : Oriente le tireur vers la position de la souris.
 - `transform.x` : Vecteur de direction du tireur.
@@ -160,6 +178,7 @@ func shoot():
 ```
 
 ### Explication :
+
 - `shoot_interval` : Définit l'intervalle de temps entre les tirs.
 - `time_since_last_shot` : Un accumulateur qui suit le temps écoulé depuis le dernier tir.
 
@@ -212,8 +231,8 @@ func _on_bullet_out_of_screen(bullet):
 
 Dans l'inspecteur, il faudra associer la scène `Bullet` au `BulletPool` de projectiles pour qu'il puisse instancier les projectiles.
 
-
 **Explication**
+
 - `bullet_pool` : Tableau de tous les projectiles créés.
 - `available_bullets` : Tableau des projectiles disponibles pour le tir.
 - La première étape consiste à créer un pool de projectiles lors de l'initialisation.
@@ -247,6 +266,7 @@ func shoot():
 ```
 
 **Explication**
+
 - `bullet_pool_scene` : Référence à la scène du `BulletPool`.
 - `bullet_pool` : Instance du `BulletPool` dans le jeu.
 - `bullet_pool.get_bullet()` : Récupère un projectile du pool pour le tir.
@@ -285,6 +305,7 @@ func is_out_of_screen() -> bool:
 ```
 
 ## Autres améliorations possibles
+
 - Créer un Singleton pour gérer les `Pools` de projectiles.
 - Créer une fabrique de projectiles pour gérer différents types de projectiles.
 - Détacher la dépendance du `BulletPool` du tireur.
