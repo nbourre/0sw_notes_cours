@@ -4,6 +4,7 @@ theme:
   name: material
   custom_dir: overrides
   language: fr
+  font: false
   features:
     - search.suggest
     - search.highlight
@@ -17,8 +18,8 @@ theme:
 
 plugins:
   - search
-  - print-site
   - mkdocs-video
+  - print-site
 
 markdown_extensions:
   - admonition
@@ -47,8 +48,7 @@ markdown_extensions:
 
 extra_javascript:
   - javascripts/mathjax.js
-  #- javascripts/tex-mml-chtml.js
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - javascripts/mathjax-vendor/tex-mml-chtml.js
   # p5.js elle-même est chargée dans <head> (voir overrides/main.html) pour
   # être disponible avant les scripts des esquisses embarquées dans le contenu.
   - javascripts/p5-embed.js
