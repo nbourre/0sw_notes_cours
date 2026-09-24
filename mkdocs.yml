@@ -104,13 +104,13 @@ nav:
     - Génération Procédurale:
       - A - Introduction au bruit de Perlin: procedural_generation/index.md
       - B - Génération de terrain: terrain_generation/index.md
-#  - Projet de session:
-#    - Énoncé: projet_session/01_enonce/index.md
-#    - Documentation et suivis:
-#      - Aperçu: projet_session/02_documentation_suivis/index.md
-#      - Suivi du projet: projet_session/02_documentation_suivis/suivis.md
-#      - Documentation du projet: projet_session/02_documentation_suivis/documentation_projet.md
-#    - Critères d'évaluation - Présentations: projet_session/03_presentation/index.md
+  - Projet de session:
+    - Énoncé: projet_session/01_enonce/index.md
+    - Documentation et suivis:
+      - Aperçu: projet_session/02_documentation_suivis/index.md
+      - Suivi du projet: projet_session/02_documentation_suivis/suivis.md
+      - Documentation du projet: projet_session/02_documentation_suivis/documentation_projet.md
+    - Critères d'évaluation - Présentations: projet_session/03_presentation/index.md
   - Extras:
     - Liste de ressources: extras/liste_de_ressources.md
 

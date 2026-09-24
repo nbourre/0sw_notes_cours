@@ -66,143 +66,143 @@ Les propriétés importantes pour ce noeud sont les suivantes:
 Pour contrôler le joueur, il est possible d'utiliser un script. Il est possible d'utiliser un script `GDScript` ou `C#`. Depuis Godot 4, il y a la possibilité d'utiliser le script par défaut. Il s'agit d'un script adapté pour les jeux de plateforme.
 
 ### Plateforme
-Le script par défaut en GDScript est le suivant:
+Le script par défaut est le suivant :
 
-```gdscript
-extends CharacterBody2D
+=== "GDScript"
 
-
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+    ```gdscript
+    extends CharacterBody2D
 
 
-func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+    const SPEED = 300.0
+    const JUMP_VELOCITY = -400.0
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+    func _physics_process(delta: float) -> void:
+        # Ajouter la gravité.
+        if not is_on_floor():
+            velocity += get_gravity() * delta
 
-	move_and_slide()
-```
+        # Gestion du saut.
+        if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+            velocity.y = JUMP_VELOCITY
 
----
+        # Récupère la direction et gère le mouvement/la décélération.
+        # Bonne pratique : remplacez les actions UI par vos propres actions de jeu.
+        var direction := Input.get_axis("ui_left", "ui_right")
+        if direction:
+            velocity.x = direction * SPEED
+        else:
+            velocity.x = move_toward(velocity.x, 0, SPEED)
 
-Le script par défaut en C# est le suivant:
+        move_and_slide()
+    ```
 
-```csharp
-using Godot;
-using System;
+=== "C#"
 
-public partial class player : CharacterBody2D
-{
-	public const float Speed = 300.0f;
-	public const float JumpVelocity = -400.0f;
+    ```csharp
+    using Godot;
+    using System;
 
-	// Récupère la gravité qui est indiqué dans les propriétés du projet
-	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+    public partial class player : CharacterBody2D
+    {
+        public const float Speed = 300.0f;
+        public const float JumpVelocity = -400.0f;
 
-	public override void _PhysicsProcess(double delta)
-	{
-		Vector2 velocity = Velocity;
+        // Récupère la gravité qui est indiquée dans les propriétés du projet
+        public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
-		// Ajouter la gravité si le joueur n'est pas sur le sol.
-		if (!IsOnFloor()) {
-            // Remarquez le delta qui est utilisé
-			velocity.Y += gravity * (float)delta;
+        public override void _PhysicsProcess(double delta)
+        {
+            Vector2 velocity = Velocity;
+
+            // Ajouter la gravité si le joueur n'est pas sur le sol.
+            if (!IsOnFloor()) {
+                // Remarquez le delta qui est utilisé
+                velocity.Y += gravity * (float)delta;
+            }
+
+            // Gestion des sauts
+            if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+                velocity.Y = JumpVelocity;
+
+            // Récupère la direction du joueur
+            // Bonne pratique : créez vos propres actions dans les paramètres du projet
+            Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+            if (direction != Vector2.Zero)
+            {
+                velocity.X = direction.X * Speed;
+            }
+            else
+            {
+                velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+            }
+
+            Velocity = velocity;
+
+            // MoveAndSlide utilise la propriété Velocity pour déplacer le joueur
+            // Retourne vrai s'il y a eu une collision
+            MoveAndSlide();
         }
-
-		// Gestions des sauts
-		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-			velocity.Y = JumpVelocity;
-
-		// Récupère la direction du joueur
-		// Bonne pratique: Créez vos propres actions dans les paramètres du projet
-		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-		if (direction != Vector2.Zero)
-		{
-			velocity.X = direction.X * Speed;
-		}
-		else
-		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-		}
-
-		Velocity = velocity;
-
-        // Move and slide utilise la propriété Velocity pour déplacer le joueur
-        // Retourne vrai s'il y a eu une collision
-		MoveAndSlide();
-	}
-}
-```
+    }
+    ```
 
 ### Top-down
-Il n'y a pas de script par défaut pour les jeux en vue de dessus. Il est possible d'utiliser les scripts C# ou GDScript suivant:
+Il n'y a pas de script par défaut pour les jeux en vue de dessus. Voici un script de base pour un jeu en vue de dessus:
 
-#### GDScript
+=== "GDScript"
 
-```gdscript
-extends CharacterBody2D
+    ```gdscript
+    extends CharacterBody2D
 
-@export var max_speed: float = 1500.0
-@export var acceleration: float = 10.0
+    @export var max_speed: float = 1500.0
+    @export var acceleration: float = 10.0
 
-func _physics_process(delta):
-    var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").normalized()
+    func _physics_process(delta):
+        var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").normalized()
 
-    if direction.length() > 0:
-        velocity = velocity.lerp(direction * max_speed, acceleration * delta)
-    else:
-        velocity = velocity.lerp(Vector2.ZERO, acceleration * delta)
+        if direction.length() > 0:
+            velocity = velocity.lerp(direction * max_speed, acceleration * delta)
+        else:
+            velocity = velocity.lerp(Vector2.ZERO, acceleration * delta)
 
-    # Pour pointer vers la souris
-    # look_at(get_global_mouse_position())
+        # Pour pointer vers la souris
+        # look_at(get_global_mouse_position())
 
-    move_and_slide()
-```
+        move_and_slide()
+    ```
 
-#### C#
+=== "C#"
 
-```csharp
-using Godot;
-using System;
+    ```csharp
+    using Godot;
+    using System;
 
-public partial class ship : CharacterBody2D
-{
-	[Export]
-	public float MaxSpeed = 1500.0f;
-	[Export]
-	public float Acceleration = 10.0f;
+    public partial class ship : CharacterBody2D
+    {
+        [Export]
+        public float MaxSpeed = 1500.0f;
+        [Export]
+        public float Acceleration = 10.0f;
 
-	public override void _PhysicsProcess(double delta)
-	{
-		var direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down").Normalized();
+        public override void _PhysicsProcess(double delta)
+        {
+            var direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down").Normalized();
 
-		if (direction.Length() > 0) {
-			Velocity = Velocity.Lerp(direction * MaxSpeed, Acceleration * (float)delta);
-		}
-		else {
-			Velocity = Velocity.Lerp(Vector2.Zero, Acceleration * (float)delta);
-		}
+            if (direction.Length() > 0) {
+                Velocity = Velocity.Lerp(direction * MaxSpeed, Acceleration * (float)delta);
+            }
+            else {
+                Velocity = Velocity.Lerp(Vector2.Zero, Acceleration * (float)delta);
+            }
 
-        // Pour pointer vers la souris
-        //LookAt(GetGlobalMousePosition());
+            // Pour pointer vers la souris
+            //LookAt(GetGlobalMousePosition());
 
-		MoveAndSlide();
-	}
-}
-```
+            MoveAndSlide();
+        }
+    }
+    ```
 
 ![Alt text](assets/characterbody2d_04_test_no_grav.gif)
 

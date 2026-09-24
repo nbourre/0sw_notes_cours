@@ -20,9 +20,9 @@
 
 ## Notes
 
-- Plusieurs des images que j'aie prises dans ces diapositives proviennent du site itch.io
+- Plusieurs des images que j'aie prises dans ces diapositives proviennent du site [itch.io](https://itch.io/)
 - Il y a plusieurs artistes qui offrent des ressources gratuites pour les jeux
-- Plusieurs ensembles d'images sont à vendre à des prix très abordables (moins dispendieux qu'un repas à la cafétéria! 😅)
+- Plusieurs ensembles d'images sont à vendre à des prix très abordables (moins dispendieux qu'une poutine à la cafétéria! 😅)
 
 ---
 
@@ -67,7 +67,7 @@
 
 ## AnimatedSprite
 
-- Dans cette partie, nous allons voir comment utiliser une façon simple pour animer un sprite dans Godot
+- Dans cette partie, nous allons voir comment utiliser une **façon simple** pour animer un sprite dans Godot
 - Utilisez un `AnimatedSprite` pour animer un sprite dans Godot
 - Voici une structure typique pour un personnage 2D qui inclut un `AnimatedSprite`:
     - CharacterBody2D
@@ -75,6 +75,11 @@
         - CollisionShape2D
 - Lien vers la documentation officielle: [AnimatedSprite](https://docs.godotengine.org/fr/stable/tutorials/2d/2d_sprite_animation.html)
 
+
+!!! note "AnimatedSprite2D est simple, mais..."
+    - AnimatedSprite2D est simple à utiliser, mais il est limité
+    - On va l'utiliser pour des animations simples comme des pièces qui tournent, des décors de base, etc.
+    - Il est préférable d'utiliser AnimationPlayer pour des animations plus complexes
 
 ---
 
@@ -257,7 +262,7 @@ func _process(_delta):
 ## Détail sur l'`AnimationPlayer`
 
 - L'`AnimationPlayer` est un nœud qui permet, **entre autres**, de contrôler les animations dans Godot
-- En fait l'`AnimationPlayer` est un contrôleur de valeurs
+- En fait l'`AnimationPlayer` est un **contrôleur de valeurs**
 - Lorsque l'on a ajouté une animation, l'`AnimationPlayer` a contrôlé la propriété `frame` du `Sprite2D` pour changer l'image affichée
 - L'`AnimationPlayer` peut contrôler n'importe quelle propriété d'un nœud dans Godot
 - On pourrait faire varier la transparence, la position, la rotation, etc.

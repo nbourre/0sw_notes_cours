@@ -9,11 +9,11 @@ Dans le cadre de ce travail, vous allez devoir développer un projet multimédia
 
 Le projet devra avoir les éléments ci-dessous. Chacun de ces points sera développé plus bas.
 
-- Menu initial
 - Démarrage
-    - Instruction
-    - Configuration
-        - Ajustement indépendants des niveaux sonores de la musique et des effets sonores
+    - Menu initial
+        - Instruction
+        - Configuration
+            - Ajustement indépendants des niveaux sonores de la musique et des effets sonores
 - Cœur : Jeu, simulation ou démonstration
     - Interaction avec l’utilisateur
     - Graphisme et animation
@@ -22,13 +22,14 @@ Le projet devra avoir les éléments ci-dessous. Chacun de ces points sera déve
         - Son d’ambiance pour la musique
         - Sons réactifs (effets sonores)
     - Algorithmes ou mécanismes de jeu
+    - Changement de scène
     - Données pour les geeks
-        - Touche F12 pour afficher la RAM et les images par seconde à l’écran
+        - Touche F12 pour afficher la mémoire actuelle, maximale et minimale et les images par seconde à l’écran
 - Scène de fin
     - Une scène indiquant la fin du projet
         - Il doit y avoir une fin perdante et une fin gagnante
-    - L'utilisateur pourra faire les choix suivants : quitter, revenir au menu principal et redémarrer le jeu
-- Sauvegarde du meilleur score
+    - L'utilisateur pourra faire les choix suivants : quitter, revenir au menu principal et redémarrer le jeu du début
+- Sauvegarde des meilleures performances (*leaderboard*)
 - Mise en pause
 - Exécutable sur la borne arcade
     - Linux
@@ -74,7 +75,7 @@ Cette partie est l’équivalent au développement d’un texte : le « met prin
 
 #### Son
 - Minimum requis : musique de fond et effets sonores.
-- Possibilité de mettre en sourdine via le menu de configuration et une touche raccourcie.
+- Possibilité de mettre en sourdine via le menu de configuration et une combinaison de touches raccourcie (CTRL + M).
 
 #### Algorithmes et mécanismes de jeux
 
@@ -101,7 +102,8 @@ Si vous choisissez d’utiliser des **mécanismes intégrés dans la plateforme 
 Les données de débogage doivent inclure des informations comme :
 - Les boîtes de collision.
 - Les vecteurs (flèches pour visualisation).
-- Le taux de rafraîchissement (FPS), la mémoire utilisée, etc.
+- Le taux de rafraîchissement (FPS).
+- La mémoire utilisée (RAM) ainsi que la mémoire maximale et minimale pendant l’exécution du projet.
 
 ---
 
@@ -109,7 +111,7 @@ Les données de débogage doivent inclure des informations comme :
 
 Une scène de fin doit :
 - Afficher une fin gagnante et une fin perdante.
-- Permettre de quitter le jeu, retourner au menu principal ou redémarrer.
+- Permettre de quitter le jeu, retourner au menu principal ou redémarrer le jeu du début.
 - Inclure une touche spéciale pour atteindre directement la scène de fin.
 
 ---
@@ -173,7 +175,9 @@ Votre projet doit permettre à l’utilisateur de mettre en pause via une touche
 ---
 
 ### Relation entre catégories
+
 Certains algorithmes peuvent se retrouver dans plusieurs catégories en fonction de leur usage. Par exemple :
+
 - **Raycasting** peut être utilisé pour la navigation (Pathfinding) ou la détection de collisions (Simulation).
 - **Automate cellulaire** peut servir à la génération procédurale ou à simuler des comportements dynamiques.
 

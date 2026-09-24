@@ -2,6 +2,7 @@
 Maintenant que le cœur du projet est essentiellement terminé, il faudra ajouter la portion concernant la documentation et l’aide pour le projet.
 
 Il y a deux volets pour la documentation :
+
 - Document d’une page en MarkDown expliquant le concept du projet et aux moins deux points saillants du développement
 - Aide intégrée au projet
 
@@ -21,22 +22,19 @@ La génération procédurale est un concept qui est très populaire dans le doma
 
 L’algorithme du OSN n’est que la base pour l’algorithme de génération. En effet, il y a 2 cartes OSN l’une pour déterminer l’élévation et une seconde pour déterminer le taux d’humidité. Cette approche permet de générer des biomes selon 2 facteurs distincts. De plus, on élimine l’effet de bande qu'une seule carte d'élévation de base aurait pu produire.
 
-<table>
-    <tr>
-        <td>
-            <figure>
-                <img src="assets/exemple_01.png"/><br />
-                <figcaption>Figure 1 : Terrain basé avec une seule valeur de bruit</figcaption>
-            </figure>
-        </td>
-        <td>
-            <figure>
-                <img src="assets/exemple_02.png"/><br />
-                <figcaption>Figure 2 : Terrain basé 2 valeurs de bruit</figcaption>
-            </figure>
-        </td>
-    </tr>
-</table>
+<div class="grid" markdown>
+
+<figure markdown>
+![Terrain basé avec une seule valeur de bruit](assets/exemple_01.png)
+<figcaption>Figure 1 : Terrain basé avec une seule valeur de bruit</figcaption>
+</figure>
+
+<figure markdown>
+![Terrain basé sur 2 valeurs de bruit](assets/exemple_02.png)
+<figcaption>Figure 2 : Terrain basé sur 2 valeurs de bruit</figcaption>
+</figure>
+
+</div>
 
 
 Pour effectuer cet algorithme, je me suis basé sur cet [article](https://www.redblobgames.com/maps/terrain-from-noise/). L’article discute plus en profondeur sur une mécanique pour simuler aussi la dispersion des objets et la création d’îles.
@@ -52,6 +50,7 @@ Dans le projet, vous devez ajouter un menu **Options** (ou équivalent) dans leq
 
 ## Structure du document
 Le document devra comporter les éléments suivants :
+
 - Titre du jeu en H1
 - Créateur du jeu (Votre nom)
 - Petite introduction expliquant le concept du jeu
