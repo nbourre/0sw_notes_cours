@@ -45,6 +45,7 @@ markdown_extensions:
       alternate_style: true
   - attr_list
   - md_in_html
+  - sane_lists
 
 extra_javascript:
   - javascripts/mathjax.js
@@ -86,6 +87,7 @@ nav:
     - C - Ajouter des pièces à ramasser: c07c_plateformes_loots/index.md
     - D - Mourir: c07d_plateformes_mort/index.md
     - E - Le ray casting: c07e_ennemi_raycast/index.md
+    - F - Le Tilemap Terrain: tilemap_terrain/index.md
   - Cours 08:
     - A - La machine à état fini: c08_fsm/index.md
     - B - La parallaxe: c08a_parallaxe/index.md
@@ -97,7 +99,6 @@ nav:
   - Cours 12:
     - Sauvegarder les données avec des ressources personnalisées: c12_save_data/index.md
   - AnimationTree: animation_tree/index.md
-  - Le Tilemap Terrain: tilemap_terrain/index.md
   - Utiliser le débogueur distant: remote_debugger/index.md
   - Déployer le jeu sur l'arcade: arcade_game/index.md
   - Science:
@@ -113,6 +114,8 @@ nav:
     - Critères d'évaluation - Présentations: projet_session/03_presentation/index.md
   - Extras:
     - Liste de ressources: extras/liste_de_ressources.md
+  - WIP:
+    - Les terrains avancés: terrains_avances/index.md
 
 not_in_nav: |
   no_nav/*.md

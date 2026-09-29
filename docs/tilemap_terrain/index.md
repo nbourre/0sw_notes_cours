@@ -12,10 +12,12 @@ Pour utiliser cette fonctionnalité, il faut utiliser un TileSet et un TileMap. 
 Pour cet article, je vais utiliser le fond de carte de [Ninja Adventure](https://pixel-boy.itch.io/ninja-adventure-asset-pack).
 
 ![Alt text](assets/TilesetFloor.png)
+
 - Les tuiles sont de dimensions 16x16 pixels.
 
 ## Prérequis
 Pour l'article, on prend pour acquis les points suivants:
+
 - Godot 4 est installé
 - Un projet Godot 4 est créé
 - Le TileSet est créé
@@ -25,8 +27,9 @@ Pour l'article, on prend pour acquis les points suivants:
 ## Création du terrain
 Une fois que le TileSet est créé et importé, il faut créer le terrain.
 
-<table>
-<tr><td>
+<div class="grid" markdown>
+
+<div markdown>
 
 1. Pour ce faire, il faut aller dans les propriétés du noeud `TileMap` et sélectionner le `TileSet` dans la propriété `Tile Set`. 
 2. Cliquer sur `Terrain Sets`
@@ -37,14 +40,18 @@ Une fois que le TileSet est créé et importé, il faut créer le terrain.
     - Cela n'a aucun impact sur le jeu. C'est pour mieux discerner les masques de terrain dans l'éditeur.
     - Il y a l'outil `Color Picker` pour sélectionner une couleur.
 
-</td><td>
+</div>
+
+<div markdown>
 
 ![Alt text](assets/tilset_add_terrains.gif)
 
+</div>
+
+</div>
+
 <video src="assets/tileset_select_color.mp4" controls title="Title"></video>
 
-</td></tr>
-</table>
 
 ### Sélection d'un jeu de tuiles (TileSet)
 Pour que Godot puisse générer les masques de terrain, il faut lui donner un jeu de tuiles adéquat. Qu'est-ce qu'un jeu de tuiles adéquat? C'est un jeu de tuiles qui contient les tuiles de base pour le terrain avec plusieurs variantes pour chaque tuile. On y retrouve des transitions pour les coins, les côtés et les centres.
@@ -59,9 +66,13 @@ Maintenant que le terrain est créé, il faut tracer le masque de terrain. Le ma
 1. La première étape sera de sélectionner l'onglet `TileSet`. Cet onglet permet de configurer le jeu de tuiles.
 2. Sélectionner l'outil `Paint` dans la barre d'outils.
 3. Dans `Paint properties`, sélectionner `Terrains`.
-4. Dans `Painting`, sélectionner le terrain à peindre. Dans notre cas, `Terrain Set 0` <br/> 
-![Alt text](assets/Tilet_paint_properties.png)
-5. Sélectionner les tuiles qui seront utilisées pour tracer le masque de terrain. <br /> ![Alt text](assets/tileset_paint_select.gif)
+4. Dans `Painting`, sélectionner le terrain à peindre. Dans notre cas, `Terrain Set 0`
+
+    ![Alt text](assets/Tilet_paint_properties.png)
+
+5. Sélectionner les tuiles qui seront utilisées pour tracer le masque de terrain.
+
+    ![Alt text](assets/tileset_paint_select.gif)
 
 ### Tracer le masque de terrain
 Maintenant vient le moment un peu plus corsé soit le traçage du masque de bit.
@@ -70,16 +81,22 @@ Mon astuce personnelle est de tracer le sol ensuite les délimitations (exemple 
 
 1. Suivant les étapes précédentes, sélectionner le `Terrain Set 0`.
 2. Pour Terrain, sélectionner `Dirt`.
-3. Commencer à tracer les surfaces représentant le sol. <br /> ![Alt text](assets/tileset_paint_dirt.gif)
+3. Commencer à tracer les surfaces représentant le sol.
+
+    ![Alt text](assets/tileset_paint_dirt.gif)
+
     - La couleur du masque sera celle sélectionnée lors de la création des `Terrain`. Je propose toujours une couleur complémentaire, car c'est plus facile à distinguer.
 
-Voici le résultat pour le sol. <br />
+Voici le résultat pour le sol.
+
 ![Alt text](assets/tileset_paint_dirt_done.png)
 
-4. Répéter les étapes 2 à 3 pour le gazon. <br/>
-![Alt text](assets/tileset_paint_grass.gif)
+4. Répéter les étapes 2 à 3 pour le gazon.
 
-Voici le résultat pour le gazon et le sol. <br />
+    ![Alt text](assets/tileset_paint_grass.gif)
+
+Voici le résultat pour le gazon et le sol.
+
 ![Alt text](assets/tileset_grass_done.png)
 
 ### Ajout de tuiles supplémentaires
@@ -90,6 +107,7 @@ Il y a quelques tuiles avec plus de gazon dans le bas du l'image. Il faut les aj
 Ensuite, il suffit de continuer à tracer le masque de terrain.
 
 Le résultat final est le suivant.
+
 ![Alt text](assets/tileset_paint_grass_extra_done.png)
 
 Remarquez que l'on a omis une série de tuiles dans la rangée plus. Il s'agit de tuile avec des combinaisons qui touchent d'autres types de terrain.
@@ -102,7 +120,8 @@ Vous avez probablement remarqué qu'il y a des tuiles pleines du même genre soi
 3. Entrer 0.03 dans la zone de texte
 4. Cliquer sur les tuiles que l'on désire modifier la probabilité d'apparition.
 
-Voici le résultat de la distribution des probabilités. <br />
+Voici le résultat de la distribution des probabilités.
+
 ![Alt text](assets/tileset_probability.png)
 
 
@@ -110,6 +129,7 @@ Voici le résultat de la distribution des probabilités. <br />
 ### Tracer le terrain
 
 Pour la sélection des tuiles automatiques, la logique du système est la suivante:
+
 - Le bit central est le bit de la tuile courante.
 - Les bits autour sont les bits des tuiles adjacentes.
 - La tuile sélectionnée par le système sera celle dont les bits autour du centre ont des bits identiques sur les tuiles adjacentes.
@@ -119,13 +139,14 @@ Pour la sélection des tuiles automatiques, la logique du système est la suivan
 3. Sélectionner le type de terrain désiré. Il y a 2 choix selon ce que nous avons créé précédemment soit `Dirt` et `Grass`.
 4. Avec les outils de crayon, ligne, rectangle ou peinture, tracer le terrain.
 
-Voici le résultat que l'on pourra s'attendre. <br />
+Voici le résultat que l'on pourra s'attendre.
 
-![Alt text](Godot_v4.1.1-stable_mono_win64_chVItmCnGg.gif)
+![Alt text](assets/Godot_v4.1.1-stable_mono_win64_chVItmCnGg.gif)
 
 On remarque que les tuiles se sélectionnent toutes seules. C'est le système de sélection de tuiles qui fait le travail. Il suffit de tracer le masque de terrain et le système de sélection de tuiles fait le reste.
 
-> **Notes :** Il est important de ne pas oublier un bit dans les masques, car cela peut empêcher le bon fonctionnement du système de sélection de tuiles.
+!!! note
+    Il est important de ne pas oublier un bit dans les masques, car cela peut empêcher le bon fonctionnement du système de sélection de tuiles.
 
 ## Travailler avec les couches
 Il est possible d'ajouter des couches sur le TileMap. Cela permet de tracer des éléments par-dessus le terrain. C'est utile pour ajouter des éléments de décor ou des éléments interactifs.
