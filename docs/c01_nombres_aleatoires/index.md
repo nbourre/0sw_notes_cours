@@ -338,7 +338,7 @@ Dans l'image ci-contre, de quel côté est la distribution uniforme et pourquoi?
 ---
 
 ## Le bruit de Perlin
-Voici le lien vers mes notes sur la [génération procédurale](../procedural_generation/)
+Voici le lien vers mes notes sur la [génération procédurale](../procedural_generation/index.md)
 
 
 ### Exemple

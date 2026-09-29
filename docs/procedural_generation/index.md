@@ -14,7 +14,7 @@ Dans cet article, nous allons voir l'outil de base qui rend cela possible : le *
 
 Concrètement, le bruit de Perlin retourne une valeur en fonction d'une position qu'on lui donne — un peu comme une fonction mathématique. Deux positions rapprochées produiront des valeurs similaires, alors que deux positions éloignées produiront des valeurs très différentes. C'est cette continuité qui donne un aspect naturel aux terrains, textures ou trajectoires générés.
 
-Comme pour `random()`, le bruit dépend d'une graine (voir la section sur les [nombres aléatoires](../c01_nombres_aleatoires/)) : avec la même graine, on obtient toujours le même bruit, donc les mêmes résultats. Une graine différente produira un tout autre paysage.
+Comme pour `random()`, le bruit dépend d'une graine (voir la section sur les [nombres aléatoires](../c01_nombres_aleatoires/index.md)) : avec la même graine, on obtient toujours le même bruit, donc les mêmes résultats. Une graine différente produira un tout autre paysage.
 
 Vous pouvez vous référer à l'image ci-dessous pour mieux comprendre : plus les positions sont proches, plus les valeurs du bruit sont similaires.
 
@@ -62,7 +62,7 @@ Avant de passer à l'exemple des plateformes, voici un petit bac à sable pour e
 
 - Le curseur **Pas** contrôle l'incrément utilisé pour échantillonner le bruit à chaque pixel : un petit pas donne une courbe lisse, un grand pas donne une courbe qui varie beaucoup plus vite (voir les deux animations ci-dessus).
 - Le bouton **Générer** choisit une nouvelle graine (`noiseSeed()`) au hasard et redessine une toute nouvelle courbe.
-- Le champ **Graine** peut aussi être modifié directement : entrez-y n'importe quel nombre pour obtenir toujours la même courbe, comme avec `randomSeed()` (voir la section sur les [nombres aléatoires](../c01_nombres_aleatoires/)). Essayez d'entrer deux fois la même valeur : la courbe sera identique.
+- Le champ **Graine** peut aussi être modifié directement : entrez-y n'importe quel nombre pour obtenir toujours la même courbe, comme avec `randomSeed()` (voir la section sur les [nombres aléatoires](../c01_nombres_aleatoires/index.md)). Essayez d'entrer deux fois la même valeur : la courbe sera identique.
 - Le bouton **Réinitialiser** remet le pas et la graine à leur valeur de départ.
 
 <div class="p5-embed">
@@ -78,7 +78,7 @@ Avant de passer à l'exemple des plateformes, voici un petit bac à sable pour e
 </div>
 
 ## Retour sur le marcheur aléatoire
-Rappelez-vous le [marcheur aléatoire](../c01_nombres_aleatoires/#le-marcheur-aleatoire) du cours sur les nombres aléatoires : à chaque image, il choisissait une direction avec `random()`, ce qui donnait un déplacement saccadé, sans lien entre un pas et le suivant.
+Rappelez-vous le [marcheur aléatoire](../c01_nombres_aleatoires/index.md#le-marcheur-aleatoire) du cours sur les nombres aléatoires : à chaque image, il choisissait une direction avec `random()`, ce qui donnait un déplacement saccadé, sans lien entre un pas et le suivant.
 
 En remplaçant `random()` par `noise()`, on obtient un déplacement beaucoup plus fluide. L'idée est d'utiliser deux « pistes » de bruit indépendantes, une pour `x` et une pour `y`, que l'on fait avancer légèrement à chaque image :
 

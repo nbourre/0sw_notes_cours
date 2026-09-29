@@ -4,7 +4,7 @@
     Cette page est en cours de rédaction. Les sections jusqu'à « Redistribuer les valeurs » sont complètes (texte + exemples visuels interactifs). Tout ce qui suit, à partir de **« Façonner une île »**, est encore à l'état de brouillon (texte de base sans exemple visuel).
 
 !!! warning "Prérequis"
-    Cette page suppose que vous avez déjà lu [A - Introduction au bruit de Perlin](../procedural_generation/). On y explique ce qu'est le bruit de Perlin, comment l'utiliser avec `noise()` et pourquoi il est cohérent contrairement à `random()`. Si ce n'est pas encore fait, c'est le bon moment.
+    Cette page suppose que vous avez déjà lu [A - Introduction au bruit de Perlin](../procedural_generation/index.md). On y explique ce qu'est le bruit de Perlin, comment l'utiliser avec `noise()` et pourquoi il est cohérent contrairement à `random()`. Si ce n'est pas encore fait, c'est le bon moment.
 
 ## Introduction
 Le bruit de Perlin est un bon point de départ, mais utilisé seul, il ne donne pas vraiment l'impression d'un terrain : on obtient une bosse lisse, sans montagnes, sans îles, sans variété. Cette page présente quelques techniques simples pour transformer un bruit brut en quelque chose qui ressemble à une vraie carte.
@@ -12,7 +12,7 @@ Le bruit de Perlin est un bon point de départ, mais utilisé seul, il ne donne 
 Le contenu qui suit est une adaptation pédagogique de l'excellent article [Making maps with noise functions](https://www.redblobgames.com/maps/terrain-from-noise/) de Red Blob Games, traduit et simplifié pour ce cours. Je vous encourage fortement à consulter l'article original : il contient des démonstrations interactives (vous pouvez modifier les paramètres et voir le résultat en temps réel) qui valent largement le détour.
 
 ## Le bruit en 2D : l'effet « nuage »
-Dans la section [Introduction au bruit de Perlin](../procedural_generation/), on a vu `noise()` avec un seul argument : une courbe qui varie dans le temps. Mais `noise()` accepte aussi deux arguments. En lui donnant les coordonnées `x` et `y` d'un pixel plutôt qu'une seule valeur de temps, on obtient une valeur différente pour chaque point d'une image — et en transformant cette valeur en niveau de gris, on obtient le fameux effet « nuage » qu'on retrouve dans énormément de textures et de générateurs de terrain.
+Dans la section [Introduction au bruit de Perlin](../procedural_generation/index.md), on a vu `noise()` avec un seul argument : une courbe qui varie dans le temps. Mais `noise()` accepte aussi deux arguments. En lui donnant les coordonnées `x` et `y` d'un pixel plutôt qu'une seule valeur de temps, on obtient une valeur différente pour chaque point d'une image — et en transformant cette valeur en niveau de gris, on obtient le fameux effet « nuage » qu'on retrouve dans énormément de textures et de générateurs de terrain.
 
 ```java
 float increment = 0.05;
