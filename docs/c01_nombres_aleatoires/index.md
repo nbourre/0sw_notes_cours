@@ -220,7 +220,8 @@ void draw() {
 
 
 
-### Comment faire pour gérer la distribution normale?
+### Comment faire pour générer la distribution normale?
+
 Pour générer une distribution normale, on fait ce que l'on appelle un changement d'échelle :
 - On prend une valeur aléatoire générée par `randomGaussian()`
 - On la multiplie par l'écart-type désiré
