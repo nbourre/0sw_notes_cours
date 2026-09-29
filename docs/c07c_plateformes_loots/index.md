@@ -21,9 +21,11 @@ Voici mon résultat du montage :
 ## Étape 2 : Détecter la collecte
 
 1. Ajoutez un script au nœud "Area2D".
-2. Dans le nœud "Area2D", connectez le signal "body_entered".
+2. Dans le nœud "Area2D", connectez le signal "body_entered".  
     ![alt text](assets/body_entered.png)
+
 3. Ajoutez un script simple pour faire disparaître la pièce quand le joueur la ramasse.
+
     ![alt text](assets/coin_collected.gif)
 
 Exemple de script :

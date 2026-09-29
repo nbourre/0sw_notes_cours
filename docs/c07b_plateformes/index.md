@@ -4,6 +4,11 @@
 
 
 ## Introduction
+
+!!! note
+    Cette leçon suit la leçon précédente sur les Tilesets.
+
+
 Dans bien des jeux de type plateforme, les plateformes mobiles sont un élément essentiel pour créer des niveaux intéressants et stimulants. Dans cette leçon, nous allons apprendre à créer une plateforme mobile qui se déplace de manière fluide entre deux positions.
 
 Il y a plusieurs façons de créer des plateformes mobiles dans Godot.
@@ -28,10 +33,15 @@ Il nécessite un `CollisionShape2D` pour détecter les collisions et idéalement
 
 ### Ajouter une plateforme
 
-1. Dans la scène principale, ajoutez la scène de la plateforme que vous avez créée.
-2. Exécutez la scène principale.
+1. Créez une nouvelle scène avec un noeud `AnimatableBody2D` comme racine, ajoutez un `CollisionShape2D` et un `Sprite2D` en tant qu'enfants.
+2. Pour le `Sprite2D`, il y a un fichier nommé `platforms.png` dans le dossier `sprites` que vous pouvez utiliser pour l'image de la plateforme. Assurez-vous de définir la propriété `Texture` du `Sprite2D` avec ce fichier.
+    - Pour l'image mentionnée dans l'étape précédente, cochez la case `Region` dans le `Sprite2D` et définissez la propriété `Region Rect` pour sélectionner la partie de l'image que vous souhaitez utiliser pour la plateforme.
+    - Voici les coordonnées que j'ai utilisées pour la plateforme dans mon exemple initial : `Region Rect` = `(16, 0, 32, 9)`.
+3. Renommez le noeud racine en `MovingPlatform` (ou `PlateformeMobile` si vous préférez le français) et sauvegardez la scène.
+4. Dans la scène principale, ajoutez une instance de la scène `MovingPlatform` et positionnez-la à l'endroit souhaité.
+5. Exécutez la scène principale.
 
-![alt text](Godot_v4.5-stable_win64_gpzVnJIncN.gif)
+![alt text](assets/Godot_v4.5-stable_win64_gpzVnJIncN.gif)
 
 ### Corriger l'ordre de rendu
 Si le joueur apparaît derrière la plateforme, vous pouvez ajuster l'ordre de rendu en modifiant la propriété `Z Index` du noeud joueur. Il suffit de mettre une valeur plus élevée que celle de la plateforme. Dans mon cas, j'ai mis `5` pour le joueur.
@@ -94,7 +104,7 @@ func start_tween():
 
 ##### Explication des Principales Lignes
 
-- **Ligne 1-2** :
+- **Ligne 3-4** :
     - `offset` détermine la distance de déplacement de la plateforme à partir de la position initiale, et 
     - `duration` contrôle la durée de l’animation.
 - Fonction **`start_tween`** :
