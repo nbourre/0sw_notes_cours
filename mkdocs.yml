@@ -87,7 +87,7 @@ nav:
     - C - Ajouter des pièces à ramasser: c07c_plateformes_loots/index.md
     - D - Mourir: c07d_plateformes_mort/index.md
     - E - Le ray casting: c07e_ennemi_raycast/index.md
-    - F - Le Tilemap Terrain: tilemap_terrain/index.md
+    - F - Le Tilemap Terrain: c07f_tilemap_terrain/index.md
   - Cours 08:
     - A - La machine à état fini: c08_fsm/index.md
     - B - La parallaxe: c08a_parallaxe/index.md
