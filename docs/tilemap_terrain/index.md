@@ -6,10 +6,12 @@ Nous avons vu comment tracer une carte de tuiles manuellement. C'est utile, cepe
 
 Cette fonctionnalité permet de tracer la carte en donnant la responsabilité à Godot pour sélectionner les bonnes tuiles. Il suffit de lui donner les tuiles de base et les règles de sélection.
 
-Pour utiliser cette fonctionnalité, il faut utiliser un TileSet et un TileMap. Le TileSet contient les tuiles de base et le TileMap contient la carte de tuiles.
+Pour utiliser cette fonctionnalité, il faut utiliser un `TileSet` et un nœud `TileMapLayer`. Le `TileSet` contient les tuiles de base et le `TileMapLayer` contient la carte de tuiles.
 
 ## Ressources pour l'article
-Pour cet article, je vais utiliser le fond de carte de [Ninja Adventure](https://pixel-boy.itch.io/ninja-adventure-asset-pack).
+Pour cet article, je vais utiliser le projet `c07_TileMap_Terrain`dans mes projets du cours.
+
+Si vous désirez partir de zéro, j'utilise comme fond de carte de [Ninja Adventure](https://pixel-boy.itch.io/ninja-adventure-asset-pack).
 
 ![Alt text](assets/TilesetFloor.png)
 
@@ -18,10 +20,10 @@ Pour cet article, je vais utiliser le fond de carte de [Ninja Adventure](https:/
 ## Prérequis
 Pour l'article, on prend pour acquis les points suivants:
 
-- Godot 4 est installé
-- Un projet Godot 4 est créé
+- Godot 4.3 ou plus récent est installé
+- Un projet Godot est créé
 - Le TileSet est créé
-    - Si ce n'est pas le cas, ajouter un noeud `Tilemap` avec un nouveau Tileset de 16x16 pixels.
+    - Si ce n'est pas le cas, ajouter un nœud `TileMapLayer` avec un nouveau `TileSet` de 16x16 pixels.
     - Glisser l'image fourni dans cet article.
 
 ## Création du terrain
@@ -31,7 +33,7 @@ Une fois que le TileSet est créé et importé, il faut créer le terrain.
 
 <div markdown>
 
-1. Pour ce faire, il faut aller dans les propriétés du noeud `TileMap` et sélectionner le `TileSet` dans la propriété `Tile Set`. 
+1. Pour ce faire, il faut aller dans les propriétés du nœud `TileMapLayer` et sélectionner le `TileSet` dans la propriété `Tile Set`. 
 2. Cliquer sur `Terrain Sets`
 3. Sélectionner un mode. Pour l'article, je vais utiliser le mode `Match Corners and Sides`
 4. Ensuite, il faut ajouter un `Element`. Nous en ajouterons 2 soit un pour la terre et l'autre pour le gazon.
@@ -72,7 +74,7 @@ Maintenant que le terrain est créé, il faut tracer le masque de terrain. Le ma
 
 5. Sélectionner les tuiles qui seront utilisées pour tracer le masque de terrain.
 
-    ![Alt text](assets/tileset_paint_select.gif)
+    ![type:video](assets/terrain_painting.mp4)
 
 ### Tracer le masque de terrain
 Maintenant vient le moment un peu plus corsé soit le traçage du masque de bit.
@@ -99,6 +101,13 @@ Voici le résultat pour le gazon et le sol.
 
 ![Alt text](assets/tileset_grass_done.png)
 
+#### La logique derrière le système de sélection de tuiles
+Pour la sélection des tuiles automatiques, la logique du système est la suivante:
+
+- Le bit central est le bit de la tuile courante.
+- Les bits autour sont les bits des tuiles adjacentes.
+- La tuile sélectionnée par le système sera celle dont les bits autour du centre ont des bits identiques sur les tuiles adjacentes.
+
 ### Ajout de tuiles supplémentaires
 Il y a quelques tuiles avec plus de gazon dans le bas du l'image. Il faut les ajouter au TileSet. Pour ce faire, il suffit de cliquer sur les tuiles avec un point blanc pour les ajouter à l'ensemble de tuiles.
 
@@ -124,15 +133,7 @@ Voici le résultat de la distribution des probabilités.
 
 ![Alt text](assets/tileset_probability.png)
 
-
-
 ### Tracer le terrain
-
-Pour la sélection des tuiles automatiques, la logique du système est la suivante:
-
-- Le bit central est le bit de la tuile courante.
-- Les bits autour sont les bits des tuiles adjacentes.
-- La tuile sélectionnée par le système sera celle dont les bits autour du centre ont des bits identiques sur les tuiles adjacentes.
 
 1. Sélectionner l'onglet `TileMap`
 2. Sélectionner le sous-onglet `Terrains` (Coin supérieur gauche du volet)
@@ -148,27 +149,65 @@ On remarque que les tuiles se sélectionnent toutes seules. C'est le système de
 !!! note
     Il est important de ne pas oublier un bit dans les masques, car cela peut empêcher le bon fonctionnement du système de sélection de tuiles.
 
+
+
+## Les patrons (*Patterns*)
+Certains éléments de décor occupent plusieurs tuiles : un arbre, une maison, un rocher, un pont. Les placer tuile par tuile est long et on risque d'en oublier une ou de les décaler. Les **patrons** (*Patterns*) permettent d'enregistrer un groupe de tuiles déjà placées pour ensuite le réutiliser d'un seul clic.
+
+### Créer un patron
+
+1. Dans un `TileMapLayer`, tracez une première fois l'objet complet (ex. : un arbre de 2×3 tuiles) avec l'outil crayon.
+2. Dans l'onglet `TileMap`, choisissez l'outil **Sélection** (`S`).
+3. Tracez un rectangle de sélection autour de l'objet.
+4. Copiez la sélection avec `Ctrl + C`.
+5. Ouvrez le sous-onglet **Patterns** (à côté de `Tiles` et `Terrains`).
+6. Cliquez dans l'espace vide de la liste, puis collez avec `Ctrl + V`. Une vignette du patron apparaît.
+
+![type:video](assets/Tilemap_patterns.mp4)
+
+!!! tip
+    Une cellule ne contient qu'une seule tuile par couche. Si vous placez un arbre sur la même couche que le gazon, chaque tuile de l'arbre **remplace** la tuile de gazon : les parties transparentes de l'arbre laisseront voir le fond vide plutôt que le gazon. Placez plutôt les objets multituiles sur une couche à part (voir la section suivante).
+
+### Utiliser un patron
+
+1. Dans le sous-onglet **Patterns**, cliquez sur la vignette du patron.
+2. Choisissez un outil de peinture (crayon, ligne, rectangle ou pot de peinture).
+3. Cliquez dans la scène pour placer l'objet complet.
+
+Avec les outils ligne, rectangle et pot de peinture, le patron est répété. C'est pratique pour tracer rapidement une clôture, une rangée d'arbres ou une forêt complète.
+
+Pour supprimer un patron, sélectionnez sa vignette dans le sous-onglet **Patterns** et appuyez sur `Supprimer`.
+
+!!! note "Les patrons sont enregistrés dans le `TileSet`"
+    Même si on les crée dans l'onglet `TileMap`, les patrons sont stockés dans la ressource `TileSet`. Si le `TileSet` est enregistré dans un fichier `.tres`, ses patrons sont disponibles dans tous les `TileMapLayer` et toutes les scènes qui l'utilisent.
+
 ## Travailler avec les couches
-Il est possible d'ajouter des couches sur le TileMap. Cela permet de tracer des éléments par-dessus le terrain. C'est utile pour ajouter des éléments de décor ou des éléments interactifs.
+Il est possible de superposer plusieurs couches de tuiles. Cela permet de tracer des éléments par-dessus le terrain. C'est utile pour ajouter des éléments de décor ou des éléments interactifs.
 
-Pour ajouter une couche, il suffit d'ajouter un élément à la propriété `Layers` du noeud `TileMap`.
+Pour ajouter une couche :
 
-On peut en profiter pour renommer les couches en modifiant le champ `Name` de la propriété `Layers`.
+1. Regroupez vos couches sous un nœud parent `Node2D` (par exemple `Niveau`).
+2. Ajoutez un deuxième nœud `TileMapLayer` comme frère du premier.
+3. Renommez chaque nœud selon son rôle. Le nom du nœud sert de nom de couche. Dans notre exemple, on utilise `Ground` et `Nature`.
+4. Assignez le même `TileSet` à la nouvelle couche. Pour ce faire, enregistrez d'abord le `TileSet` en fichier `.tres` à partir de la première couche, puis chargez-le dans la propriété `Tile Set` de la deuxième.
 
-Dans le cas ci-contre, on y voit 2 couches soit `Ground` et `Nature`.
+![alt text](assets/multiple_layers.png)
 
-![Alt text](assets/tilemap_layers.png)
+L'ordre d'affichage suit l'ordre des nœuds dans l'arbre de scène : un nœud plus bas dans la liste est dessiné par-dessus ceux qui sont au-dessus. On peut aussi ajuster la propriété `Z Index` de chaque couche.
 
-Pour tracer sur un couche, il suffit de sélectionner la couche désirée dans l'onglet Tilemap et de tracer les éléments comme nous l'avons fait précédemment.
+Pour tracer sur une couche, il suffit de sélectionner le nœud `TileMapLayer` désiré dans l'arbre de scène, puis de tracer les éléments dans l'onglet `TileMap` comme nous l'avons fait précédemment.
 
-![Alt text](assets/Tilemap_layers_selection.png)
+![alt text](assets/tilemaplayer_peindre_couche.png)
+
+!!! tip
+    Les boutons en haut à droite de l'onglet `TileMap` permettent d'atténuer les autres couches pendant que l'on peint (*Highlight Selected TileMap Layer*), ce qui aide à voir sur quelle couche on travaille.
 
 ## Résumé
 On a vu comment utiliser les propriétés de terrains pour tracer un fond de jeu rapidement. Ce qui est important de retenir est que le système de sélection de tuiles est basé sur les bits des tuiles adjacentes. Il faut donc s'assurer que les bits sont bien placés pour que le système fonctionne correctement.
 Dépendant du mode de terrain, on a besoin d'un ensemble de tuiles distinctes pour que le système fonctionne correctement. Dans le cas du mode `Match Corners and Sides`, il faut 47 variantes pour chaque direction et transition. Dans le cas de `Match Corners`, il faut 
 
 ## Références
-- [Godot Docs - Using TileSet](https://docs.godotengine.org/en/stable/tutorials/2d/using_tilesets.html#doc-using-tilesets)
-- [Godot Docs - Using TileMaps](https://docs.godotengine.org/en/stable/tutorials/2d/using_tilemaps.html)
+- [Godot Docs - Using TileSet](https://docs.godotengine.org/fr/stable/tutorials/2d/using_tilesets.html#doc-using-tilesets)
+- [Godot Docs - Utiliser les TileMaps](https://docs.godotengine.org/fr/4.x/tutorials/2d/using_tilemaps.html)
 - [Tilesetter.org](https://www.tilesetter.org/)
 - [Terrain Autotiling and Alternative tiles - Godot 4](https://youtu.be/vV8uKN1VnN4?si=JvF7z2vFa5sNdplm)
