@@ -13,17 +13,18 @@ Pour cet article, je vais utiliser le projet `c07_TileMap_Terrain`dans mes proje
 
 Si vous désirez partir de zéro, j'utilise comme fond de carte de [Ninja Adventure](https://pixel-boy.itch.io/ninja-adventure-asset-pack).
 
-![Alt text](assets/TilesetFloor.png)
+![Alt text](assets/TilesetFloor.png){width=50%}
 
 - Les tuiles sont de dimensions 16x16 pixels.
 
 ## Prérequis
 Pour l'article, on prend pour acquis les points suivants:
 
-- Godot 4.3 ou plus récent est installé
-- Un projet Godot est créé
-- Le TileSet est créé
-    - Si ce n'est pas le cas, ajouter un nœud `TileMapLayer` avec un nouveau `TileSet` de 16x16 pixels.
+- Godot 4.6 ou plus récent est installé
+- Le projet mentionné ci-haut
+- Cependant, vous pouvez ajouter une nouvelle scène au projet.
+    - Utilisez un nœud `Node2D` comme racine.
+    - Ajoutez un nœud `TileMapLayer` avec un nouveau `TileSet` de 16x16 pixels.
     - Glisser l'image fourni dans cet article.
 
 ## Création du terrain
