@@ -91,7 +91,7 @@ Pour éviter des problèmes d’échelle et de performance :
 ---
 
 ## Exercice
-À partir du projet [c07d_pateforme_ennemi](https://github.com/nbourre/0sw_projets_cours/tree/master/c07_plateforme_ennemi).
+À partir du projet [c07d_pateforme_ennemi](https://github.com/nbourre/0sw_projets_cours/tree/master/godot/c07_plateforme_ennemi).
 
 - Ajouter un décor avec les images fournies dans le dossier `Legacy-Fantasy-PurpleBay/Background`.
     - La dimension des images est de 336x192

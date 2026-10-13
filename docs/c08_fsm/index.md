@@ -199,7 +199,7 @@ En respectant ce principe, chaque état devient une "**boîte noire**" : un modu
 
 ## Projet Godot
 
-- Pour suivre, je vous suggère de partir avec le projet de plateforme [`c08a_platformer_base_completed`](https://github.com/nbourre/0sw_projets_cours/tree/master/c08a_platformer_base_completed) dans le dépôt `0sw_projets_cours`
+- Pour suivre, je vous suggère de partir avec le projet de plateforme [`c08a_pf_base_completed_gdscript`](https://github.com/nbourre/0sw_projets_cours/tree/master/godot/c08a_pf_base_completeted_gdscript) dans le dépôt `0sw_projets_cours`
 
 ![alt text](assets/platform_without_fsm.gif)
 
