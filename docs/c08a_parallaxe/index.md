@@ -32,7 +32,6 @@
 | **scroll_scale**            | Détermine la vitesse relative du défilement (ex. `0.5` = deux fois plus lent que la caméra).                 |
 | **repeat_size**             | Définit la taille de répétition de l’image si l’on veut qu’elle boucle.                                      |
 | **repeat_time**             | Nombre de fois que l'on répète l'image de part d'autre. Utile pour la caméra lorsque l'on zoome.                                                                      |
-
 | **follow_viewport** | Si activé, la couche suit automatiquement la caméra.                                                         |
 | **autoscroll**              | Vecteur 2D qui permet de faire défiler automatiquement la couche sans script, pratique pour les nuages ou les fonds animés. |
 
