@@ -15,7 +15,7 @@ Il est relavivement simple à utiliser. Pour la configuration, il suffit d'avoir
 Quelques propriétés d'intérêt:
 
 - `Nine Patch Stretch` : Permet de définir si l'image de fond peut être étirée ou non.
-    - [Courte vidéo explicative](https://www.youtube.com/watch?v=1u4817DKvb8)
+    - [Courte vidéo explicative](https://www.youtube.com/watch?v=1u4817DKvb8) (Attention, la vidéo utilise la version 3.x de Godot, mais le principe est le même pour la version 4.x)
     - Important, l'image de fond doit être rectangulaire, les lignes horizontales et verticales seront étirées, mais les coins resteront intacts.
     - L'option `Stretch Margin` apparait lorsqu'on coche cette option. Elle permet de définir les marges qui ne seront pas étirées.
 
@@ -147,4 +147,4 @@ Voici le résultat final:
 ---
 ## Références
 
-- [Godot documentation : TextureProgressBar](https://docs.godotengine.org/en/stable/classes/class_textureprogressbar.html)
+- [Godot documentation : TextureProgressBar](https://docs.godotengine.org/fr/stable/classes/class_textureprogressbar.html){:target="_blank"}
