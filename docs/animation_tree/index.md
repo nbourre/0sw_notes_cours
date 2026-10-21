@@ -112,7 +112,7 @@ L'action complète.
 
 ## Ajouter un noeud `AnimationTree`
 
-Une fois que les configurations des animations est réalisées, on peut passer à l'étape de l'[`AnimationTree`](https://docs.godotengine.org/en/stable/tutorials/animation/animation_tree.html).
+Une fois que les configurations des animations est réalisées, on peut passer à l'étape de l'[`AnimationTree`](https://docs.godotengine.org/fr/stable/tutorials/animation/animation_tree.html).
 
 
 Vidéo où j'explique l'`AnimationTree`
@@ -211,7 +211,7 @@ stateMachine = (AnimationNodeStateMachinePlayback)animTree.Get("parameters/playb
 
 ```
 
-Dans Godot, la méthode `GodotObject.Get` permet de récupérer les propriétés d'un noeud. Dans notre cas, on récupère la propriété `playback` de l'`AnimationTree` qui est un [`AnimationNodeStateMachinePlayback`](https://docs.godotengine.org/en/stable/classes/class_animationnodestatemachineplayback.html).
+Dans Godot, la méthode `GodotObject.Get` permet de récupérer les propriétés d'un noeud. Dans notre cas, on récupère la propriété `playback` de l'`AnimationTree` qui est un [`AnimationNodeStateMachinePlayback`](https://docs.godotengine.org/fr/stable/classes/class_animationnodestatemachineplayback.html).
 
 Pour connaître la chaîne du paramètre, il suffit de sélectionner le noeud dans l'IDE et de cliquez avec le bouton droit sur la propriété qui nous intéresse. Un menu contextuel apparaîtra et il suffit de sélectionner `Copier le chemin de la propriété`.
 

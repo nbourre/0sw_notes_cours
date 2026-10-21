@@ -130,7 +130,7 @@ Plusieurs méthodes de la classe `Tween` peuvent être utilisées pour créer de
 
 ![alt text](assets/tween_transition.gif)
 
-Il y a plusieurs autres méthodes qui peuvent être intéressantes pour votre projet. Je vous suggère d'aller voir la [documentation officielle](https://docs.godotengine.org/en/stable/classes/class_tween.html) pour plus d'informations.
+Il y a plusieurs autres méthodes qui peuvent être intéressantes pour votre projet. Je vous suggère d'aller voir la [documentation officielle](https://docs.godotengine.org/fr/stable/classes/class_tween.html) pour plus d'informations.
 
 
 #### Conclusion
@@ -140,4 +140,4 @@ Les `Tween` peuvent être utilisés pour créer des effets intéressants pour vo
 
 ## Références
 
-- [Godot Engine : Tween](https://docs.godotengine.org/en/stable/classes/class_tween.html)
+- [Godot Engine : Tween](https://docs.godotengine.org/fr/stable/classes/class_tween.html)

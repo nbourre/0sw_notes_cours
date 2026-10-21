@@ -8,12 +8,12 @@
 - Le script
 
 ## CharacterBody2D
-Le noeud [`CharacterBody2D`](https://docs.godotengine.org/en/stable/classes/class_characterbody2d.html) est un noeud qui permet de gérer les collisions et les déplacements d'un personnage. Il est très utile pour créer un personnage jouable dans un jeu 2D que ce soit un jeu de plateforme, un jeu de type RPG ou top-down.
+Le noeud [`CharacterBody2D`](https://docs.godotengine.org/fr/stable/classes/class_characterbody2d.html) est un noeud qui permet de gérer les collisions et les déplacements d'un personnage. Il est très utile pour créer un personnage jouable dans un jeu 2D que ce soit un jeu de plateforme, un jeu de type RPG ou top-down.
 
-Il s'agit d'une classe spécialisée de `PhysicsBody2D` qui est destinés à être contrôlés par l'utilisateur.  Ils ne sont pas du tout affectés par la physique, mais ils affectent d'autres corps physiques sur leur trajectoire. Ils sont principalement utilisés pour fournir une API de haut niveau permettant de déplacer des objets avec une détection de murs et de pentes (méthode [`move_and_slide()`](https://docs.godotengine.org/en/stable/classes/class_characterbody2d.html#class-characterbody2d-method-move-and-slide)) en plus de la détection générale des collisions fournie par [`PhysicsBody2D.move_and_collide()`](https://docs.godotengine.org/en/stable/classes/class_physicsbody2d.html#class-physicsbody2d-method-move-and-collide). Cela le rend utile pour les corps physiques hautement configurables qui doivent se déplacer de manière spécifique et entrer en collision avec le monde, comme c'est souvent le cas avec les personnages contrôlés par l'utilisateur.
+Il s'agit d'une classe spécialisée de `PhysicsBody2D` qui est destinés à être contrôlés par l'utilisateur.  Ils ne sont pas du tout affectés par la physique, mais ils affectent d'autres corps physiques sur leur trajectoire. Ils sont principalement utilisés pour fournir une API de haut niveau permettant de déplacer des objets avec une détection de murs et de pentes (méthode [`move_and_slide()`](https://docs.godotengine.org/fr/stable/classes/class_characterbody2d.html#class-characterbody2d-method-move-and-slide)) en plus de la détection générale des collisions fournie par [`PhysicsBody2D.move_and_collide()`](https://docs.godotengine.org/fr/stable/classes/class_physicsbody2d.html#class-physicsbody2d-method-move-and-collide). Cela le rend utile pour les corps physiques hautement configurables qui doivent se déplacer de manière spécifique et entrer en collision avec le monde, comme c'est souvent le cas avec les personnages contrôlés par l'utilisateur.
 
 !!! note
-    Pour les objets de jeu qui n'ont pas besoin d'un mouvement complexe ou d'une détection de collision, tels que les plates-formes mobiles, [AnimatableBody2D](https://docs.godotengine.org/en/stable/classes/class_animatablebody2d.html#class-animatablebody2d) est plus simple à configurer.
+    Pour les objets de jeu qui n'ont pas besoin d'un mouvement complexe ou d'une détection de collision, tels que les plates-formes mobiles, [AnimatableBody2D](https://docs.godotengine.org/fr/stable/classes/class_animatablebody2d.html#class-animatablebody2d) est plus simple à configurer.
 
 CharacterBody2D requiert un noeud `CollisionShape2D` ou `CollisionPolygon2D` pour fonctionner. Il est possible d'en ajouter plusieurs pour gérer les collisions avec différents types de formes.
 
@@ -46,12 +46,12 @@ Dans le cas de ce vaisseau, j'ai utilisé des noeuds `Polygon2D` pour représent
 ## Collision
 Pour effectuer la gestion des collisions, le noeud `CharacterBody2D` a besoin d'un noeud `CollisionShape2D` ou `CollisionPolygon2D` pour fonctionner.
 
-Le noeud [`CollisionShape2D`](https://docs.godotengine.org/en/stable/classes/class_collisionshape2d.html) est un noeud qui permet de gérer les collisions avec des formes simples. Par exemple, un cercle, un rectangle, un segment, etc. Il est possible d'en ajouter plusieurs pour gérer les collisions avec différents types de formes.
+Le noeud [`CollisionShape2D`](https://docs.godotengine.org/fr/stable/classes/class_collisionshape2d.html) est un noeud qui permet de gérer les collisions avec des formes simples. Par exemple, un cercle, un rectangle, un segment, etc. Il est possible d'en ajouter plusieurs pour gérer les collisions avec différents types de formes.
 
-Le noeud [`CollisionPolygon2D`](https://docs.godotengine.org/en/stable/classes/class_collisionpolygon2d.html) est un noeud qui permet de gérer les collisions avec des formes complexes. Il faudra tracer à la main ou programmatiquement la forme de la collision. Il est possible d'en ajouter plusieurs pour gérer les collisions avec différents types de formes.
+Le noeud [`CollisionPolygon2D`](https://docs.godotengine.org/fr/stable/classes/class_collisionpolygon2d.html) est un noeud qui permet de gérer les collisions avec des formes complexes. Il faudra tracer à la main ou programmatiquement la forme de la collision. Il est possible d'en ajouter plusieurs pour gérer les collisions avec différents types de formes.
 
 ## Camera2D
-Le noeud [`Camera2D`](https://docs.godotengine.org/en/stable/classes/class_camera2d.html) est un noeud qui permet de gérer la caméra dans un jeu 2D. Il est possible de configurer la caméra pour qu'elle suive un noeud spécifique. Dans notre cas, nous voulons que la caméra suive le joueur.
+Le noeud [`Camera2D`](https://docs.godotengine.org/fr/stable/classes/class_camera2d.html) est un noeud qui permet de gérer la caméra dans un jeu 2D. Il est possible de configurer la caméra pour qu'elle suive un noeud spécifique. Dans notre cas, nous voulons que la caméra suive le joueur.
 
 Les propriétés importantes pour ce noeud sont les suivantes:
 

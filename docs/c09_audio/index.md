@@ -138,4 +138,4 @@ Dans cet article, je ne fais que montrer les bases de la gestion du son et de la
 ## Références
 
 - [Playing sounds effects and music in Godot 4](https://www.youtube.com/watch?v=N6-2Iwb8xoU)
-- [Godot Engine - Audio](https://docs.godotengine.org/en/stable/tutorials/audio/index.html)
+- [Godot Engine - Audio](https://docs.godotengine.org/fr/stable/tutorials/audio/index.html)

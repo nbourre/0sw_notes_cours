@@ -306,9 +306,9 @@ func _on_add_button_pressed() -> void:
 
 ## Références
 
-- [Documentation de Godot sur les ressources](https://docs.godotengine.org/en/stable/tutorials/scripting/resources.html)
+- [Documentation de Godot sur les ressources](https://docs.godotengine.org/fr/stable/tutorials/scripting/resources.html)
 - [Save Files in Godot! (Custom Resource Tutorial)](https://www.youtube.com/watch?v=VGxYtJ3rXdE)
 - [SECURE saving with Encryption in Godot 4!](https://www.youtube.com/watch?v=mI4HfyBdV-k)
-- [TSCN file format](https://docs.godotengine.org/en/latest/contributing/development/file_formats/tscn.html)
+- [TSCN file format](https://docs.godotengine.org/fr/latest/contributing/development/file_formats/tscn.html)
 
 ![alt text](assets/Artificial__Intelligence_Aided.jpeg)

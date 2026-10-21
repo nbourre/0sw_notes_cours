@@ -155,7 +155,7 @@ Comme indiqué plus tôt, un projet peut avoir plusieurs scènes; il faut donc c
 
 ### Introduction
 
-Dans cette partie, nous allons construire un projet dans lequel un bouton change le texte d'une étiquette à l'aide du code. Sans extension, Godot accepte deux langages : le GDScript, langage natif de Godot ressemblant à Python (le favori de ceux qui apprennent à programmer, et utilisé dans la plupart des tutoriels), et le C#, le langage favori des programmeurs et des gros projets, celui que je vous suggère si vous désirez être sérieux avec Godot. Il est possible d'utiliser plusieurs langages dans un même projet. Voir la [documentation officielle](https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html).
+Dans cette partie, nous allons construire un projet dans lequel un bouton change le texte d'une étiquette à l'aide du code. Sans extension, Godot accepte deux langages : le GDScript, langage natif de Godot ressemblant à Python (le favori de ceux qui apprennent à programmer, et utilisé dans la plupart des tutoriels), et le C#, le langage favori des programmeurs et des gros projets, celui que je vous suggère si vous désirez être sérieux avec Godot. Il est possible d'utiliser plusieurs langages dans un même projet. Voir la [documentation officielle](https://docs.godotengine.org/fr/stable/getting_started/step_by_step/scripting_languages.html).
 
 ### Objectifs
 
@@ -604,7 +604,7 @@ Dans les petits projets, l'utilisation d'une seule scène avec quelques nœuds p
 
 ### Exercice : Instanciation
 
-À l'aide du fichier [`instancing_starter.zip`](https://github.com/godotengine/godot-docs-project-starters/releases/download/latest-4.x/instancing_starter.zip), décompressez-le à l'endroit désiré, puis importez-le dans Godot à partir du gestionnaire de projet. Il se peut qu'il y ait un avertissement de version : acceptez la mise à jour du projet. Réalisez ensuite l'exercice qui se retrouve [ici](https://docs.godotengine.org/en/stable/getting_started/step_by_step/instancing.html#instancing-by-example).
+À l'aide du fichier [`instancing_starter.zip`](https://github.com/godotengine/godot-docs-project-starters/releases/download/latest-4.x/instancing_starter.zip), décompressez-le à l'endroit désiré, puis importez-le dans Godot à partir du gestionnaire de projet. Il se peut qu'il y ait un avertissement de version : acceptez la mise à jour du projet. Réalisez ensuite l'exercice qui se retrouve [ici](https://docs.godotengine.org/fr/stable/getting_started/step_by_step/instancing.html#instancing-by-example).
 
 **Résumé du projet**
 

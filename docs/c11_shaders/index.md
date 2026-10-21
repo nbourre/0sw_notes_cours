@@ -213,7 +213,7 @@ Voici quelques valeurs l'indice :
 - `source_color` : Utilisé comme sélecteur de couleur
 - `hint_range(min,max [,step] )` : Utilisé comme sélecteur de nombre
 
-Vous avez la liste complète des indices dans la [documentation de Godot](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shading_language.html#uniforms).
+Vous avez la liste complète des indices dans la [documentation de Godot](https://docs.godotengine.org/fr/stable/tutorials/shaders/shader_reference/shading_language.html#uniforms).
 
 
 
@@ -575,9 +575,9 @@ Il y a plusieurs ressources gratuites de disponibles sur [GodotShaders.com](http
 
 ## Références
 
-- [Godot Shading Language](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shading_language.html) - Godot Documentation
-- [Your first 2D shader](https://docs.godotengine.org/en/stable/tutorials/shaders/your_first_shader/your_first_2d_shader.html)
-- [Shading Language](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/shading_language.html) (GLSL) - OpenGL Wiki
+- [Godot Shading Language](https://docs.godotengine.org/fr/stable/tutorials/shaders/shader_reference/shading_language.html) - Godot Documentation
+- [Your first 2D shader](https://docs.godotengine.org/fr/stable/tutorials/shaders/your_first_shader/your_first_2d_shader.html)
+- [Shading Language](https://docs.godotengine.org/fr/stable/tutorials/shaders/shader_reference/shading_language.html) (GLSL) - OpenGL Wiki
 - [Godot 4 Shader Tutorial for Absolute Beginners](https://www.youtube.com/watch?v=KeHKKLuygoY)
 - [The book of shaders](https://thebookofshaders.com/)
 - [Godot 4 Shader Introduction for ABSOLUTE Beginners!](https://www.youtube.com/watch?v=rW_MjIeFz0Y)
