@@ -94,6 +94,7 @@ nav:
   - Cours 09:
     - A - Jouer des sons et de la musique dans Godot: c09_audio/index.md
     - B - Le TextureProgressBar: c09b_ui_TextureProgressBar/index.md
+    - C - Les menus: c09c_menus/index.md
   - Cours 11:
     - Les shaders en Godot: c11_shaders/index.md
   - Cours 12:
