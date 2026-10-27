@@ -1,8 +1,5 @@
 # Les menus
 
-!!! warning
-    Cette leçon est en cours de rédaction. Le contenu peut être incomplet ou sujet à des modifications.
-
 Dans cette leçon nous allons voir comment créer un menu de jeu simple. Nous allons créer un menu principal avec des boutons pour démarrer le jeu, accéder aux options et quitter le jeu. Nous allons également voir comment gérer la navigation entre les différents écrans du menu.
 
 ## Objectifs
@@ -50,7 +47,7 @@ MainMenu (Control)
         └── QuitButton (Button)
 ```
 
-![Arbre de scène du menu principal dans Godot](https://placecats.com/640/480)
+![Arbre de scène du menu principal dans Godot](./assets/godot_main_menu.png)
 
 ### Positionnement avec les ancres
 
@@ -58,16 +55,22 @@ Pour que le menu occupe tout l'écran peu importe la résolution, sélectionnez 
 
 Le `CenterContainer` garde son enfant centré. Inutile donc de calculer des positions à la main.
 
-![Menu Anchor preset avec l'option Full Rect](https://placecats.com/640/480)
+![Menu Anchor preset avec l'option Full Rect](./assets/main_menu_anchor_fullrect.png)
 
 !!! tip
     Dans le `VBoxContainer`, la propriété `Theme Overrides → Constants → Separation` contrôle l'espace entre les boutons.
 
+
+Si vous désirez positionner le menu à un endroit précis avec les ancres, vous pouvez modifier les propriétés de `Anchors Preset` dans l'inspecteur. Par exemple, j'ai choisi de centrer le menu verticalement et de le placer à 10% de la largeur de l'écran. Pour cela, j'ai réglé l'ancre de gauche à 0.1 et l'ancre du dessus à 0.5. Ensuite, pour centrer verticalement le menu, j'ai mis le `Grow Direction` vertical à `Both`.
+
+!!! note
+	Lorsque l'on modifie certaines propriétés, d'autres peuvent être automatiquement recalculées. Par exemple, si l'on modifie les points d'ancrage, la position et la taille du nœud peuvent être ajustées automatiquement. Il est donc important de vérifier les valeurs après avoir modifié les ancres pour s'assurer que le nœud est positionné comme souhaité.
+
+![Menu Anchor preset avec l'option Custom Rect](./assets/main_menu_anchors_custom.png)
+
 ### Le texte des boutons
 
-Pour chaque `Button`, modifiez la propriété `Text` dans l'inspecteur : « Jouer », « Options », « Quitter ». La propriété `Custom Minimum Size` permet de donner une largeur uniforme aux boutons.
-
-![Menu principal terminé, vu dans l'éditeur](https://placecats.com/640/480)
+Pour chaque `Button`, modifiez la propriété `Text` dans l'inspecteur : « Jouer », « Options », « Quitter ». La propriété `Custom Minimum Size` sous la classe `Control` permet de donner une largeur uniforme aux boutons.
 
 ### Le script
 
@@ -99,7 +102,7 @@ func _on_quit_pressed() -> void:
 !!! note "Le symbole `%`"
     `%StartButton` fait référence à un nœud marqué comme **nom unique de scène** (clic droit sur le nœud → *Access as Unique Name*). Ainsi, le script ne brise pas si on déplace le bouton dans un autre conteneur.
 
-![Clic droit sur un nœud avec l'option Access as Unique Name](https://placecats.com/640/480)
+![Clic droit sur un nœud avec l'option Access as Unique Name](./assets/godot_unique_name.png)
 
 !!! info "Connecter par l'éditeur"
     On peut aussi connecter les signaux à partir de l'onglet **Nœud → Signaux**. Le résultat est le même. Connecter par le code a l'avantage de tout garder visible au même endroit.
@@ -111,7 +114,7 @@ func _on_quit_pressed() -> void:
 
 Pour que le jeu s'ouvre sur le menu, allez dans **Projet → Paramètres du projet → Application → Run → Main Scene** et choisissez `main_menu.tscn`.
 
-![Paramètre Main Scene dans les paramètres du projet](https://placecats.com/640/480)
+![Paramètre Main Scene dans les paramètres du projet](./assets/godot_start_main_scene.png)
 
 ## Navigation au clavier et à la manette
 
@@ -125,7 +128,6 @@ func _ready() -> void:
 
 Sans cet appel, aucun bouton n'est sélectionné et les flèches ne font rien tant que la souris n'a pas cliqué.
 
-![Bouton Jouer avec le contour de focus visible](https://placecats.com/640/480)
 
 !!! tip
     Les propriétés `Focus → Neighbor Top/Bottom` d'un bouton permettent de forcer l'ordre de navigation quand la disposition automatique ne convient pas.
@@ -152,7 +154,7 @@ OptionsMenu (Control)
 
 Pour le `HSlider`, réglez `Min Value` à 0, `Max Value` à 1, `Step` à 0.05 et `Value` à 1.
 
-![Arbre de scène et rendu du menu d'options](https://placecats.com/640/480)
+![Arbre de scène et rendu du menu d'options](./assets/sous_menu_config.png)
 
 ### Le script
 
@@ -215,7 +217,7 @@ func _on_options_closed() -> void:
 	options_button.grab_focus()
 ```
 
-![Menu d'options ouvert par-dessus le menu principal](https://placecats.com/640/480)
+![Menu d'options ouvert par-dessus le menu principal](./assets/main_menu_sous_menu.png)
 
 !!! tip "Pour aller plus loin"
     Les options sont perdues à la fermeture du jeu. Voir [Sauvegarde de données](../c12_save_data/index.md) pour les conserver d'une session à l'autre.
@@ -240,7 +242,7 @@ PauseMenu (CanvasLayer)
             └── MainMenuButton (Button)
 ```
 
-![Menu de pause affiché par-dessus le jeu assombri](https://placecats.com/640/480)
+![Menu de pause affiché par-dessus le jeu assombri](./assets/pause_menu_config.png)
 
 ### Le `process_mode`
 
@@ -248,7 +250,7 @@ Quand `get_tree().paused` vaut `true`, Godot arrête tous les nœuds dont le `pr
 
 Sélectionnez la racine `PauseMenu` et réglez **Process → Mode** à `Always`. Ses enfants héritent de ce mode.
 
-![Propriété Process Mode réglée à Always dans l'inspecteur](https://placecats.com/640/480)
+![Propriété Process Mode réglée à Always dans l'inspecteur](./assets/pause_menu_process_mode.png)
 
 ### Le script
 
@@ -305,13 +307,18 @@ Modifier chaque bouton un par un devient vite pénible. Un `Theme` regroupe poli
 
 1. Sélectionnez la racine du menu, puis dans la propriété `Theme`, choisissez **Nouveau Theme**.
 2. Sauvegardez-le comme `res://ui/menu_theme.tres`.
-3. Dans l'éditeur de thème (panneau du bas), ajoutez le type `Button` et modifiez ses `StyleBox` pour les états `normal`, `hover`, `pressed` et `focus`.
+3. Dans l'éditeur de thème (panneau du bas), personnalisez les styles de `Button` :
+
+    - Cliquez sur le bouton `+` près de la liste des types, puis choisissez `Button`.
+    - Ouvrez l'onglet **Styles**. Pour chaque état (`normal`, `hover`, `pressed` et `focus`), cliquez sur **Override** pour ajouter sa `StyleBox` au thème.
+	- Sélectionnez une `StyleBox` pour la modifier dans l'Inspecteur. Par exemple, avec une `StyleBoxFlat`, réglez **Bg Color** et **Corner Radius** pour les trois premiers états, puis **Border Color** et **Border Width** pour rendre l'état `focus` visible.
+    - Vérifiez les changements dans l'aperçu du thème : le bouton doit avoir une apparence distincte au repos, au survol et lorsqu'il est appuyé.
 4. Assignez le même thème aux autres menus.
 
-![Éditeur de thème avec les styles du Button](https://placecats.com/640/480)
+Voir aussi la documentation Godot sur [l'éditeur de thème](https://docs.godotengine.org/fr/stable/tutorials/ui/gui_using_theme_editor.html).
 
 !!! tip
-    N'oubliez pas l'état `focus`. Sans style visible, le joueur à la manette ne sait pas quel bouton est sélectionné.
+	L'état `focus` est dessiné par-dessus les autres styles. Utilisez surtout un contour, afin que le fond du bouton reste visible et que le joueur à la manette repère clairement la sélection.
 
 ## Résumé
 
