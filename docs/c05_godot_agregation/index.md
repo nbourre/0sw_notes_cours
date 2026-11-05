@@ -274,6 +274,15 @@ Exemple en appliquant les trois forces avec des agents immobiles
 
 ---
 
+## Fuite - par Pharel Kamga
+
+![alt text](assets/fuite_image.png)
+
+Pour chaque prédateur, il faut calculer différence entre la position de la proie et du prédateur afin d'obtenir la direction opposée de la ploie vers l'agent, puis il faut normaliser cette direction et la diviser par la distance qui sépare la proie et le prédateur, cela va donnera la force permettant à la proie de fuire chaque prédateur, ensuite il faut faire la somme de ces forces, puis la normaliser et la multiplier par la vitesse maximale souhaitée et enfin faire la soustraction de la vitesse actuelle de la proie pour obtenir la vitesse de braquage finale que doit prendre la proie pour fuire les prédateurs. 
+
+ 
+---
+
 ## Références
 - [En 5 niveaux de difficulté : Comment fonctionne un banc de poissons?](https://www.youtube.com/watch?v=Ch7VxxTBe1c)
 - http://en.wikipedia.org/wiki/Swarm_behaviour
