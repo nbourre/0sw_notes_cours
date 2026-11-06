@@ -79,9 +79,13 @@ Cette partie est l’équivalent au développement d’un texte : le « met prin
 
 #### Algorithmes et mécanismes de jeux
 
-Dans le cadre du projet, on devra retrouver au moins **deux algorithmes développés à partir des principes de base**, c’est-à-dire sans utiliser de librairie quelconque. Dans le cours, vous avez vu l’algorithme d’essaimage et les algorithmes de forces. Cependant, vous n’êtes pas obligés d’utiliser ces algorithmes. Vous pouvez prendre des algorithmes qui sont mieux adaptés à votre projet, par exemple : la génération de terrain, la génération de labyrinthe, la cinématique inverse, l’intelligence artificielle, etc.
+Dans le cadre du projet, on devra retrouver au moins **deux algorithmes ou mécaniques développés à partir des principes de base**, c’est-à-dire sans utiliser de librairie quelconque. Dans le cours, vous avez vu l’algorithme d’essaimage et les algorithmes de forces. Cependant, vous n’êtes pas obligés d’utiliser ces algorithmes. Vous pouvez prendre des algorithmes qui sont mieux adaptés à votre projet, par exemple : la génération de terrain, la génération de labyrinthe, la cinématique inverse, l’intelligence artificielle, etc.
 
 Les éléments de base nécessaires à la construction du projet **ne seront pas comptabilisés comme des algorithmes**. Par exemple, dans un jeu de plateforme, le déplacement du personnage, les collisions ou le saut sont des fonctionnalités fondamentales et ne seront donc pas évalués comme des algorithmes. Cependant, si vous intégrez des fonctionnalités avancées, comme un ennemi qui pourchasse le personnage et attaque de manière stratégique, cela sera considéré comme un algorithme.
+
+!!! note "Qu'est-ce qu'une mécanique de jeu?"
+    Une mécanique de jeu est un élément qui définit comment le joueur interagit avec le jeu et comment le jeu réagit aux actions du joueur. Cela peut inclure des systèmes de contrôle, des règles de jeu, des interactions avec l'environnement, des comportements d'ennemis, etc. Les mécaniques de jeu sont essentielles pour créer une expérience engageante et immersive pour le joueur.
+    Par exemple, un système d'inventaire, un mécanisme de combat, ou un système de progression sont tous des exemples de mécaniques de jeu.
 
 ##### Pointage des algorithmes
 J’ai défini un pointage pour différents algorithmes en fonction de leur complexité. La difficulté de ces algorithmes étant variable, le pointage attribué reflètera leur niveau d’exigence.
