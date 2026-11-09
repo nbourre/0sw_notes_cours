@@ -245,11 +245,11 @@ Nous avons maintenant accès à un paramètre `Flash color` dans l'inspecteur de
 Exemple 2
 ```glsl
 uniform vec4 flash_color : source_color = vec4(1.0);
-uniform float flash_modifer : hint_range(0.0, 1.0) = 1.0;
+uniform float flash_modifier : hint_range(0.0, 1.0) = 1.0;
 
 void fragment() {
   vec4 color = texture(TEXTURE, UV);
-  color.rgb = mix(color.rgb, flash_color.rgb, flash_modifer);
+  color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
   COLOR = color;
 }
 ```
@@ -268,128 +268,175 @@ Pour appliquer le shader sur un objet, il faut sélectionner l'objet et dans l'i
 ### Utiliser le shader dans un script
 Dans la scène où j'utilise le shader, j'ai ajouté un noeud `Timer` qui dure 0.1 seconde.
 
-La première étape consiste à se créer des références pour utiliser le `Sprite`, le `Timer` et le `Shader`.
+La première étape consiste à se créer des références pour utiliser le `Sprite2D`, le `Timer` et le `ShaderMaterial`.
 
-```gdscript	
-Sprite sprite;
-Timer flashTimer;
-ShaderMaterial shader;
+=== "GDScript"
 
-public override void _Ready()
-{
-    sprite = GetNode<Sprite>("Icon");    
-    flashTimer = GetNode<Timer>("FlashTimer");                        
-    shader = sprite.Material as ShaderMaterial;
-}
-```
+    ```gdscript
+    extends Node2D
 
-Ensuite, je crée une fonction `flash` qui va modifier le paramètre `flash_modifier` et démarrer `flashTimer`.
+    @onready var sprite : Sprite2D = $Icon
+    @onready var timer : Timer = $FlashTimer
+    @onready var shader : ShaderMaterial = sprite.material as ShaderMaterial
+    ```
 
-```gdscript
-private void flash() {
-    GD.Print("Flash");
-    shader.SetShaderParam("flash_modifier", 1);
-    flashTimer.Start();
-}
-```
+=== "C#"
 
-Dans la méthode associée au signal `Timeout`, je vais modifier la propriété `flash_modifer` du shader pour la mettre à 0 et aussi arrêter le timer.
+    ```csharp
+    private Sprite2D sprite;
+    private Timer flashTimer;
+    private ShaderMaterial shader;
 
-```gdscript
-public void onTimerTimeout()
-{
-    GD.Print("Timer timeout");
-    shader.SetShaderParam("flash_modifier", 0);
-    flashTimer.Stop();
-}
-```
+    public override void _Ready()
+    {
+        sprite = GetNode<Sprite2D>("Icon");
+        flashTimer = GetNode<Timer>("FlashTimer");
+        shader = sprite.Material as ShaderMaterial;
+    }
+    ```
+
+Ensuite, je crée une fonction `flash` qui va modifier le paramètre `flash_modifier` et démarrer le `Timer`.
+
+=== "GDScript"
+
+    ```gdscript
+    func flash() -> void:
+        print("Flash")
+        shader.set_shader_parameter("flash_modifier", 1)
+        timer.start()
+    ```
+
+=== "C#"
+
+    ```csharp
+    private void Flash()
+    {
+        GD.Print("Flash");
+        shader.SetShaderParameter("flash_modifier", 1);
+        flashTimer.Start();
+    }
+    ```
+
+Dans la méthode associée au signal `timeout`, je vais modifier la propriété `flash_modifier` du shader pour la mettre à 0 et aussi arrêter le timer.
+
+=== "GDScript"
+
+    ```gdscript
+    func _on_flashtimer_timeout() -> void:
+        print("Timer timeout")
+        shader.set_shader_parameter("flash_modifier", 0)
+        timer.stop()
+    ```
+
+=== "C#"
+
+    ```csharp
+    public void OnTimerTimeout()
+    {
+        GD.Print("Timer timeout");
+        shader.SetShaderParameter("flash_modifier", 0);
+        flashTimer.Stop();
+    }
+    ```
 
 Enfin pour tester mon shader, je vais l'activer lorsque j'appuie sur la touche `Espace`.
 
-```gdscript
-public override void _Process(float delta)
-{
-    if (Input.IsActionJustPressed("ui_select"))
+=== "GDScript"
+
+    ```gdscript
+    func _process(delta: float) -> void:
+        if Input.is_action_just_pressed("ui_select"):
+            flash()
+    ```
+
+=== "C#"
+
+    ```csharp
+    public override void _Process(double delta)
     {
-        flash();
+        if (Input.IsActionJustPressed("ui_select"))
+        {
+            Flash();
+        }
     }
-}
-```
+    ```
 
 Voici le résultat
 
 ![](assets/shader_tutorial_12_final.gif)
 
-<details><summary>Version GDScript</summary>
+??? info "Code complet et version alternative"
 
-```glsl
-shader_type canvas_item;
+    Shader :
 
-uniform vec4 flash_color : source_color = vec4(1.0);
-uniform float flash_modifier : hint_range(0.0, 1.0) = 0;
+    ```glsl
+    shader_type canvas_item;
 
-void fragment() {
-  vec4 color = texture(TEXTURE, UV);
-  color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
-  COLOR = color;
-}
-```
+    uniform vec4 flash_color : source_color = vec4(1.0);
+    uniform float flash_modifier : hint_range(0.0, 1.0) = 0;
 
-```gdscript
-extends Node2D
+    void fragment() {
+      vec4 color = texture(TEXTURE, UV);
+      color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
+      COLOR = color;
+    }
+    ```
 
-@onready var sprite : Sprite2D = $Icon
-@onready var timer : Timer = $FlashTimer
-var shader : ShaderMaterial = sprite.material as ShaderMaterial
+    Script complet :
 
-func flash() -> void:
-	print("Flash")
-	shader.set_shader_parameter("flash_modifier", 1);
-	timer.start()
+    ```gdscript
+    extends Node2D
 
-func _on_flashtimer_timeout() -> void:
-	print("Timer timeout")
-	shader.set_shader_parameter("flash_modifier", 0);
-	timer.stop()
+    @onready var sprite : Sprite2D = $Icon
+    @onready var timer : Timer = $FlashTimer
+    @onready var shader : ShaderMaterial = sprite.material as ShaderMaterial
 
-func _process(delta: float) -> void:
-	if (Input.is_action_just_pressed("ui_select")):
-		flash()
-```
+    func flash() -> void:
+        print("Flash")
+        shader.set_shader_parameter("flash_modifier", 1)
+        timer.start()
 
-Version alternative
+    func _on_flashtimer_timeout() -> void:
+        print("Timer timeout")
+        shader.set_shader_parameter("flash_modifier", 0)
+        timer.stop()
 
-```gdscript
-extends Node2D
+    func _process(delta: float) -> void:
+        if Input.is_action_just_pressed("ui_select"):
+            flash()
+    ```
 
-@onready var sprite : Sprite2D = $Icon
-@onready var timer : Timer = $FlashTimer
-var shader : ShaderMaterial
+    Version alternative (clignotement répété, GDScript) :
 
-const NB_FLASH : int = 8
-var flash_counter : int
-var flash_value : int = 0;
+    ```gdscript
+    extends Node2D
 
-func _ready() -> void:
-	shader = sprite.material as ShaderMaterial
+    @onready var sprite : Sprite2D = $Icon
+    @onready var timer : Timer = $FlashTimer
+    var shader : ShaderMaterial
 
-func _on_flashtimer_timeout() -> void:
-	shader.set_shader_parameter("flash_modifier", flash_value * 0.5);
-	flash_value = !flash_value
+    const NB_FLASH : int = 8
+    var flash_counter : int
+    var flash_value : int = 0
 
-	if flash_counter < NB_FLASH:
-		flash_counter += 1
-	else:
-		flash_counter = 0
-		shader.set_shader_parameter("flash_modifier", 0);
-		timer.stop()
+    func _ready() -> void:
+        shader = sprite.material as ShaderMaterial
 
-func _process(delta: float) -> void:
-	if (Input.is_action_just_pressed("ui_select")):
-		timer.start()
-```
+    func _on_flashtimer_timeout() -> void:
+        shader.set_shader_parameter("flash_modifier", flash_value * 0.5)
+        flash_value = 1 - flash_value
 
-</details>
+        if flash_counter < NB_FLASH:
+            flash_counter += 1
+        else:
+            flash_counter = 0
+            shader.set_shader_parameter("flash_modifier", 0)
+            timer.stop()
+
+    func _process(delta: float) -> void:
+        if Input.is_action_just_pressed("ui_select"):
+            timer.start()
+    ```
 
 #### Autres exemples
 ![](assets/shader_tutorial_13_exA.gif)
@@ -555,6 +602,179 @@ Dans cet exemple :
 
 Ces shaders permettent de transformer et d'animer des objets sans avoir à changer la géométrie de base, et peuvent être combinés avec des *fragment shaders* pour des effets visuels plus complexes.
 
+## Les variables intégrées (*built-ins*)
+
+Depuis le début de la leçon, nous utilisons des variables que nous n'avons jamais déclarées : `COLOR`, `UV`, `TEXTURE`, `TIME`, `VERTEX`. Ce sont des variables **intégrées** (*built-ins*) : Godot les fournit à chaque appel de `fragment()` ou de `vertex()`. Elles s'écrivent toujours en **majuscules**.
+
+Faisons le point sur ce que nous avons vu et regroupons-les en deux familles :
+
+- **Les variables de contexte** (en lecture) : elles informent le shader sur *où* il est et *quand* il est.
+- **Les variables d'instruction** (en écriture) : le shader leur assigne une valeur pour dire au GPU *quoi* dessiner.
+
+!!! note
+    Comme nous l'avons vu avec la fonction `fragment()` (« appelée pour chaque pixel ») et `vertex()` (« appelée pour chaque sommet »), les *built-ins* se rapportent toujours au pixel ou au sommet **en cours de traitement**. Le GPU exécute la fonction en parallèle, avec des valeurs différentes pour chacun.
+
+### Variables de contexte
+
+| Variable | Type | Description | Déjà vue |
+| --- | --- | --- | --- |
+| `UV` | `vec2` | Coordonnées normalisées (0 à 1) sur la texture. `(0, 0)` est le coin supérieur gauche et `(1, 1)` le coin inférieur droit. L'axe Y augmente vers le **bas**. | Fragment shader (`COLOR = vec4(UV, 1.0, 1.0)`) |
+| `TEXTURE` | `sampler2D` | Texture du noeud. | Fragment shader (`texture(TEXTURE, UV)`) |
+| `TIME` | `float` | Temps écoulé en secondes. | Vertex shader (onde de l'herbe) |
+| `VERTEX` | `vec2` | Position du sommet, relative au centre du noeud. | Vertex shader (onde de l'herbe) |
+
+- **`UV`** nous a servi à lire la texture. Elle nous indique aussi **où** on se trouve dans l'image : `UV.y` vaut 0 en haut et 1 en bas.
+- **`TIME`** est la même pour tous les pixels, mais elle change à chaque image. Dans l'exemple de l'herbe, nous l'avons passée dans `sin()` pour obtenir une oscillation.
+- **`VERTEX`** dépend de la fonction. Dans `vertex()`, on peut la lire et la modifier. Dans `fragment()`, elle est en lecture seule.
+
+### Variables d'instruction
+
+| Variable | Fonction | Rôle | Déjà vue |
+| --- | --- | --- | --- |
+| `COLOR` | `fragment()` | Couleur finale du pixel. Le canal alpha gère la transparence. | Tous les exemples de fragment shader |
+| `VERTEX` | `vertex()` | Nouvelle position du sommet. La modifier déforme l'objet. | `VERTEX.x += wave_offset` (herbe) |
+
+!!! tip
+    Une bonne façon de visualiser une variable est de l'écrire dans `COLOR`, comme nous l'avons fait avec `UV` : `COLOR = vec4(UV, 0.0, 1.0);`.
+
+Jusqu'ici, nous avons utilisé ces variables **séparément** : `COLOR`/`UV` dans un fragment shader, `TIME`/`VERTEX` dans un vertex shader. Voyons comment les **combiner**.
+
+### Exemple : le vent dans le feuillage
+
+Dans l'exemple de l'herbe, nous avons déplacé les **sommets** avec `VERTEX` et `TIME`. Cette fois, nous allons combiner `TIME`, `UV` et `COLOR` dans `fragment()` pour faire osciller le feuillage d'un arbre comme s'il était pris dans le vent. L'idée générale vient de l'effet [2D Foliage Wind Effect](https://godotshaders.com/shader/2d-foliage-wind-effect/){:target="_blank"} de *jess.codes* (licence CC0). Les explications sur les *built-ins* s'inspirent du tutoriel [Your first shader](https://www.gdquest.com/library/first_shader_godot4_portal/){:target="_blank"} de GDQuest.
+
+Nous utiliserons cet arbre comme texture. Téléchargez-le ou utilisez le vôtre.
+
+![Arbre en pixel art](assets/TestTree.png){ width="128" style="image-rendering: pixelated;" }
+
+Dans la scène, placez un `Sprite2D` avec la texture `TestTree.png` et créez-lui un `ShaderMaterial` comme précédemment.
+
+!!! tip
+    Il s'agit de *pixel art*. Pour éviter que l'image soit floue lorsqu'elle est agrandie, mettez la propriété `Texture > Filter` du `Sprite2D` à `Nearest`.
+
+#### Étape 1 : décaler la lecture de la texture
+
+Rappelez-vous que `texture(TEXTURE, UV)` lit la couleur de la texture à la position `UV`. Si on lit **ailleurs** que la position du pixel, l'image paraît déplacée. On peut donc déformer l'image sans toucher aux sommets, simplement en modifiant les coordonnées de lecture. On reprend l'idée de l'onde de l'herbe (`sin()` et `TIME`), mais appliquée aux `UV` plutôt qu'à `VERTEX`.
+
+```glsl
+shader_type canvas_item;
+
+void fragment() {
+    vec2 uv = UV;
+    uv.x += sin(TIME) * 0.05;   // Décale la lecture de gauche à droite
+    COLOR = texture(TEXTURE, uv);
+}
+```
+
+Toute l'image oscille de gauche à droite. On peut ajuster l'amplitude du mouvement en changeant la valeur `0.05`. Plus elle est grande, plus l'arbre bouge.
+
+#### Étape 2 : l'effet augmente avec la hauteur
+
+`UV.y` vaut 1 au bas de l'image et 0 en haut. L'expression `1.0 - UV.y` vaut donc 0 au sol et 1 au sommet. On s'en sert comme **poids** du déplacement. C'est le même but que le `if (og_pos.y < 0.0)` de l'herbe (ne pas bouger le bas), mais en plus doux : le mouvement augmente progressivement plutôt que de s'activer d'un coup.
+
+```glsl
+shader_type canvas_item;
+
+void fragment() {
+    float poids = 1.0 - UV.y;                  // 0 en bas, 1 en haut
+    vec2 uv = UV;
+    uv.x += sin(TIME) * 0.05 * poids;
+    COLOR = texture(TEXTURE, uv);
+}
+```
+
+#### Étape 3 : paramètres modifiables
+
+Dans l'exemple de l'herbe, `amplitude` et `frequency` étaient écrites directement dans le code. Comme pour `flash_modifier`, remplaçons-les par des `uniform` avec `hint_range` pour les ajuster dans l'inspecteur.
+
+```glsl
+shader_type canvas_item;
+
+uniform float amplitude : hint_range(0.0, 0.2, 0.01) = 0.05;
+uniform float vitesse : hint_range(0.0, 5.0, 0.1) = 1.5;
+
+void fragment() {
+    float poids = 1.0 - UV.y;
+    vec2 uv = UV;
+    uv.x += sin(TIME * vitesse) * amplitude * poids;
+    COLOR = texture(TEXTURE, uv);
+}
+```
+
+#### Étape 4 : un vent moins régulier avec du bruit
+
+Un `sin()` donne un mouvement trop régulier, trop mécanique. L'effet de *jess.codes* utilise plutôt une **texture de bruit** pour obtenir un vent irrégulier, et fait **pivoter** les coordonnées `UV` autour d'un point d'ancrage (le pied de l'arbre). Ce code introduit quelques notions nouvelles : un `uniform` de type `sampler2D` (une texture), une fonction personnalisée (`rotate_vec`), `distance()` et `varying`.
+
+Pour fournir le bruit, ajoutez un `uniform sampler2D noise_texture` et, dans l'inspecteur, assignez-lui une `NoiseTexture2D` avec un `FastNoiseLite`.
+
+!!! warning "Important"
+    Dans la `NoiseTexture2D`, cochez `Seamless`. Le shader déclare la texture avec `repeat_enable`, ce qui permet au bruit de se répéter sans coupure.
+
+```glsl
+shader_type canvas_item;
+
+uniform sampler2D noise_texture : repeat_enable;
+uniform float amplitude : hint_range(0.0, 0.5, 0.01) = 0.2;
+uniform float time_scale : hint_range(0.0, 5.0, 0.01) = 0.04;
+uniform float noise_scale : hint_range(0.0, 2.0, 0.0001) = 0.001;
+uniform float rotation_strength : hint_range(0.0, 5.0, 0.1) = 1.0;
+uniform vec2 rotation_pivot = vec2(0.5, 1.0); // Pied de l'arbre (centre-bas)
+
+// Variable transmise de vertex() à fragment()
+varying vec2 world_position;
+
+void vertex() {
+    // Position du sommet dans le monde
+    world_position = (MODEL_MATRIX * vec4(VERTEX, 0.0, 1.0)).xy;
+}
+
+// Fait pivoter un point autour d'un pivot
+vec2 rotate_vec(vec2 vec, vec2 pivot, float rotation) {
+    float cosa = cos(rotation);
+    float sina = sin(rotation);
+    vec -= pivot;
+    return vec2(
+        cosa * vec.x - sina * vec.y,
+        cosa * vec.y + sina * vec.x
+    ) + pivot;
+}
+
+void fragment() {
+    // 1. Lire le bruit. La position et le temps le font « défiler ».
+    vec2 noise_pos = world_position * noise_scale + TIME * time_scale;
+    float noise_amount = texture(noise_texture, noise_pos).r - 0.5;
+
+    // 2. Angle de rotation selon le bruit (entre -0.5 et 0.5)
+    float rotation = amplitude * noise_amount;
+    vec2 rotated_uv = rotate_vec(UV, rotation_pivot, rotation);
+
+    // 3. Plus on s'éloigne du pivot, plus la rotation compte
+    float dist = distance(UV, rotation_pivot) * rotation_strength;
+    vec2 result_uv = mix(UV, rotated_uv, dist);
+
+    // 4. Lire la texture à la nouvelle position
+    COLOR = texture(TEXTURE, result_uv);
+}
+```
+
+Ce qu'il faut retenir de cet exemple :
+
+- **`TIME`** fait « avancer » le bruit, ce qui anime le vent (au lieu de l'envoyer dans `sin()` comme à l'étape 1).
+- **`UV`** indique où se trouve le pixel. On la fait pivoter autour du pied de l'arbre, puis on l'utilise pour lire la texture.
+- **`COLOR`** reçoit le résultat final, comme dans tous nos fragment shaders.
+- **`mix()`** (vue avec le clignotement) dose la rotation : aucune au pied (`dist` ≈ 0), maximale au sommet. C'est le rôle du `poids` de l'étape 2.
+- **`distance(a, b)`** retourne la distance entre deux points. Ici, entre le pixel (`UV`) et le pivot.
+- **`VERTEX`** est utilisée dans `vertex()` pour calculer la position dans le monde (`world_position`). Ainsi, deux arbres placés à des endroits différents ne bougent pas en même temps.
+- **`varying`** est un mot-clé nouveau : il transmet une valeur calculée dans `vertex()` à `fragment()`. Le `uniform`, lui, vient du programme principal (Godot); le `varying` vient du shader lui-même.
+
+!!! note
+    Le code de l'étape 4 est une version commentée en français de l'effet de [jess.codes](https://godotshaders.com/shader/2d-foliage-wind-effect/) (CC0).
+
+!!! info "Essayez"
+    - Mettez `rotation_strength` à 0, puis à 5. Que remarquez-vous?
+    - Dupliquez le `Sprite2D` plusieurs fois à des positions différentes. Les arbres bougent-ils en phase?
+    - Remplacez `rotation_pivot` par `vec2(0.5, 0.5)`. Que se passe-t-il?
+
 ## Ressources
 
 ### Godot Shaders
@@ -581,3 +801,5 @@ Il y a plusieurs ressources gratuites de disponibles sur [GodotShaders.com](http
 - [Godot 4 Shader Tutorial for Absolute Beginners](https://www.youtube.com/watch?v=KeHKKLuygoY)
 - [The book of shaders](https://thebookofshaders.com/)
 - [Godot 4 Shader Introduction for ABSOLUTE Beginners!](https://www.youtube.com/watch?v=rW_MjIeFz0Y)
+- [Your first shader (portail)](https://www.gdquest.com/library/first_shader_godot4_portal/) - GDQuest
+- [2D Foliage Wind Effect](https://godotshaders.com/shader/2d-foliage-wind-effect/) - jess.codes, GodotShaders (CC0)
