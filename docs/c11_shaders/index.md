@@ -477,7 +477,7 @@ La fonction `vertex()` sera appelée pour chaque sommet de l'objet.
 
 #### Exemple : Faire onduler un objet
 
-Voyons un exemple où nous faisons bouger les sommets de l'objet pour créer un effet d’ondulation. Nous allons utiliser la position de chaque sommet (`VERTEX`) et le temps (`TIME`) pour créer un déplacement en forme d'onde.
+Voyons un exemple où nous faisons bouger les sommets de l'objet pour créer un effet de balancement. Nous allons utiliser la position de chaque sommet (`VERTEX`) et le temps (`TIME`) pour créer un déplacement en forme d'onde.
 
 - La variable `VERTEX` contient la position du sommet actuel. Nous allons modifier la position `x` du sommet en fonction de sa position `y` et du temps pour créer une onde horizontale.
 - La variable `TIME` contient le temps écoulé depuis le début de la scène. Nous allons l'utiliser pour animer l'onde. Elle est automatiquement mise à jour par Godot à chaque image.
@@ -488,13 +488,18 @@ Voici une animation pour vous rappeler la forme des cosinus et sinus par rapport
 
 ![alt text](assets/Circle_cos_sin.gif)
 
-Objectif : Créer un effet d'ondulation sur de l'herbe.
+Objectif : Créer un effet de balancement sur de l'herbe.
+
+!!! warning "Attention : combien de sommets a un `Sprite2D`?"
+    Un `Sprite2D` n'a que **4 sommets** : les 4 coins du rectangle de l'image. Le PNG ne contient pas de sommets, car c'est la géométrie sur laquelle Godot colle la texture qui en a. Le vertex shader n'est exécuté que pour ces 4 coins. Entre les coins, la carte graphique **interpole** (étire linéairement) la position et la texture.
+
+    Avec 4 sommets, on ne peut donc pas créer une véritable onde. On obtient plutôt un **cisaillement animé** : le haut de l'image se déplace pendant que le bas reste fixe. Pour de l'herbe, c'est suffisant pour simuler le vent. Pour une vraie onde, voir la section [Pour une vraie onde](#pour-une-vraie-onde).
 
 Voici le résultat attendu :
 
 ![alt text](assets/grass_objective.gif)
 
-La première étape sera de déterminer l'amplitude et la fréquence de l'onde. L'amplitude contrôle l'intensité de l'onde ainsi le déplacement des sommets. La fréquence contrôle la densité des ondulations.
+La première étape sera de déterminer l'amplitude et la fréquence de l'onde. L'amplitude contrôle l'intensité du mouvement ainsi le déplacement des sommets. La fréquence contrôle la vitesse du balancement lorsqu'elle est reliée au temps.
 
 ```glsl
 shader_type canvas_item;
@@ -533,7 +538,7 @@ On observe que l'effet est trop rapide et il n'est pas ce que l'on désire. Pour
     float frequency = TIME * 0.5;   // Fréquence de l'onde
 ```
 
-L'image ondule, mais entièrement. On veut que l'ondulation se propage sur l'axe Y. Pour ce faire, on va utiliser la position `y` du sommet pour déterminer l'ondulation.
+L'image se balance, mais entièrement. On veut que le déplacement dépende de la hauteur. Pour ce faire, on va utiliser la position `y` du sommet pour déterminer le décalage.
 
 ```glsl
     float wave_offset = sin(og_pos.y + frequency) * amplitude;
@@ -541,9 +546,9 @@ L'image ondule, mais entièrement. On veut que l'ondulation se propage sur l'axe
 
 ![alt text](assets/grass_waving_all.gif)
 
-C'est pratiquement ce que l'on veut. Selon la documentation, le plan cartésien
+C'est pratiquement ce que l'on veut. Selon la documentation, le plan cartésien de Godot a son axe Y orienté vers le bas : une position `y` négative correspond donc à la partie supérieure du sprite.
 
-Cependant, on veut que l'ondulation ne soit appliquer que si la position `y` est négative. Pour ce faire, on peut utiliser une condition `if`.
+Cependant, on veut que le balancement ne soit appliqué que si la position `y` est négative. Pour ce faire, on peut utiliser une condition `if`.
 
 ```glsl
 	  float wave_offset = 0.0;
@@ -561,17 +566,29 @@ Cependant, on veut que l'ondulation ne soit appliquer que si la position `y` est
 
 1. **Variables `amplitude` et `frequency`** :
     - `amplitude` contrôle l'intensité de l'onde, ou à quel point les sommets se déplacent horizontalement.
-    - `frequency` contrôle la fréquence des ondulations, influençant la densité des vagues.
+    - `frequency` est relié à `TIME`, ce qui fait varier le décalage dans le temps et crée l'animation.
 
 2. **Oscillation en fonction de la position `y`** :
     - Nous utilisons `sin(og_pos.y + frequency)` pour créer une oscillation sinusoïdale en fonction de la position `y` du sommet et de la fréquence.
+    - Avec un `Sprite2D`, les deux sommets du haut ont le même `y` et reçoivent donc le même décalage. Le bas ne bouge pas. Le résultat est un balancement, pas une onde.
     - Nous appliquons l'oscillation seulement si la position `y` est négative, pour que l'effet ne soit visible que sur la partie supérieure de l'objet.
 
 3. **Application du déplacement** :
-    - Le calcul de l'onde est appliqué à la coordonnée `x` de `VERTEX`, ce qui entraîne une ondulation horizontale.
+    - Le calcul de l'onde est appliqué à la coordonnée `x` de `VERTEX`, ce qui entraîne un déplacement horizontal.
 
 !!! note
     Ce shader est assez performant car il agit uniquement sur les sommets, ce qui demande moins de calculs qu’un effet appliqué aux pixels.
+
+#### Pour une vraie onde
+
+Le même shader produit une véritable onde si l'objet possède **plus de sommets**. Chaque rangée de sommets a alors un `y` différent, donc un décalage `x` différent, et la texture est étirée entre ces rangées.
+
+![Comparaison entre un Sprite2D à 4 sommets et un maillage subdivisé à 9 sommets](assets/vertex_subdivision.svg)
+
+Plus il y a de sommets, plus l'onde est lisse. Pour obtenir ces sommets supplémentaires, on peut :
+
+- Utiliser un `MeshInstance2D` avec un `QuadMesh` ou un `PlaneMesh` subdivisé, auquel on applique la texture.
+- Utiliser un `Polygon2D` avec des sommets internes.
 
 #### Variables Utilisées dans les Vertex Shaders
 
@@ -756,6 +773,11 @@ void fragment() {
     COLOR = texture(TEXTURE, result_uv);
 }
 ```
+
+Résultat : l'arbre bouge de façon irrégulière, comme s'il était agité par le vent.
+
+![type:video](assets/TestTree.mp4)
+
 
 Ce qu'il faut retenir de cet exemple :
 
