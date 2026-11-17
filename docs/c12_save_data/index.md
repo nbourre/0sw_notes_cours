@@ -39,8 +39,8 @@ La structure de la scène est la suivante :
             - `Button` (SaveButton) : bouton pour sauvegarder les données.
             - `Button` (ChangeButton) : bouton pour modifier la santé du joueur.
             - `Button` (AddButton) : bouton pour ajouter un item à l’inventaire.
-    - `Panel` : panneau pour afficher les informations.
-        - `Label` : étiquette pour afficher la santé du joueur.
+        - `Panel` : panneau pour afficher les informations.
+            - `Label` : étiquette pour afficher la santé du joueur.
 
 - Création d'un script `main.gd` pour gérer les interactions avec les boutons
 - Ajout des signaux pour les boutons `pressed` pour appeler les fonctions correspondantes.
@@ -80,10 +80,10 @@ Pour gérer les données du joueur, comme sa santé, nous allons créer une ress
 Pour enregistrer les données du joueur sur le disque, nous devons configurer un fichier de sauvegarde dans `main.gd`.
 
 1. **Définir les variables de chemin :**
-   ```gd
-   var save_file_path = "user://save/"
-   var save_file_name = "player_save.tres"
-   ```
+    ```gd
+    var save_file_path = "user://save/"
+    var save_file_name = "player_save.tres"
+    ```
 
     - La sauvegarde est placée dans le répertoire `user://`, accessible à toutes les plateformes.
     - Le fichier sera nommé `player_save.tres`.
@@ -92,24 +92,45 @@ Pour enregistrer les données du joueur sur le disque, nous devons configurer un
     - Instanciez `PlayerData` et assignez-la à une variable `player_data`.
     - Créez une fonction pour vérifier et, si besoin, créer le dossier de sauvegarde en utilisant `DirectoryAccess`.
   
-   ```gd
-   var player_data = PlayerData.new()
+    ```gd
+    var player_data = PlayerData.new()
 
-   func verify_save_directory(path: String):
-       DirAccess.make_dir_absolute(path)
-   ```
+    func verify_save_directory(path : String) -> void:
+        var err := DirAccess.make_dir_recursive_absolute(save_file_path)
+
+        if err != OK:
+            push_error("Erreur lors de la création du répertoire de sauvegarde : " + str(err))
+    ```
+
+    `DirAccess.make_dir_recursive_absolute()` crée le répertoire de sauvegarde s'il n'existe pas déjà, garantissant que le chemin est prêt pour la sauvegarde. S'il y a une erreur, `err` contiendra le code d'erreur.
+
+    `push_error()` est utilisé pour afficher un message d'erreur dans la console de Godot, ce qui est utile pour le débogage.
+
 
 3. **Sauvegarder et charger les données :**
     - Utilisez `ResourceSaver` pour sauvegarder et `ResourceLoader` pour charger.
 
-   ```gd
-   func save_game() -> void:
-       ResourceSaver.save(player_data, save_file_path + save_file_name)
+    ```gd
+    func save_game() -> void:
+        verify_save_directory(save_file_path)
+        
+        var err := ResourceSaver.save(player_data, save_file_path.path_join(save_file_name))
+        
+        if err != OK:
+            push_error("Erreur lors de la sauvegarde")
 
-   func load_game() -> void :
-      # duplicate(true) permet de charger une copie profonde (deep copy) de la ressource, i.e. une copie des sous-ressources. Autrement, les sous-ressources ne seront pas chargées (shallow copy).
-      playerData = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
-   ```
+    func load_game() -> void :
+        var save_path := save_file_path.path_join(save_file_name)
+        if not ResourceLoader.exists(save_path):
+            push_warning("No save file found at: " + ProjectSettings.globalize_path(save_path))
+            return
+        player_data = ResourceLoader.load(save_path).duplicate(true)
+        update_label()
+    ```
+    
+    `ResourceSaver.save()` enregistre l'état actuel de `player_data` dans le fichier spécifié. Si une erreur survient, un message d'erreur est affiché.
+    `ResourceLoader.load()` charge les données sauvegardées et les duplique pour éviter toute référence partagée, garantissant que les modifications ultérieures n'affectent pas les données chargées.
+    `.duplicate(true)` crée une copie complète de la ressource, y compris toutes les sous-ressources (ex : classe enfant), ce qui est crucial pour éviter les effets secondaires lors de la manipulation des données chargées.
 
 4. **Mise à jour de la santé :**
     - Créez une fonction qui modifie la santé du joueur, puis sauvegardez l'état après chaque changement.
@@ -124,6 +145,9 @@ Pour enregistrer les données du joueur sur le disque, nous devons configurer un
 
 ## Test de la sauvegarde et du chargement
 Lors de la première exécution, cliquez sur le bouton `Save` pour enregistrer les données du joueur. Ensuite, cliquez sur le bouton `Change` pour modifier la santé du joueur. Enfin, cliquez sur le bouton `Load` pour charger les données sauvegardées.
+
+!!! note "Complétez le code"
+    Appeler les fonctions derrières les boutons `Save`, `Load` et `Change` dans le script principal pour tester la sauvegarde et le chargement des données.
 
 ### Observations
 
@@ -141,34 +165,34 @@ En ajoutant un inventaire comme sous-ressource dans `PlayerData`, chaque item se
 1. **Créer une ressource d’Item :**
     - Créez `item.gd` pour définir un objet `Item` avec une propriété `item_name`.
 
-   ```gd
-   extends Resource
-   class_name Item
+    ```gd
+    extends Resource
+    class_name Item
 
-   @export var item_name: String = "undefined"
+    @export var item_name: String = "undefined"
 
-   func _init(item_name: String = "undefined"):
-       self.item_name = item_name
-   ```
+    func _init(item_name: String = "undefined"):
+        self.item_name = item_name
+    ```
 
 2. **Ajouter une propriété d’inventaire à `PlayerData` :**
-    - Dans `playerdata.gd`, ajoutez une propriété exportée `inventory` comme un tableau d'objets `Item`.
+    - Dans `player_data.gd`, ajoutez une propriété exportée `inventory` comme un tableau d'objets `Item`.
 
-   ```gd
-   @export var inventory := []
+    ```gd
+    @export var inventory := []
 
-   func add_item_to_inventory(item_name : String) -> void:
-      var item := Item.new(item_name)
-      inventory.append(item)
-   ```
+    func add_item_to_inventory(item_name : String) -> void:
+        var item := Item.new(item_name)
+        inventory.append(item)
+    ```
 
 3. **Ajouter des objets via le script principal :**
     - Dans `main.gd`, créez une méthode pour ajouter des éléments à l’inventaire, comme des pommes.
 
-   ```gd
-   func _on_add_button_pressed() -> void:
-      playerData.add_item_to_inventory("Apple")
-   ```
+    ```gd
+    func _on_add_button_pressed() -> void:
+        player_data.add_item_to_inventory(["Pomme", "Banane", "Poire"].pick_random())
+    ```
 
 4. **Sauvegarde et restauration de l’inventaire :**
     - Lors de la sauvegarde, les sous-ressources contenues dans `inventory` seront automatiquement sauvegardées dans le fichier principal.
@@ -216,8 +240,8 @@ Les fichiers JSON restent utiles pour stocker des données de référence ou des
 
 Exemple d'utilisation :
 
-    - **JSON** : stocke les données de base des items.
-    - **Ressources personnalisées** : gèrent les sauvegardes de chaque instance d’item et ses modifications.
+- **JSON** : stocke les données de base des items.
+- **Ressources personnalisées** : gèrent les sauvegardes de chaque instance d’item et ses modifications.
 
 Cette approche hybride permet de conserver des données par défaut tout en offrant la flexibilité d’ajuster chaque item individuellement dans le jeu.
 
