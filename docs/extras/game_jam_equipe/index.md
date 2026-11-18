@@ -2,6 +2,62 @@
 
 Pendant un game jam, le temps est limité : un conflit de fusion (*merge*) peut coûter des heures. Ce workflow vise à **éviter les conflits plutôt que de les résoudre**.
 
+## Brièevement : le workflow typique
+
+Voici la version courte. Les sections suivantes expliquent chaque point.
+
+**Avant le jam (une seule fois, par le responsable du projet)**
+
+1. Créer le dépôt GitHub et inviter l'équipe.
+2. Ajouter et commiter `.gitignore` et `.gitattributes`.
+3. Créer le projet Godot avec `Main.tscn`, puis le pousser sur `main`.
+4. Répartir les scènes et les dossiers : **une scène = un propriétaire**.
+
+**Cycle de travail (à répéter toute la journée, pour chaque membre)**
+
+```bash
+# 1. Fermer Godot, partir à jour
+git switch main
+git pull
+
+# 2. Créer une branche courte pour une fonctionnalité
+git switch -c feature/ma-fonctionnalite
+
+# 3. Travailler dans son dossier, tester avec sa scène de test (F6)
+
+# 4. Fermer Godot, commiter souvent
+git add .
+git commit -m "Description courte"
+
+# 5. Intégrer les changements des autres, puis pousser
+git pull --rebase origin main
+git push -u origin feature/ma-fonctionnalite
+
+# 6. Ouvrir une Pull Request sur GitHub
+```
+
+7. Une personne désignée fusionne la Pull Request, puis vérifie que `main` s'ouvre et se lance dans Godot.
+8. Tout le monde refait `git switch main` et `git pull` avant la prochaine tâche.
+
+**Les règles à retenir**
+
+- Petites scènes, un propriétaire par scène, un dossier par fonctionnalité.
+- Branches courtes (quelques heures), commits petits et fréquents.
+- **Godot fermé** pendant un `pull`, `merge` ou `switch`.
+- Annoncer à l'équipe les fichiers partagés qu'on touche (`Main.tscn`, `project.godot`, ressources communes).
+- Ne jamais faire `git push --force` sur `main`.
+
+**En cas de problème**
+
+- Conflit sur un `.tscn` : garder une version complète, puis refaire l'ajout dans Godot.
+- Conflit sur un `.gd` : résoudre dans VS Code.
+- « Your local changes would be overwritten » : `git stash push -u`, puis `pull`, puis `git stash pop`.
+
+**À la fin du jam**
+
+- Étiquette de remise : `git tag v1.0-jam`.
+- Tester un **clone frais** du dépôt avant de remettre le projet.
+
 ## Préparation générale
 
 ### 1. Préparation (avant le jam)
