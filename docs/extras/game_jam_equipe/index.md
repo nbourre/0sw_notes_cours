@@ -2,7 +2,7 @@
 
 Pendant un game jam, le temps est limité : un conflit de fusion (*merge*) peut coûter des heures. Ce workflow vise à **éviter les conflits plutôt que de les résoudre**.
 
-## Brièevement : le workflow typique
+## Brièvement : le workflow typique
 
 Voici la version courte. Les sections suivantes expliquent chaque point.
 
@@ -23,7 +23,7 @@ git pull
 # 2. Créer une branche courte pour une fonctionnalité
 git switch -c feature/ma-fonctionnalite
 
-# 3. Travailler dans son dossier, tester avec sa scène de test (F6)
+# 3. Travailler dans son dossier, TESTER AVEC SA SCÈNE (F6). Pas F5!
 
 # 4. Fermer Godot, commiter souvent
 git add .
@@ -66,6 +66,7 @@ git push -u origin feature/ma-fonctionnalite
     - On évite les autres services, car la plupart ont déjà un compte sur cette plateforme.
 - Déterminer les rôles de chacun : qui fait quoi, qui est responsable de quoi.
     - Une personne doit s'occuper du projet principal et de la structure du dépôt.
+- Si l'équipe compte un graphiste (ou un musicien) qui ne programme pas, faites-lui suivre le [cours accéléré GitHub Desktop](../github_desktop_graphiste/index.md) avant le jam. Il pourra déposer ses fichiers sans Godot ni ligne de commande.
 
 ### 2. Préparer le dépôt Git
 
@@ -550,3 +551,117 @@ const PLAYER_SPEED = 300
 
 - [ ] Chaque membre peut expliquer la différence entre `--ours` et `--theirs`.
 
+## Compléments de dernière minute
+
+- Le responsable peut modifier le `main.tscn` avec des boutons pour charger les scènes de test de chaque membre. Cela permet de vérifier rapidement que tout fonctionne.
+
+---
+
+## Et le graphiste?
+
+Un graphiste qui ne programme pas n'a pas besoin de Godot. Il a besoin d'un **gabarit** : une entité modèle, déjà fonctionnelle, qui lui montre comment l'art est utilisé dans le jeu. Il garde la liberté de créer son propre style, ses dimensions et sa grille. Les programmeurs préparent le gabarit, puis adaptent la scène à l'art livré.
+
+!!! note "Prérequis pour le graphiste"
+    Il suit le [cours accéléré GitHub Desktop](../github_desktop_graphiste/index.md) avant le jam.
+
+### 1. Un membre prépare l'entité modèle
+
+Un programmeur de l'équipe crée, sur une branche `feature/gabarit-joueur` (ou `-ennemi`), une entité typique avec **un `AnimationPlayer`** et son dossier.
+
+```
+player/
+  player.tscn          # CharacterBody2D + Sprite2D + AnimationPlayer + CollisionShape2D
+  player.gd
+  player_sprites.png   # feuille de sprites PLACEHOLDER (carrés colorés numérotés)
+  test_player.tscn
+```
+
+Dans `player.tscn` :
+
+- Un `Sprite2D` avec `player_sprites.png`, dont **`Hframes` et `Vframes`** correspondent à la grille de la feuille de sprites.
+- Un `AnimationPlayer` avec des animations nommées de façon claire (ex. : `idle`, `walk`, `attack`, `hurt`, `death`). Chaque animation modifie la propriété `frame` du `Sprite2D`.
+- Une feuille de sprites **placeholder** : cases de couleurs différentes avec le numéro de la case. Elle sert d'exemple au graphiste, pas de contrainte.
+- Une scène de test `test_player.tscn` pour vérifier chaque animation avec **F6**.
+
+Le programmeur fusionne cette branche dans `main` **avant** que le graphiste commence.
+
+### 2. Le membre montre comment fonctionne l'`AnimationPlayer`
+
+Une fois le gabarit prêt, le programmeur fait une **courte démonstration (5 à 10 minutes)** à l'équipe, en partage d'écran ou en personne. Le graphiste comprend ainsi comment son image est utilisée, et les autres membres pourront ajouter leurs propres animations.
+
+À montrer, dans `player.tscn` :
+
+1. **Le panneau Animation** (en bas de l'éditeur) : choisir une animation dans la liste déroulante (`idle`, `walk`, etc.).
+2. **Les pistes** (*tracks*) : montrer la piste qui modifie la propriété `frame` du `Sprite2D`.
+3. **Les clés** (*keyframes*) : à quel moment de la ligne du temps chaque image s'affiche. Déplacer une clé pour changer la vitesse.
+4. **La durée et la boucle** : la longueur de l'animation et le bouton de bouclage (`idle` et `walk` bouclent, `attack` et `death` non).
+5. **Lecture dans l'éditeur** : le bouton lecture, pour voir le résultat tout de suite.
+6. **Créer une nouvelle animation** : bouton *Animation → Nouvelle*, nommer l'animation, ajouter une piste `frame`, insérer les clés.
+7. **Déclencher l'animation par le code** :
+
+    ```gdscript
+    @onready var anim: AnimationPlayer = $AnimationPlayer
+
+    func _physics_process(_delta: float) -> void:
+        if velocity.length() > 0:
+            anim.play("walk")
+        else:
+            anim.play("idle")
+    ```
+
+8. **Tester avec F6** dans `test_player.tscn`, pour confirmer que chaque animation joue correctement.
+
+!!! tip "Pour le graphiste"
+    L'idée à retenir : chaque animation affiche des cases de la feuille de sprites, dans un ordre précis. Si votre grille diffère du placeholder, dites-le au programmeur : il ajustera la scène.
+
+### 3. Le graphiste livre son art
+
+1. Il récupère `main` avec GitHub Desktop (**Pull origin**).
+2. Il crée sa branche `art/joueur`.
+3. Il ajoute sa feuille de sprites dans le dossier de l'entité (ex. : `player/`), en suivant le `snake_case` pour le nom.
+4. Il fait un commit, pousse, puis ouvre une Pull Request.
+5. Dans la Pull Request (ou sur Discord), il indique au programmeur :
+    - la **taille d'une case** (ex. : 48 x 48 px) ;
+    - le **nombre de colonnes et de lignes** de la feuille ;
+    - **quelles cases** forment chaque animation (ex. : `walk` = ligne 2, 8 images).
+
+### 4. Le programmeur adapte la scène
+
+Le nombre d'images par animation et la taille des cases sont **enregistrés dans le `.tscn`** (`Hframes`, `Vframes`, clés de l'`AnimationPlayer`). Avant de fusionner, le programmeur :
+
+1. Récupère la branche du graphiste.
+2. Ouvre le projet dans Godot : Godot importe l'image et génère les fichiers `.import`.
+3. Dans `player.tscn`, assigne la nouvelle texture au `Sprite2D` et ajuste `Hframes` et `Vframes`.
+4. Ajuste les clés de chaque animation selon les indications du graphiste.
+5. Lance `test_player.tscn` (**F6**) et vérifie chaque animation.
+6. Commite la scène modifiée et les fichiers `.import`, puis fusionne.
+
+!!! note "Le graphiste ne modifie pas les `.tscn`"
+    Il fournit l'image et les informations. C'est le programmeur qui adapte la scène.
+
+!!! tip "Pour gagner du temps pendant le jam"
+    Faites un gabarit pour le joueur et un pour un ennemi **générique**, puis copiez le dossier ennemi pour chaque nouvel ennemi (`slime/`, `goblin/`). Si le graphiste garde la même grille d'une entité à l'autre, l'ajustement de la scène devient très rapide.
+
+### Variante : livrer un dossier autonome
+
+Si le graphiste est prêt à utiliser un peu de Godot, il peut construire lui-même le visuel de son entité (sprites + `AnimationPlayer`) dans un **petit projet Godot personnel**, puis livrer le **dossier complet**. Le programmeur n'a qu'à le copier dans le projet de l'équipe. C'est la voie la plus simple quand elle est possible : plus besoin de communiquer la grille ni d'ajuster les clés.
+
+Cette variante fonctionne seulement si le dossier est **indépendant** :
+
+- Il contient la scène visuelle (ex. : `slime_visual.tscn` avec `Node2D`, `Sprite2D` et `AnimationPlayer`), les images et tout ce dont la scène a besoin.
+- Rien dans le dossier ne pointe vers l'extérieur : pas de ressource partagée, pas de script ou de thème venant d'un autre dossier du projet.
+- Les noms de fichiers et de dossiers sont en `snake_case`.
+- Pas de logique de jeu dans ce dossier : le **programmeur instancie** la scène visuelle dans la scène de l'entité (`slime.tscn`) et y attache son script. Il déclenche les animations avec `anim.play("walk")`, comme dans la démonstration.
+
+Étapes :
+
+1. Le graphiste crée un projet Godot personnel (hors du dépôt) et suit la démonstration de l'`AnimationPlayer`.
+2. Il se met d'accord avec le programmeur sur les **noms d'animation** (ex. : `idle`, `walk`, `attack`).
+3. Il copie le dossier fini dans le dépôt de l'équipe (même chemin `res://` voulu, ex. : `enemies/slime/`), sur sa branche `art/...`, puis ouvre une Pull Request.
+4. Le programmeur ouvre le projet (Godot importe les fichiers et génère les `.import`), instancie la scène visuelle, teste avec F6, commite les `.import` et fusionne.
+
+!!! warning "Pièges à éviter"
+    - **Un dossier copié ne doit rien référencer hors de lui-même.** Si la scène charge une ressource de l'ancien projet, elle apparaîtra avec une erreur « dépendance manquante ».
+    - **Ne copiez pas** le dossier `.godot/` du projet personnel.
+    - **Même chemin des deux côtés** : Godot enregistre les chemins `res://`. Si le dossier est déplacé ou renommé après coup dans le dépôt, passez par Godot et prévenez l'équipe.
+    - **Un seul propriétaire par dossier** : le graphiste ne livre qu'un dossier neuf, il ne modifie pas les fichiers existants des autres.
