@@ -94,20 +94,32 @@ Une fois que le modèle d'exportation est installé, vous pouvez exporter le jeu
 3. Donner un nom au projet
 4. Cliquer sur "Export PCK/ZIP"
 5. Indiquer l'emplacement où sauvegarder le fichier, le nom du fichier sera celui affiché dans l'arcade.
-    - Ajouter un préfixe au nom du fichier pour indiquer votre année et la session (ex: `A25_`).
-6. Donner l'extension `.pck` au fichier
+    - Si vous utilisez le SFTP, ajouter un préfixe au nom du fichier pour indiquer votre année et la session (ex: `A26_`).
+6. Donner l'extension `.pck` (ou `.zip` si vous utilisez le dépôt web) au fichier
 
 ### Copier le jeu sur l'arcade
-Vous pouvez maintenant envoyer le fichier `.pck` sur l'arcade. Pour cela, vous pouvez utiliser un logiciel de transfert de fichier comme FileZilla ou autres client FTP.
+Deux méthodes permettent d'envoyer votre jeu sur l'arcade (depuis le réseau étudiant) :
+
+#### Option 1 (recommandée) : Via le dépôt Web
+1. Ouvrir [http://arcade.shawinigan.info/drop](http://arcade.shawinigan.info/drop) (ou cliquer sur le lien discret **« Déposer un jeu »** en bas à droite de [http://arcade.shawinigan.info/](http://arcade.shawinigan.info/)).
+2. Entrer le mot de passe donné en classe (n'importe quel nom d'utilisateur est accepté, par exemple `etd`).
+3. Sélectionner votre **cohorte** (ex. `A26`), saisir le **nom du jeu** (optionnel, déduit du fichier si vide) et glisser-déposer votre fichier **`.pck`** ou **`.zip`** (max 250 Mo).
+4. Laisser cochée l'option **« Redémarrer EmulationStation après le dépôt »** puis cliquer sur **Envoyer sur la borne**.
+
+#### Option 2 : Via SFTP
+Vous pouvez aussi utiliser un logiciel de transfert de fichiers comme FileZilla ou un autre client SFTP :
 
 - Utiliser le protocole `SFTP`.
-- L'adresse de l'arcade est 172.22.213.71.
+- L'adresse de l'arcade est `172.22.213.71` (ou `arcade.shawinigan.info`).
     - À partir du réseau étudiant
 - Le nom d'utilisateur est `etd`.
 - Le mot de passe est `etdshawi`.
-- Téléverser le fichier `.pck` dans le répertoire `upload` de l'utilisateur `etd`.
+- Téléverser le fichier `.pck` (avec le préfixe de votre cohorte, ex. `A26_Mon_Jeu.pck`) dans le répertoire `upload` de l'utilisateur `etd`.
+- *(Pour redémarrer EmulationStation via SFTP, téléversez un fichier vide nommé `restart.txt` dans le répertoire `upload`.)*
 
-À toutes les minutes, un script s'exécute pour vérifier la présence de nouveaux fichiers `.pck` dans le répertoire `/home/etd/ftp/upload`. Si un fichier est trouvé, il est automatiquement déplacé dans le répertoire des roms de Godot.
+#### Traitement automatique sur la borne
+À toutes les minutes, un script s'exécute sur l'arcade pour traiter les fichiers déposés dans `/home/etd/ftp/upload` :
 
-#### Redémarrer l'arcade
-Avec le SFTP, si vous téléversez un fichier nommé `restart.txt`, le script redémarrera `emulationstation` lorsqu'il le trouvera.
+- Le jeu est automatiquement rangé dans le sous-dossier de sa cohorte (ou dans `Z - Non classés` si aucun préfixe n'est détecté).
+- La version de Godot requise par le `.pck` est vérifiée et installée automatiquement au besoin.
+- Si `restart.txt` est présent (ou si la case de redémarrage a été cochée sur le web), `emulationstation` redémarre automatiquement.
