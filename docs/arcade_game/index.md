@@ -30,14 +30,14 @@ Voici un tableau du mapping des contrôles de l'arcade
 ### Quitter le jeu
 Il faudra ajouter un moyen de quitter le jeu. L'arcade n'a pas de clavier, il faudra donc ajouter un mapping de bouton pour quitter le jeu.
 
-- Ajouter un bouton `Hotkey` et attribuer la valeur `joy_button_9` à ce bouton.
-- Ajouter un bouton `Quit` et attribuer la valeur `joy_button_8` à ce bouton. 
+- Ajouter un bouton `Hotkey` et attribuer la valeur `joy_button_6` à ce bouton.
+- Ajouter un bouton `Quit` et attribuer la valeur `joy_button_4` à ce bouton. 
 
 Ajouter les fonctions suivantes dans le script principal du jeu pour quitter le jeu.
 
 ```gd
 func is_on_arcade() -> bool:
-	return OS.get_executable_path().to_lower().contains("retropie")
+	return OS.get_executable_path().to_lower().contains("/home/prof/")
 
 func manage_end_game() -> void:
 	if is_on_arcade() :
